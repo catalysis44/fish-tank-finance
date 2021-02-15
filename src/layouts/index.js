@@ -1,9 +1,16 @@
 import styles from './index.less';
 import "../styles/bulma.scss"
+
+function toggleSidebar()
+{
+  document.getElementById('wrapper').classList.toggle("toggled");
+}
+
 function BasicLayout(props) {
   return (
     <div id="wrapper">
       <div id="sidebar_wrapper">
+        <a id="menu_toggle" onClick={toggleSidebar}>Toggle</a>
         <div id="sidebar_heading">ZOOKEEPER!</div>
         <div class="list_group">
           <aside class="menu">
