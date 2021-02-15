@@ -8,6 +8,7 @@
     "precommit": "lint-staged"
   },
   "dependencies": {
+    "@umijs/plugin-sass": "^1.1.1",
     "@umijs/preset-react": "^1.7.13",
     "antd": "^4.12.2",
     "eslint-plugin-react-hooks": "^4.2.0",
