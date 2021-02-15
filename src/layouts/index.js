@@ -1,5 +1,5 @@
 import styles from './index.css';
-
+import "../styles/bulma.scss"
 function BasicLayout(props) {
   return (
     <div className={styles.normal}>
@@ -10,3 +10,4 @@ function BasicLayout(props) {
 }
 
 export default BasicLayout;
+
