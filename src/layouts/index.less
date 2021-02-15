@@ -17,6 +17,7 @@
         transition: margin .25s ease-out;
         background:white;
         position:relative;
+        box-shadow:none;
     }
     #menu_toggle
     {
@@ -52,7 +53,7 @@
     
     #wrapper.toggled #sidebar_wrapper {
         margin-left: 0;
-        box-shadow:none;
+        box-shadow:3px 3px 5px #999;
         
     }
     
@@ -63,14 +64,19 @@
         }
         #sidebar_wrapper {
             margin-left: 0;
-            box-shadow:3px 3px 5px #999;
+           
         }
         #page_content_wrapper {
             min-width: 0;
             width: 100%;
         }
+        #wrapper #sidebar_wrapper
+        {
+            box-shadow:3px 3px 5px #999;
+        }
         #wrapper.toggled #sidebar_wrapper {
             margin-left: -15rem;
+            box-shadow:none;
         }
     }
 }
