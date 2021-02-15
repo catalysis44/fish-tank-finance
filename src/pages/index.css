@@ -2,5 +2,9 @@
 .normal {
   margin-top: 4em;
   text-align: center;
-  
+  padding:0 40px;
+}
+p{
+  font-size:12px;
+  margin-bottom:20px;
 }

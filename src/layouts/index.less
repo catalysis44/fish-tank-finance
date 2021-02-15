@@ -11,13 +11,11 @@
     #sidebar_wrapper {
         min-height: 100vh;
         margin-left: -15rem;
-        -webkit-transition: margin .25s ease-out;
-        -moz-transition: margin .25s ease-out;
-        -o-transition: margin .25s ease-out;
-        transition: margin .25s ease-out;
+        transition: margin .2s ease-out;
         background:white;
-        position:relative;
+        position:fixed;
         box-shadow:none;
+        
     }
     #menu_toggle
     {
@@ -49,6 +47,7 @@
     
     #page_content_wrapper {
         min-width: 100vw;
+        margin-left:0rem;
     }
     
     #wrapper.toggled #sidebar_wrapper {
@@ -69,6 +68,7 @@
         #page_content_wrapper {
             min-width: 0;
             width: 100%;
+            margin-left:15rem;
         }
         #wrapper #sidebar_wrapper
         {
