@@ -10,16 +10,16 @@ function BasicLayout(props) {
   return (
     <div id="wrapper">
       <div id="sidebar_wrapper">
-        <a id="menu_toggle" onClick={toggleSidebar}>Toggle</a>
+        <a id="menu_toggle" onClick={toggleSidebar}>›</a>
         <div id="sidebar_heading">ZOOKEEPER!</div>
         <div class="list_group">
           <aside class="menu">
             
             <ul class="menu-list">
-              <li><a>FARM</a></li>
-              <li><a>MARKET</a></li>
-              <li><a>VOTES</a></li>
-              <li><a>FAQ</a></li>
+              <li><a>농장</a></li>
+              <li><a>ファーム</a></li>
+              <li><a>投票</a></li>
+              <li><a>常见问题</a></li>
             </ul>
             
           </aside>
