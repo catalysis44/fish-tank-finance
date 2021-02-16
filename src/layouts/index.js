@@ -11,7 +11,7 @@ function BasicLayout(props) {
     <div id="wrapper">
       <div id="sidebar_wrapper">
         <a id="menu_toggle" onClick={toggleSidebar}>›</a>
-        <div id="sidebar_heading">ZOOKEEPER!</div>
+        <div id="sidebar_heading">ZôçKëéèPêR!</div>
         <div class="list_group">
           <aside class="menu">
             
