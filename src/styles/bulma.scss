@@ -1,6 +1,7 @@
 @charset "utf-8";
 // Import a Google Font
 //@import url('https://fonts.googleapis.com/css?family=Nunito:400,700');
+/*
 @font-face {
     font-family: 'dogicaregular';
     src: url('fonts/dogica-webfont.woff2') format('woff2'), url('fonts/dogica-webfont.woff') format('woff');
@@ -28,15 +29,12 @@
     font-weight: normal;
     font-style: normal;
 }
+*/
 
-/*Chinese*/
+
 @font-face {
-    font-family: 'mxmc';
-    src: url('fonts/MeiXiaoMingChao.ttf');
-}
-@font-face {
-    font-family: 'zpix';
-    src: url('fonts/LanaPixel.ttf');
+    font-family: 'LanaPixel';
+    src: url('fonts/LanaPixel.woff2'), url('fonts/LanaPixel.woff');
 }
 
 // Set your brand colors
@@ -46,7 +44,7 @@ $brown: #757763;
 $beige-light: #d0d1cd;
 $beige-lighter: #eff0eb;
 // Update Bulma's global variables
-$family-sans-serif: 'dogicaregular',
+$family-sans-serif: 'LanaPixel',
 sans-serif;
 $grey-dark: $brown;
 $grey-light: $beige-light;
