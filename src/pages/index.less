@@ -1,22 +1,39 @@
+/*Stupid Effect*/
+@keyframes bounce {
+	0%, 100%, 30%, 50%, 80% {
+		transform:         translateY(0)
+	}
+	40% {
+		transform:         translateY(-20px)
+	}
+	60% {
+		transform:         translateY(-15px)
+	}
+}
+
 .row
 {
   display:flex;
   flex-wrap: wrap;
   justify-content: center;
-  padding:40px;
+  padding:80px;
   margin:0 auto;
 }
 
 .pool
 {
-  width:220px;
-  height:300px;
+  width:290px;
+  min-width:290px;
+  height:400px;
   background:white;
-  border-radius: 20px;
-  box-shadow:5px 5px 0px #00000010;
+  border-radius: 14px;
+  box-shadow:5px 5px 0px #00000020;
   margin:20px;
   padding:15px 20px;
-
+  &[data-active="true"]
+  {
+    box-shadow:5px 5px 0px #00000020, inset 0 0 0 3px #00a99d;
+  }
   position:relative;
   .header
   {
@@ -24,43 +41,314 @@
     flex-direction: column;
     .title
     {
-      font-size:16px;
+      font-size:22px;
       color:#000000;
     }
     :global
     .choice
     {
       width:fit-content;
-      font-size:11px;
+      font-size:12px;
       padding: 0px 5px;
-      margin-top: -4px;
-
-      height: 16px;
+      margin-top: -8px;
+      font-family:Rubik;
+      height: 18px;
       display: flex;
-      align-items: baseline;
+      align-items: center;
       .icon
       {
-        padding-left:2px;
+        padding-left:4px;
         margin-right: 0;
         svg
         {
-          height:9px;
+          height:12px;
         }
       }
     }
     
   }
-
+  &:hover
+  {
+    .avatar
+    {
+      animation-name:bounce;
+    }
+  }
   .avatar
     {
+     
+      animation-duration: 1s;
+      animation-fill-mode: both;
+      animation-timing-function: ease-out;
+      animation-iteration-count: 2;
+
       position:absolute;
-      top:-50px;
+      top:-60px;
       right:-18px;
       img
       {
-        width:92px;
-        height:100px;
+        width:115px;
+        height:125px;
       }
     }
   
+  .mul_apy
+  {
+    display:flex;
+    margin-top:20px;
+    justify-content: space-between;
+    .multiplier
+    {
+      
+      text-align:right;
+      position:relative;
+      background:#fdad48;
+      color:white;
+     
+      border-radius:4px;
+      font-size:24px;
+      width: 80px;
+      margin-left:18px;
+      padding:0 5px;
+      height:32px;
+      img
+      {
+        position:absolute;
+        left:-18px;
+        top:3px;
+      }
+    }
+    .apy
+    {
+      position:relative;
+      background:#e1e5da;
+      color:#274652;
+      text-align: right;
+      border-radius:4px;
+      font-size:24px;
+      width: 120px;
+      margin-left:18px;
+      padding:0 5px;
+      height:32px;
+      img
+      {
+        position:absolute;
+        left:-18px;
+        top:3px;
+      }
+    }
+  }
+
+
+  
+  .main_area{
+    width:100%;
+    height:250px;
+    /*background:green;*/
+    margin-top:20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .earned
+  {
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    .title
+      {
+        font-size:11px;
+        color:#000000;
+        font-family: Rubik;
+        margin-left:10px;
+        margin-bottom:3px;
+      }
+    .harvest_wrapper
+    {
+      display:flex;
+      justify-content: space-between;
+      .earned_amount
+      {
+        font-size:24px;
+        text-align: center;
+        width:120px;
+        height:40px;
+        padding-top:4px;
+        color:#cccccc;
+        display:flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .harvest
+      {
+        &[disabled]
+        {
+          color:white;
+          background:#e6e6e6;
+          border:1px solid #e6e6e6;
+    
+        }
+        &:hover
+        {
+            transform:scale(1.05);
+        }
+        width:112px;
+        border-radius: 4px;
+        font-size:20px;
+        padding-top:4px;
+        padding-left:2px;
+        height:40px;
+        background:#00a99d;
+        border:#00a99d;
+        color:white;
+        text-align: center;
+        display:flex;
+        align-items: center;
+        justify-content: center;
+        transition: all .1s ease-in-out;
+        
+      }
+    }
+   
+  }
+
+
+
+  .staked
+  {
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    .title
+    {
+      font-size:11px;
+      color:#000000;
+      font-family: Rubik;
+      margin-left:10px;
+      margin-bottom:3px;
+    }
+    .action_wrapper
+    {
+      display:flex;
+      justify-content: space-between;
+
+      .connect_wallet
+      {
+        &[disabled]
+        {
+          color:white;
+          background:#e6e6e6;
+          border:1px solid #e6e6e6;
+        }
+        &:hover
+        {
+            transform:scale(1.05);
+        }
+        width:100%;
+        border-radius: 4px;
+        font-size:20px;
+        padding-top:4px;
+        height:40px;
+        background:#00a99d;
+        border:#00a99d;
+        color:white;
+        text-align: center;
+        display:flex;
+        align-items: center;
+        justify-content: center;
+        transition: all .1s ease-in-out;
+
+
+      }
+
+    }
+    
+
+  }
+
+  .horizontal_line
+  {
+    width: calc(100% + 10px);
+    
+    height:1px;
+    background:#eee;
+    margin-left:-5px;
+    margin-right:-10px;
+  }
+  .detail_wrapper
+  {
+    .coin_info
+    {
+      display:flex;
+      justify-content: space-between;
+      align-items: center;
+      .coins
+      {
+        display:flex;
+        justify-content: center;
+        width:68px;
+        img:first-child
+        {
+          width:36px;
+          height:36px;
+          position:relative;
+          z-index:1;
+        }
+        img:nth-child(2)
+        {
+          width:36px;
+          height:36px;
+          position:relative;
+          left:-5px;
+          z-index:0;
+        }
+      }
+
+      .add_liquidity
+      {
+        
+        &:hover
+        {
+            transform:scale(1.05);
+        }
+        width:170px;
+        border-radius: 4px;
+        font-size:14px;
+        height:28px;
+        padding-top:4px;
+        background:#e67056;
+        border:#e67056;
+        color:white;
+        text-align: center;
+        display:flex;
+        align-items: center;
+        justify-content: center;
+        transition: all .1s ease-in-out;
+        
+       
+      }
+      
+    }
+
+    .liq_detail
+    {
+      margin-top:5px;
+      font-family:Rubik;
+      font-size: 12px;
+      color:black;
+      display:flex;
+      flex-direction: column;
+      .liq_row
+      {
+        display:flex;
+        flex-direction: row;
+        justify-content: space-between;
+        a
+        {
+          color:#00a99d;
+        }
+      }
+    }
+  }
 }
