@@ -1,35 +1,4 @@
 @charset "utf-8";
-// Import a Google Font
-//@import url('https://fonts.googleapis.com/css?family=Nunito:400,700');
-/*
-@font-face {
-    font-family: 'dogicaregular';
-    src: url('fonts/dogica-webfont.woff2') format('woff2'), url('fonts/dogica-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'dogicabold';
-    src: url('fonts/dogicabold-webfont.woff2') format('woff2'), url('fonts/dogicabold-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'dogica_pixelregular';
-    src: url('fonts/dogicapixel-webfont.woff2') format('woff2'), url('fonts/dogicapixel-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'dogica_pixelbold';
-    src: url('fonts/dogicapixelbold-webfont.woff2') format('woff2'), url('fonts/dogicapixelbold-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-*/
 
 
 @font-face {
@@ -37,18 +6,47 @@
     src: url('fonts/LanaPixel.woff2'), url('fonts/LanaPixel.woff');
 }
 
+/* rubik-regular - latin_cyrillic */
+@font-face {
+    font-family: 'Rubik';
+    font-style: normal;
+    font-weight: 400;
+    src: local(''),
+         url('fonts/rubik-v12-latin_cyrillic-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+         url('fonts/rubik-v12-latin_cyrillic-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+  }
+  /* rubik-700 - latin_cyrillic */
+  @font-face {
+    font-family: 'Rubik';
+    font-style: normal;
+    font-weight: bold;
+    src: local(''),
+         url('fonts/rubik-v12-latin_cyrillic-700.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+         url('fonts/rubik-v12-latin_cyrillic-700.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+  }
+  /* rubik-900 - latin_cyrillic */
+  @font-face {
+    font-family: 'Rubik';
+    font-style: normal;
+    font-weight: 900;
+    src: local(''),
+         url('fonts/rubik-v12-latin_cyrillic-900.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+         url('fonts/rubik-v12-latin_cyrillic-900.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+  }
+
 // Set your brand colors
+$green: #00a99d;
 $purple: #8a4d76;
 $pink: #fa7c91;
 $brown: #757763;
 $beige-light: #d0d1cd;
 $beige-lighter: #eff0eb;
 // Update Bulma's global variables
-$family-sans-serif: 'LanaPixel',
-sans-serif;
+$family-sans-serif: 'LanaPixel',sans-serif;
 $grey-dark: $brown;
 $grey-light: $beige-light;
 $primary: $purple;
+$success: $green;
 $link: $pink;
 $widescreen-enabled: false;
 $fullhd-enabled: false;
