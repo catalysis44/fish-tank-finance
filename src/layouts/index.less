@@ -16,6 +16,7 @@
         position:fixed;
         box-shadow:none;
         height:40px;
+        z-index: 2;
     }
     #menu_toggle
     {
@@ -26,6 +27,7 @@
         background: white;
         width: 30px;
         text-align: center;
+        box-shadow:3px 3px 5px rgba(0,0,0,0.05);
     }
     
     #sidebar_wrapper #sidebar_heading {
@@ -53,12 +55,18 @@
     #page_content_wrapper {
         min-width: 100vw;
         margin-left:0rem;
+        transition: all .2s ease-out;
     }
     
     #wrapper.toggled #sidebar_wrapper {
         margin-left: 0;
-        box-shadow:3px 3px 5px #999;
+        box-shadow:3px 3px 5px rgba(0,0,0,0.05);
         
+    }
+    #wrapper.toggled #page_content_wrapper
+    {
+        margin-left: 15rem;
+        opacity:0.2;
     }
     
     @media (min-width: 768px) {
@@ -68,7 +76,6 @@
         }
         #sidebar_wrapper {
             margin-left: 0;
-           
         }
         #page_content_wrapper {
             min-width: 0;
