@@ -52,6 +52,7 @@ $widescreen-enabled: false;
 $fullhd-enabled: false;
 body {
     background: #e1e4db;
+    
     -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
      -khtml-user-select: none; /* Konqueror HTML */
@@ -61,7 +62,7 @@ body {
                                   supported by Chrome, Edge, Opera and Firefox */
 }
 a{
-    color:#00a99d impor !important;
+    color:#00a99d;
 }
 
 // Import only what you need from Bulma

@@ -1,19 +1,22 @@
 /*Stupid Effect*/
 @keyframes bounce {
 	0%, 100%, 30%, 50%, 80% {
-		transform:         translateY(0)
+		transform: translateY(0);
+   
 	}
 	40% {
-		transform:         translateY(-20px)
+		transform: translateY(-20px);
+    
 	}
 	60% {
-		transform:         translateY(-15px)
+		transform: translateY(-15px);
+   
 	}
 }
 
 .row
 {
-  display: flex;
+    display: flex;
     flex-wrap: wrap;
     justify-content: center;
     margin:0 auto;
@@ -73,11 +76,12 @@
     .avatar
     {
       animation-name:bounce;
+      
     }
   }
   .avatar
     {
-     
+      
       animation-duration: 1s;
       animation-fill-mode: both;
       animation-timing-function: ease-out;
@@ -168,15 +172,26 @@
     {
       display:flex;
       justify-content: space-between;
+      
       .earned_amount
       {
+        &[disabled]
+        {
+          color:#cccccc;
+        }
+        &[data-double-farming="true"]
+        {
+          font-size:14px;
+          line-height:14px;
+        }
         font-size:24px;
         text-align: center;
         width:120px;
         height:40px;
         padding-top:4px;
-        color:#cccccc;
+        color:#000000;
         display:flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
       }
