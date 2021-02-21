@@ -1,0 +1,73 @@
+.row
+{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin:0 auto;
+    padding: 0px 10px;
+}
+.box
+{
+  width:290px;
+  min-width:290px;
+  height:60px;
+  background:white;
+  border-radius: 14px;
+  box-shadow:5px 5px 0px #00000020;
+  margin:20px 40px;
+  padding:15px 10px 15px 20px;
+  position:relative;
+  display:flex;
+  align-items: center;
+  .chestbox
+  {
+      position: absolute;
+      left: -20px;
+  }
+  .buy_btn
+    {  
+    &:hover
+    {
+    transform:scale(1.05);
+    }
+    img
+    {
+        margin-top:-4px;
+        margin-left:-14px;
+    }
+    justify-content: center;
+    display:flex;
+    align-items:center;
+    margin-left:10px;
+    width:84px;
+    border-radius: 4px;
+    font-size:20px;
+    padding-top:4px;
+    height:40px;
+    background:#00a99d;
+    border:#00a99d;
+    color:white;
+    text-align: center;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    transition: all .1s ease-in-out;
+    }
+    .chestPrice
+    {
+        display:flex;
+        flex-direction: column;
+        font-family: Rubik;
+        font-size:12px;
+        margin-left:10px;
+        line-height:18px;
+        
+        div
+        {
+            font-family: LanaPixel;
+            font-size:22px;
+            color:#00a99d;
+            font-weight:normal;
+        }
+    }
+}

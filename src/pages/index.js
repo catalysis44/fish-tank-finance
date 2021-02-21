@@ -58,6 +58,15 @@ export default function () {
               <a className={styles.connect_wallet}>
                 Connect Wallet
               </a>
+              <a className={styles.deposit_lp}>
+                Deposit WSLP Token
+              </a>
+              <a className={styles.withdraw_lp}>
+                Withdraw
+              </a>
+              <a className={styles.topup_lp}>
+                Top-up
+              </a>
             </div>
           </div>
 

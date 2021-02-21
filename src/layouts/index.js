@@ -2,7 +2,7 @@ import styles from './index.less';
 import "../styles/bulma.scss"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faWallet } from '@fortawesome/free-solid-svg-icons'
-
+import Header from '../components/Header';
 function toggleSidebar()
 {
   document.getElementById('wrapper').classList.toggle("toggled");
@@ -39,6 +39,7 @@ function BasicLayout(props) {
       </div>
 
       <div id="page_content_wrapper">
+        <Header/>
         {props.children}
       </div>
 
