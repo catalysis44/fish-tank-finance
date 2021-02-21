@@ -11,10 +11,12 @@ function toggleSidebar()
 function BasicLayout(props) {
   return (
     <div id="wrapper">
+      <div id="sidebar_backdrop" onClick={toggleSidebar}></div>
+      <a id="menu_toggle" onClick={toggleSidebar}>›</a>
       <div id="sidebar_wrapper">
-        <a id="menu_toggle" onClick={toggleSidebar}>›</a>
+        
         <div id="sidebar_heading"><img src="dummy/logo.png"/></div>
-
+        
         <div id="wallet_connection" data-connected="true"> {/*data-connected="true" when connected*/}
           <a class="connect_disconnect_btn">DISCONNECT</a> 
           <div class="address"><FontAwesomeIcon icon={faWallet} /> <span>0x0000...0000</span></div>

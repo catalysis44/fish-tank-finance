@@ -36,7 +36,7 @@ export default function () {
         <div className={styles.main_area}>
           <div className={styles.earned}>
             <div className={styles.title}>
-              <b>ZOO</b> EARNED
+              <b>ZOO+WASP</b> EARNED
             </div>
             <div className={styles.harvest_wrapper}>
               <div className={styles.earned_amount}  data-double-farming="true"> {/*Add "disabled" when non-connected  and data-double-farming="true" when duofarming */}
@@ -140,9 +140,9 @@ export default function () {
               <b>ZOO</b> EARNED
             </div>
             <div className={styles.harvest_wrapper}>
-              <div className={styles.earned_amount}  data-double-farming="true"> {/*Add "disabled" when non-connected  and data-double-farming="true" when duofarming */}
-                <div>125.5410 ZOO</div>
-                <div>158.86 WASP</div>
+              <div className={styles.earned_amount}  data-double-farming="false"> {/*Add "disabled" when non-connected  and data-double-farming="true" when duofarming */}
+                <div>125.5410</div>
+                
               </div>
               <a className={styles.harvest} > {/*Add disabled when non-connected */}
                 HARVEST
@@ -238,12 +238,12 @@ export default function () {
         <div className={styles.main_area}>
           <div className={styles.earned}>
             <div className={styles.title}>
-              <b>ZOO</b> EARNED
+              <b>WASP</b> EARNED
             </div>
             <div className={styles.harvest_wrapper}>
-              <div className={styles.earned_amount}  data-double-farming="true"> {/*Add "disabled" when non-connected  and data-double-farming="true" when duofarming */}
-                <div>125.5410 ZOO</div>
-                <div>158.86 WASP</div>
+              <div className={styles.earned_amount}  data-double-farming="false"> {/*Add "disabled" when non-connected  and data-double-farming="true" when duofarming */}
+                
+                <div>158.86</div>
               </div>
               <a className={styles.harvest} > {/*Add disabled when non-connected */}
                 HARVEST
