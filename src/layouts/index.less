@@ -15,13 +15,13 @@
         position:absolute;
         z-index:2;
         opacity:0;
-        
+        transition: opacity .2s ease-in-out;
     }
     
     #sidebar_wrapper {
         min-height: 100vh;
         margin-left: -240px;
-        transition: margin .2s;
+        transition: margin .2s ease-in-out;
         background:white;
         position:fixed;
         box-shadow:none;
@@ -43,7 +43,7 @@
         text-align: center;
         box-shadow:3px 3px 5px rgba(0,0,0,0.01);
         z-index:3;
-        transition: left .2s;
+        transition: left .2s ease-in-out;
     }
     #wrapper.toggled #menu_toggle
     {
@@ -202,7 +202,7 @@
     }
     #wrapper.toggled #page_content_wrapper
     {
-        margin-left: 240px;
+        /*margin-left: 240px;*/
         
     }
     #wrapper.toggled #sidebar_backdrop
