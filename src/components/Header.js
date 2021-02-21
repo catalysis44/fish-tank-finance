@@ -26,11 +26,26 @@ export default function Header(props) {
             </div>
 
             <div className={styles.box}>
+                <img src="assets/zoo42x42.png" class={styles.zoo_icon}/>
+                <div class={styles.current_supply}>
+                    <div>Current Supply</div>
+                    <div>154,548,453 ZOO</div>
+                </div>
+                <div class={styles.verticle_line}>
 
+                </div>
+                <div class={styles.market}>
+                    <div>1 ZOO = <span>$10.32</span></div>
+                    <div>MC $154,548,453</div>
+                </div>
             </div>
 
             <div className={styles.box}>
-
+                <img src="assets/burned.png" class={styles.burn_icon}/>
+                <div class={styles.burn}>
+                    <div class={styles.burn_text}>TOTAL BURNED</div>
+                    <div class={styles.burn_amount}>55,012,345.56 ZOO</div>
+                </div>
             </div>
         </div>
     );
