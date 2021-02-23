@@ -34,11 +34,83 @@
   box-shadow:5px 5px 0px #00000020;
   margin:60px 40px;
   padding:15px 20px;
+  position:relative;
   &[data-active="true"]
   {
     box-shadow:5px 5px 0px #00000020, inset 0 0 0 3px #00a99d;
   }
-  position:relative;
+  .bubble
+  {
+    img
+    {
+      margin-left:3px;
+      width:28px;
+      height:28px;
+    }
+    .bubble_text
+    {
+      margin-left:5px;
+      line-height:11px;
+      padding-top:3px;
+      font-size:12px;
+      &[data-three-line="true"]
+      {
+        line-height:9px;
+        padding-top:3px;
+        font-size:11px;
+        margin-left:5px;
+      }
+    }
+    display:flex;
+    align-items: center;
+    border-radius:4px;
+    box-shadow:1px 1px 2px #eee;
+    position:absolute;
+    top:-25px;
+    width:55%;
+    height:36px;
+    border:2px solid black;
+    background:#f2f2f2;
+    &[data-equipped-nft="true"]
+    {
+      background:#ffff00;
+    }
+  }
+  .bubble:before {
+    
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    width: 0;
+    height: 0;
+    border: 8px solid transparent;
+    border-left-color: #000000;
+    border-right: 0;
+    margin-top: -8px;
+    margin-right: -8px;
+  }
+  
+  .bubble:after {
+    
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    width: 0;
+    height: 0;
+    border: 6px solid transparent;
+    border-left-color: #f2f2f2;
+    
+    border-right: 0;
+    margin-top: -6px;
+    margin-right: -6px;
+  }
+  .bubble[data-equipped-nft="true"]:after
+  {
+    border-left-color:#ffff00;
+  }
+  
   .header
   {
     display:flex;
@@ -248,7 +320,7 @@
     {
       display:flex;
       justify-content: space-between;
-      gap:15px;
+      
       .connect_wallet
       {  
         &:hover
@@ -300,7 +372,7 @@
             transform:scale(1.05);
         }
         flex:1;
-        width:100%;
+        width:115px;
         border-radius: 4px;
         font-size:20px;
         padding-top:4px;
@@ -313,6 +385,28 @@
         align-items: center;
         justify-content: center;
         transition: all .1s ease-in-out;
+        margin-right:8px;
+      }
+      .locked_lp
+      {  
+        font-size:14px;
+        line-height:14px;
+        flex:1;
+        width:115px;
+        border-radius: 4px;
+        
+        padding-top:4px;
+        height:40px;
+        text-align: center;
+        display:flex;
+        flex-direction:column;
+        align-items: center;
+        justify-content: center;
+        transition: all .1s ease-in-out;
+        margin-right:8px;
+        color: #888;
+        background:#e6e6e6;
+        border:1px solid #e6e6e6;
       }
 
       .topup_lp
@@ -321,8 +415,10 @@
         {
             transform:scale(1.05);
         }
+        margin-left:8px;
+        width:115px;
         flex:1;
-        width:100%;
+        
         border-radius: 4px;
         font-size:20px;
         padding-top:4px;
