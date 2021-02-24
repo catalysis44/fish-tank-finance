@@ -152,24 +152,35 @@
     .avatar
     {
       animation-name:bounce;
+    }
+    .avatar img.lv2
+    {
+      animation-name:bounce;
       
     }
   }
   .avatar
-    {
-      
+    {  
       animation-duration: 1s;
       animation-fill-mode: both;
       animation-timing-function: ease-out;
       animation-iteration-count: 2;
-
       position:absolute;
-      top:-64px;
-      right:-34px;
-      img
+      top:-66px;
+      right:-40px;
+      width:128px;
+      height:128px;
+      img.lv1
       {
-        width:115px;
-        height:125px;
+        position:absolute;
+      }
+      img.lv2
+      {
+        position:absolute;
+        animation-duration: 1s;
+        animation-fill-mode: both;
+        animation-timing-function: ease-out;
+        animation-iteration-count: 2;
       }
     }
   

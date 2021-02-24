@@ -31,7 +31,8 @@ export default function () {
         </div>
 
         <div className={styles.avatar}>
-          <img src="dummy/lama.png" />
+          <img src="dummy/lama.png" className={styles.lv1}/>
+          <img src="assets/sunglass.png"  className={styles.lv2}/>
         </div>
         <div className={styles.mul_apy}>
           <div className={styles.multiplier}>
