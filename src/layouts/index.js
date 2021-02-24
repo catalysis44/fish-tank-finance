@@ -15,7 +15,7 @@ function BasicLayout(props) {
       <a id="menu_toggle" onClick={toggleSidebar}>›</a>
       <div id="sidebar_wrapper">
         
-        <div id="sidebar_heading"><img src="dummy/logo.png"/></div>
+        <div id="sidebar_heading"><img src="assets/logo.svg"/></div>
         
         <div id="wallet_connection" data-connected="true"> {/*data-connected="true" when connected*/}
           <a class="connect_disconnect_btn">DISCONNECT</a> 

@@ -9,7 +9,7 @@ export default function Header(props) {
                    <img src="assets/silverkey29x29.png"/> BUY
                 </a>
                 <div className={styles.chestPrice}>
-                    OPEN 1 SILVERCHEST FOR
+                    1 SILVERCHEST FOR
                     <div>2,554.15 ZOO</div>
                 </div>
             </div>
@@ -20,13 +20,13 @@ export default function Header(props) {
                    <img src="assets/goldenkey29x29.png"/> BUY
                 </a>
                 <div className={styles.chestPrice}>
-                    OPEN 1 GOLDENCHEST FOR
+                    1 GOLDENCHEST FOR
                     <div>25,541.53 ZOO</div>
                 </div>
             </div>
 
             <div className={styles.box}>
-                <img src="assets/zoo42x42.png" class={styles.zoo_icon}/>
+                <img src="assets/zoo48x48.png" class={styles.zoo_icon}/>
                 <div class={styles.current_supply}>
                     <div>Current Supply</div>
                     <div>154,548,453 ZOO</div>
@@ -41,7 +41,7 @@ export default function Header(props) {
             </div>
 
             <div className={styles.box}>
-                <img src="assets/burned.png" class={styles.burn_icon}/>
+                <img src="assets/burned42x42.png" class={styles.burn_icon}/>
                 <div class={styles.burn}>
                     <div class={styles.burn_text}>TOTAL BURNED</div>
                     <div class={styles.burn_amount}>55,012,345.56 ZOO</div>

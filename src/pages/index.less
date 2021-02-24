@@ -67,7 +67,7 @@
     box-shadow:1px 1px 2px #eee;
     position:absolute;
     top:-25px;
-    width:55%;
+    width:60%;
     height:36px;
     border:2px solid black;
     background:#f2f2f2;
@@ -124,20 +124,24 @@
     .choice
     {
       width:fit-content;
-      font-size:12px;
+      font-size:10px;
+      padding-bottom:2px;
       padding: 0px 5px;
       margin-top: -5px;
-      font-family:Rubik;
+
       height: 18px;
+      
       display: flex;
       align-items: center;
+      justify-content: space-around;
       .icon
       {
         padding-left:4px;
-        margin-right: 0;
+        margin-right:4px;
+        
         svg
         {
-          height:12px;
+          height:10px;
         }
       }
     }
@@ -160,8 +164,8 @@
       animation-iteration-count: 2;
 
       position:absolute;
-      top:-60px;
-      right:-18px;
+      top:-64px;
+      right:-34px;
       img
       {
         width:115px;
@@ -173,60 +177,88 @@
   {
     display:flex;
     margin-top:20px;
+    margin-bottom:20px;
     justify-content: space-between;
     .multiplier
     {
       
       text-align:right;
       position:relative;
-      background:#fdad48;
-      color:white;
-     
+      
+      background:#e1e5da;
+      color:#274652;
       border-radius:4px;
-      font-size:24px;
-      width: 80px;
-      margin-left:18px;
-      padding:0 5px;
+      font-size:22px;
+      width: 100px;
+      
+      padding:0 10px;
+      padding-top:2px;
       height:32px;
       img
       {
         position:absolute;
-        left:-18px;
-        top:3px;
+        left:2px;
+        top:0px;
       }
     }
     .apy
     {
       position:relative;
-      background:#e1e5da;
-      color:#274652;
+      background:#fdad48;
+      color:white;
       text-align: right;
       border-radius:4px;
-      font-size:24px;
-      width: 115px;
-      margin-left:18px;
-      padding:0 5px;
+      font-size:22px;
+      text-shadow: 2px 2px #e67056;
+      width: 135px;
+      
+      padding:0 10px;
+      padding-top:2px;
       height:32px;
       img
       {
         position:absolute;
-        left:-18px;
-        top:3px;
+        left:5px;
+        top:-1px;
       }
     }
   }
 
 
-  
-  .main_area{
-    width:100%;
+  .wrapper_area
+  {
     height:250px;
-    /*background:green;*/
-    margin-top:20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    width: calc(100% + 20px);
+    overflow: hidden;
+    margin-left: -10px;
+    &[data-show-subarea="true"]
+    {
+      .main_area{
+        margin-top:-250px;
+      }
+    }
+    .main_area{
+      width:250px;
+      height:250px;
+      /*background:green;*/
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: margin .3s ease-in-out;
+      margin-left: 10px;
+    }
+    .sub_area
+    {
+      width:250px;
+      height:250px;
+      margin-left: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+     
+    }
   }
+  
   .earned
   {
     display:flex;
@@ -236,7 +268,7 @@
       {
         font-size:12px;
         color:#000000;
-        font-family: Rubik;
+       
         margin-left:10px;
         margin-bottom:3px;
       }
@@ -312,7 +344,7 @@
     {
       font-size:12px;
       color:#000000;
-      font-family: Rubik;
+    
       margin-left:10px;
       margin-bottom:3px;
     }
@@ -505,7 +537,7 @@
     .liq_detail
     {
       margin-top:5px;
-      font-family:Rubik;
+ 
       font-size: 12px;
       color:black;
       display:flex;
@@ -522,4 +554,243 @@
       }
     }
   }
+
+
+  /*Sub Area*/
+  .deposit
+  {
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    .title
+      {
+        font-size:12px;
+        color:#000000;
+        margin-bottom:3px;
+        width:100%;
+        display:flex;
+        justify-content: space-between;
+      }
+    .deposit_wrapper
+    {
+      display:flex;
+      justify-content: space-between;
+      
+      .deposit_amount
+      {
+        
+        font-size:24px;
+        text-align: left;
+        width:115px;
+        height:40px;
+        padding-top:4px;
+        color:#000000;
+        border:0px;
+        outline-width: 0;
+
+      }
+      .coin_wrapper
+      {
+        display:flex;
+        justify-content: space-between;
+        align-items: center;
+        height:40px;
+        .max
+        {
+          &:hover
+          {
+              transform:scale(1.05);
+          }
+          width:56px;
+          border-radius: 4px;
+          font-size:20px;
+          padding-top:4px;
+          padding-left:2px;
+          height:26px;
+          background:#00a99d;
+          border:#00a99d;
+          color:white;
+          text-align: center;
+          display:flex;
+          align-items: center;
+          justify-content: center;
+          transition: all .1s ease-in-out;
+        }
+        .coins
+        {
+          display:flex;
+          justify-content: center;
+          margin-left:5px;
+          margin-right:-5px;
+          img:first-child
+          {
+            width:36px;
+            height:36px;
+            position:relative;
+            z-index:1;
+          }
+          img:nth-child(2)
+          {
+            width:36px;
+            height:36px;
+            position:relative;
+            left:-5px;
+            z-index:0;
+          }
+        }
+      }
+      
+    }
+   
+  }
+
+
+  .locking
+  {
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    .title
+      {
+        font-size:12px;
+        color:#000000;
+        margin-bottom:3px;
+        width:100%;
+        display:flex;
+        justify-content: space-between;
+      }
+    .lock_wrapper
+    {
+      display:flex;
+      justify-content: space-between;
+      
+      .lock_period
+      {
+        font-size:24px;
+        text-align: left;
+        width:115px;
+        height:40px;
+        padding-top:4px;
+        color:#000000;
+        display:flex;
+        border:0px;
+        outline-width: 0;
+      }
+      .lock_action
+      {
+        height:40px;
+        display:flex;
+        align-items:center;
+      }
+    
+    }
+   
+  }
+
+
+  .boosting
+  {
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    .title
+      {
+        font-size:12px;
+        color:#000000;
+        margin-bottom:3px;
+        width:100%;
+        display:flex;
+        justify-content: space-between;
+      }
+
+      .action_wrapper
+      {
+        display:flex;
+        justify-content: space-between;
+        flex-direction:column;
+        
+        .select_booster
+        {  
+          &:hover
+          {
+              transform:scale(1.05);
+          }
+          flex:1;
+          width:100%;
+          border-radius: 4px;
+          font-size:60px;
+          padding-top:12px;
+          height:40px;
+          max-height:40px;
+          margin-bottom:10px;
+          background:#e1e5da;
+          border:#e1e5da;
+          color:white;
+          text-align: center;
+          display:flex;
+          align-items: center;
+          justify-content: center;
+          transition: all .1s ease-in-out;
+        }
+  
+        .lp_management
+        {
+          display:flex;
+          justify-content: space-between;
+          flex-direction:row;
+          .approve
+          {  
+            &:hover
+            {
+                transform:scale(1.05);
+            }
+            flex:1;
+            width:115px;
+            border-radius: 4px;
+            font-size:20px;
+            padding-top:4px;
+            height:40px;
+            background:#00a99d;
+            border:#00a99d;
+            color:white;
+            text-align: center;
+            display:flex;
+            align-items: center;
+            justify-content: center;
+            transition: all .1s ease-in-out;
+            margin-right:8px;
+          }
+          
+    
+          .validate
+          {  
+            &:hover
+            {
+                transform:scale(1.05);
+            }
+            margin-left:8px;
+            width:115px;
+            flex:1;
+            
+            border-radius: 4px;
+            font-size:20px;
+            padding-top:4px;
+            height:40px;
+            background:#00a99d;
+            border:#00a99d;
+            color:white;
+            text-align: center;
+            display:flex;
+            align-items: center;
+            justify-content: center;
+            transition: all .1s ease-in-out;
+          }
+        }
+        
+  
+      }
+    
+   
+  }
+
 }
