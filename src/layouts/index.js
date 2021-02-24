@@ -31,9 +31,12 @@ function BasicLayout(props) {
           <aside class="menu">
             
             <ul class="menu-list">
-              <li><a><img src="dummy/menu_pond.png"/> The Ponds</a></li>
-              <li><a><img src="dummy/menu_expedition.png"/> The Expedition</a></li>
-              <li><a><img src="dummy/menu_market.png"/> The Market</a></li>
+              <li><a><img src="assets/sidebar/zoo.png"/> <div>The Zoo</div></a></li>
+              <li><a><img src="assets/sidebar/expedition.png"/> <div>The Expedition</div></a></li>
+              <li><a><img src="assets/sidebar/market.png"/> <div>The Market</div></a></li>
+              <li><a><img src="assets/sidebar/safe.png"/> <div>My Safe</div></a></li>
+              <li><a><img src="assets/sidebar/stake.png"/> <div>Stake Zoo</div></a></li>
+              <li><a><img src="assets/sidebar/lotto.png"/> <div>Lotto</div></a></li>
             </ul>
             
           </aside>
