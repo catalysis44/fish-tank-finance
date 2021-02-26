@@ -1,11 +1,91 @@
 import styles from './index.less';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheckSquare, faExternalLinkSquareAlt } from '@fortawesome/free-solid-svg-icons'
+import { Button, notification } from 'antd';
 export default function () {
 
   function showSubArea() {
     document.getElementById('sub_area').setAttribute("data-show-subarea", "true");
   }
+  const openNotification = () => {
+    const args = {
+      message: 'Notification Title',
+      description:
+      <div>
+      {"xxxxxxxxxxxxxxxxxx xxxxx xxxxx"}
+      <br/>
+      {"xxxxxxxxxxxxxxxxxx xx   xxxxxxxxxx"}
+      <br/>
+      {"xxxxxx xxxxxxxx xxxxxxxxx "}
+      <a href="" className="button">TX hash on Wanscan</a>
+    </div>,
+      duration: 0,
+      placement: 'bottomRight',
+      icon: <img src="assets/notification/bell.png"/>,
+    };
+    notification.open(args);
+  };
+  const openNotification2 = () => {
+    const args = {
+      message: 'Notification Title',
+      description:
+      <div>
+      {"xxxxxxxxxxxxxxxxxx xxxxx xxxxx"}
+      <br/>
+      {"xxxxxxxxxxxxxxxxxx xx   xxxxxxxxxx"}
+      <br/>
+      {"xxxxxx xxxxxxxx xxxxxxxxx "}
+      <a href="" className="button">TX hash on Wanscan</a>
+    </div>,
+      duration: 0,
+      placement: 'bottomRight',
+      icon: <img src="assets/notification/trophy.png"/>,
+    };
+    notification.open(args);
+  };
+  const openNotification3 = () => {
+    const args = {
+      message: 'Notification Title',
+      description:
+      <div>
+      {"xxxxxxxxxxxxxxxxxx xxxxx xxxxx"}
+      <br/>
+      {"xxxxxxxxxxxxxxxxxx xx   xxxxxxxxxx"}
+      <br/>
+      {"xxxxxx xxxxxxxx xxxxxxxxx "}
+      <a href="" className="button">TX hash on Wanscan</a>
+    </div>,
+      
+      duration: 0,
+      placement: 'bottomRight',
+      icon: <img src="assets/notification/exclamation.png"/>,
+    };
+    notification.open(args);
+  };
+  const openNotification4 = () => {
+    const args = {
+      message: 'GOLDEN CHEST HAS BEEN OPENED',
+      description:
+      <div>
+      {"You got \" "}
+      <b>Wasabi Ginger Sake</b>
+      {"\", "}
+      <br/>
+      {"your boost card has been transfered to your wallet "}
+      <a href="" className="button">Check your collection</a>
+    </div>,
+      duration: 0,
+      placement: 'bottomRight',
+      icon: <img src="assets/notification/bottle.png"/>,
+      className: 'open-chestbox-notification',
+      
+    };
+    notification.open(args);
+  };
+  openNotification();
+  openNotification2();
+  openNotification3();
+  openNotification4();
 
 
   return (
