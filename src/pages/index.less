@@ -18,7 +18,7 @@
 {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-around;
     margin:0 auto;
     padding: 80px 10px;
 }
@@ -26,13 +26,14 @@
 
 .pool
 {
+  z-index: 1;
   width:290px;
   min-width:290px;
   height:400px;
   background:white;
   border-radius: 14px;
   box-shadow:5px 5px 0px #00000020;
-  margin:60px 40px;
+  margin:60px 20px;
   padding:15px 20px;
   position:relative;
   &[data-active="true"]
@@ -720,6 +721,53 @@
         justify-content: space-between;
         flex-direction:column;
         
+        .selected_booster
+        {  
+          
+          flex:1;
+          width:100%;
+          height:40px;
+          min-height:40px;
+          margin-bottom:10px;
+          display:flex;
+          align-items: center;
+          justify-content: space-between;
+          
+          .remove
+          {
+            transition: all .1s ease-in-out;
+            &:hover
+            {
+              transform:scale(1.2);
+            }
+          }
+          
+          .booster,.locked_time
+          {
+            font-size:18px;
+            padding-top:3px;
+            background:#e1e5da;
+            width:92px;
+            height:32px;
+            display:flex;
+            align-items:center;
+            padding-left:2px;
+            padding-right:5px;
+            justify-content: space-between;
+            border-radius:4px;
+            color:#274652;
+            img
+            {
+              position:relative;
+              top:-2px;
+              max-width:24px;
+              max-height:24px;
+            }
+          }
+          
+         
+        }
+
         .select_booster
         {  
           &:hover

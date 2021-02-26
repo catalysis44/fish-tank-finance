@@ -2,6 +2,12 @@ import styles from './index.less';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheckSquare, faExternalLinkSquareAlt } from '@fortawesome/free-solid-svg-icons'
 export default function () {
+
+  function showSubArea() {
+    document.getElementById('sub_area').setAttribute("data-show-subarea", "true");
+  }
+
+
   return (
 
     <div className={styles.row}>
@@ -31,8 +37,8 @@ export default function () {
         </div>
 
         <div className={styles.avatar}>
-          <img src="dummy/lama.png" className={styles.lv1}/>
-          <img src="assets/sunglass.png"  className={styles.lv2}/>
+          <img src="dummy/lama.png" className={styles.lv1} />
+          <img src="assets/sunglass.png" className={styles.lv2} />
         </div>
         <div className={styles.mul_apy}>
           <div className={styles.multiplier}>
@@ -46,7 +52,7 @@ export default function () {
         </div>
 
 
-        <div className={styles.wrapper_area} data-show-subarea="true"> {/*data-show-subarea="true" when want to show LP providing panel */}
+        <div id="sub_area" className={styles.wrapper_area} data-show-subarea="false"> {/*data-show-subarea="true" when want to show LP providing panel */}
           <div className={styles.main_area}>
 
             <div className={styles.earned}>
@@ -73,7 +79,7 @@ export default function () {
                 <a className={styles.connect_wallet} style={{ display: 'none' }}>
                   Connect Wallet
               </a>
-                <a className={styles.deposit_lp} >
+                <a className={styles.deposit_lp} onClick={showSubArea}>
                   Deposit WSLP Token
               </a>
                 <a className={styles.withdraw_lp} style={{ display: 'none' }}>
@@ -170,8 +176,21 @@ export default function () {
 
               <div className={styles.action_wrapper}>
 
-                <a className={styles.select_booster}>
+                <a className={styles.select_booster} style={{ display: 'none' }}> {/*Hided it after selected*/}
                   +
+                </a>
+
+                <a className={styles.selected_booster}>
+                  <img src="dummy/booster.png" />
+                  <div className={styles.booster}>
+                    <img src="assets/rocket24x24.png" />
+                    +5.55%
+                  </div>
+                  <div className={styles.locked_time}>
+                    <img src="assets/hourglass24x24.png" />
+                    -524.50
+                  </div>
+                  <a className={styles.remove}><img src="assets/remove16x16.png" /></a>
                 </a>
 
                 <div className={styles.lp_management}>

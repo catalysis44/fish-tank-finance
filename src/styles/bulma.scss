@@ -22,9 +22,30 @@ $success: $green;
 $link: $pink;
 $widescreen-enabled: false;
 $fullhd-enabled: false;
+
+// Globals
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    
+  }
+  
+  ::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 2px rgba(0,0,0,0.2); 
+    border-radius: 15px;
+    background: rgba(0,0,0,0.15);
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    border-radius: 15px;
+    -webkit-box-shadow: inset 0 0 1px rgba(0,0,0,0.8); 
+    background: #00a99d;
+  }
+
+
 body {
     background: #e1e4db;
-    
+    background: linear-gradient(0deg, rgba(166,208,190,1) 0%, rgba(242,242,242,1) 20%, rgba(242,242,242,1) 80%, rgba(61,209,255,1) 100%);
     -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
      -khtml-user-select: none; /* Konqueror HTML */

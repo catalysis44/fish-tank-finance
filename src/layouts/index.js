@@ -19,8 +19,8 @@ function BasicLayout(props) {
         
         <div id="wallet_connection" data-connected="true"> {/*data-connected="true" when connected*/}
           <a class="connect_disconnect_btn">DISCONNECT</a> 
-          <div class="address"><FontAwesomeIcon icon={faWallet} /> <span>0x0000...0000</span></div>
-          <div class="balance"><img src="dummy/zoo_mini_icon.png"/> <span>555,324,652.55</span></div>
+          <div class="address"><img src="assets/wallet32x32.png"/><span>0x0000...0000</span></div>
+          <div class="balance"><img src="assets/zoo32x32.png"/><span>555,324,652.55</span></div>
         </div>
 
         <div class="horizontal_line">
@@ -46,6 +46,8 @@ function BasicLayout(props) {
       <div id="page_content_wrapper">
         <Header/>
         {props.children}
+        <img src="assets/bg/bush_a.png" style={{position:'absolute',bottom:0,zIndex:0}}/>
+        <img src="assets/bg/bush_b.png" style={{position:'absolute',right:0,bottom:0,zIndex:0}}/>
       </div>
 
     </div>
