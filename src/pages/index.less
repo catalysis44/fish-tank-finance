@@ -14,13 +14,81 @@
 	}
 }
 
+.filter_row
+{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin:0 auto;
+    padding: 20px 10px 0 10px;
+    .box
+    {
+      max-width:600px;
+      width:100%;
+      min-height:60px;
+      background:white;
+      border-radius: 14px;
+      box-shadow:5px 5px 0px #00000020;
+      
+      padding:10px 10px;
+      position:relative;
+      display:flex;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: center;
+      .title{
+        color:black;
+        margin:0 5px;
+      }
+      .sort_btn
+      {
+        display:flex;
+        align-items: center;
+        flex-wrap: wrap;
+        justify-content: center;
+        
+        a
+        {
+          &.is_acitve
+          {
+            color:white;
+            background:#00a99d;
+          }
+          &:hover
+          {
+            color:white;
+            background:#00a99d;
+          }
+          .icon
+          {
+            position:absolute;
+            font-size:9px;
+            line-height:9px;
+            left:8px;
+            top:5px;
+          }
+          position:relative;
+          width:120px;
+          height:32;
+          border:1px solid #00a99d;
+          color:#00a99d;
+          border-radius:4px;
+          margin:5px 5px;
+          text-align:center;
+          padding-top:3px;
+          
+        }
+      }
+      
+    }
+}
 .row
 {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
     margin:0 auto;
-    padding: 80px 10px;
+    padding: 60px 10px;
 }
 
 
