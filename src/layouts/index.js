@@ -1,8 +1,9 @@
 import styles from './index.less';
 import "../styles/bulma.scss"
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faWallet } from '@fortawesome/free-solid-svg-icons'
+//import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+//import { faWallet } from '@fortawesome/free-solid-svg-icons'
 import Header from '../components/Header';
+import { Link } from 'umi';
 function toggleSidebar()
 {
   document.getElementById('wrapper').classList.toggle("toggled");
@@ -31,8 +32,9 @@ function BasicLayout(props) {
           <aside class="menu">
             
             <ul class="menu-list">
-              <li><a><img src="assets/sidebar/zoo.png"/> <div>The Zoo</div></a></li>
-              <li><a><img src="assets/sidebar/expedition.png"/> <div>The Expedition</div></a></li>
+             
+              <li><Link to="/"><img src="assets/sidebar/zoo.png"/> <div>The Zoo</div></Link></li>
+              <li><Link to="/expedition"><img src="assets/sidebar/expedition.png"/> <div>The Expedition</div></Link></li>
               <li><a><img src="assets/sidebar/market.png"/> <div>The Market</div></a></li>
               <li><a><img src="assets/sidebar/safe.png"/> <div>My Safe</div></a></li>
               <li><a><img src="assets/sidebar/stake.png"/> <div>Stake Zoo</div></a></li>
