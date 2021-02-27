@@ -125,9 +125,10 @@ export default function () {
             <img src="assets/zoo32x32.png" />
             <span>x2</span>
           </div>
-          <div className={styles.apy}>
+          <div className={styles.apy} data-equipped-nft="true">  {/*true if equipped an NFT*/}
             <img src="assets/apy36x36.png" />
             <span>555.55%</span>
+            <div><img src="assets/rocket_horizon16x16.png"/> +115.33%</div>
           </div>
         </div>
 
