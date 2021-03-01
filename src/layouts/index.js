@@ -3,7 +3,7 @@ import "../styles/bulma.scss"
 //import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 //import { faWallet } from '@fortawesome/free-solid-svg-icons'
 import Header from '../components/Header';
-import { Link } from 'umi';
+import { NavLink } from 'umi';
 function toggleSidebar()
 {
   document.getElementById('wrapper').classList.toggle("toggled");
@@ -16,7 +16,7 @@ function BasicLayout(props) {
       <a id="menu_toggle" onClick={toggleSidebar}>›</a>
       <div id="sidebar_wrapper">
         
-        <div id="sidebar_heading"><img src="assets/logo.svg"/></div>
+        <div id="sidebar_heading"><img src="assets/zoo_logo.png"/></div>
         
         <div id="wallet_connection" data-connected="true"> {/*data-connected="true" when connected*/}
           <a class="connect_disconnect_btn">DISCONNECT</a> 
@@ -33,8 +33,8 @@ function BasicLayout(props) {
             
             <ul class="menu-list">
              
-              <li><Link to="/"><img src="assets/sidebar/zoo.png"/> <div>The Zoo</div></Link></li>
-              <li><Link to="/expedition"><img src="assets/sidebar/expedition.png"/> <div>The Expedition</div></Link></li>
+              <li><NavLink  to="" activeClassName="is_active"><img src="assets/sidebar/zoo.png"/> <div>The Zoo</div></NavLink></li>
+              <li><NavLink  to="expedition" activeClassName="is_active"><img src="assets/sidebar/expedition.png"/> <div>The Expedition</div></NavLink></li>
               <li><a><img src="assets/sidebar/market.png"/> <div>The Market</div></a></li>
               <li><a><img src="assets/sidebar/safe.png"/> <div>My Safe</div></a></li>
               <li><a><img src="assets/sidebar/stake.png"/> <div>Stake Zoo</div></a></li>
@@ -48,8 +48,7 @@ function BasicLayout(props) {
       <div id="page_content_wrapper">
         <Header/>
         {props.children}
-        <img src="assets/bg/bush_a.png" style={{position:'absolute',bottom:0,zIndex:0}}/>
-        <img src="assets/bg/bush_b.png" style={{position:'absolute',right:0,bottom:0,zIndex:0}}/>
+        
       </div>
 
     </div>
