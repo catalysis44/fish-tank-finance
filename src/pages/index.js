@@ -83,9 +83,9 @@ export default function () {
     };
     notification.open(args);
   };
-  //openNotification();
-  //openNotification2();
- // openNotification3();
+  openNotification();
+  openNotification2();
+  openNotification3();
   openNotification4();
 
 
@@ -131,10 +131,11 @@ export default function () {
         <div className={styles.pool} data-active="true"> {/*active true for on staking pool */}
           
           <div className={styles.bubble} data-equipped-nft="true"> {/*true if equipped an NFT*/}
-
+            <a href="" className={styles.reload}><img src="assets/reload24x24.png"/></a>
 
             <img src="dummy/equip_item.png" />
             <div className={styles.bubble_text} data-three-line="true"> {/*true if show 3 lines*/}
+              
               <div>NFT NAME</div>
               <div>REWARD +5%</div>
               <div>LOCK TIME -23 HOURS</div>
@@ -337,7 +338,7 @@ export default function () {
         <div className={styles.pool} data-active="true"> {/*active true for on staking pool */}
           
           <div className={styles.bubble} data-equipped-nft="true"> {/*true if equipped an NFT*/}
-
+          <a href="" className={styles.reload}><img src="assets/reload24x24.png"/></a>
 
             <img src="dummy/equip_item.png" />
             <div className={styles.bubble_text} data-three-line="true"> {/*true if show 3 lines*/}
@@ -543,7 +544,7 @@ export default function () {
         <div className={styles.pool} data-active="true"> {/*active true for on staking pool */}
           
           <div className={styles.bubble} data-equipped-nft="true"> {/*true if equipped an NFT*/}
-
+          <a href="" className={styles.reload}><img src="assets/reload24x24.png"/></a>
 
             <img src="dummy/equip_item.png" />
             <div className={styles.bubble_text} data-three-line="true"> {/*true if show 3 lines*/}
