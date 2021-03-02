@@ -1,5 +1,6 @@
 import styles from './index.less';
 import "../styles/bulma.scss"
+
 //import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 //import { faWallet } from '@fortawesome/free-solid-svg-icons'
 import Header from '../components/Header';
@@ -33,8 +34,8 @@ function BasicLayout(props) {
             
             <ul class="menu-list">
              
-              <li><NavLink  to="" activeClassName="is_active"><img src="assets/sidebar/zoo.png"/> <div>The Zoo</div></NavLink></li>
-              <li><NavLink  to="expedition" activeClassName="is_active"><img src="assets/sidebar/expedition.png"/> <div>The Expedition</div></NavLink></li>
+              <li><NavLink  to="/" activeClassName="is_active"  exact={true}><img src="assets/sidebar/zoo.png"/> <div>The Zoo</div></NavLink></li>
+              <li><NavLink  to="/expedition" activeClassName="is_active"><img src="assets/sidebar/expedition.png"/> <div>The Expedition</div></NavLink></li>
               <li><a><img src="assets/sidebar/market.png"/> <div>The Market</div></a></li>
               <li><a><img src="assets/sidebar/safe.png"/> <div>My Safe</div></a></li>
               <li><a><img src="assets/sidebar/stake.png"/> <div>Stake Zoo</div></a></li>

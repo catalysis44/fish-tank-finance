@@ -69,10 +69,42 @@ a{
 @import 'node_modules/bulma/sass/form/_all.sass';
 @import 'node_modules/bulma/sass/elements/title.sass';
 @import 'node_modules/bulma/sass/components/navbar.sass';
+@import 'node_modules/bulma/sass/components/modal.sass';
 @import 'node_modules/bulma/sass/layout/hero.sass';
 @import 'node_modules/bulma/sass/layout/section.sass';
 
+/*Modal*/
+@keyframes moveGradient {
+  50% {
+  background-position: 100% 50%;
+  }
+}
+.modal
+{
+  padding-left:15px;
+  padding-right:15px;
 
+}
+.modal-background
+{
+  background:rgba(0, 169, 157,0.8) !important;
+  
+}
+.modal-card
+{
+  overflow:visible;
+}
+.modal-card-body
+{
+  border-radius:14px;
+  
+}
+.modal-card-body .close
+{
+  position:absolute;
+  top:5px;
+  right:10px;
+}
 
 
 /* Notification */

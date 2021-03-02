@@ -1,9 +1,12 @@
 import styles from './index.less';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCheckSquare, faExternalLinkSquareAlt } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheckSquare, faExternalLinkSquareAlt } from '@fortawesome/free-solid-svg-icons';
 import { notification } from 'antd';
+import { useState } from 'react';
 import React from 'react';
 export default function () {
+
+  
 
   function showSubArea() {
     document.getElementById('sub_area').setAttribute("data-show-subarea", "true");
@@ -83,14 +86,15 @@ export default function () {
     };
     notification.open(args);
   };
-  openNotification();
-  openNotification2();
-  openNotification3();
-  openNotification4();
+  //openNotification();
+  //openNotification2();
+  //openNotification3();
+  //openNotification4();
 
 
   return (
     <React.Fragment>
+      
       <div className={styles.filter_row}>
 
         <div className={styles.box}>

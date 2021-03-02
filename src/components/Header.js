@@ -1,11 +1,16 @@
 import styles from './header.less';
-
+import ChestboxBuyModal from '../components/zoo/ChestboxBuyModal';
+import React from 'react';
+import { useState } from 'react';
 export default function Header(props) {
+    const [modal, setModal] = useState(0);
     return (
+        <React.Fragment>
+        <ChestboxBuyModal isActived={modal} setModal={setModal}></ChestboxBuyModal>
         <div className={styles.row}>
             <div className={styles.box}>
                 <img src="assets/silverbox42x42.png" class={styles.chestbox}/>
-                <a className={styles.buy_btn}>
+                <a className={styles.buy_btn} onClick={()=>{setModal(1)}}>
                    <img src="assets/silverkey29x29.png"/> BUY
                 </a>
                 <div className={styles.chestPrice}>
@@ -16,7 +21,7 @@ export default function Header(props) {
 
             <div className={styles.box}>
                 <img src="assets/goldenbox42x42.png" class={styles.chestbox}/>
-                <a className={styles.buy_btn}>
+                <a className={styles.buy_btn} onClick={()=>{setModal(1)}}>
                    <img src="assets/goldenkey29x29.png"/> BUY
                 </a>
                 <div className={styles.chestPrice}>
@@ -48,5 +53,6 @@ export default function Header(props) {
                 </div>
             </div>
         </div>
+        </React.Fragment>
     );
 }
