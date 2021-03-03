@@ -1,6 +1,6 @@
 import styles from './index.less';
 import "../styles/bulma.scss"
-
+import '../../node_modules/animate.css/animate.min.css';
 //import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 //import { faWallet } from '@fortawesome/free-solid-svg-icons'
 import Header from '../components/Header';

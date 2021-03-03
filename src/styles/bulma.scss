@@ -72,7 +72,31 @@ a{
 @import 'node_modules/bulma/sass/components/modal.sass';
 @import 'node_modules/bulma/sass/layout/hero.sass';
 @import 'node_modules/bulma/sass/layout/section.sass';
+/*Slider*/
+.ant-slider
+{
+  width:100%;
+}
+.ant-slider-track
+{
+  background-color:transparent !important;
+}
+.ant-slider-handle
+{
+  background-color: #00a99d !important;
+  border: 0 !important;
+  margin-top:-4px !important;
+}
+.ant-slider-handle:focus
+{
+  box-shadow:0 0 0 5px rgba(0, 169, 157,0.8);
+}
 
+.ant-slider-rail
+{
+  background-color:#e1e5da !important;
+  height:6px !important;
+}
 /*Modal*/
 @keyframes moveGradient {
   50% {
@@ -83,7 +107,7 @@ a{
 {
   padding-left:15px;
   padding-right:15px;
-
+  z-index: 1020;
 }
 .modal-background
 {
