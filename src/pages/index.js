@@ -6,7 +6,7 @@ import { useState } from 'react';
 import React from 'react';
 export default function () {
 
-  
+
 
   function showSubArea() {
     document.getElementById('sub_area').setAttribute("data-show-subarea", "true");
@@ -94,7 +94,7 @@ export default function () {
 
   return (
     <React.Fragment>
-      
+
       <div className={styles.filter_row}>
 
         <div className={styles.box}>
@@ -133,16 +133,16 @@ export default function () {
 
       <div className={styles.row}>
         <div className={styles.pool} data-active="true"> {/*active true for on staking pool */}
-          
+
           <div className={styles.bubble} data-equipped-nft="true"> {/*true if equipped an NFT*/}
-            <a href="" className={styles.reload}><img src="assets/reload24x24.png"/></a>
+            <a href="" className={styles.reload}><img src="assets/reload24x24.png" /></a>
 
             <img src="dummy/equip_item.png" />
-            <div className={styles.bubble_text} data-three-line="true"> {/*true if show 3 lines*/}
-              
-              <div>NFT NAME</div>
-              <div>REWARD +5%</div>
-              <div>LOCK TIME -23 HOURS</div>
+            <div className={styles.bubble_text}>
+
+              <div className={styles.name}>Very Red Strawberry</div>
+              <div className={styles.boost_amount}>+150.33%</div>
+
             </div>
 
           </div>
@@ -168,10 +168,10 @@ export default function () {
               <img src="assets/zoo32x32.png" />
               <span>×2</span>
             </div>
-            <div className={styles.apy} data-equipped-nft="true">  {/*true if equipped an NFT*/}
+            <div className={styles.apy} >
               <img src="assets/apy36x36.png" />
               <span>555.55%</span>
-              <div><img src="assets/rocket_horizon16x16.png" /> +115.33%</div>
+
             </div>
           </div>
 
@@ -340,15 +340,14 @@ export default function () {
 
 
         <div className={styles.pool} data-active="true"> {/*active true for on staking pool */}
-          
+
           <div className={styles.bubble} data-equipped-nft="true"> {/*true if equipped an NFT*/}
-          <a href="" className={styles.reload}><img src="assets/reload24x24.png"/></a>
+            <a href="" className={styles.reload}><img src="assets/reload24x24.png" /></a>
 
             <img src="dummy/equip_item.png" />
-            <div className={styles.bubble_text} data-three-line="true"> {/*true if show 3 lines*/}
-              <div>NFT NAME</div>
-              <div>REWARD +5%</div>
-              <div>LOCK TIME -23 HOURS</div>
+            <div className={styles.bubble_text} > {/*true if show 3 lines*/}
+              <div className={styles.name}>Very Red Strawberry</div>
+              <div className={styles.boost_amount}>+150.33%</div>
             </div>
 
           </div>
@@ -374,10 +373,10 @@ export default function () {
               <img src="assets/zoo32x32.png" />
               <span>×2</span>
             </div>
-            <div className={styles.apy} data-equipped-nft="true">  {/*true if equipped an NFT*/}
+            <div className={styles.apy}>
               <img src="assets/apy36x36.png" />
               <span>555.55%</span>
-              <div><img src="assets/rocket_horizon16x16.png" /> +115.33%</div>
+
             </div>
           </div>
 
@@ -546,15 +545,14 @@ export default function () {
 
 
         <div className={styles.pool} data-active="true"> {/*active true for on staking pool */}
-          
+
           <div className={styles.bubble} data-equipped-nft="true"> {/*true if equipped an NFT*/}
-          <a href="" className={styles.reload}><img src="assets/reload24x24.png"/></a>
+            <a href="" className={styles.reload}><img src="assets/reload24x24.png" /></a>
 
             <img src="dummy/equip_item.png" />
-            <div className={styles.bubble_text} data-three-line="true"> {/*true if show 3 lines*/}
-              <div>NFT NAME</div>
-              <div>REWARD +5%</div>
-              <div>LOCK TIME -23 HOURS</div>
+            <div className={styles.bubble_text}> 
+            <div className={styles.name}>Very Red Strawberry</div>
+              <div className={styles.boost_amount}>+150.33%</div>
             </div>
 
           </div>
@@ -580,10 +578,10 @@ export default function () {
               <img src="assets/zoo32x32.png" />
               <span>×2</span>
             </div>
-            <div className={styles.apy} data-equipped-nft="true">  {/*true if equipped an NFT*/}
+            <div className={styles.apy} >  {/*true if equipped an NFT*/}
               <img src="assets/apy36x36.png" />
               <span>555.55%</span>
-              <div><img src="assets/rocket_horizon16x16.png" /> +115.33%</div>
+
             </div>
           </div>
 

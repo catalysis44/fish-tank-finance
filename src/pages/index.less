@@ -159,9 +159,23 @@
     .bubble_text
     {
       margin-left:5px;
-      line-height:11px;
-      padding-top:3px;
+      line-height:15px;
+      padding-top:2px;
       font-size:12px;
+      color:black;
+      .name
+      {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 105px;
+        
+      }
+      .boost_amount
+      {
+        font-size:20px;
+      }
+      /*
       &[data-three-line="true"]
       {
         line-height:9px;
@@ -169,6 +183,7 @@
         font-size:11px;
         margin-left:5px;
       }
+      */
     }
     display:flex;
     align-items: center;

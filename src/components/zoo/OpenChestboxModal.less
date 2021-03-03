@@ -1,0 +1,179 @@
+.header
+{
+    text-align: center;
+    color:black;
+    
+    .title
+    {
+      font-size:20px;
+    }
+    .supply
+    {
+        font-size:11px;
+      img
+      {
+          margin-top:-3px;
+          position:relative;
+      }
+    }
+}
+@keyframes rotation {
+    from {
+      transform: rotateY(0deg);
+    }
+    to {
+      transform: rotateY(1turn);
+    }
+  }
+.item_wrapper
+{
+    display:flex;
+    margin-top:10px;
+    margin-bottom:10px;
+    .item
+    {
+        position:relative;
+        
+        flex:1;
+        .float_item
+        {
+            width:80px;
+            height:80px;
+            position:absolute;
+            bottom:50px;
+            z-index:1;
+            left: calc(50% - 40px);
+            animation: rotation 3s infinite linear;
+            
+        }
+        .openedBox
+        {
+            width:80px;
+            height:80px;
+            position:absolute;
+            bottom:0px;
+            left: calc(50% - 40px);
+            
+        }
+    }
+    .item_description
+    {
+        display:flex;
+        flex-direction: column;
+        align-items:flex-end;
+        flex:1;
+        color:black;
+        .description
+        {
+            margin-top:5px;
+            display:flex;
+            flex-direction: column;
+            align-items:center;
+            justify-content: center;
+            height:30px;
+            width:92px;
+            font-size:13px;
+            line-height:11px;
+            border:1px solid #e1e5da;
+            border-radius:4px;
+            padding-top:3px;
+
+        }
+        
+    }
+}
+.rule
+{
+    margin-top:10px;
+    div
+    {
+        font-size:16px;
+        color:black;
+        line-height:18px;
+    }
+    span
+    {
+        display:block;
+        font-size:12px;
+        line-height:12px;
+        color:black;
+
+    }
+    a
+    {
+        font-size:11px;
+       
+        color:#00a99d
+    }
+}
+.horizontal_line
+  {
+    width: calc(100% + 20px);
+    
+    height:1px;
+    background:#eee;
+    margin-left:-10px;
+
+  }
+.action
+{
+
+    display:flex;
+    margin:0 -7px;
+    margin-top:5px;
+    .action_btn
+    {  
+      margin:0 5px;
+      margin-top:10px;
+      &:hover
+      {
+          transform:scale(1.05);
+      }
+      flex:1;
+      width:100%;
+      border-radius: 4px;
+      font-size:20px;
+      padding-top:4px;
+      height:30px;
+      background:#00a99d;
+      border:#00a99d;
+      color:white;
+      text-align: center;
+      display:flex;
+      align-items: center;
+      justify-content: center;
+      transition: all .1s ease-in-out;
+    }
+
+    
+}
+
+:global
+#OpenChestBoxModal .modal-card
+{
+    --border-width: 3px;
+  &::after {
+    position: absolute;
+    content: "";
+    top: calc(-1 * var(--border-width));
+    left: calc(-1 * var(--border-width));
+    z-index: -1;
+    width: calc(100% + var(--border-width) * 2);
+    height: calc(100% + var(--border-width) * 2);
+    background: linear-gradient(
+      60deg,
+      hsl(224, 85%, 66%),
+      hsl(269, 85%, 66%),
+      hsl(314, 85%, 66%),
+      hsl(359, 85%, 66%),
+      hsl(44, 85%, 66%),
+      hsl(89, 85%, 66%),
+      hsl(134, 85%, 66%),
+      hsl(179, 85%, 66%)
+    );
+    background-size: 300% 300%;
+    background-position: 0 50%;
+    border-radius: 14px;
+    animation: moveGradient 4s alternate infinite;
+  }
+}

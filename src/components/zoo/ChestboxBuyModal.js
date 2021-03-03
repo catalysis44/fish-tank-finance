@@ -1,17 +1,22 @@
 import { useState, useEffect } from 'react';
 import styles from './ChestboxBuyModal.less';
-import '../../../node_modules/animate.css/animate.css';
+import OpenChestboxModal from './OpenChestboxModal';
+import '../../../node_modules/animate.css/animate.min.css';
+import React from 'react';
+
 export default function ChestboxBuyModal(props) {
   // Open Confirm Modal //
   const closeModal = () => {
     props.setModal(0);
   }
-
+  const [modal, setModal] = useState(0);
 
   return (
+    <React.Fragment>
+    <OpenChestboxModal isActived={modal} setModal={setModal}></OpenChestboxModal>
     <div className={`modal  ${props.isActived === 0 ? "" : "is-active"}`}>
-      <div className="modal-background animate__animated" onClick={closeModal}></div>
-      <div style={{ maxWidth: 400 }} className="modal-card animate__animated  animate__rubberBand">
+      <div className="modal-background" onClick={closeModal}></div>
+      <div style={{ maxWidth: 400 }} className="modal-card animate__animated  animate__fadeInUp animate__faster">
         <section className="modal-card-body">
           <a onClick={closeModal} className="close"><img src="assets/remove16x16.png" /></a>
           <div className={styles.description}>
@@ -28,11 +33,20 @@ euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</span>
             <a>MORE DETAILS ABOUT THE CHEST</a>
           </div>
           <div className={styles.action}>
-              <a className={styles.action_btn}> {/* Can remove Top-up button and it will expand 100% automatically*/}
-                    Withdraw
+              <a className={styles.action_btn} style={{display:'none'}}> {/* Can remove 1 button and it will expand 100% automatically*/}
+                    Approve
               </a>
-              <a className={styles.action_btn}>
-                    Top-up
+              <a className={styles.action_btn} style={{display:'none'}}>
+                    Validate
+              </a>
+              
+          </div>
+          <div className={styles.action}>
+          <a className={styles.action_btn} onClick={()=>{
+                  closeModal();
+                  setModal(1);
+              }}>
+                    Buy & Open Chest
               </a>
           </div>
         </section>
@@ -41,5 +55,6 @@ euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</span>
 
 
     </div>
+    </React.Fragment>
   )
 }
