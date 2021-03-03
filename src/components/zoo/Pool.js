@@ -4,24 +4,23 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckSquare, faExternalLinkSquareAlt } from '@fortawesome/free-solid-svg-icons';
 import { Slider } from 'antd';
+import BoosterSelectionModal from './BoosterSelectionModal';
 export default function Pool(props) {
+    const [modal, setModal] = useState(0);
     function showSubArea() { 
         document.getElementById('sub_area').setAttribute("data-show-subarea", "true");
       }
     return (
         <React.Fragment>
+            <BoosterSelectionModal isActived={modal} setModal={setModal}></BoosterSelectionModal>
             <div className={styles.pool} data-active="true"> {/*active true for on staking pool */}
                 <div className={styles.bubble} data-equipped-nft="true"> {/*true if equipped an NFT*/}
                     <a href="" className={styles.reload}><img src="assets/reload24x24.png" /></a>
-
                     <img src="dummy/equip_item.png" />
                     <div className={styles.bubble_text}>
-
                         <div className={styles.name}>Very Red Strawberry</div>
                         <div className={styles.boost_amount}>+150.33%</div>
-
                     </div>
-
                 </div>
                 <div className={styles.header}>
                     <div className={styles.title}>
@@ -175,16 +174,16 @@ export default function Pool(props) {
 
                             <div className={styles.action_wrapper}>
 
-                                <a className={styles.select_booster} style={{ display: 'none' }}> {/*Hided it after selected*/}
-        +
-      </a>
+                                <a className={styles.select_booster}  onClick={()=>{setModal(1)}}> {/*Hided it after selected*/}
+                                    +
+                                </a>
 
-                                <a className={styles.selected_booster}>
+                                <a className={styles.selected_booster} style={{ display: 'none' }}>
                                     <img src="dummy/booster.png" />
                                     <div className={styles.booster}>
                                         <img src="assets/rocket24x24.png" />
-          +5.55%
-        </div>
+                                    +5.55%
+                                    </div>
                                     <div className={styles.locked_time}>
                                         <img src="assets/hourglass24x24.png" />
           -524.50

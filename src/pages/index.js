@@ -83,9 +83,9 @@ export default function () {
     };
     notification.open(args);
   };
-  openNotification();
-  openNotification2();
-  openNotification3();
+  //openNotification();
+ //openNotification2();
+ // openNotification3();
   openNotification4();
 
 

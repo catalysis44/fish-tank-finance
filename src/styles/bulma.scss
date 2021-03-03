@@ -107,7 +107,7 @@ a{
 {
   padding-left:15px;
   padding-right:15px;
-  z-index: 1020;
+  /*z-index: 1020;*/
 }
 .modal-background
 {
@@ -117,11 +117,12 @@ a{
 .modal-card
 {
   overflow:visible;
+  
 }
 .modal-card-body
 {
   border-radius:14px;
-  
+  box-shadow: 5px 5px 0px #00000020;
 }
 .modal-card-body .close
 {
