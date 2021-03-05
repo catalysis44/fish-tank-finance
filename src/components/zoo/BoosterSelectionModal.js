@@ -38,6 +38,12 @@ export default function BoosterSelectionModal(props) {
                     </a>
                     
                 </div>
+                <div className={styles.search}>
+                  <div>
+                    <img src="assets/magnify24x24.png"/>
+                    <input type="value" placeholder="Input Boosting Name"></input>
+                  </div>
+                </div>
 
             
           </div>
