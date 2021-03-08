@@ -141,8 +141,8 @@ export default function Pool(props) {
 
                                 <div class={styles.coin_wrapper}>
                                     <a className={styles.max} > {/*Add disabled when non-connected */}
-          MAX
-        </a>
+                                    MAX
+                                    </a>
                                     <div className={styles.coins}>
                                         <img src="dummy/wanBTC.png" />
                                         <img src="dummy/wanUSDT.png" />

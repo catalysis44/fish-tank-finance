@@ -22,7 +22,7 @@ export default function OpenChestboxModal(props) {
               Wonderland Cheery Jam
             </div>
             <div className={styles.supply}>
-              <img src="assets/coin18x18.png" /> total supply: 100
+              <img src="assets/gem/common18x18.png" /> total supply: 100
             </div>
           </div>
 

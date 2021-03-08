@@ -103,7 +103,7 @@ export default function () {
               <div className={styles.icon}>
                 <div>A</div><div>Z</div>
               </div>
-              NAME
+              Name
             </a>
             <a>
               <div className={styles.icon}>
@@ -115,13 +115,13 @@ export default function () {
               <div className={styles.icon}>
                 <div>A</div><div>Z</div>
               </div>
-              LIQUIDITY
+              Liquidity
             </a>
             <a>
               <div className={styles.icon}>
                 <div>A</div><div>Z</div>
               </div>
-              MULTIPLIER
+              Multtiplier
               </a>
           </div>
 
