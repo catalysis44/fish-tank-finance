@@ -69,6 +69,7 @@ body {
 }
 a{
     color:#00a99d;
+    transition: all 0.3s;
 }
 
 // Import only what you need from Bulma
@@ -333,4 +334,20 @@ a{
     right: 0;
 
   }
+}
+
+/* Checkbox */
+.ant-checkbox-inner
+{
+  background-color:#e1e5da !important;
+  border-color:#e1e5da !important;//#e1e5da
+}
+.ant-checkbox-checked .ant-checkbox-inner
+{
+  background-color:#00a99d !important;
+  border-color:#00a99d !important;//#e1e5da
+}
+.ant-checkbox-checked::after
+{
+  border-color:#00a99d !important;
 }

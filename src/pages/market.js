@@ -1,15 +1,88 @@
 import styles from './market.less';
 import React from 'react';
 import '../../node_modules/animate.css/animate.min.css';
+import { Slider,Checkbox, Row, Col } from 'antd';
 export default function () {
     return (
         <React.Fragment>
-
             <div className={styles.content_wrapper}>
                 <div className={styles.filter_panel}>
                     <div className={styles.title}>
                         Filter (0)
-                </div>
+                    </div>
+                    <a className={styles.clear_filter}>Clear Filter</a>
+
+                    <div className={styles.filter_by}>
+                        <a className={styles.is_active}>By Type</a>
+                        <a>By Name</a>
+                    </div>
+                    <div className={styles.filter_ability}>
+                        <div className={styles.ability_title}>
+                            <img src="assets/rocket24x24.png" />
+                            <div>
+                                <span>Minimum</span>
+                                <span>Boost reward</span>
+                            </div>
+                        </div>
+                        <div className={styles.ability_slider}>
+                            +12.0%
+                            <div className={styles.slider}>
+                                <Slider defaultValue={12} min={0} max={50} tooltipVisible={false} />
+                            </div>
+                        </div>
+
+                    </div>
+                    <div className={styles.filter_ability}>
+                        <div className={styles.ability_title}>
+                            <img src="assets/hourglass24x24.png" />
+                            <div>
+                                <span>Minimum</span>
+                                <span>Locktime reducer</span>
+                            </div>
+                        </div>
+                        <div className={styles.ability_slider}>
+                            -5.25%
+                            <div className={styles.slider}>
+                                <Slider defaultValue={5} min={0} max={20} tooltipVisible={false} />
+                            </div>
+                        </div>
+                    </div>
+                    <div className={styles.title}>
+                        Level
+                    </div>
+                    <div className={styles.filter_level}>
+                        <a className={styles.is_active}><img src="assets/star18x18.png"/></a>
+                        <a><img src="assets/star18x18.png"/><img src="assets/star18x18.png"/></a>
+                        <a><img src="assets/star18x18.png"/><img src="assets/star18x18.png"/><img src="assets/star18x18.png"/></a>
+                        <a><img src="assets/max.png"/></a>
+                    </div>
+                    <div className={styles.title}>
+                        Currency
+                    </div>
+                    <div className={styles.filter_currency}>
+                        <Checkbox.Group style={{ width: '100%' }} >
+                            <Row>
+                                <Col span={12}>
+                                    <Checkbox value="A">ZOO</Checkbox>
+                                </Col>
+                                <Col span={12}>
+                                    <Checkbox value="B">wanBTC</Checkbox>
+                                </Col>
+                                <Col span={12}>
+                                    <Checkbox value="C">WAN</Checkbox>
+                                </Col>
+                                <Col span={12}>
+                                    <Checkbox value="D">wanUSDT</Checkbox>
+                                </Col>
+                                <Col span={12}>
+                                    <Checkbox value="E">WASP</Checkbox>
+                                </Col>
+                                <Col span={12}>
+                                    <Checkbox value="F">wanETH</Checkbox>
+                                </Col>
+                            </Row>
+                        </Checkbox.Group>
+                    </div>
                 </div>
                 <div className={styles.main_panel}>
                     <div className={styles.filter_row}>
@@ -63,9 +136,8 @@ export default function () {
                                         <div className={styles.title}>
                                             Lemon of Bunbury
                                         <div>
-                                                <img src="assets/star18x18.png" />
-                                                <img src="assets/star18x18.png" />
-                                                <img src="assets/star18x18.png" />
+                                                <img src="assets/max.png" />
+                                               
                                             </div>
                                         </div>
                                     </div>
@@ -267,7 +339,7 @@ export default function () {
 
                     </div>
 
-                    
+
 
 
                 </div>
