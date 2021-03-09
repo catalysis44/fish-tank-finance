@@ -337,10 +337,17 @@ a{
 }
 
 /* Checkbox */
+
 .ant-checkbox-inner
 {
   background-color:#e1e5da !important;
   border-color:#e1e5da !important;//#e1e5da
+  width:20px !important;
+  height:20px !important;
+}
+.ant-checkbox + span
+{
+  font-size:18px;
 }
 .ant-checkbox-checked .ant-checkbox-inner
 {

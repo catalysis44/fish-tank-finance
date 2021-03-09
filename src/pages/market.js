@@ -61,24 +61,24 @@ export default function () {
                     </div>
                     <div className={styles.filter_currency}>
                         <Checkbox.Group style={{ width: '100%' }} >
-                            <Row>
+                            <Row gutter={[5,10]}>
                                 <Col span={12}>
-                                    <Checkbox value="A">ZOO</Checkbox>
+                                    <Checkbox value="A"><img src="assets/currency/zoo.png"/> ZOO</Checkbox>
                                 </Col>
                                 <Col span={12}>
-                                    <Checkbox value="B">wanBTC</Checkbox>
+                                    <Checkbox value="B"><img src="assets/currency/wanBTC.png"/> wanBTC</Checkbox>
                                 </Col>
                                 <Col span={12}>
-                                    <Checkbox value="C">WAN</Checkbox>
+                                    <Checkbox value="C"><img src="assets/currency/wan.png"/> WAN</Checkbox>
                                 </Col>
                                 <Col span={12}>
-                                    <Checkbox value="D">wanUSDT</Checkbox>
+                                    <Checkbox value="D"><img src="assets/currency/wanUSDT.png"/> wanUSDT</Checkbox>
                                 </Col>
                                 <Col span={12}>
-                                    <Checkbox value="E">WASP</Checkbox>
+                                    <Checkbox value="E"><img src="assets/currency/wasp.png"/> WASP</Checkbox>
                                 </Col>
                                 <Col span={12}>
-                                    <Checkbox value="F">wanETH</Checkbox>
+                                    <Checkbox value="F"><img src="assets/currency/wanETH.png"/> wanETH</Checkbox>
                                 </Col>
                             </Row>
                         </Checkbox.Group>
