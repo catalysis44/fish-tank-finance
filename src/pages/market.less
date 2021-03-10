@@ -346,7 +346,8 @@
   {
     #filter1.toggled, #filter2.toggled
     {
-      right: 0px !important;
+      
+      transform: translateX(0);
     }
     #filterbar_backdrop.toggled
     {
@@ -376,17 +377,17 @@
 
     .filter_panel
     {
-        
+        transform:translateX(290px);
         position: absolute !important;
         top: 230px !important;
         margin: 0 !important;
-        right: -290px !important;
+        right: 0px !important;
         height: calc(100% - 230px) !important;
         border-radius: 0;
         box-shadow: none;
         overflow-y: auto;
         z-index: 4;
-        transition: right 0.2s ease-in-out 0s;
+        transition: all 0.2s ease-in-out 0s;
         
 
     }
@@ -411,11 +412,12 @@
           border-bottom-left-radius: 14px;
           
         }
-        transition: right 0.2s ease-in-out 0s;
+        transform:translateX(290px);
+        transition: all 0.2s ease-in-out 0s;
         width:290px;
         position: absolute !important;
         top: 0 !important;
-        right: -290px !important;
+        right: 0px !important;
         height: 230px !important;
         border-radius: 0;
         box-shadow:none;
