@@ -348,6 +348,14 @@ a{
 .ant-checkbox + span
 {
   font-size:18px;
+  
+}
+.ant-checkbox + span span
+{
+  position: relative;
+  top: 2px;
+  white-space: nowrap;
+  float:right;
 }
 .ant-checkbox-checked .ant-checkbox-inner
 {

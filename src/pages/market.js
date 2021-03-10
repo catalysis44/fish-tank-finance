@@ -63,23 +63,45 @@ export default function () {
                         <Checkbox.Group style={{ width: '100%' }} >
                             <Row gutter={[5,10]}>
                                 <Col span={12}>
-                                    <Checkbox value="A"><img src="assets/currency/zoo.png"/> ZOO</Checkbox>
+                                    <Checkbox value="A"><img src="assets/currency/zoo.png"/> <span>ZOO</span></Checkbox>
                                 </Col>
                                 <Col span={12}>
-                                    <Checkbox value="B"><img src="assets/currency/wanBTC.png"/> wanBTC</Checkbox>
+                                    <Checkbox value="B"><img src="assets/currency/wanBTC.png"/> <span>wanBTC</span></Checkbox>
                                 </Col>
                                 <Col span={12}>
-                                    <Checkbox value="C"><img src="assets/currency/wan.png"/> WAN</Checkbox>
+                                    <Checkbox value="C"><img src="assets/currency/wan.png"/><span> WAN</span></Checkbox>
                                 </Col>
                                 <Col span={12}>
-                                    <Checkbox value="D"><img src="assets/currency/wanUSDT.png"/> wanUSDT</Checkbox>
+                                    <Checkbox value="D"><img src="assets/currency/wanUSDT.png"/> <span>wanUSDT</span></Checkbox>
                                 </Col>
                                 <Col span={12}>
-                                    <Checkbox value="E"><img src="assets/currency/wasp.png"/> WASP</Checkbox>
+                                    <Checkbox value="E"><img src="assets/currency/wasp.png"/> <span>WASP</span></Checkbox>
                                 </Col>
                                 <Col span={12}>
-                                    <Checkbox value="F"><img src="assets/currency/wanETH.png"/> wanETH</Checkbox>
+                                    <Checkbox value="F"><img src="assets/currency/wanETH.png"/> <span>wanETH</span></Checkbox>
                                 </Col>
+                            </Row>
+                        </Checkbox.Group>
+                    </div>
+                    <div className={styles.title}>
+                        Rarity
+                    </div>
+                    <div className={styles.filter_rarity}>
+                        <Checkbox.Group style={{ width: '100%' }} >
+                            <Row gutter={[5,10]}>
+                                <Col span={12}>
+                                    <Checkbox value="A"><img src="assets/gem/common18x18.png"/> <span>Common</span></Checkbox>
+                                </Col>
+                                <Col span={12}>
+                                    <Checkbox value="B"><img src="assets/gem/epic18x18.png"/> <span>Epic</span></Checkbox>
+                                </Col>
+                                <Col span={12}>
+                                    <Checkbox value="C"><img src="assets/gem/rare18x18.png"/> <span>Rare</span></Checkbox>
+                                </Col>
+                                <Col span={12}>
+                                    <Checkbox value="D"><img src="assets/gem/ultrarare18x18.png"/> <span>Ultra Rare</span></Checkbox>
+                                </Col>
+                                
                             </Row>
                         </Checkbox.Group>
                     </div>
