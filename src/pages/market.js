@@ -8,6 +8,8 @@ export default function () {
     {
         document.getElementById('filter1').classList.toggle("toggled");
         document.getElementById('filter2').classList.toggle("toggled");
+        document.getElementById('filterbar_backdrop').classList.toggle("toggled");
+        
     }
     useEffect(()=>{
         toggleFilter();
@@ -15,6 +17,7 @@ export default function () {
     
     return (
         <React.Fragment>
+            <div id="filterbar_backdrop"  onClick={toggleFilter}></div>
             <div className={styles.content_wrapper}>
                 
                 <div id="filter1" className={styles.filter_panel}>

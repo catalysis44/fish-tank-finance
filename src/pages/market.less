@@ -330,11 +330,28 @@
 }
 :global
 {
+  #filterbar_backdrop
+  {
+    width: 0%;
+    height: 100%;
+    background: #00a99d !important;
+    position: absolute;
+    z-index: 3;
+    opacity: 0;
+    top:0;
+    transition: opacity 0.2s ease-in-out;
+  }
+
   @media screen and (max-width: 1250px)
   {
     #filter1.toggled, #filter2.toggled
     {
       right: 0px !important;
+    }
+    #filterbar_backdrop.toggled
+    {
+      width:100%;
+      opacity:0.8;
     }
   }
 }
@@ -354,7 +371,7 @@
         border-radius: 0;
         box-shadow: none;
         overflow-y: auto;
-        z-index: 1;
+        z-index: 4;
         transition: right 0.2s ease-in-out 0s;
         
 
@@ -391,7 +408,7 @@
         border-radius: 0;
         box-shadow:none;
         justify-content: left;
-        z-index: 1;
+        z-index: 4;
         .title{
             margin-left:10px;
         }
