@@ -205,7 +205,7 @@ export default function () {
                                     </div>
                                     <div className={styles.footer}>
                                         <div className={styles.description}>
-                                            <span><img src="assets/apple24x24.png" /> Potions</span>
+                                            <span><img src="assets/category/potions.png" /> Potions</span>
                                         </div>
                                         <div className={styles.description}>
                                             <span>Card #</span>
@@ -249,7 +249,7 @@ export default function () {
 
                         <div className={styles.flip_card}>
                             <div className={styles.flip_card_inner}>
-                                <div className={styles.flip_card_front} data-is-max="true"> {/* data-is-max="true" if this is max item */}
+                                <div className={styles.flip_card_front}> {/* data-is-max="true" if this is max item */}
                                     <div className={styles.item_title}>
                                         <img src="assets/lemon64x64.png" />
                                         <div className={styles.title}>
@@ -274,7 +274,7 @@ export default function () {
                                     </div>
                                     <div className={styles.footer}>
                                         <div className={styles.description}>
-                                            <span><img src="assets/apple24x24.png" /> Potions</span>
+                                            <span><img src="assets/category/dishes.png" /> Dishes</span>
                                         </div>
                                         <div className={styles.description}>
                                             <span>Card #</span>
@@ -318,7 +318,7 @@ export default function () {
 
                         <div className={styles.flip_card}>
                             <div className={styles.flip_card_inner}>
-                                <div className={styles.flip_card_front} data-is-max="true"> {/* data-is-max="true" if this is max item */}
+                                <div className={styles.flip_card_front}> {/* data-is-max="true" if this is max item */}
                                     <div className={styles.item_title}>
                                         <img src="assets/lemon64x64.png" />
                                         <div className={styles.title}>
@@ -343,7 +343,7 @@ export default function () {
                                     </div>
                                     <div className={styles.footer}>
                                         <div className={styles.description}>
-                                            <span><img src="assets/apple24x24.png" /> Potions</span>
+                                            <span><img src="assets/category/fruits.png" /> Potions</span>
                                         </div>
                                         <div className={styles.description}>
                                             <span>Card #</span>
