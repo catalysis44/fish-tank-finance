@@ -30,7 +30,7 @@ export default function Header(props) {
                 </div>
             </div>
 
-            <div className={styles.box}>
+            <div className={styles.box} style={{display:'none'}}>
                 <img src="assets/zoo48x48.png" class={styles.zoo_icon}/>
                 <div class={styles.current_supply}>
                     <div>Current Supply</div>
@@ -45,7 +45,7 @@ export default function Header(props) {
                 </div>
             </div>
 
-            <div className={styles.box}>
+            <div className={styles.box} style={{display:'none'}}>
                 <img src="assets/burned42x42.png" class={styles.burn_icon}/>
                 <div class={styles.burn}>
                     <div class={styles.burn_text}>TOTAL BURNED</div>

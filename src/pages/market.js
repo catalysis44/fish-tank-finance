@@ -1,12 +1,23 @@
 import styles from './market.less';
 import React from 'react';
 import '../../node_modules/animate.css/animate.min.css';
-import { Slider,Checkbox, Row, Col } from 'antd';
+import { Slider, Checkbox, Row, Col } from 'antd';
+import { useEffect } from 'react';
 export default function () {
+    function toggleFilter()
+    {
+        document.getElementById('filter1').classList.toggle("toggled");
+        document.getElementById('filter2').classList.toggle("toggled");
+    }
+    useEffect(()=>{
+        toggleFilter();
+    },[])
+    
     return (
         <React.Fragment>
             <div className={styles.content_wrapper}>
-                <div className={styles.filter_panel}>
+                
+                <div id="filter1" className={styles.filter_panel}>
                     <div className={styles.title}>
                         Filter (0)
                     </div>
@@ -51,34 +62,34 @@ export default function () {
                         Level
                     </div>
                     <div className={styles.filter_level}>
-                        <a className={styles.is_active}><img src="assets/star18x18.png"/></a>
-                        <a><img src="assets/star18x18.png"/><img src="assets/star18x18.png"/></a>
-                        <a><img src="assets/star18x18.png"/><img src="assets/star18x18.png"/><img src="assets/star18x18.png"/></a>
-                        <a><img src="assets/max.png"/></a>
+                        <a className={styles.is_active}><img src="assets/star18x18.png" /></a>
+                        <a><img src="assets/star18x18.png" /><img src="assets/star18x18.png" /></a>
+                        <a><img src="assets/star18x18.png" /><img src="assets/star18x18.png" /><img src="assets/star18x18.png" /></a>
+                        <a><img src="assets/max.png" /></a>
                     </div>
                     <div className={styles.title}>
                         Currency
                     </div>
                     <div className={styles.filter_currency}>
                         <Checkbox.Group style={{ width: '100%' }} >
-                            <Row gutter={[5,10]}>
+                            <Row gutter={[5, 10]}>
                                 <Col span={12}>
-                                    <Checkbox value="A"><img src="assets/currency/zoo.png"/> <span>ZOO</span></Checkbox>
+                                    <Checkbox value="A"><img src="assets/currency/zoo.png" /> <span>ZOO</span></Checkbox>
                                 </Col>
                                 <Col span={12}>
-                                    <Checkbox value="B"><img src="assets/currency/wanBTC.png"/> <span>wanBTC</span></Checkbox>
+                                    <Checkbox value="B"><img src="assets/currency/wanBTC.png" /> <span>wanBTC</span></Checkbox>
                                 </Col>
                                 <Col span={12}>
-                                    <Checkbox value="C"><img src="assets/currency/wan.png"/><span> WAN</span></Checkbox>
+                                    <Checkbox value="C"><img src="assets/currency/wan.png" /><span> WAN</span></Checkbox>
                                 </Col>
                                 <Col span={12}>
-                                    <Checkbox value="D"><img src="assets/currency/wanUSDT.png"/> <span>wanUSDT</span></Checkbox>
+                                    <Checkbox value="D"><img src="assets/currency/wanUSDT.png" /> <span>wanUSDT</span></Checkbox>
                                 </Col>
                                 <Col span={12}>
-                                    <Checkbox value="E"><img src="assets/currency/wasp.png"/> <span>WASP</span></Checkbox>
+                                    <Checkbox value="E"><img src="assets/currency/wasp.png" /> <span>WASP</span></Checkbox>
                                 </Col>
                                 <Col span={12}>
-                                    <Checkbox value="F"><img src="assets/currency/wanETH.png"/> <span>wanETH</span></Checkbox>
+                                    <Checkbox value="F"><img src="assets/currency/wanETH.png" /> <span>wanETH</span></Checkbox>
                                 </Col>
                             </Row>
                         </Checkbox.Group>
@@ -88,20 +99,20 @@ export default function () {
                     </div>
                     <div className={styles.filter_rarity}>
                         <Checkbox.Group style={{ width: '100%' }} >
-                            <Row gutter={[5,10]}>
-                            <Col span={12}>
-                                    <Checkbox value="A"><img src="assets/gem/common18x18.png"/> <span>Common</span></Checkbox>
+                            <Row gutter={[5, 10]}>
+                                <Col span={12}>
+                                    <Checkbox value="A"><img src="assets/gem/common18x18.png" /> <span>Common</span></Checkbox>
                                 </Col>
                                 <Col span={12}>
-                                    <Checkbox value="B"><img src="assets/gem/epic18x18.png"/> <span>Epic</span></Checkbox>
+                                    <Checkbox value="B"><img src="assets/gem/epic18x18.png" /> <span>Epic</span></Checkbox>
                                 </Col>
                                 <Col span={12}>
-                                    <Checkbox value="C"><img src="assets/gem/rare18x18.png"/> <span>Rare</span></Checkbox>
+                                    <Checkbox value="C"><img src="assets/gem/rare18x18.png" /> <span>Rare</span></Checkbox>
                                 </Col>
                                 <Col span={12}>
-                                    <Checkbox value="D"><img src="assets/gem/ultrarare18x18.png"/> <span>Ultra Rare</span></Checkbox>
+                                    <Checkbox value="D"><img src="assets/gem/ultrarare18x18.png" /> <span>Ultra Rare</span></Checkbox>
                                 </Col>
-                                
+
                             </Row>
                         </Checkbox.Group>
                     </div>
@@ -110,71 +121,81 @@ export default function () {
                     </div>
                     <div className={styles.filter_category}>
                         <Checkbox.Group style={{ width: '100%' }} >
-                            <Row gutter={[5,10]}>
-                            <Col span={12}>
-                                    <Checkbox value="A"><img src="assets/category/fruits.png"/> <span>Fruits</span></Checkbox>
+                            <Row gutter={[5, 10]}>
+                                <Col span={12}>
+                                    <Checkbox value="A"><img src="assets/category/fruits.png" /> <span>Fruits</span></Checkbox>
                                 </Col>
                                 <Col span={12}>
-                                    <Checkbox value="B"><img src="assets/category/dishes.png"/> <span>Dishes</span></Checkbox>
+                                    <Checkbox value="B"><img src="assets/category/dishes.png" /> <span>Dishes</span></Checkbox>
                                 </Col>
                                 <Col span={12}>
-                                    <Checkbox value="C"><img src="assets/category/sweets.png"/> <span>Sweets</span></Checkbox>
+                                    <Checkbox value="C"><img src="assets/category/sweets.png" /> <span>Sweets</span></Checkbox>
                                 </Col>
                                 <Col span={12}>
-                                    <Checkbox value="D"><img src="assets/category/potions.png"/> <span>Potions</span></Checkbox>
+                                    <Checkbox value="D"><img src="assets/category/potions.png" /> <span>Potions</span></Checkbox>
                                 </Col>
                                 <Col span={12}>
-                                    <Checkbox value="E"><img src="assets/category/spices.png"/> <span>Spices</span></Checkbox>
+                                    <Checkbox value="E"><img src="assets/category/spices.png" /> <span>Spices</span></Checkbox>
                                 </Col>
                                 <Col span={12}>
-                                    <Checkbox value="F"><img src="assets/category/magic.png"/> <span>Magic</span></Checkbox>
+                                    <Checkbox value="F"><img src="assets/category/magic.png" /> <span>Magic</span></Checkbox>
                                 </Col>
-                                
-                                
+
+
                             </Row>
                         </Checkbox.Group>
                     </div>
                 </div>
                 <div className={styles.main_panel}>
-                    <div className={styles.filter_row}>
-
-                        <div className={styles.box}>
-                            <div className={styles.title}>
-                                Sort by
-                </div>
-                            <div className={styles.sort_btn}>
-                                <a className={styles.is_acitve}>
-                                    <div className={styles.icon}>
-                                        <div>A</div><div>Z</div>
-                                    </div>
-                    Name
-                    </a>
-                                <a>
-                                    <div className={styles.icon}>
-                                        <div>A</div><div>Z</div>
-                                    </div>
-                    Total supply
-                    </a>
-                                <a>
-                                    <div className={styles.icon}>
-                                        <div>A</div><div>Z</div>
-                                    </div>
-                    Price
-                    </a>
-                                <a>
-                                    <div className={styles.icon}>
-                                        <div>A</div><div>Z</div>
-                                    </div>
-                    Boost reward
-                    </a>
-                                <a>
-                                    <div className={styles.icon}>
-                                        <div>A</div><div>Z</div>
-                                    </div>
-                    Time reducer
-                    </a>
+                    <div  className={styles.filter_row}>
+                        <div id="filter2" className={styles.box}>
+                            <a className={styles.toggle_filter} onClick={toggleFilter}>FILTER</a>
+                            <div className={styles.sorting}>
+                                <div className={styles.title}>
+                                    Sort by
+                                </div>
+                                <div className={styles.sort_btn}>
+                                    <a className={styles.is_acitve}>
+                                        <div className={styles.icon}>
+                                            <div>A</div><div>Z</div>
+                                        </div>
+                                        Name
+                                    </a>
+                                    <a>
+                                        <div className={styles.icon}>
+                                            <div>A</div><div>Z</div>
+                                        </div>
+                                Total supply
+                                </a>
+                                    <a>
+                                        <div className={styles.icon}>
+                                            <div>A</div><div>Z</div>
+                                        </div>
+                                Price
+                                </a>
+                                    <a>
+                                        <div className={styles.icon}>
+                                            <div>A</div><div>Z</div>
+                                        </div>
+                                    Boost reward
+                                    </a>
+                                    <a>
+                                        <div className={styles.icon}>
+                                            <div>A</div><div>Z</div>
+                                        </div>
+                                Time reducer
+                                </a>
+                                </div>
                             </div>
-
+                            <div className={styles.view_selection}>
+                                <div className={styles.title}>
+                                    View
+                                </div>
+                                <div className={styles.view_btn}>
+                                    <a className={styles.is_acitve}>Card</a>
+                                    <a>List</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -188,7 +209,7 @@ export default function () {
                                             Lemon of Bunbury
                                         <div>
                                                 <img src="assets/max.png" />
-                                               
+
                                             </div>
                                         </div>
                                     </div>
