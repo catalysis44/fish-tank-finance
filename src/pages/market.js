@@ -1,6 +1,8 @@
 import styles from './market.less';
 import React from 'react';
 import '../../node_modules/animate.css/animate.min.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSlidersH } from '@fortawesome/free-solid-svg-icons';
 import { Slider, Checkbox, Row, Col } from 'antd';
 import { useEffect } from 'react';
 export default function () {
@@ -152,7 +154,7 @@ export default function () {
                 <div className={styles.main_panel}>
                     <div  className={styles.filter_row}>
                         <div id="filter2" className={styles.box}>
-                            <a className={styles.toggle_filter} onClick={toggleFilter}>FILTER</a>
+                            <a className={styles.toggle_filter} onClick={toggleFilter}><FontAwesomeIcon icon={faSlidersH} /> FILTER</a>
                             <div className={styles.sorting}>
                                 <div className={styles.title}>
                                     Sort by
@@ -203,6 +205,73 @@ export default function () {
                     </div>
 
                     <div className={styles.row}>
+                        <div className={styles.flip_card}>
+                            <div className={styles.flip_card_inner}>
+                                <div className={styles.flip_card_front} data-is-max="true"> {/* data-is-max="true" if this is max item */}
+                                    <div className={styles.item_title}>
+                                        <img src="assets/lemon64x64.png" />
+                                        <div className={styles.title}>
+                                            Lemon of Bunbury
+                                        <div>
+                                                <img src="assets/max.png" />
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className={styles.total_supply}>
+                                        <img src="assets/gem/common18x18.png" /> Total Supply : 100
+                                </div>
+                                    <div className={styles.item_description}>
+                                        <div className={styles.description}>
+                                            <span><img src="assets/rocket24x24.png" /> +5.15%</span>
+                                        </div>
+                                        <div className={styles.description}>
+                                            <span><img src="assets/hourglass24x24.png" style={{ height: 20 }} /> -15.25%</span>
+                                        </div>
+                                    </div>
+                                    <div className={styles.footer}>
+                                        <div className={styles.description}>
+                                            <span><img src="assets/category/potions.png" /> Potions</span>
+                                        </div>
+                                        <div className={styles.description}>
+                                            <span>Card #</span>
+                                        555,555,555
+                                    </div>
+                                        <div className={styles.price}>
+                                            <img src="assets/currency/zoo.png" />
+                                            <div>
+                                                1,535,350
+                                            <span>ZOO</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className={styles.flip_card_back}>
+                                    <div className={styles.title}>
+                                        <img src="assets/lemon64x64.png" />
+                                        Lemon of Bunbury
+                                    </div>
+                                    <div className={styles.item_description}>
+                                        <div className={styles.description}>
+                                            <div>
+                                                <img src="assets/star18x18.png" />
+                                                <img src="assets/star18x18.png" />
+                                                <img src="assets/star18x18.png" />
+                                            </div>
+                                        </div>
+                                        <div className={styles.description}>
+                                            <span><img src="assets/rocket24x24.png" /> +5.15%</span>
+                                        </div>
+                                        <div className={styles.description}>
+                                            <span><img src="assets/hourglass24x24.png" style={{ height: 20 }} /> -15.25%</span>
+                                        </div>
+                                    </div>
+                                    <a className={styles.buy_btn}>
+                                        Buy for 1,535,350 ZOO
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                         <div className={styles.flip_card}>
                             <div className={styles.flip_card_inner}>
                                 <div className={styles.flip_card_front} data-is-max="true"> {/* data-is-max="true" if this is max item */}
