@@ -105,6 +105,9 @@ export default function () {
                             </Row>
                         </Checkbox.Group>
                     </div>
+                    <div className={styles.title}>
+                        Rarity
+                    </div>
                 </div>
                 <div className={styles.main_panel}>
                     <div className={styles.filter_row}>
