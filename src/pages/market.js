@@ -89,7 +89,7 @@ export default function () {
                     <div className={styles.filter_rarity}>
                         <Checkbox.Group style={{ width: '100%' }} >
                             <Row gutter={[5,10]}>
-                                <Col span={12}>
+                            <Col span={12}>
                                     <Checkbox value="A"><img src="assets/gem/common18x18.png"/> <span>Common</span></Checkbox>
                                 </Col>
                                 <Col span={12}>
@@ -106,7 +106,33 @@ export default function () {
                         </Checkbox.Group>
                     </div>
                     <div className={styles.title}>
-                        Rarity
+                        Category
+                    </div>
+                    <div className={styles.filter_category}>
+                        <Checkbox.Group style={{ width: '100%' }} >
+                            <Row gutter={[5,10]}>
+                            <Col span={12}>
+                                    <Checkbox value="A"><img src="assets/category/fruits.png"/> <span>Fruits</span></Checkbox>
+                                </Col>
+                                <Col span={12}>
+                                    <Checkbox value="B"><img src="assets/category/dishes.png"/> <span>Dishes</span></Checkbox>
+                                </Col>
+                                <Col span={12}>
+                                    <Checkbox value="C"><img src="assets/category/sweets.png"/> <span>Sweets</span></Checkbox>
+                                </Col>
+                                <Col span={12}>
+                                    <Checkbox value="D"><img src="assets/category/potions.png"/> <span>Potions</span></Checkbox>
+                                </Col>
+                                <Col span={12}>
+                                    <Checkbox value="E"><img src="assets/category/spices.png"/> <span>Spices</span></Checkbox>
+                                </Col>
+                                <Col span={12}>
+                                    <Checkbox value="F"><img src="assets/category/magic.png"/> <span>Magic</span></Checkbox>
+                                </Col>
+                                
+                                
+                            </Row>
+                        </Checkbox.Group>
                     </div>
                 </div>
                 <div className={styles.main_panel}>
