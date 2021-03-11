@@ -123,9 +123,8 @@
         box-shadow:none;
         height:40px;
         z-index: 6;
-        overflow-y:auto;
-        overflow-x:visible;
-       
+        
+        padding-bottom:60px;
     }
 
     #menu_toggle
@@ -341,6 +340,12 @@
         width:100%;
         opacity:0.8;
     }
+
+    #wrapper.toggled #sidebar_wrapper
+    {
+        overflow-y:auto;
+        overflow-x:visible;
+    }
     
     @media (min-width: 769px) {
         #menu_toggle
@@ -349,6 +354,8 @@
         }
         #sidebar_wrapper {
             margin-left: 0;
+            overflow-y:auto;
+            overflow-x:visible;
         }
         #page_content_wrapper {
             min-width: 0;
