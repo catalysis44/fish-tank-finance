@@ -10,7 +10,7 @@ export default function () {
             {/* For Instant Chest - NFT / Artifact */}
             <ChestboxBuyModal isActived={modal} setModal={setModal}></ChestboxBuyModal>
             <div className={styles.row} style={{ paddingBottom: 0 }}>
-                <div className={styles.pool} style={{ background: '#fec137' }}> {/*active true for on staking pool */}
+                <div className={styles.pool} style={{ background: '#ffce1b' }}> {/*active true for on staking pool */}
                     <div className={styles.cover_wrapper} >
                         <img src="dummy/desert.png" className={styles.cover} />
 
@@ -47,7 +47,7 @@ export default function () {
 
                 </div>
 
-                <div className={styles.pool} style={{ background: '#cbcbcb' }}> {/*active true for on staking pool */}
+                <div className={styles.pool} style={{ background: '#cbcbcb' }}>
                     <div className={styles.cover_wrapper} >
                         <img src="dummy/desert.png" className={styles.cover} />
 
