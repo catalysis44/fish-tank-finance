@@ -95,7 +95,7 @@ function BasicLayout(props) {
               <a href="#" target="_blank">FAQ</a>
               <a href="#" target="_blank">Documentation</a>
             </div>
-            <div className={styles.fixed_bottom}>
+            <div>
               <div className={styles.social}>
                 <a href="#" target="_blank"><img src="assets/social/twitter.svg"/></a>
                 <a href="#" target="_blank"><img src="assets/social/telegram.svg"/></a>
