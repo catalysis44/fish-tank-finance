@@ -514,8 +514,15 @@
       /* add  .flip_card back*/
       .flip_card:hover .flip_card_inner {
         transform: rotateY(180deg);
+        .flip_card_front
+        {
+          opacity:0;
+        }
       }
       .flip_card_front, .flip_card_back {
+        transition: opacity 0.8s;
+       
+        opacity:1;
         background:white;
         border-radius: 14px;
         box-shadow:5px 5px 0px #00000020;
