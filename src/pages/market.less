@@ -463,11 +463,17 @@
 /* For CARD*/
 
 @keyframes fluid {
-  from {
+  0% {
     background-position: top;
   }
 
-  to {
+  50%{
+    background-position: left;
+  }
+
+ 
+
+  100% {
     background-position: bottom;
   }
 }
@@ -522,12 +528,12 @@
       .flip_card_front[data-is-max="true"]
       {
         background-image: url(../../public/assets/holo.jpg); 
-        background-size: 500%;
+        background-size: 400%;
         animation-iteration-count: infinite;
         animation-direction: alternate;
         animation-timing-function: linear;
         animation-name: fluid;
-        animation-duration:  10s;
+        animation-duration:  30s;
         .item_description .description
         {
           background:transparent;

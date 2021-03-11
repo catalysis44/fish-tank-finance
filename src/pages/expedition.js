@@ -4,15 +4,91 @@ export default function () {
     return (
         <React.Fragment>
             {/* For Instant Chest - NFT / Artifact */}
-            <div className={styles.row}>
+            <div className={styles.row} style={{ paddingBottom: 0 }}>
+                <div className={styles.pool} style={{ background: '#fec137' }}> {/*active true for on staking pool */}
+                    <div className={styles.cover_wrapper} >
+                        <img src="dummy/desert.png" className={styles.cover} />
+
+                    </div>
+                    <div className={styles.title}>
+                        THE GOLDEN CHEST
+                    </div>
+                    <div className={styles.condition}>
+                        <div className={styles.minimum}>
+                            <img src="assets/zoo32x32.png" />
+                            30,000
+                        </div>
+                        <div className={styles.hour}>
+                            <img src="assets/hourglass24x24.png" />
+                            <span>INSTANT</span>
+
+                        </div>
+                    </div>
+
+                    <div className={styles.reward}>
+                        <div className={styles.type}>
+                            <img src="assets/goldenbox48x48.png" />
+                            <div className={styles.x}>×</div>
+                            <div className={styles.amount}>1</div>
+                        </div>
+                        <div className={styles.description}>
+                            <div>SPEND ZOO AND GET</div>
+                            <div>1 GOLDEN CHEST</div>
+                        </div>
+                    </div>
+                    <a className={styles.action_btn}>
+                        BUY GOLDEN CHEST
+                    </a>
+
+                </div>
+
+                <div className={styles.pool} style={{ background: '#cbcbcb' }}> {/*active true for on staking pool */}
+                    <div className={styles.cover_wrapper} >
+                        <img src="dummy/desert.png" className={styles.cover} />
+
+                    </div>
+                    <div className={styles.title}>
+                        THE SILVER CHEST
+                    </div>
+                    <div className={styles.condition}>
+                        <div className={styles.minimum}>
+                            <img src="assets/zoo32x32.png" />
+                            3,000
+                        </div>
+                        <div className={styles.hour}>
+                            <img src="assets/hourglass24x24.png" />
+                            <span>INSTANT</span>
+
+                        </div>
+                    </div>
+
+                    <div className={styles.reward}>
+                        <div className={styles.type}>
+                            <img src="assets/silverbox48x48.png" />
+                            <div className={styles.x}>×</div>
+                            <div className={styles.amount}>1</div>
+                        </div>
+                        <div className={styles.description}>
+                            
+                            <div>SPEND ZOO AND GET</div>
+                            <div>1 SILVER CHEST</div>
+
+                        </div>
+                    </div>
+                    <a className={styles.action_btn}>
+                        BUY SILVER CHEST
+                    </a>
+
+                </div>
 
             </div>
-            <div className={styles.row}>
+
+            <div className={styles.row} style={{ paddingTop: 0 }}>
                 <div className={styles.pool} data-active="true"> {/*active true for on staking pool */}
                     <div className={styles.cover_wrapper} >
                         <img src="dummy/desert.png" className={styles.cover} />
-                        <div  className={styles.tvl}>
-                            <div  className={styles.amount}>
+                        <div className={styles.tvl}>
+                            <div className={styles.amount}>
                                 555,555,555.00
                             </div>
                             ZOO LOCKED
@@ -29,7 +105,7 @@ export default function () {
                         <div className={styles.hour}>
                             <img src="assets/hourglass24x24.png" />
                             <span>72 Hours</span>
-                            
+
                         </div>
                     </div>
 
@@ -42,17 +118,17 @@ export default function () {
                         <div className={styles.description}>
                             <div>STAKE AND LOCK</div>
                             <div>ZOO AND GET</div>
-                            <div>1 GOLDENCHEST</div>
-                            
+                            <div>1 GOLDEN CHEST</div>
+
                         </div>
                     </div>
                     <a className={styles.action_btn}>
                         Stake ZOO
                     </a>
-                    <a className={styles.action_btn} style={{display:'none'}}>
+                    <a className={styles.action_btn} style={{ display: 'none' }}>
                         Claim 1 Artifact
                     </a>
-                    <a className={styles.pending_btn} style={{display:'none'}}>
+                    <a className={styles.pending_btn} style={{ display: 'none' }}>
                         35:45:15 Left
                     </a>
                 </div>
@@ -60,8 +136,8 @@ export default function () {
                 <div className={styles.pool} data-active="true"> {/*active true for on staking pool */}
                     <div className={styles.cover_wrapper} >
                         <img src="dummy/cave.png" className={styles.cover} />
-                        <div  className={styles.tvl}>
-                            <div  className={styles.amount}>
+                        <div className={styles.tvl}>
+                            <div className={styles.amount}>
                                 555,555,555.00
                             </div>
                             ZOO LOCKED
@@ -78,7 +154,7 @@ export default function () {
                         <div className={styles.hour}>
                             <img src="assets/hourglass24x24.png" />
                             <span>72 Hours</span>
-                            
+
                         </div>
                     </div>
 
@@ -91,17 +167,17 @@ export default function () {
                         <div className={styles.description}>
                             <div>STAKE AND LOCK</div>
                             <div>ZOO AND GET</div>
-                            <div>1 GOLDENCHEST</div>
-                            
+                            <div>1 GOLDEN CHEST</div>
+
                         </div>
                     </div>
-                    <a className={styles.action_btn} style={{display:'none'}}>
+                    <a className={styles.action_btn} style={{ display: 'none' }}>
                         Stake ZOO
                     </a>
                     <a className={styles.action_btn}>
                         Claim 1 Golden Chest
                     </a>
-                    <a className={styles.pending_btn} style={{display:'none'}}>
+                    <a className={styles.pending_btn} style={{ display: 'none' }}>
                         35:45:15 Left
                     </a>
                 </div>
@@ -109,8 +185,8 @@ export default function () {
                 <div className={styles.pool} data-active="true"> {/*active true for on staking pool */}
                     <div className={styles.cover_wrapper} >
                         <img src="dummy/jungle.png" className={styles.cover} />
-                        <div  className={styles.tvl}>
-                            <div  className={styles.amount}>
+                        <div className={styles.tvl}>
+                            <div className={styles.amount}>
                                 555,555,555.00
                             </div>
                             ZOO LOCKED
@@ -127,7 +203,7 @@ export default function () {
                         <div className={styles.hour}>
                             <img src="assets/hourglass24x24.png" />
                             <span>72 Hours</span>
-                            
+
                         </div>
                     </div>
 
@@ -140,14 +216,14 @@ export default function () {
                         <div className={styles.description}>
                             <div>STAKE AND LOCK</div>
                             <div>ZOO AND GET</div>
-                            <div>1 GOLDENCHEST</div>
-                            
+                            <div>1 GOLDEN CHEST</div>
+
                         </div>
                     </div>
-                    <a className={styles.action_btn} style={{display:'none'}}>
+                    <a className={styles.action_btn} style={{ display: 'none' }}>
                         Stake ZOO
                     </a>
-                    <a className={styles.action_btn} style={{display:'none'}}>
+                    <a className={styles.action_btn} style={{ display: 'none' }}>
                         Claim 1 Golden Chest
                     </a>
                     <a className={styles.pending_btn}>
