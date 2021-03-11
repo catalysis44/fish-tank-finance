@@ -46,7 +46,7 @@ function BasicLayout(props) {
       </div>
 
       <div id="page_content_wrapper">
-        <Header/>
+        
         {props.children}
         
       </div>

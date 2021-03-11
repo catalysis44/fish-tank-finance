@@ -154,7 +154,7 @@ export default function () {
                 <div className={styles.main_panel}>
                     <div  className={styles.filter_row}>
                         <div id="filter2" className={styles.box}>
-                            <a className={styles.toggle_filter} onClick={toggleFilter}><FontAwesomeIcon icon={faSlidersH} /> FILTER</a>
+                            <a id="toggle_filter" className={styles.toggle_filter} onClick={toggleFilter}><span><img src="assets/magnify24x24.png"/> FILTER</span></a>
                             <div className={styles.sorting}>
                                 <div className={styles.title}>
                                     Sort by

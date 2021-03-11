@@ -360,21 +360,36 @@
 {
   .toggle_filter
   {
-    zoom:0.8;
+    width:60px !important;
+    left:-60px !important;
+    padding-top:5px !important;
+    padding-bottom:0px !important;
+    span{
+      transform: scale(0.8);
+    }
   }
 }
 @media screen and (max-width: 375px)
 {
   .toggle_filter
   {
-    zoom:0.6;
+    height:45px;
+    width:50px !important;
+    left:-50px !important;
+    padding-top:5px !important;
+    padding-bottom:0px !important;
+    span{
+      transform: scale(0.6);
+    }
+  }
+  :global
+  #filter2.toggled #toggle_filter
+  {
+    top:80px !important;
   }
 }
 @media screen and (max-width: 1250px)
 {
-
-
-
     .filter_panel
     {
         transform:translateX(290px);
@@ -398,7 +413,7 @@
           flex-direction: column;
           position: absolute;
           left: -80px;
-          top: 40vh;
+          top: 20px;
           font-size: 18px;
           background: white;
           width: 80px;
