@@ -3,7 +3,10 @@ import React from 'react';
 export default function () {
     return (
         <React.Fragment>
+            {/* For Instant Chest - NFT / Artifact */}
+            <div className={styles.row}>
 
+            </div>
             <div className={styles.row}>
                 <div className={styles.pool} data-active="true"> {/*active true for on staking pool */}
                     <div className={styles.cover_wrapper} >
