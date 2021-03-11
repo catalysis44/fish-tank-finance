@@ -5,14 +5,30 @@ import '../../node_modules/animate.css/animate.min.css';
 //import { faWallet } from '@fortawesome/free-solid-svg-icons'
 import Header from '../components/Header';
 import { NavLink } from 'umi';
+import Wallet from '../wallet/Wallet';
+import { useState } from 'react';
+import { useStorage } from '../hooks';
+import { commafy } from '../utils';
+
+
 function toggleSidebar()
 {
   document.getElementById('wrapper').classList.toggle("toggled");
 }
 
 function BasicLayout(props) {
+  const [wallet, setWallet] = useState({});
+  const web3 = wallet.web3;
+  const chainId = wallet.networkId;
+  const address = wallet.address;
+  const connected = wallet.connected;
+  const provider = wallet.provider;
+  console.debug('chainId', chainId);
+  const storage = useStorage();
+
   return (
     <div id="wrapper">
+      <Wallet wallet={wallet} setWallet={setWallet} />
       <div id="sidebar_backdrop" onClick={toggleSidebar}></div>
       <a id="menu_toggle" onClick={toggleSidebar}>›</a>
       <div id="sidebar_wrapper">
@@ -20,9 +36,16 @@ function BasicLayout(props) {
         <div id="sidebar_heading"><img src="assets/zoo_logo.png"/></div>
         
         <div id="wallet_connection" data-connected="true"> {/*data-connected="true" when connected*/}
-          <a class="connect_disconnect_btn">DISCONNECT</a> 
-          <div class="address"><img src="assets/wallet32x32.png"/><span>0x0000...0000</span></div>
-          <div class="balance"><img src="assets/zoo32x32.png"/><span>555,324,652.55</span></div>
+          <a class="connect_disconnect_btn" onClick={()=>{
+            if (!connected) {
+              wallet.connect();
+            } else {
+              wallet.resetApp();
+            }
+          }}>{connected ? "DISCONNECT" : "CONNECT WALLET"}</a> 
+          <div class="address"><img src="assets/wallet32x32.png"/><span>{address ? address.slice(0, 6) + '...' + address.slice(-6) : 'NO WALLET'}</span></div>
+          <div class="address"><span>{chainId !== 1 && chainId !== 888 && "Testnet"}</span></div>
+          <div class="balance"><img src="assets/zoo32x32.png"/><span>{commafy(storage.zooBalance)}</span></div>
         </div>
 
         <div class="horizontal_line">
