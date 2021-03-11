@@ -103,7 +103,7 @@ function BasicLayout(props) {
                 <a href="#" target="_blank"><img src="assets/social/github.svg"/></a>
               </div>
               <div className={styles.credit}>
-                ©The Wanilla 2021 / Powered by <a href="https://www.wanchain.org" target="_blank">WANCHAIN</a>
+                ©The Wanilla {new Date().getFullYear()} / Powered by <a href="https://www.wanchain.org" target="_blank">WANCHAIN</a>
               </div>
             </div>
       </div>
