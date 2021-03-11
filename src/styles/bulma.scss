@@ -127,7 +127,7 @@ a{
 .modal-card-body
 {
   border-radius:14px;
-  box-shadow: 5px 5px 0px #00000020;
+  box-shadow: 4px 4px 0 rgba(0,0,0,0.04);
 }
 .modal-card-body .close
 {
@@ -148,7 +148,7 @@ a{
   background:white;
   color:black;
   border-radius: 14px 0 0 14px;
-  box-shadow: 4px 4px 0 rgba(0,0,0,0.4);
+  box-shadow:4px 4px 0 rgba(0,0,0,0.04);
   line-height:1.2;
  
 }
