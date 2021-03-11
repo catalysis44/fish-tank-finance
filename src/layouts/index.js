@@ -7,7 +7,7 @@ import Header from '../components/Header';
 import { NavLink } from 'umi';
 import Wallet from '../wallet/Wallet';
 import { useState } from 'react';
-import { useStorage } from '../hooks';
+import { useDataPump, initialState } from '../hooks';
 import { commafy } from '../utils';
 
 
@@ -24,7 +24,10 @@ function BasicLayout(props) {
   const connected = wallet.connected;
   const provider = wallet.provider;
   console.debug('chainId', chainId);
-  const storage = useStorage();
+  // const storage = useStorage();
+  const [storage, setStorage] = useState(initialState);
+
+  useDataPump(storage, setStorage, chainId, address);
 
   return (
     <div id="wrapper">
