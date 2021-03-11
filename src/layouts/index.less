@@ -1,4 +1,92 @@
-
+.footer
+{
+    margin-top:40px;
+    width:100%;
+    .box
+    {
+        &:last-child
+        {
+            border-bottom:1px solid #ccc;
+        }
+        border-top:1px solid #ccc;
+        padding: 15px 30px;
+        display:flex;
+        font-size:13px;
+        img
+        {
+            width:32px;
+            height:32px;
+            margin:0 5px;
+        }
+        .detail
+        {
+            margin-left:5px;
+            line-height:15px;
+            span
+            {
+                color:#00a99d;
+            }
+            span.burned
+            {
+                color:red;
+            }
+        }
+    }
+    .ext_link
+    {
+        padding: 15px 20px;
+        a
+        {
+            font-size:18px;
+            color:black;
+            display:block;
+            margin-left:57px;
+        }
+    }
+    .fixed_bottom
+    {
+        position: fixed;
+        max-width: 240px;
+        bottom: 0;
+        background: white;
+        min-width: 240px;
+        padding-top:5px;
+    }
+    .social
+    {
+        
+        display:flex;
+        justify-content: center;
+        align-items: center;
+        a:hover img
+        {
+            filter: invert(0.65);
+        }
+        a
+        {
+            padding:3px;
+            img
+            {
+                height: auto;
+                max-height: 24px;
+                width: 24px;
+                filter: invert(0.25);
+                transition: filter 0.5s;
+            }
+        }
+        
+    }
+    .credit
+    {
+        padding:5px 20px;
+        font-size:11px;
+        border-top:1px solid #ccc;
+        a
+        {
+            color:#00a99d;
+        }
+    }
+}
 
 
 :global {
@@ -30,6 +118,7 @@
         overflow-y:auto;
         overflow-x:visible;
         padding-bottom:60px;
+        
     }
 
     #menu_toggle
@@ -109,6 +198,16 @@
         font-size:16px;
         visibility: hidden;
     }
+    #sidebar_wrapper .testnet
+    {
+        width:180px;
+        padding:5px;
+        font-size:16px;
+        text-align: center;
+        background:#e67056;
+        border-radius:4px;
+        color:white;
+    }
     #sidebar_wrapper .address svg
     {
         margin-right:8px;
@@ -151,7 +250,7 @@
     {
         width: 100%;
         height: 1px;
-        background: #eee;
+        background: #ccc;
         
     }
     
@@ -159,6 +258,8 @@
         width: 240px;
         padding: 20px;
         padding-top:0;
+        //height: calc(100vh - 300px - 300px); // Edit substract of footer here
+        //overflow: auto;
     }
     
     #sidebar_wrapper .list_group li

@@ -47,7 +47,7 @@ function BasicLayout(props) {
             }
           }}>{connected ? "DISCONNECT" : "CONNECT WALLET"}</a> 
           <div class="address"><img src="assets/wallet32x32.png"/><span>{address ? address.slice(0, 6) + '...' + address.slice(-6) : 'NO WALLET'}</span></div>
-          <div class="address"><span>{chainId !== 1 && chainId !== 888 && "Testnet"}</span></div>
+          <div class="testnet"><span>{chainId !== 1 && chainId !== 888 && "!! TESTNET !!"}</span></div>
           <div class="balance"><img src="assets/zoo32x32.png"/><span>{commafy(storage.zooBalance)}</span></div>
         </div>
 
@@ -69,7 +69,49 @@ function BasicLayout(props) {
             
           </aside>
         </div>
+
+        <div className={styles.footer}>
+            <div id="zoo_info_burned">
+              <div className={styles.box}>
+                  <img src="assets/zoo32x32.png" class={styles.zoo_icon}/>
+                  <div class={styles.detail}>
+                      <div>1 ZOO = <span>$10.32</span></div>
+                      <div>MC <span>$41,548,555.22</span></div>
+                      <div>Current supply</div>
+                      <div><span>154,456,25 ZOO</span></div>
+                  </div>
+                
+              </div>
+              
+              <div className={styles.box}>
+                  <img src="assets/burned42x42.png" class={styles.burn_icon}/>
+                  <div class={styles.detail}>
+                      <div>TOTAL BURNED</div>
+                      <div><span className={styles.burned}>55,012,345.56 ZOO</span></div>
+                  </div>
+              </div>
+            </div>
+            <div className={styles.ext_link}>
+              <a href="#" target="_blank">FAQ</a>
+              <a href="#" target="_blank">Documentation</a>
+            </div>
+            <div className={styles.fixed_bottom}>
+              <div className={styles.social}>
+                <a href="#" target="_blank"><img src="assets/social/twitter.svg"/></a>
+                <a href="#" target="_blank"><img src="assets/social/telegram.svg"/></a>
+                <a href="#" target="_blank"><img src="assets/social/medium.svg"/></a>
+                <a href="#" target="_blank"><img src="assets/social/github.svg"/></a>
+              </div>
+              <div className={styles.credit}>
+                ©The Wanilla 2021 / Powered by <a href="https://www.wanchain.org" target="_blank">WANCHAIN</a>
+              </div>
+            </div>
       </div>
+
+
+      </div>
+
+      
 
       <div id="page_content_wrapper">
         
