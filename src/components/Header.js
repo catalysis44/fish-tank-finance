@@ -1,5 +1,5 @@
 import styles from './header.less';
-import ChestboxBuyModal from '../components/zoo/ChestboxBuyModal';
+import ChestboxBuyModal from './expedition/ChestboxBuyModal';
 import React from 'react';
 import { useState } from 'react';
 export default function Header(props) {

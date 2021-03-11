@@ -1,9 +1,14 @@
 import styles from './expedition.less';
 import React from 'react';
+import { useState } from 'react';
+import ChestboxBuyModal from '../components/expedition/ChestboxBuyModal';
 export default function () {
+    const [modal, setModal] = useState(0);
     return (
         <React.Fragment>
+            
             {/* For Instant Chest - NFT / Artifact */}
+            <ChestboxBuyModal isActived={modal} setModal={setModal}></ChestboxBuyModal>
             <div className={styles.row} style={{ paddingBottom: 0 }}>
                 <div className={styles.pool} style={{ background: '#fec137' }}> {/*active true for on staking pool */}
                     <div className={styles.cover_wrapper} >
@@ -36,7 +41,7 @@ export default function () {
                             <div>1 GOLDEN CHEST</div>
                         </div>
                     </div>
-                    <a className={styles.action_btn}>
+                    <a className={styles.action_btn} onClick={()=>{setModal(1)}}>
                         BUY GOLDEN CHEST
                     </a>
 
@@ -75,7 +80,7 @@ export default function () {
 
                         </div>
                     </div>
-                    <a className={styles.action_btn}>
+                    <a className={styles.action_btn} onClick={()=>{setModal(1)}}>
                         BUY SILVER CHEST
                     </a>
 
