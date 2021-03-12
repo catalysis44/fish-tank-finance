@@ -1,6 +1,6 @@
 import styles from './index.less';
 
-import { notification,Switch} from 'antd';
+import { notification, Switch } from 'antd';
 import { useState } from 'react';
 import React from 'react';
 
@@ -84,8 +84,8 @@ export default function () {
     notification.open(args);
   };
   //openNotification();
- //openNotification2();
- // openNotification3();
+  //openNotification2();
+  // openNotification3();
   //openNotification4();
 
 
@@ -95,52 +95,54 @@ export default function () {
       <div className={styles.filter_row}>
 
         <div className={styles.box}>
-          <div className={styles.title}>
-            Sort by
-          </div>
-          <div className={styles.sort_btn}>
-            <a className={styles.is_acitve}>
-              <div className={styles.icon}>
-                <div>A</div><div>Z</div>
-              </div>
+
+          <div className={styles.sorting}>
+            <div className={styles.title}>
+              Sort by
+            </div>
+            <div className={styles.sort_btn}>
+              <a className={styles.is_acitve}>
+                <div className={styles.icon}>
+                  <div>A</div><div>Z</div>
+                </div>
               Name
             </a>
-            <a>
-              <div className={styles.icon}>
-                <div>A</div><div>Z</div>
-              </div>
+              <a>
+                <div className={styles.icon}>
+                  <div>A</div><div>Z</div>
+                </div>
               APY
             </a>
-            <a>
-              <div className={styles.icon}>
-                <div>A</div><div>Z</div>
-              </div>
+              <a>
+                <div className={styles.icon}>
+                  <div>A</div><div>Z</div>
+                </div>
               Liquidity
             </a>
-            <a>
-              <div className={styles.icon}>
-                <div>A</div><div>Z</div>
-              </div>
+              <a>
+                <div className={styles.icon}>
+                  <div>A</div><div>Z</div>
+                </div>
               Multtiplier
               </a>
-          </div>
-          
-            <div className={styles.switcher_group}>
-              <div className={styles.title}>
-                Only Staked
-              </div>
-              <Switch defaultChecked />
-
-              <div className={styles.title}>
-                Only Active
-              </div>
-              <Switch defaultChecked />
             </div>
+          </div>
+          <div className={styles.switcher_group}>
+            <div className={styles.title}>
+              Only Staked
+              </div>
+            <Switch defaultChecked />
+
+            <div className={styles.title}>
+              Only Active
+              </div>
+            <Switch defaultChecked />
+          </div>
         </div>
       </div>
 
       <div className={styles.row}>
-        <Pool/>
+        <Pool />
 
       </div>
     </React.Fragment>

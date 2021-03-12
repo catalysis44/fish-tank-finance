@@ -22,8 +22,8 @@ export default function () {
             <div id="filterbar_backdrop" onClick={toggleFilter}></div>
             <a id="toggle_filter" className={styles.toggle_filter} onClick={toggleFilter}><span><img src="assets/magnify24x24.png" /> FILTER</span></a>
             <div className={styles.content_wrapper}>
-
-                <div id="filter1" className={styles.filter_panel}>
+                <div className={styles.left_side}>
+                    <div id="filter1" className={styles.filter_panel}>
                     <div className={styles.title}>
                         Filter (0)
                     </div>
@@ -125,7 +125,13 @@ export default function () {
                         </Checkbox.Group>
                     </div>
                 </div>
-                <div className={styles.main_panel}>
+                
+                
+                    <div id="tx_panel" className={styles.tx_panel}>
+                        
+                    </div>
+                </div>
+               <div className={styles.main_panel}>
                     <div className={styles.filter_row}>
                         <div id="filter2" className={styles.box}>
                             <div className={styles.sorting}>
@@ -175,6 +181,8 @@ export default function () {
                                 </div>
                             </div>
                         </div>
+
+                        
                     </div>
 
                     <div className={styles.row}>
