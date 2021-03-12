@@ -38,7 +38,7 @@ function BasicLayout(props) {
         
         <div id="sidebar_heading"><img src="assets/zoo_logo.png"/></div>
         
-        <div id="wallet_connection" data-connected="true"> {/*data-connected="true" when connected*/}
+        <div id="wallet_connection" data-connected={connected ? "true" : "false"}> {/*data-connected="true" when connected*/}
           <a class="connect_disconnect_btn" onClick={()=>{
             if (!connected) {
               wallet.connect();
@@ -47,7 +47,7 @@ function BasicLayout(props) {
             }
           }}>{connected ? "DISCONNECT" : "CONNECT WALLET"}</a> 
           <div class="address"><img src="assets/wallet32x32.png"/><span>{address ? address.slice(0, 6) + '...' + address.slice(-6) : 'NO WALLET'}</span></div>
-          <div class="testnet"><span>{chainId !== 1 && chainId !== 888 && "!! TESTNET !!"}</span></div>
+          {chainId !== 1 && chainId !== 888 && <div class="testnet"><span>!! TESTNET !!</span></div>}
           <div class="balance"><img src="assets/zoo32x32.png"/><span>{commafy(storage.zooBalance)}</span></div>
         </div>
 
