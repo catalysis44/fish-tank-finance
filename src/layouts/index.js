@@ -9,6 +9,7 @@ import Wallet from '../wallet/Wallet';
 import { useState } from 'react';
 import { useDataPump, initialState } from '../hooks';
 import { commafy } from '../utils';
+import { useLocalStorageState } from 'ahooks';
 
 
 function toggleSidebar()
@@ -19,15 +20,14 @@ function toggleSidebar()
 function BasicLayout(props) {
   const [wallet, setWallet] = useState({});
   const web3 = wallet.web3;
-  const chainId = wallet.networkId;
+  const chainId = wallet.networkId && wallet.networkId.toString();
   const address = wallet.address;
   const connected = wallet.connected;
   const provider = wallet.provider;
-  console.debug('chainId', chainId);
-  // const storage = useStorage();
-  const [storage, setStorage] = useState(initialState);
+  
+  const [storage, setStorage] = useLocalStorageState('zoo-keeper-v0.1', initialState);
 
-  useDataPump(storage, setStorage, chainId, address);
+  useDataPump(storage, setStorage, chainId, address, connected);
 
   return (
     <div id="wrapper">
@@ -100,7 +100,7 @@ function BasicLayout(props) {
                 <a href="#" target="_blank"><img src="assets/social/twitter.svg"/></a>
                 <a href="#" target="_blank"><img src="assets/social/telegram.svg"/></a>
                 <a href="#" target="_blank"><img src="assets/social/medium.svg"/></a>
-                <a href="#" target="_blank"><img src="assets/social/github.svg"/></a>
+                <a href="https://github.com/zooFarming/" target="_blank"><img src="assets/social/github.svg"/></a>
               </div>
               <div className={styles.credit}>
                 ©The Wanilla {new Date().getFullYear()} / Powered by <a href="https://www.wanchain.org" target="_blank">WANCHAIN</a>
