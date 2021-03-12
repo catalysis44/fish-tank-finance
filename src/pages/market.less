@@ -8,6 +8,8 @@
     max-width:1400px;
 }
 
+
+
 .filter_panel
 {
     
@@ -202,6 +204,36 @@
     max-width:1200px;
 }
 
+.toggle_filter
+{
+  flex-direction: column;
+  position: absolute;
+  right: 0px;
+  top: 20px;
+  font-size: 18px;
+  background: white;
+  width: 80px;
+  text-align: center;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  padding-top: 20px;
+  border-top-left-radius: 14px;
+  border-bottom-left-radius: 14px;
+  z-index:4;
+  transition: all 0.2s ease-in-out 0s;
+  box-shadow: 4px 4px 0 rgba(0,0,0,0.04);
+}
+:global
+{
+  #toggle_filter.toggled
+  {
+    
+    right:290px;
+  }
+}
+
 .filter_row
 {
   max-width:1400px;
@@ -213,11 +245,7 @@
     
     .box
     {
-      .toggle_filter
-      {
-        
-        display:none;
-      }
+      
 
       width:100%;
       min-height:60px;
@@ -353,6 +381,10 @@
       width:100%;
       opacity:0.8;
     }
+    #toggle_filter
+    {
+      display:flex;
+    }
   }
 }
 @media screen and (max-width: 425px)
@@ -360,7 +392,6 @@
   .toggle_filter
   {
     width:60px !important;
-    left:-60px !important;
     padding-top:5px !important;
     padding-bottom:0px !important;
     span{
@@ -374,7 +405,6 @@
   {
     height:45px;
     width:50px !important;
-    left:-50px !important;
     padding-top:5px !important;
     padding-bottom:0px !important;
     span{
@@ -382,7 +412,7 @@
     }
   }
   :global
-  #filter2.toggled #toggle_filter
+  #toggle_filter
   {
     top:80px !important;
   }
@@ -407,25 +437,7 @@
     }
     .filter_row .box
     {
-        .toggle_filter
-        {
-          flex-direction: column;
-          position: absolute;
-          left: -80px;
-          top: 20px;
-          font-size: 18px;
-          background: white;
-          width: 80px;
-          text-align: center;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          padding: 10px;
-          padding-top: 20px;
-          border-top-left-radius: 14px;
-          border-bottom-left-radius: 14px;
-          
-        }
+        
         transform:translateX(290px);
         transition: all 0.2s ease-in-out 0s;
         width:290px;
