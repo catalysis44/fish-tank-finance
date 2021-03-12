@@ -1,6 +1,6 @@
 import styles from './index.less';
 
-import { notification } from 'antd';
+import { notification,Switch} from 'antd';
 import { useState } from 'react';
 import React from 'react';
 
@@ -124,7 +124,18 @@ export default function () {
               Multtiplier
               </a>
           </div>
+          
+            <div className={styles.switcher_group}>
+              <div className={styles.title}>
+                Only Staked
+              </div>
+              <Switch defaultChecked />
 
+              <div className={styles.title}>
+                Only Active
+              </div>
+              <Switch defaultChecked />
+            </div>
         </div>
       </div>
 
