@@ -5,11 +5,12 @@ import '../../node_modules/animate.css/animate.min.css';
 //import { faWallet } from '@fortawesome/free-solid-svg-icons'
 import Header from '../components/Header';
 import { NavLink } from 'umi';
-import Wallet from '../wallet/Wallet';
+import Wallet, { WalletContext } from '../wallet/Wallet';
 import { useState } from 'react';
-import { useDataPump, initialState } from '../hooks';
+import { useDataPump, initialState, StorageContext } from '../hooks';
 import { commafy } from '../utils';
 import { useLocalStorageState } from 'ahooks';
+
 
 
 function toggleSidebar()
@@ -111,14 +112,13 @@ function BasicLayout(props) {
 
       </div>
 
-      
-
-      <div id="page_content_wrapper">
-        
-        {props.children}
-        
-      </div>
-
+      <StorageContext.Provider value={storage} >
+        <WalletContext.Provider value={wallet} >
+          <div id="page_content_wrapper">
+            {props.children}
+          </div>
+        </WalletContext.Provider>
+      </StorageContext.Provider>
     </div>
   );
 }

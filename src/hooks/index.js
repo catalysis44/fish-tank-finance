@@ -1,7 +1,7 @@
 import BigNumber from 'bignumber.js';
 import { useInterval, useLockFn, useReactive } from 'ahooks';
 import { MULTICALL_ADDRESS, RPC_URL, ZOO_TOKEN_ADDRESS } from '../config';
-import { useCallback, useMemo } from 'react';
+import React, { useCallback, useMemo } from 'react';
 const { aggregate } = require('@makerdao/multicall');
 const DataLoader = require('dataloader');
 
@@ -11,6 +11,16 @@ export const initialState = {
   address: '',
   chainId: 1,
 }
+
+const differ = (a, b) => {
+  if (JSON.stringify(a) === JSON.stringify(b)) {
+    return 0;
+  } else {
+    return 1;
+  }
+}
+
+export const StorageContext = React.createContext(initialState, differ);
 
 export const useLoader = (chainId) => {
   const loader = useMemo(() => {

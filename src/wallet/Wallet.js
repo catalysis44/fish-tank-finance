@@ -13,6 +13,24 @@ const INITIAL_STATE = {
   chainType: "wan"
 };
 
+const differ = (a, b) => {
+  if (a.address !== b.address) {
+    return 1;
+  }
+
+  if (a.networkId !== b.networkId) {
+    return 1;
+  }
+
+  if (a.connected !== b.connected) {
+    return 1;
+  }
+
+  return 0;
+}
+
+export const WalletContext = React.createContext({}, differ);
+
 function initWeb3(provider) {
   const web3 = new Web3(provider);
   return web3;
