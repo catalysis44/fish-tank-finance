@@ -24,16 +24,12 @@ $widescreen-enabled: false;
 $fullhd-enabled: false;
 
 // Globals
-::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-    
-  }
-  @media screen and (max-width: 768px)
+
+  @media screen and (min-width: 769px)
 {
   ::-webkit-scrollbar {
-    width: 4px;
-    height: 4px;
+    width: 8px;
+    height: 8px;
     
   }
 }
