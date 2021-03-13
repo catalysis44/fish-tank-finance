@@ -2,7 +2,7 @@ import styles from './safe.less';
 import React from 'react';
 import '../../node_modules/animate.css/animate.min.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
+import { faExternalLinkAlt, faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import { Slider, Checkbox, Row, Col,Pagination  } from 'antd';
 import { useEffect } from 'react';
 export default function () {
@@ -326,8 +326,43 @@ export default function () {
                                             <span><img src="assets/hourglass24x24.png" style={{ height: 20 }} /> -15.25%</span>
                                         </div>
                                     </div>
-                                    <a className={styles.buy_btn}>
-                                        Buy for 1,535,350 ZOO
+                                    <a className={styles.withdraw_btn} style={{display:'none'}}> {/*Show this one when on sale*/}
+                                        WITHDRAW FROM SALE
+                                    </a>
+                                    <div className={styles.sell_action}> {/*Show this when not on sale*/}
+                                        <input type="text" value="0.0"/>
+                                        <div className="dropdown is-active">
+                                            <a className={styles.select_currency} aria-haspopup="true" aria-controls="dropdown-menu">
+                                                <img src="assets/currency/wanBTC.png"/>
+                                                <span>wanBTC</span>
+                                                <span><FontAwesomeIcon icon={faCaretDown} /></span>
+                                            </a>
+                                        
+
+                                            <div class="dropdown-menu" id="dropdown-menu" role="menu">
+                                                <div class="dropdown-content">
+                                               
+                                                <a class="dropdown-item">
+                                                    <img src="assets/currency/zoo.png"/> ZOO
+                                                </a>
+                                                
+                                                <a href="#" class="dropdown-item">
+                                                    <img src="assets/currency/wanBTC.png"/> wanBTC
+                                                </a>
+
+                                                <a href="#" class="dropdown-item">
+                                                    <img src="assets/currency/wanETH.png"/> wanETH
+                                                </a>
+                                                
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        
+                                    </div>
+                                    <a className={styles.sell_btn}>
+                                       SELL
                                     </a>
                                 </div>
                             </div>
@@ -342,7 +377,7 @@ export default function () {
                 </div>
             </div>
 
-
+            
         </React.Fragment>
     );
 }
