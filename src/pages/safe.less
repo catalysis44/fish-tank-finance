@@ -60,17 +60,21 @@
     font-size:11px;
     margin-top:10px;
     color:black;
+    tr:last-child td
+    {
+      border-bottom:0;
+    }
     td
     {
       &.explorer
       {
-        width:82px;
+        width:79px;
       }
       &.price
       {
-        width:82px;
+        width:78px;
       }
-      padding:5px;
+      padding:4px;
       border-bottom:1px solid #ccc;
       vertical-align: middle;
       a
@@ -79,6 +83,13 @@
       }
     }
     
+  }
+  .table_pagination
+  {
+    width:100%;
+    display: flex;
+    justify-content: center;
+    margin-top:10px;
   }
   
 }

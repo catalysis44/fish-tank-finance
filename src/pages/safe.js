@@ -3,7 +3,7 @@ import React from 'react';
 import '../../node_modules/animate.css/animate.min.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
-import { Slider, Checkbox, Row, Col } from 'antd';
+import { Slider, Checkbox, Row, Col,Pagination  } from 'antd';
 import { useEffect } from 'react';
 export default function () {
     function toggleFilter() {
@@ -196,6 +196,9 @@ export default function () {
                                    
                                 </tbody>
                             </table>
+                            <div className={styles.table_pagination}>
+                                <Pagination size="small" total={50} />
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -382,3 +382,17 @@ input[type=text] {
 {
   background-color: #00a99d !important;
 }
+
+/*Pagination*/
+.ant-pagination-item:focus a, .ant-pagination-item:hover a
+{
+  color:#00a99d !important;
+}
+.ant-pagination-item-active:focus a, .ant-pagination-item-active:hover a, .ant-pagination-item-active a
+{
+  color:#00a99d !important;
+}
+.ant-pagination-item-active:focus, .ant-pagination-item-active:hover, .ant-pagination-item-active
+{
+  border-color:#00a99d !important;
+}
