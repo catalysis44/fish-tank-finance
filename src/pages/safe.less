@@ -39,6 +39,11 @@
         background:#00a99d;
         color:white;
       }
+      &.is_active
+      {
+        background:#00a99d;
+        color:white;
+      }
       border:1px solid #00a99d;
       border-radius: 4px;
       color:#00a99d;
@@ -49,6 +54,31 @@
       font-size:14px;
       
     }
+  }
+  .table_wrapper
+  {
+    font-size:11px;
+    margin-top:10px;
+    color:black;
+    td
+    {
+      &.explorer
+      {
+        width:82px;
+      }
+      &.price
+      {
+        width:82px;
+      }
+      padding:5px;
+      border-bottom:1px solid #ccc;
+      vertical-align: middle;
+      a
+      {
+        color:#00a99d;
+      }
+    }
+    
   }
   
 }
@@ -472,7 +502,7 @@
   }
   .toggle_tx
   {
-    top:130px;
+    top:80px;
     height:45px;
     width:50px !important;
     padding-top:5px !important;
@@ -481,10 +511,17 @@
       transform: scale(0.6);
     }
   }
+  
   :global
-  #toggle_filter
   {
-    top:80px !important;
+    #toggle_filter
+    {
+      top:20px !important;
+    }
+    #toggle_filter.toggled
+    {
+      top:80px !important;
+    }
   }
 }
 @media screen and (max-width: 1520px)

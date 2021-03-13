@@ -2,7 +2,7 @@ import styles from './safe.less';
 import React from 'react';
 import '../../node_modules/animate.css/animate.min.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSlidersH } from '@fortawesome/free-solid-svg-icons';
+import { faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
 import { Slider, Checkbox, Row, Col } from 'antd';
 import { useEffect } from 'react';
 export default function () {
@@ -162,6 +162,40 @@ export default function () {
                             <a className={styles.is_active}>Purchase</a>
                             <a>Sale</a>
                             <a>From Chest</a>
+                        </div>
+
+                        <div className={styles.table_wrapper}>
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td className={styles.name}>#1 ROYAL SWEET BASIL</td>
+                                        <td className={styles.price}>0.3495 wanETH</td>
+                                        <td className={styles.explorer}><a href="https://www.wanscan.org" target="_blank">TX WanScan  <FontAwesomeIcon icon={faExternalLinkAlt} /></a></td>
+                                    </tr>
+                                    <tr>
+                                        <td className={styles.name}>#1 ROYAL SWEET BASIL</td>
+                                        <td className={styles.price}>0.3495 wanETH</td>
+                                        <td className={styles.explorer}><a href="https://www.wanscan.org" target="_blank">TX WanScan  <FontAwesomeIcon icon={faExternalLinkAlt} /></a></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td className={styles.name}>#1 ROYAL SWEET BASIL</td>
+                                        <td className={styles.price}>0.3495 wanETH</td>
+                                        <td className={styles.explorer}><a href="https://www.wanscan.org" target="_blank">TX WanScan  <FontAwesomeIcon icon={faExternalLinkAlt} /></a></td>
+                                    </tr>
+                                    <tr>
+                                        <td className={styles.name}>#1 ROYAL SWEET BASIL</td>
+                                        <td className={styles.price}>0.3495 wanETH</td>
+                                        <td className={styles.explorer}><a href="https://www.wanscan.org" target="_blank">TX WanScan  <FontAwesomeIcon icon={faExternalLinkAlt} /></a></td>
+                                    </tr>
+                                    <tr>
+                                        <td className={styles.name}>#1 ROYAL SWEET BASIL</td>
+                                        <td className={styles.price}>0.3495 wanETH</td>
+                                        <td className={styles.explorer}><a href="https://www.wanscan.org" target="_blank">TX WanScan  <FontAwesomeIcon icon={faExternalLinkAlt} /></a></td>
+                                    </tr>
+                                   
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
