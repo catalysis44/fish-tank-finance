@@ -1,7 +1,7 @@
 import styles from './index.less';
 
 import { notification, Switch } from 'antd';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import React from 'react';
 
 import Pool from '../components/zoo/Pool';
@@ -88,13 +88,25 @@ export default function () {
   // openNotification3();
   //openNotification4();
 
+  function toggleFilter()
+    {
+        document.getElementById('toggle_filter').classList.toggle("toggled");
+        document.getElementById('filter1').classList.toggle("toggled");
+        //document.getElementById('filter2').classList.toggle("toggled");
+        document.getElementById('filterbar_backdrop').classList.toggle("toggled");
+        
+    }
+    useEffect(()=>{
+        toggleFilter();
+    },[])
 
   return (
     <React.Fragment>
-
+      <div id="filterbar_backdrop"  onClick={toggleFilter}></div>
+      <a id="toggle_filter" className={styles.toggle_filter} onClick={toggleFilter}><span><img src="assets/magnify24x24.png"/> FILTER</span></a>
       <div className={styles.filter_row}>
 
-        <div className={styles.box}>
+        <div id="filter1" className={styles.box}>
 
           <div className={styles.sorting}>
             <div className={styles.title}>
