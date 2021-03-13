@@ -14,9 +14,7 @@ export default function () {
         document.getElementById('filterbar_backdrop').classList.toggle("toggled");
         
     }
-    useEffect(()=>{
-        toggleFilter();
-    },[])
+  
     
     return (
         <React.Fragment>

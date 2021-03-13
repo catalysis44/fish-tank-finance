@@ -101,7 +101,7 @@
     #wrapper {
         overflow-x: hidden;
         display:flex;
-        
+        overscroll-behavior-y: contain;
     }
     #sidebar_backdrop
     {
@@ -125,6 +125,7 @@
         z-index: 6;
         
         padding-bottom:60px;
+        overscroll-behavior-y: contain;
     }
 
     #menu_toggle
@@ -322,7 +323,7 @@
         min-width: 100vw;
         margin-left:0rem;
         transition: all .2s;
-        
+        overscroll-behavior-y: contain;
     }
     
     #wrapper.toggled #sidebar_wrapper {

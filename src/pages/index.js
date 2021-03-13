@@ -96,10 +96,7 @@ export default function () {
         document.getElementById('filterbar_backdrop').classList.toggle("toggled");
         
     }
-    useEffect(()=>{
-        toggleFilter();
-    },[])
-
+  
   return (
     <React.Fragment>
       <div id="filterbar_backdrop"  onClick={toggleFilter}></div>
@@ -135,7 +132,7 @@ export default function () {
                 <div className={styles.icon}>
                   <div>A</div><div>Z</div>
                 </div>
-              Multtiplier
+              Multiplier
               </a>
             </div>
           </div>
