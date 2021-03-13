@@ -128,7 +128,14 @@ export default function () {
                 
                 
                     <div id="tx_panel" className={styles.tx_panel}>
-                        
+                        <div className={styles.title}>
+                            TX history
+                        </div>
+                        <div className={styles.history_btn}>
+                            <a className={styles.is_active}>Purchase</a>
+                            <a>Sale</a>
+                            <a>From Chest</a>
+                        </div>
                     </div>
                 </div>
                <div className={styles.main_panel}>

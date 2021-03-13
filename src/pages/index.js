@@ -127,16 +127,14 @@ export default function () {
               </a>
             </div>
           </div>
-          <div className={styles.switcher_group}>
-            <div className={styles.title}>
-              Only Staked
+          <div className={styles.view_selection}>
+              <div className={styles.title}>
+                  View only
               </div>
-            <Switch defaultChecked />
-
-            <div className={styles.title}>
-              Only Active
+              <div className={styles.view_btn}>
+                  <a>Staked</a>
+                  <a className={styles.is_acitve}>Active</a>
               </div>
-            <Switch defaultChecked />
           </div>
         </div>
       </div>
