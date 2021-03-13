@@ -1,4 +1,4 @@
-@media (min-height: 900px) { // Edit here for expanding menu
+@media (min-height: 800px) { // Edit here for expanding menu
     .footer
     {
         width:100%;
@@ -101,7 +101,7 @@
     #wrapper {
         overflow-x: hidden;
         display:flex;
-        
+        overscroll-behavior-y: contain;
     }
     #sidebar_backdrop
     {
@@ -125,6 +125,7 @@
         z-index: 6;
         
         padding-bottom:60px;
+        overscroll-behavior-y: contain;
     }
 
     #menu_toggle
@@ -141,6 +142,7 @@
         transition: left .2s ease-in-out;
         border-top-right-radius: 14px;
         border-bottom-right-radius: 14px;
+        box-shadow: 4px 4px 0 rgba(0,0,0,0.04);
     }
     #wrapper.toggled #menu_toggle
     {
@@ -322,7 +324,7 @@
         min-width: 100vw;
         margin-left:0rem;
         transition: all .2s;
-        
+        overscroll-behavior-y: contain;
     }
     
     #wrapper.toggled #sidebar_wrapper {

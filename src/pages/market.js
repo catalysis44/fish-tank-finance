@@ -8,18 +8,18 @@ import { useEffect } from 'react';
 export default function () {
     function toggleFilter()
     {
+        document.getElementById('toggle_filter').classList.toggle("toggled");
         document.getElementById('filter1').classList.toggle("toggled");
         document.getElementById('filter2').classList.toggle("toggled");
         document.getElementById('filterbar_backdrop').classList.toggle("toggled");
         
     }
-    useEffect(()=>{
-        toggleFilter();
-    },[])
+  
     
     return (
         <React.Fragment>
             <div id="filterbar_backdrop"  onClick={toggleFilter}></div>
+            <a id="toggle_filter" className={styles.toggle_filter} onClick={toggleFilter}><span><img src="assets/magnify24x24.png"/> FILTER</span></a>
             <div className={styles.content_wrapper}>
                 
                 <div id="filter1" className={styles.filter_panel}>
@@ -154,7 +154,6 @@ export default function () {
                 <div className={styles.main_panel}>
                     <div  className={styles.filter_row}>
                         <div id="filter2" className={styles.box}>
-                            <a id="toggle_filter" className={styles.toggle_filter} onClick={toggleFilter}><span><img src="assets/magnify24x24.png"/> FILTER</span></a>
                             <div className={styles.sorting}>
                                 <div className={styles.title}>
                                     Sort by

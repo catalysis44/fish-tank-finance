@@ -175,7 +175,7 @@ export default function Pool(props) {
                             <div className={styles.action_wrapper}>
 
                                 <a className={styles.select_booster}  onClick={()=>{setModal(1)}}> {/*Hided it after selected*/}
-                                    <span><img src="assets/plus.svg"/></span>
+                                    <img src="assets/plus.svg"/>
                                 </a>
 
                                 <a className={styles.selected_booster} style={{ display: 'none' }}>
