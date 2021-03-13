@@ -254,13 +254,34 @@
   transition: all 0.2s ease-in-out 0s;
   box-shadow: 4px 4px 0 rgba(0,0,0,0.04);
 }
+.toggle_tx
+{
+  flex-direction: column;
+  position: absolute;
+  right: 0px;
+  top: 120px;
+  font-size: 18px;
+  background: white;
+  width: 80px;
+  text-align: center;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  padding-top: 20px;
+  border-top-left-radius: 14px;
+  border-bottom-left-radius: 14px;
+  z-index:4;
+  transition: all 0.2s ease-in-out 0s;
+  box-shadow: 4px 4px 0 rgba(0,0,0,0.04);
+}
 :global
 {
-  #toggle_filter.toggled
+  #toggle_filter.toggled, #toggle_tx.toggled
   {
-    
     right:290px;
   }
+
 }
 
 .filter_row
@@ -400,9 +421,8 @@
 
   @media screen and (max-width: 1520px)
   {
-    #filter1.toggled, #filter2.toggled
+    #filter1.toggled, #filter2.toggled, #tx_panel.toggled
     {
-      
       transform: translateX(0);
     }
     #filterbar_backdrop.toggled
@@ -410,7 +430,7 @@
       width:100%;
       opacity:0.8;
     }
-    #toggle_filter
+    #toggle_filter, #toggle_tx
     {
       display:flex;
     }
@@ -427,11 +447,32 @@
       transform: scale(0.8);
     }
   }
+  .toggle_tx
+  {
+    top:90px;
+    width:60px !important;
+    padding-top:5px !important;
+    padding-bottom:0px !important;
+    span{
+      transform: scale(0.8);
+    }
+  }
 }
 @media screen and (max-width: 375px)
 {
   .toggle_filter
   {
+    height:45px;
+    width:50px !important;
+    padding-top:5px !important;
+    padding-bottom:0px !important;
+    span{
+      transform: scale(0.6);
+    }
+  }
+  .toggle_tx
+  {
+    top:130px;
     height:45px;
     width:50px !important;
     padding-top:5px !important;
@@ -461,8 +502,22 @@
         overflow-y: auto;
         z-index: 4;
         transition: all 0.2s ease-in-out 0s;
-        
-
+    }
+    .tx_panel
+    {
+        transform:translateX(290px);
+        position: absolute !important;
+       
+        margin: 0 !important;
+        right: 0px !important;
+       
+        border-radius: 0;
+        box-shadow: none;
+        overflow-y: auto;
+        z-index: 4;
+        transition: all 0.2s ease-in-out 0s;
+        height: 100% !important;
+        top: 0 !important;
     }
     .filter_row .box
     {
@@ -662,7 +717,25 @@
             }
             
         }
-        
+        .sell_btn
+        {
+          position:absolute;
+          background:#00a99d;
+          height:30px;
+          width:80px;
+          right:10px;
+          bottom:10px;
+          color:white;
+          border-radius:4px;
+          display:flex;
+          align-items: center;
+          justify-content: center;
+          span
+          {
+            padding-top:2px;
+            padding-left:2px;
+          }
+        }
         .on_sale
         {
           .title

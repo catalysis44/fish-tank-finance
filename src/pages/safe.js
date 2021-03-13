@@ -7,20 +7,47 @@ import { Slider, Checkbox, Row, Col } from 'antd';
 import { useEffect } from 'react';
 export default function () {
     function toggleFilter() {
+        // Remove TX //
+        document.getElementById('toggle_tx').classList.remove("toggled");
+        document.getElementById('tx_panel').classList.remove("toggled");
+        document.getElementById('filterbar_backdrop').classList.remove("toggled");
+
+
         document.getElementById('toggle_filter').classList.toggle("toggled");
         document.getElementById('filter1').classList.toggle("toggled");
         document.getElementById('filter2').classList.toggle("toggled");
-        document.getElementById('filterbar_backdrop').classList.toggle("toggled");
-
+        document.getElementById('filterbar_backdrop').classList.toggle("toggled");   
     }
-    useEffect(() => {
-        toggleFilter();
-    }, [])
+
+    function toggleTx()
+    {
+        // Remove filter //
+        document.getElementById('toggle_filter').classList.remove("toggled");
+        document.getElementById('filter1').classList.remove("toggled");
+        document.getElementById('filter2').classList.remove("toggled");
+        document.getElementById('filterbar_backdrop').classList.remove("toggled");
+
+
+        document.getElementById('toggle_tx').classList.toggle("toggled");
+        document.getElementById('tx_panel').classList.toggle("toggled");
+        document.getElementById('filterbar_backdrop').classList.toggle("toggled");
+    }
+
+    function removeToggle()
+    {
+        document.getElementById('toggle_filter').classList.remove("toggled");
+        document.getElementById('filter1').classList.remove("toggled");
+        document.getElementById('filter2').classList.remove("toggled");
+        document.getElementById('filterbar_backdrop').classList.remove("toggled");
+        document.getElementById('toggle_tx').classList.remove("toggled");
+        document.getElementById('tx_panel').classList.remove("toggled");
+    }
 
     return (
         <React.Fragment>
-            <div id="filterbar_backdrop" onClick={toggleFilter}></div>
+            <div id="filterbar_backdrop" onClick={removeToggle}></div>
             <a id="toggle_filter" className={styles.toggle_filter} onClick={toggleFilter}><span><img src="assets/magnify24x24.png" /> FILTER</span></a>
+            <a id="toggle_tx" className={styles.toggle_tx} onClick={toggleTx}><span><img src="assets/reload24x24.png" /> HISTORY</span></a>
             <div className={styles.content_wrapper}>
                 <div className={styles.left_side}>
                     <div id="filter1" className={styles.filter_panel}>
@@ -229,8 +256,8 @@ export default function () {
                                         </div>
 
                                     </div>
-                                    {/*On Sale*/}
-                                    <div className={styles.on_sale}>
+                                    {/*On Sale : hide it if not on the market*/}
+                                    <div className={styles.on_sale} style={{display:'none'}}>
                                         <div className={styles.title}>
                                             On Sale for
                                         </div>
@@ -238,6 +265,9 @@ export default function () {
                                             23,394.55 ZOO
                                         </div>
                                     </div>
+                                    <a className={styles.sell_btn}>
+                                        <span>SELL</span>
+                                    </a>
                                 </div>
                                 <div className={styles.flip_card_back}>
                                     <div className={styles.title}>
