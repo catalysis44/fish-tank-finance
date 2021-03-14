@@ -1,10 +1,11 @@
 import styles from './index.less';
 
 import { notification, Switch } from 'antd';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import React from 'react';
 
 import Pool from '../components/zoo/Pool';
+import { StorageContext } from '../hooks';
 export default function () {
 
 
@@ -88,19 +89,21 @@ export default function () {
   // openNotification3();
   //openNotification4();
 
-  function toggleFilter()
-    {
-        document.getElementById('toggle_filter').classList.toggle("toggled");
-        document.getElementById('filter1').classList.toggle("toggled");
-        //document.getElementById('filter2').classList.toggle("toggled");
-        document.getElementById('filterbar_backdrop').classList.toggle("toggled");
-        
-    }
-  
+  function toggleFilter() {
+    document.getElementById('toggle_filter').classList.toggle("toggled");
+    document.getElementById('filter1').classList.toggle("toggled");
+    //document.getElementById('filter2').classList.toggle("toggled");
+    document.getElementById('filterbar_backdrop').classList.toggle("toggled");
+
+  }
+
+  const storage = useContext(StorageContext);
+
+
   return (
     <React.Fragment>
-      <div id="filterbar_backdrop"  onClick={toggleFilter}></div>
-      <a id="toggle_filter" className={styles.toggle_filter} onClick={toggleFilter}><span><img src="assets/magnify24x24.png"/> FILTER</span></a>
+      <div id="filterbar_backdrop" onClick={toggleFilter}></div>
+      <a id="toggle_filter" className={styles.toggle_filter} onClick={toggleFilter}><span><img src="assets/magnify24x24.png" /> FILTER</span></a>
       <div className={styles.filter_row}>
 
         <div id="filter1" className={styles.box}>
@@ -137,19 +140,23 @@ export default function () {
             </div>
           </div>
           <div className={styles.view_selection}>
-              <div className={styles.title}>
-                  View only
+            <div className={styles.title}>
+              View only
               </div>
-              <div className={styles.view_btn}>
-                  <a>Staked</a>
-                  <a className={styles.is_acitve}>Active</a>
-              </div>
+            <div className={styles.view_btn}>
+              <a>Staked</a>
+              <a className={styles.is_acitve}>Active</a>
+            </div>
           </div>
         </div>
       </div>
 
       <div className={styles.row}>
-        <Pool />
+        {
+          storage.poolInfo.map((v, i)=>{
+            return <Pool poolInfo={v} pid={i} key={i}/>
+          })
+        }
 
       </div>
     </React.Fragment>

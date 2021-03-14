@@ -29,7 +29,7 @@ function BasicLayout(props) {
   const [storage, setStorage] = useLocalStorageState('zoo-keeper-v0.1', initialState);
 
   useDataPump(storage, setStorage, chainId, address, connected);
-
+  console.debug('chainId', chainId);
   return (
     <div id="wrapper">
       <Wallet wallet={wallet} setWallet={setWallet} />
@@ -48,7 +48,7 @@ function BasicLayout(props) {
             }
           }}>{connected ? "DISCONNECT" : "CONNECT WALLET"}</a> 
           <div class="address"><img src="assets/wallet32x32.png"/><span>{address ? address.slice(0, 6) + '...' + address.slice(-6) : 'NO WALLET'}</span></div>
-          {chainId !== 1 && chainId !== 888 && chainId !== "" && <div class="testnet"><span>!! TESTNET !!</span></div>}
+          {chainId && chainId.toString() !== '1' && chainId.toString() !== '888' && chainId !== "" && <div class="testnet"><span>!! TESTNET !!</span></div>}
           <div class="balance"><img src="assets/zoo32x32.png"/><span>{commafy(storage.zooBalance)}</span></div>
         </div>
         
