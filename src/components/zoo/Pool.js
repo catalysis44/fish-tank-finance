@@ -244,7 +244,7 @@ export default function Pool(props) {
                     Validate
                     </a>
 
-                    <a className={styles.back}>
+                    <a className={styles.back} onClick={()=>{setShowDeposit(false)}}>
                         <FontAwesomeIcon icon={faUndoAlt} />
                     </a>
                 </div>
