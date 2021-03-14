@@ -2,7 +2,7 @@ import { useState, useEffect, useContext, useRef } from 'react';
 import styles from './Pool.less';
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheckSquare, faExternalLinkSquareAlt } from '@fortawesome/free-solid-svg-icons';
+import { faCheckSquare, faExternalLinkSquareAlt,faUndoAlt } from '@fortawesome/free-solid-svg-icons';
 import { Slider } from 'antd';
 import BoosterSelectionModal from './BoosterSelectionModal';
 import { commafy } from '../../utils';
@@ -238,11 +238,15 @@ export default function Pool(props) {
                 <div className={styles.lp_management}>
                   <a className={styles.approve}>
                     Approve
-        </a>
+                    </a>
 
                   <a className={styles.validate}>
                     Validate
-        </a>
+                    </a>
+
+                    <a className={styles.back}>
+                        <FontAwesomeIcon icon={faUndoAlt} />
+                    </a>
                 </div>
               </div>
 
