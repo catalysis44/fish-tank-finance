@@ -648,8 +648,8 @@
         transition: transform 0.8s;
         transform-style: preserve-3d;
       }
-      /* add  .flip_card back*/
-      .flip_card:hover .flip_card_inner {
+      /* add .flip_card back*/
+      .flip_card:hover .flip_card_inner,.flip_card:focus .flip_card_inner {
         transform: rotateY(180deg);
         .flip_card_front
         {
@@ -857,7 +857,7 @@
             margin-right:5px;
           }
         }
-        .buy_btn
+        .withdraw_btn
         {
           &:hover
           {
@@ -878,6 +878,75 @@
           justify-content: center;
           border-radius: 4px;
         }
+        .sell_action
+        {
+          
+          color:#00a99d;
+          transition: all 0.1s ease-in-out;
+          background:white;
+          
+          position:absolute;
+          bottom:10px;
+          left:10px;
+          width:200px;
+          height:30px;
+          display:flex;
+          align-items: center;
+          justify-content: left;
+          border-radius: 4px;
+          input
+          {
+            padding-top:4px;
+            margin-left:5px;
+            margin-right:5px;
+            border:0;
+            color:black;
+            width: 80px;
+            outline: none;
+            text-align: center;
+            font-size:18px;
+            height:30px;
+          }
+          .select_currency
+          {
+
+            color:#00a99d;
+            img
+            {
+              width:24px;
+              height:24px;
+              margin-right:5px;
+            }
+            span
+            {
+              text-align: right;
+              margin-right:5px;
+            }
+            
+          }
+          
+        }
+        .sell_btn
+          {
+            &:hover
+            {
+              transform: scale(1.05);
+            }
+            padding-top:2px;
+            color:#00a99d;
+            transition: all 0.1s ease-in-out;
+            background:white;
+            box-shadow:2px 2px #00000020;
+            position:absolute;
+            bottom:12px;
+            right:10px;
+            width:64px;
+            height:26px;
+            display:flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+          }
         .item_description
         {
             display:flex;
@@ -917,4 +986,38 @@
       }
 
     
+}
+
+
+:global
+{
+  a.dropdown-item:hover, button.dropdown-item:hover
+  {
+    background:transparent;
+    color:#00a99d;
+    transform: scale(1.1);
+  }
+  .dropdown-content .dropdown-item img
+  {
+    width:24px;
+    height:24px;
+  }
+  .dropdown-item
+  {
+    color:#00a99d;
+    padding-right:1rem !important;
+    text-align: left !important;
+    font-size:16px;
+  }
+  .dropdown-menu
+  {
+    min-width: 120px !important;
+    padding-top:6px !important;
+
+  }
+  .dropdown-content
+  {
+    border-radius: 4px !important;
+    
+  }
 }
