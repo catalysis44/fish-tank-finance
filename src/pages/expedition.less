@@ -40,7 +40,41 @@
     animation: moveGradient 4s alternate infinite;
   }
 }
+:global
+{
+  #golden_pool::after
+  {
+    --border-width: 3px;
+    position: absolute;
+    content: "";
+    top: calc(-1 * var(--border-width));
+    left: calc(-1 * var(--border-width));
+    z-index: -1;
+    width: calc(100% + var(--border-width) * 2);
+    height: calc(100% + var(--border-width) * 2);
+    background: linear-gradient(to right, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C);
+    background-size: 300% 300%;
+    background-position: 0 50%;
+    border-radius: 14px;
 
+    
+  }
+  #silver_pool::after
+  {
+    --border-width: 3px;
+    position: absolute;
+    content: "";
+    top: calc(-1 * var(--border-width));
+    left: calc(-1 * var(--border-width));
+    z-index: -1;
+    width: calc(100% + var(--border-width) * 2);
+    height: calc(100% + var(--border-width) * 2);
+    background: linear-gradient(to right, #cbcbcb, #fcfcfc, #818181, #fcfcfc, #696969);
+    background-size: 300% 300%;
+    background-position: 0 50%;
+    border-radius: 14px;
+  }
+}
 .pool
 {
   width:290px;
@@ -250,3 +284,4 @@
   }
 
 }
+
