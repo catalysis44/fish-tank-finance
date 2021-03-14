@@ -12,14 +12,13 @@ import { WalletContext } from '../../wallet/Wallet';
 import { withdraw } from '../../wallet/send';
 import { WWAN_ADDRESS } from '../../config';
 
+
+
 export default function Pool(props) {
   const [modal, setModal] = useState(0);
-  function showSubArea() {
-    document.getElementById('sub_area').setAttribute("data-show-subarea", "true");
-  }
 
   const [showDeposit, setShowDeposit] = useState(false);
-
+  
   const poolInfo = props.poolInfo;
   const pid = props.pid;
   console.debug('poolInfo 1', poolInfo);
@@ -38,7 +37,7 @@ export default function Pool(props) {
   return (
     <React.Fragment >
       <BoosterSelectionModal isActived={modal} setModal={setModal}></BoosterSelectionModal>
-      <div className={styles.pool} data-active="true"> {/*active true for on staking pool */}
+      <div id={'pool_'+pid} className={styles.pool} data-active="true"> {/*active true for on staking pool */}
         <div className={styles.bubble} data-equipped-nft="true"> {/*true if equipped an NFT*/}
           <a href="" className={styles.reload}><img src="assets/reload24x24.png" /></a>
           <img src="dummy/equip_item.png" />
@@ -76,7 +75,7 @@ export default function Pool(props) {
           </div>
         </div>
 
-        <div id="sub_area" className={styles.wrapper_area} data-show-subarea={showDeposit}> {/*data-show-subarea="true" when want to show LP providing panel */}
+        <div className={styles.wrapper_area} data-show-subarea={showDeposit}> {/*data-show-subarea="true" when want to show LP providing panel */}
           <div className={styles.main_area}>
             <div className={styles.earned}>
               <div className={styles.title}>
