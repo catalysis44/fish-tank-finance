@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext, useRef } from 'react';
 import styles from './Pool.less';
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -7,7 +7,7 @@ import { Slider } from 'antd';
 import BoosterSelectionModal from './BoosterSelectionModal';
 import { commafy } from '../../utils';
 import BigNumber from 'bignumber.js';
-import { useCountDown } from 'ahooks';
+import { useCountDown, useClickAway } from 'ahooks';
 import { WalletContext } from '../../wallet/Wallet';
 import { withdraw } from '../../wallet/send';
 import { WWAN_ADDRESS } from '../../config';
@@ -17,6 +17,8 @@ export default function Pool(props) {
   function showSubArea() {
     document.getElementById('sub_area').setAttribute("data-show-subarea", "true");
   }
+
+  const [showDeposit, setShowDeposit] = useState(false);
 
   const poolInfo = props.poolInfo;
   const pid = props.pid;
@@ -34,7 +36,7 @@ export default function Pool(props) {
   const wallet = useContext(WalletContext);
 
   return (
-    <React.Fragment>
+    <React.Fragment >
       <BoosterSelectionModal isActived={modal} setModal={setModal}></BoosterSelectionModal>
       <div className={styles.pool} data-active="true"> {/*active true for on staking pool */}
         <div className={styles.bubble} data-equipped-nft="true"> {/*true if equipped an NFT*/}
@@ -74,10 +76,8 @@ export default function Pool(props) {
           </div>
         </div>
 
-
-        <div id="sub_area" className={styles.wrapper_area} data-show-subarea="false"> {/*data-show-subarea="true" when want to show LP providing panel */}
+        <div id="sub_area" className={styles.wrapper_area} data-show-subarea={showDeposit}> {/*data-show-subarea="true" when want to show LP providing panel */}
           <div className={styles.main_area}>
-
             <div className={styles.earned}>
               <div className={styles.title}>
                 ZOO+WASP EARNED
@@ -113,7 +113,7 @@ export default function Pool(props) {
                   Connect Wallet
                 </a>
                 {
-                  !deposited && <a className={styles.deposit_lp} onClick={showSubArea}>
+                  !deposited && <a className={styles.deposit_lp} onClick={()=>{setShowDeposit(true)}}>
                     Deposit WSLP Token
                   </a>
                 }
@@ -125,11 +125,11 @@ export default function Pool(props) {
                 {
                   !expirated && <a className={styles.locked_lp}>
                     <div>UNLOCKED in</div>
-                    <div>254:24:23</div>
+                    <div>{days}:{hours}:{minutes}:{seconds}</div>
                   </a>
                 }
                 {
-                  deposited && <a className={styles.topup_lp}>
+                  deposited && <a className={styles.topup_lp} onClick={()=>{setShowDeposit(true)}}>
                     Top-up
                   </a>
                 }
