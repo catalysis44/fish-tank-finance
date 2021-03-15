@@ -5,6 +5,7 @@ import { useState, useEffect, useContext } from 'react';
 import React from 'react';
 
 import Pool from '../components/zoo/Pool';
+import Loader from '../components/loader'
 import { StorageContext } from '../hooks';
 export default function () {
 
@@ -102,6 +103,7 @@ export default function () {
 
   return (
     <React.Fragment>
+      <Loader/>
       <div id="filterbar_backdrop" onClick={toggleFilter}></div>
       <a id="toggle_filter" className={styles.toggle_filter} onClick={toggleFilter}><span><img src="assets/magnify24x24.png" /> FILTER</span></a>
       <div className={styles.filter_row}>

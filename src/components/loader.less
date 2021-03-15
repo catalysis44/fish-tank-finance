@@ -1,0 +1,52 @@
+.loader_wrapper
+{
+  width:100%;
+  height:100%;
+  position:fixed;
+  background: rgba(0, 169, 157, 0.9) !important;
+  display:flex;
+  flex-direction:column;
+  justify-content: center;
+  align-items: center;
+  top:0;
+  left:0;
+  z-index:1000;
+  img
+  {
+    margin-bottom:30px;
+  }
+  .caption
+  {
+    color:white;
+    font-size:18px;
+  }
+}
+
+.spinner {
+  color:white;
+ font-size:22px;
+  text-align: center;
+}
+
+.spinner > div {
+  display: inline-block;
+  animation: sk-bouncedelay 1s infinite;
+}
+
+.spinner .bounce1 {
+  animation-delay: -0.32s;
+}
+
+.spinner .bounce2 {
+  animation-delay: -0.16s;
+}
+
+
+
+@keyframes sk-bouncedelay {
+  0%, 80%, 100% { 
+    visibility: hidden;
+  } 40% { 
+    visibility: visible;
+  }
+}
