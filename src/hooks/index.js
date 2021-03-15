@@ -164,7 +164,7 @@ export const getZooPools = (loader, chainId, address, poolLength) => {
   return loader.loadMany(calls);
 }
 
-export const getLpInfo = (loader, lpToken) => {
+export const getLpInfo = (loader, lpToken, chainId, address) => {
   return loader.loadMany([
     {
       target: lpToken,
@@ -176,6 +176,16 @@ export const getLpInfo = (loader, lpToken) => {
       call: ['token1()(address)'],
       returns: [['token1', val => val]]
     },
+    {
+      target: lpToken,
+      call: ['balanceOf(address)(uint256)', address],
+      returns: [['lpBalance', val => (new BigNumber(val)).div(1e18)]]
+    },
+    // {
+    //   target: lpToken,
+    //   call: ['balanceOf(address)(uint256)', ZOO_FARMING_ADDRESS[chainId]],
+    //   returns: [['totalDeposited', val => (new BigNumber(val)).div(1e18)]]
+    // },
   ]);
 }
 
@@ -248,6 +258,7 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
       getZooPools(loader, chainId, address, farmingInfo.poolLength).then(ret => {
         console.debug('getZooPools ret', ret);
         let poolInfo = []
+        // TODO: 
         for (let i = 0; i < farmingInfo.poolLength; i++) {
           poolInfo[i] = {
             ...ret[i].returnValue,    // PoolInfo
@@ -263,10 +274,12 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
         // setStorage({ ...storage, poolInfo });
 
         for (let i = 0; i < farmingInfo.poolLength; i++) {
-          getLpInfo(loader, poolInfo[i].lpToken).then(ret => {
+          getLpInfo(loader, poolInfo[i].lpToken, chainId, address).then(ret => {
             console.debug('getLpInfo', i, ret);
             poolInfo[i].token0 = ret[0].returnValue.token0;
             poolInfo[i].token1 = ret[1].returnValue.token1;
+            poolInfo[i].lpBalance = ret[2].returnValue.lpBalance;
+            // poolInfo[i].totalDeposited = ret[3].returnValue.totalDeposited;
 
             getTokenSymbols(loader, poolInfo[i].token0, poolInfo[i].token1).then(ret => {
               console.debug('getTokenSymbols', i, ret);

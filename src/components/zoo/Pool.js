@@ -5,11 +5,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckSquare, faExternalLinkSquareAlt,faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { Slider } from 'antd';
 import BoosterSelectionModal from './BoosterSelectionModal';
-import { commafy } from '../../utils';
+import { commafy, checkNumber, calcLockTimeBoost } from '../../utils';
 import BigNumber from 'bignumber.js';
 import { useCountDown, useClickAway } from 'ahooks';
 import { WalletContext } from '../../wallet/Wallet';
-import { withdraw } from '../../wallet/send';
+import { approve, checkApprove, deposit, withdraw } from '../../wallet/send';
 import { WWAN_ADDRESS } from '../../config';
 
 
@@ -18,6 +18,10 @@ export default function Pool(props) {
   const [modal, setModal] = useState(0);
 
   const [showDeposit, setShowDeposit] = useState(false);
+  const [depositAmount, setDepositAmount] = useState(0);
+  const [lockDays, setLockDays] = useState(0);
+  const [approved, setApproved] = useState(false);
+  const [nftId, setNftId] = useState(0);
   
   const poolInfo = props.poolInfo;
   const pid = props.pid;
@@ -25,6 +29,7 @@ export default function Pool(props) {
   console.debug('symbol!!', poolInfo.symbol0, poolInfo.symbol1);
   const deposited = poolInfo.lpAmount && (new BigNumber(poolInfo.lpAmount)).gt(0);
   const expirated = poolInfo.expirationTime * 1000 < Date.now();
+
   
   const [countdown, setTargetDate, formattedRes] = useCountDown({
     targetDate: poolInfo.expirationTime * 1000,
@@ -33,6 +38,24 @@ export default function Pool(props) {
   const { days, hours, minutes, seconds } = formattedRes;
 
   const wallet = useContext(WalletContext);
+  const chainId = wallet.networkId;
+  const connected = wallet.connected;
+  const address = wallet.address;
+  const web3 = wallet.web3;
+  const lpToken = poolInfo.lpToken;
+
+  useEffect(()=>{
+    if (!chainId || !address || !connected || !web3) {
+      return;
+    }
+
+    checkApprove(poolInfo.lpToken, '0x'+(new BigNumber(depositAmount)).multipliedBy(1e18).toString(16), chainId, web3, address).then(ret=>{
+      console.debug('checkApprove', ret);
+      setApproved(ret);
+    }).catch(err=>{
+      console.error('checkApprove err', err);
+    });
+  }, [chainId, address, connected, lpToken, depositAmount, web3]);
 
   return (
     <React.Fragment >
@@ -96,7 +119,7 @@ export default function Pool(props) {
                   }).catch(err=>{
                     console.error(err);
                   })
-                }} > {/*Add disabled when non-connected */}
+                }} disabled={!connected}> {/*Add disabled when non-connected */}
                   HARVEST
                 </a>
               </div>
@@ -117,7 +140,13 @@ export default function Pool(props) {
                   </a>
                 }
                 {
-                  deposited && expirated && <a className={styles.withdraw_lp}>
+                  deposited && expirated && <a className={styles.withdraw_lp} onClick={()=>{
+                    withdraw(pid, '0x' + (new BigNumber(poolInfo.lpAmount.toString())).multipliedBy(1e18).toString(16), chainId, web3, address).then(ret=>{
+                      console.debug('withdraw bt ret', ret);
+                    }).catch(err=>{
+                      console.error('withdraw failed', err);
+                    });
+                  }}>
                     Withdraw
                   </a>
                 }
@@ -176,19 +205,25 @@ export default function Pool(props) {
             <div className={styles.deposit}>
               <div className={styles.title}>
                 <span>DEPOSIT WSLP</span>
-                <span>1.51454115 AVAILABLE</span>
+                <span>{poolInfo.lpBalance.toString()} AVAILABLE</span>
               </div>
               <div className={styles.deposit_wrapper}>
 
-                <input value="125.5410" className={styles.deposit_amount} />
+                <input value={depositAmount} className={styles.deposit_amount} onChange={(e)=>{
+                  if (checkNumber(e)) {
+                    setDepositAmount(e.target.value);
+                  }
+                }}/>
 
                 <div class={styles.coin_wrapper}>
-                  <a className={styles.max} > {/*Add disabled when non-connected */}
-                                    MAX
-                                    </a>
+                  <a className={styles.max} onClick={()=>{
+                    setDepositAmount(poolInfo.lpBalance.toString());
+                  }} disabled={!connected}> {/*Add disabled when non-connected */}
+                    MAX
+                  </a>
                   <div className={styles.coins}>
-                    <img src="dummy/wanBTC.png" />
-                    <img src="dummy/wanUSDT.png" />
+                    {poolInfo.symbol0 && <img src={'https://token-icons.vercel.app/icon/wanswap/'+poolInfo.symbol0+'.png'} />}
+                    {poolInfo.symbol1 && <img src={'https://token-icons.vercel.app/icon/wanswap/'+poolInfo.symbol1+'.png'} />}
                   </div>
                 </div>
               </div>
@@ -197,15 +232,17 @@ export default function Pool(props) {
             <div className={styles.locking}>
               <div className={styles.title}>
                 <span>LOCK PERIOD</span>
-                <span className={styles.boost}>BOOST X5</span>
+                <span className={styles.boost}>BOOST X{commafy(calcLockTimeBoost(lockDays))}</span>
               </div>
               <div className={styles.lock_wrapper}>
 
                 <div className={styles.lock_period}>
-                  180 days
+                  {lockDays} days
                 </div>
                 <div className={styles.lock_action}>
-                  <Slider defaultValue={30} min={8} max={180} tooltipVisible={false} />
+                  <Slider value={lockDays} min={0} max={180} tooltipVisible={false} onChange={(e)=>{
+                    setLockDays(e);
+                  }} />
                 </div>
               </div>
             </div>
@@ -217,7 +254,7 @@ export default function Pool(props) {
 
               <div className={styles.action_wrapper}>
 
-                <a className={styles.select_booster} onClick={() => { setModal(1) }}> {/*Hided it after selected*/}
+                <a className={styles.select_booster} onClick={() => { setModal(1) }} > {/*Hided it after selected*/}
                   <img src="assets/plus.svg" />
                 </a>
 
@@ -241,11 +278,23 @@ export default function Pool(props) {
                         <FontAwesomeIcon icon={faChevronLeft} />
                     </a>
 
-                  <a className={styles.approve}>
+                  <a className={styles.approve} disabled={approved} onClick={()=>{
+                    approve(poolInfo.lpToken, chainId, web3, address).then(ret=>{
+                      console.debug('approve bt ret', ret);
+                    }).catch(err=>{
+                      console.error('approve failed', err);
+                    });
+                  }}>
                     Approve
                     </a>
 
-                  <a className={styles.validate}>
+                  <a className={styles.validate} disabled={!approved} onClick={()=>{
+                    deposit(pid, '0x' + (new BigNumber(depositAmount)).multipliedBy(1e18).toString(16), lockDays*3600*24, nftId, chainId, web3, address).then(ret=>{
+                      console.debug('deposit bt ret', ret);
+                    }).catch(err=>{
+                      console.error('deposit failed', err);
+                    });
+                  }}>
                     Validate
                     </a>
 
