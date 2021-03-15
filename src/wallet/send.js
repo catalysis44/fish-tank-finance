@@ -50,6 +50,7 @@ export const checkApprove = async (lpToken, amount, chainId, web3, address) => {
   console.debug('checkApprove', lpToken, chainId, web3, address);
   const erc20 = new web3.eth.Contract(erc20Abi, lpToken);
   let allowance = await erc20.methods.allowance(address, ZOO_FARMING_ADDRESS[chainId]).call();
+  console.debug('allowance', allowance.toString(), amount.toString(), (new BigNumber(allowance)).gte(new BigNumber(amount)))
   if (!(new BigNumber(allowance)).gte(new BigNumber(amount))) {
     return false;
   }
