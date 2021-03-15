@@ -2,7 +2,7 @@ import { useState, useEffect, useContext, useRef } from 'react';
 import styles from './Pool.less';
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheckSquare, faExternalLinkSquareAlt,faUndoAlt } from '@fortawesome/free-solid-svg-icons';
+import { faCheckSquare, faExternalLinkSquareAlt,faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { Slider } from 'antd';
 import BoosterSelectionModal from './BoosterSelectionModal';
 import { commafy, checkNumber, calcLockTimeBoost } from '../../utils';
@@ -273,6 +273,11 @@ export default function Pool(props) {
                 </a>
 
                 <div className={styles.lp_management}>
+
+                <a className={styles.back} onClick={()=>{setShowDeposit(false)}}>
+                        <FontAwesomeIcon icon={faChevronLeft} />
+                    </a>
+
                   <a className={styles.approve} disabled={approved} onClick={()=>{
                     approve(poolInfo.lpToken, chainId, web3, address).then(ret=>{
                       console.debug('approve bt ret', ret);
@@ -293,9 +298,7 @@ export default function Pool(props) {
                     Validate
                     </a>
 
-                    <a className={styles.back} onClick={()=>{setShowDeposit(false)}}>
-                        <FontAwesomeIcon icon={faUndoAlt} />
-                    </a>
+                    
                 </div>
               </div>
 
