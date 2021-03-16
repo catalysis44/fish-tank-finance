@@ -87,7 +87,9 @@ export default function Pool(props) {
 
         <div className={styles.avatar}>
           <img src="dummy/giraffe.png" className={styles.lv1} />
-          <img src="assets/sunglass.png" className={styles.lv2} />
+          {
+          poolInfo.lpAmount.toString() > 0 && <img src="assets/sunglass.png" className={styles.lv2} />
+          }
         </div>
         <div className={styles.mul_apy}>
           <div className={styles.multiplier}>
