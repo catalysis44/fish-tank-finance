@@ -22,6 +22,7 @@ export default function Pool(props) {
   const [lockDays, setLockDays] = useState(0);
   const [approved, setApproved] = useState(false);
   const [nftId, setNftId] = useState(0);
+  const [updateApprove, setUpdateApprove] = useState(0);
   
   const setTxWaiting = props.setTxWaiting;
   const poolInfo = props.poolInfo;
@@ -49,14 +50,14 @@ export default function Pool(props) {
     if (!chainId || !address || !connected || !web3) {
       return;
     }
-
+    console.debug('checkApprove begin', updateApprove);
     checkApprove(poolInfo.lpToken, '0x'+(new BigNumber(depositAmount)).multipliedBy(1e18).toString(16), chainId, web3, address).then(ret=>{
       console.debug('checkApprove', ret);
       setApproved(ret);
     }).catch(err=>{
       console.error('checkApprove err', err);
     });
-  }, [chainId, address, connected, lpToken, depositAmount, web3]);
+  }, [chainId, address, connected, lpToken, depositAmount, web3, updateApprove]);
 
   return (
     <React.Fragment >
@@ -210,7 +211,7 @@ export default function Pool(props) {
             <div className={styles.deposit}>
               <div className={styles.title}>
                 <span>DEPOSIT WSLP</span>
-                <span>{poolInfo.lpBalance.toString()} AVAILABLE</span>
+                <span>{poolInfo.lpBalance && poolInfo.lpBalance.toString()} AVAILABLE</span>
               </div>
               <div className={styles.deposit_wrapper}>
 
@@ -222,7 +223,7 @@ export default function Pool(props) {
 
                 <div class={styles.coin_wrapper}>
                   <a className={styles.max} onClick={()=>{
-                    setDepositAmount(poolInfo.lpBalance.toString());
+                    setDepositAmount(poolInfo.lpBalance && poolInfo.lpBalance.toString());
                   }} disabled={!connected}> {/*Add disabled when non-connected */}
                     MAX
                   </a>
@@ -287,6 +288,7 @@ export default function Pool(props) {
                     setTxWaiting(true);
                     approve(poolInfo.lpToken, chainId, web3, address).then(ret=>{
                       setTxWaiting(false);
+                      setUpdateApprove(updateApprove + 1);
                       console.debug('approve bt ret', ret);
                     }).catch(err=>{
                       setTxWaiting(false);
@@ -301,6 +303,7 @@ export default function Pool(props) {
                     deposit(pid, '0x' + (new BigNumber(depositAmount)).multipliedBy(1e18).toString(16), lockDays*3600*24, nftId, chainId, web3, address).then(ret=>{
                       setTxWaiting(false);
                       console.debug('deposit bt ret', ret);
+                      setShowDeposit(false)
                     }).catch(err=>{
                       setTxWaiting(false);
                       console.error('deposit failed', err);

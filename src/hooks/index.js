@@ -239,8 +239,11 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
     }
 
     getZooBalance(loader, chainId, address).then(ret => {
-      console.debug('getZooBalance ret', ret);
+      console.debug('getZooBalance ret', ret, ret.returnValue.zooBalance);
       setStorage({ ...storage, zooBalance: ret.returnValue.zooBalance });
+
+      console.debug('timer ~ 2', JSON.stringify(storage, null, 2));
+
     }).catch(err => {
       console.error('err 1', err);
     });
