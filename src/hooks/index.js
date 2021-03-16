@@ -9,7 +9,7 @@ const DataLoader = require('dataloader');
 export const initialState = {
   zooBalance: new BigNumber(300),
   address: '',
-  chainId: 1,
+  chainId: 999,
   farmingInfo: {
     startBlock: 0,
     allEndBlock: 0,

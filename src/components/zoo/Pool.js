@@ -31,10 +31,11 @@ export default function Pool(props) {
   console.debug('symbol!!', poolInfo.symbol0, poolInfo.symbol1);
   const deposited = poolInfo.lpAmount && (new BigNumber(poolInfo.lpAmount)).gt(0);
   const expirated = poolInfo.expirationTime * 1000 < Date.now();
+  const baseAllocPoint = 100;
 
   
   const [countdown, setTargetDate, formattedRes] = useCountDown({
-    targetDate: poolInfo.expirationTime * 1000,
+    targetDate: new Date(poolInfo.expirationTime * 1000),
   });
 
   const { days, hours, minutes, seconds } = formattedRes;
@@ -91,7 +92,7 @@ export default function Pool(props) {
         <div className={styles.mul_apy}>
           <div className={styles.multiplier}>
             <img src="assets/zoo32x32.png" />
-            <span>×2</span>
+            <span>×{poolInfo.allocPoint && (poolInfo.allocPoint / baseAllocPoint).toFixed(0)}</span>
           </div>
           <div className={styles.apy} >
             <img src="assets/apy36x36.png" />

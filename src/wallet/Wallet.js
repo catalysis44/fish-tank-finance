@@ -9,7 +9,7 @@ const INITIAL_STATE = {
   web3: null,
   provider: null,
   connected: false,
-  networkId: 1,
+  networkId: 999,
   chainType: "wan"
 };
 
