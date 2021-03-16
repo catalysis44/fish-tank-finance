@@ -3,6 +3,8 @@ import styles from './index.less';
 import { notification, Switch } from 'antd';
 import { useState, useEffect, useContext } from 'react';
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSortAlphaDown,faSortAmountUp,faSortNumericDown,faSortNumericUp } from '@fortawesome/free-solid-svg-icons';
 
 import Pool from '../components/zoo/Pool';
 import Loader from '../components/loader'
@@ -119,25 +121,25 @@ export default function () {
             <div className={styles.sort_btn}>
               <a className={styles.is_acitve}>
                 <div className={styles.icon}>
-                  <div>A</div><div>Z</div>
+                  <FontAwesomeIcon icon={faSortAlphaDown} />
                 </div>
               Name
             </a>
               <a>
                 <div className={styles.icon}>
-                  <div>A</div><div>Z</div>
+                <FontAwesomeIcon icon={faSortNumericDown} />
                 </div>
               APY
             </a>
               <a>
                 <div className={styles.icon}>
-                  <div>A</div><div>Z</div>
+                <FontAwesomeIcon icon={faSortNumericDown} />
                 </div>
               Liquidity
             </a>
               <a>
                 <div className={styles.icon}>
-                  <div>A</div><div>Z</div>
+                <FontAwesomeIcon icon={faSortNumericDown} />
                 </div>
               Multiplier
               </a>

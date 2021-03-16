@@ -2,7 +2,7 @@ import styles from './safe.less';
 import React from 'react';
 import '../../node_modules/animate.css/animate.min.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faExternalLinkAlt, faCaretDown } from '@fortawesome/free-solid-svg-icons';
+import { faExternalLinkAlt, faCaretDown,faSortAlphaDown,faSortAmountUp,faSortNumericDown,faSortNumericUp } from '@fortawesome/free-solid-svg-icons';
 import { Slider, Checkbox, Row, Col,Pagination  } from 'antd';
 import { useEffect } from 'react';
 export default function () {
@@ -212,31 +212,31 @@ export default function () {
                                 <div className={styles.sort_btn}>
                                     <a className={styles.is_acitve}>
                                         <div className={styles.icon}>
-                                            <div>A</div><div>Z</div>
+                                            <FontAwesomeIcon icon={faSortAlphaDown} />
                                         </div>
                                         Name
                                     </a>
                                     <a>
                                         <div className={styles.icon}>
-                                            <div>A</div><div>Z</div>
+                                        <FontAwesomeIcon icon={faSortNumericDown} />
                                         </div>
                                 Total supply
                                 </a>
                                     <a>
                                         <div className={styles.icon}>
-                                            <div>A</div><div>Z</div>
+                                        <FontAwesomeIcon icon={faSortNumericDown} />
                                         </div>
                                 Price
                                 </a>
                                     <a>
                                         <div className={styles.icon}>
-                                            <div>A</div><div>Z</div>
+                                        <FontAwesomeIcon icon={faSortNumericDown} />
                                         </div>
                                     Boost reward
                                     </a>
                                     <a>
                                         <div className={styles.icon}>
-                                            <div>A</div><div>Z</div>
+                                        <FontAwesomeIcon icon={faSortNumericDown} />
                                         </div>
                                 Time reducer
                                 </a>
