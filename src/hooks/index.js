@@ -267,11 +267,11 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
         for (let i = 0; i < farmingInfo.poolLength; i++) {
           poolInfo[i] = {
             ...ret[i].returnValue,    // PoolInfo
-            ...ret[2 + i].returnValue, // UserInfo
-            ...ret[4 + i].returnValue, // PendingZoo
-            ...ret[6 + i].returnValue, // PendingWasp
-            ...ret[8 + i].returnValue, // Boosting
-            ...ret[10 + i].returnValue, // ExpirationTime
+            ...ret[farmingInfo.poolLength + i].returnValue, // UserInfo
+            ...ret[2*farmingInfo.poolLength + i].returnValue, // PendingZoo
+            ...ret[3*farmingInfo.poolLength + i].returnValue, // PendingWasp
+            ...ret[4*farmingInfo.poolLength + i].returnValue, // Boosting
+            ...ret[5*farmingInfo.poolLength + i].returnValue, // ExpirationTime
           };
         }
 
