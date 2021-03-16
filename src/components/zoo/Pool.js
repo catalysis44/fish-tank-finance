@@ -23,6 +23,7 @@ export default function Pool(props) {
   const [approved, setApproved] = useState(false);
   const [nftId, setNftId] = useState(0);
   
+  const setTxWaiting = props.setTxWaiting;
   const poolInfo = props.poolInfo;
   const pid = props.pid;
   console.debug('poolInfo 1', poolInfo);
@@ -113,11 +114,12 @@ export default function Pool(props) {
                   if (!wallet.connected) {
                     return;
                   }
-
+                  setTxWaiting(true);
                   withdraw(pid, 0, wallet.networkId, wallet.web3, wallet.address).then(ret=>{
-
+                    setTxWaiting(false);
                   }).catch(err=>{
                     console.error(err);
+                    setTxWaiting(false);
                   })
                 }} disabled={!connected}> {/*Add disabled when non-connected */}
                   HARVEST
@@ -141,9 +143,12 @@ export default function Pool(props) {
                 }
                 {
                   deposited && expirated && <a className={styles.withdraw_lp} onClick={()=>{
+                    setTxWaiting(true);
                     withdraw(pid, '0x' + (new BigNumber(poolInfo.lpAmount.toString())).multipliedBy(1e18).toString(16), chainId, web3, address).then(ret=>{
+                      setTxWaiting(false);
                       console.debug('withdraw bt ret', ret);
                     }).catch(err=>{
+                      setTxWaiting(false);
                       console.error('withdraw failed', err);
                     });
                   }}>
@@ -279,9 +284,12 @@ export default function Pool(props) {
                     </a>
 
                   <a className={styles.approve} disabled={approved} onClick={()=>{
+                    setTxWaiting(true);
                     approve(poolInfo.lpToken, chainId, web3, address).then(ret=>{
+                      setTxWaiting(false);
                       console.debug('approve bt ret', ret);
                     }).catch(err=>{
+                      setTxWaiting(false);
                       console.error('approve failed', err);
                     });
                   }}>
@@ -289,9 +297,12 @@ export default function Pool(props) {
                     </a>
 
                   <a className={styles.validate} disabled={!approved} onClick={()=>{
+                    setTxWaiting(true);
                     deposit(pid, '0x' + (new BigNumber(depositAmount)).multipliedBy(1e18).toString(16), lockDays*3600*24, nftId, chainId, web3, address).then(ret=>{
+                      setTxWaiting(false);
                       console.debug('deposit bt ret', ret);
                     }).catch(err=>{
+                      setTxWaiting(false);
                       console.error('deposit failed', err);
                     });
                   }}>

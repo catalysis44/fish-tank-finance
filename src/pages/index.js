@@ -8,7 +8,7 @@ import Pool from '../components/zoo/Pool';
 import Loader from '../components/loader'
 import { StorageContext } from '../hooks';
 export default function () {
-
+  const [txWaiting, setTxWaiting] = useState(false);
 
   const openNotification = () => {
     const args = {
@@ -103,7 +103,9 @@ export default function () {
 
   return (
     <React.Fragment>
-      <Loader/>
+      {
+        txWaiting && <Loader/>
+      }
       <div id="filterbar_backdrop" onClick={toggleFilter}></div>
       <a id="toggle_filter" className={styles.toggle_filter} onClick={toggleFilter}><span><img src="assets/magnify24x24.png" /> FILTER</span></a>
       <div className={styles.filter_row}>
@@ -156,7 +158,7 @@ export default function () {
       <div className={styles.row}>
         {
           storage.poolInfo.map((v, i)=>{
-            return <Pool poolInfo={v} pid={i} key={i}/>
+            return <Pool poolInfo={v} pid={i} key={i} setTxWaiting={setTxWaiting}/>
           })
         }
 
