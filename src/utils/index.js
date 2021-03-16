@@ -32,7 +32,7 @@ export const checkNumber = e => {
 }
 
 export const calcLockTimeBoost = (lockDays) => {
-  let boosting = 1;
+  let boosting = 0;
   let minLockDays = 8;
   let baseBoost = 0.002;
   let increaseBoost = 0.004;

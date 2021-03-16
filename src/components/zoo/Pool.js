@@ -238,7 +238,7 @@ export default function Pool(props) {
             <div className={styles.locking}>
               <div className={styles.title}>
                 <span>LOCK PERIOD</span>
-                <span className={styles.boost}>BOOST X{commafy(calcLockTimeBoost(lockDays))}</span>
+                <span className={styles.boost}>BOOST +{commafy(calcLockTimeBoost(lockDays)*100) + '%'}</span>
               </div>
               <div className={styles.lock_wrapper}>
 
