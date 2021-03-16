@@ -123,7 +123,7 @@ export default function Pool(props) {
                     console.error(err);
                     setTxWaiting(false);
                   })
-                }} disabled={!connected}> {/*Add disabled when non-connected */}
+                }} disabled={poolInfo.pendingZoo == 0}> {/*Add disabled when non-connected */}
                   HARVEST
                 </a>
               </div>
