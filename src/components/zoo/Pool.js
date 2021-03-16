@@ -75,7 +75,7 @@ export default function Pool(props) {
         <div className={styles.header}>
           <div className={styles.title}>
             TITLE OF THE POOL
-                    </div>
+          </div>
           {/*is-success for KEEPER CHOICE and is-dark for COMMUNITY CHOICE*/}
           <div className="choice button is-success is-outlined">
             <span class="icon is-small">
@@ -166,13 +166,13 @@ export default function Pool(props) {
                         <div className={styles.boosting}>
                           <img src="assets/hourglass24x24.png"/>
                           <div>
-                            +18%
+                            +{commafy(calcLockTimeBoost((poolInfo.expirationTime - Date.now()/1000) / (3600 * 24))*100) + '%'}
                             <span>boost</span>
                           </div>
                         </div>
                         <div className={styles.horizontal_line}></div>
                         <div className={styles.locktime}>
-                          180 Days
+                          {((poolInfo.expirationTime - Date.now()/1000) / (3600 * 24)).toFixed(0)} Days
                           <span>lock time</span>
                         </div>
                       </div>

@@ -2,6 +2,7 @@ import BigNumber from 'bignumber.js';
 import { useInterval, useLockFn, useReactive } from 'ahooks';
 import { MULTICALL_ADDRESS, RPC_URL, ZOO_TOKEN_ADDRESS, ZOO_FARMING_ADDRESS, ZOO_BOOSTING_ADDRESS } from '../config';
 import React, { useCallback, useMemo } from 'react';
+import { getWaspPrice } from './waspPrice';
 const { aggregate } = require('@makerdao/multicall');
 const DataLoader = require('dataloader');
 
@@ -231,6 +232,10 @@ export const getFarmingInfo = (loader, chainId) => {
 
 export const useDataPump = (storage, setStorage, chainId, address, connected) => {
   const loader = useLoader(chainId);
+
+  // getWaspPrice().then(ret=>{
+  //   console.debug('wasp price', ret);
+  // })
 
   const updater = () => {
     console.debug('timer ~', JSON.stringify(storage, null, 2));
