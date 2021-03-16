@@ -140,6 +140,7 @@ export default function Pool(props) {
                 </a>
                 {
                   !deposited && <a className={styles.deposit_lp} onClick={()=>{setShowDeposit(true)}}>
+                    
                     Deposit WSLP Token
                   </a>
                 }
@@ -159,6 +160,23 @@ export default function Pool(props) {
                 }
                 {
                   !expirated && <a className={styles.locked_lp}>
+                    <div className={styles.tipbox_btn}>
+                      ?
+                      <div className={styles.tipbox}>
+                        <div className={styles.boosting}>
+                          <img src="assets/hourglass24x24.png"/>
+                          <div>
+                            +18%
+                            <span>boost</span>
+                          </div>
+                        </div>
+                        <div className={styles.horizontal_line}></div>
+                        <div className={styles.locktime}>
+                          180 Days
+                          <span>lock time</span>
+                        </div>
+                      </div>
+                    </div>
                     <div>UNLOCKED in</div>
                     <div>{days}:{hours}:{minutes}:{seconds}</div>
                   </a>
