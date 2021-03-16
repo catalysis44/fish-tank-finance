@@ -238,12 +238,13 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
       return;
     }
 
+    let tmpStorage = Object.assign({...storage});
+
     getZooBalance(loader, chainId, address).then(ret => {
       console.debug('getZooBalance ret', ret, ret.returnValue.zooBalance);
-      setStorage({ ...storage, zooBalance: ret.returnValue.zooBalance });
 
-      console.debug('timer ~ 2', JSON.stringify(storage, null, 2));
-
+      tmpStorage = Object.assign({...tmpStorage, zooBalance: ret.returnValue.zooBalance})
+      setStorage(tmpStorage);
     }).catch(err => {
       console.error('err 1', err);
     });
@@ -255,7 +256,8 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
         farmingInfo[v.returns[0][0]] = v.returnValue[v.returns[0][0]];
       });
 
-      setStorage({ ...storage, farmingInfo });
+      tmpStorage = Object.assign({...tmpStorage, farmingInfo})
+      setStorage(tmpStorage);
       console.debug('farmingInfo', farmingInfo);
 
       getZooPools(loader, chainId, address, farmingInfo.poolLength).then(ret => {
@@ -274,7 +276,6 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
         }
 
         console.debug('poolInfo', poolInfo);
-        // setStorage({ ...storage, poolInfo });
 
         for (let i = 0; i < farmingInfo.poolLength; i++) {
           getLpInfo(loader, poolInfo[i].lpToken, chainId, address).then(ret => {
@@ -290,7 +291,8 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
               poolInfo[i].symbol1 = ret[1].returnValue.symbol1;
 
               if (i === farmingInfo.poolLength - 1) {
-                setStorage({ ...storage, poolInfo });
+                tmpStorage = Object.assign({...tmpStorage, poolInfo})
+                setStorage(tmpStorage);
               }
             }).catch(err => {
               console.error('err 5', err);
