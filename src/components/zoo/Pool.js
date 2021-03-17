@@ -52,7 +52,7 @@ export default function Pool(props) {
       return;
     }
     console.debug('checkApprove begin', updateApprove);
-    checkApprove(poolInfo.lpToken, '0x'+(new BigNumber(depositAmount)).multipliedBy(1e18).toString(16), chainId, web3, address).then(ret=>{
+    checkApprove(lpToken, '0x'+(new BigNumber(depositAmount)).multipliedBy(1e18).toString(16), chainId, web3, address).then(ret=>{
       console.debug('checkApprove', ret);
       setApproved(ret);
     }).catch(err=>{

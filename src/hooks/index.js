@@ -1,6 +1,6 @@
 import BigNumber from 'bignumber.js';
 import { useInterval, useLockFn, useReactive } from 'ahooks';
-import { MULTICALL_ADDRESS, RPC_URL, ZOO_TOKEN_ADDRESS, ZOO_FARMING_ADDRESS, ZOO_BOOSTING_ADDRESS } from '../config';
+import { MULTICALL_ADDRESS, RPC_URL, ZOO_TOKEN_ADDRESS, ZOO_FARMING_ADDRESS, ZOO_BOOSTING_ADDRESS, NFT_FACTORY_ADDRESS } from '../config';
 import React, { useCallback, useMemo } from 'react';
 import { getWaspPrice } from './waspPrice';
 const { aggregate } = require('@makerdao/multicall');
@@ -18,6 +18,7 @@ export const initialState = {
     poolLength: 0,
   },
   poolInfo: [],
+  goldenPrice: 0,
 }
 
 const differ = (a, b) => {
@@ -230,6 +231,16 @@ export const getFarmingInfo = (loader, chainId) => {
   ]);
 }
 
+export const getNFTFactoryInfo = (loader, chainId) => {
+  return loader.loadMany([
+    {
+      target: NFT_FACTORY_ADDRESS[chainId],
+      call: ['queryGoldenPrice()(uint)'],
+      returns: [['goldenPrice', val => (new BigNumber(val)).div(1e18)]]
+    },
+  ]);
+}
+
 export const useDataPump = (storage, setStorage, chainId, address, connected) => {
   const loader = useLoader(chainId);
 
@@ -311,6 +322,13 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
       });
     }).catch(err => {
       console.error('err 2', err);
+    });
+
+    getNFTFactoryInfo(loader, chainId).then(ret => {
+      console.debug('getNFTFactoryInfo ret', ret);
+      tmpStorage.goldenPrice = ret[0].returnValue.goldenPrice;
+    }).catch(err => {
+      console.error('err 30', err);
     });
 
   };
