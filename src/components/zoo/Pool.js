@@ -60,6 +60,14 @@ export default function Pool(props) {
     });
   }, [chainId, address, connected, lpToken, depositAmount, web3, updateApprove]);
 
+  if (poolInfo.symbol0 === 'WBTC') {
+    poolInfo.symbol0 = 'wanBTC';
+  }
+
+  if (poolInfo.symbol1 === 'WBTC') {
+    poolInfo.symbol1 = 'wanBTC';
+  }
+
   return (
     <React.Fragment >
       <BoosterSelectionModal isActived={modal} setModal={setModal}></BoosterSelectionModal>
