@@ -30,7 +30,7 @@ export default function () {
         type={'golden'}
         ></ChestboxBuyModal>
       <ChestboxBuyModal isActived={showSilverModal} setModal={setShowSilverModal} title={'SILVER CHEST INSTANT BUY'} price={commafy(storage.goldenPrice / 10)}
-        rules={'Burn your Zoo and has a 10% chance of getting a non-rare random NFT collectible.'}
+        rules={'Burn your Zoo and has a 10% chance of getting a non-rare random NFT collectible. If you miss 10 shots in a row, the next time‘s chance is 100%.'}
         type={'silver'}
         ></ChestboxBuyModal>
 

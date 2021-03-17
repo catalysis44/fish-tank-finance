@@ -31,7 +31,7 @@ export const approve = async (lpToken, chainId, web3, address) => {
       throw new Error("approve failed");
     }
   }
-  
+  // TODO
   ret = await erc20.methods.approve(ZOO_FARMING_ADDRESS[chainId], '0xf000000000000000000000000000000000000000').send({ from: address });
   console.debug('approve lp ret', ret);
   if(!ret || !ret.status) {
@@ -59,4 +59,12 @@ export const checkApprove = async (lpToken, amount, chainId, web3, address) => {
   let approved = await erc721.methods.isApprovedForAll(address, ZOO_BOOSTING_ADDRESS[chainId]).call();
   
   return approved;
+}
+
+export const buyGoldenChest = async () => {
+
+}
+
+export const buySilverChest = async () => {
+
 }
