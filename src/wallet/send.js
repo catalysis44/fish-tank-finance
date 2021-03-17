@@ -3,6 +3,7 @@ import { ZOO_FARMING_ADDRESS, ZOO_BOOSTING_ADDRESS, ZOO_NFT_ADDRESS, ZOO_TOKEN_A
 const farmingAbi = require('../assets/abi/farming.json');
 const erc20Abi = require('../assets/abi/erc20.json');
 const erc721Abi = require('../assets/abi/erc721.json');
+const nftFactoryAbi = require('../assets/abi/nftFactory.json');
 
 export const withdraw = async (pid, amount, chainId, web3, address) => {
   console.debug('withdraw', pid, amount, chainId, web3, address);
@@ -96,8 +97,12 @@ export const buyGoldenChest = async () => {
 
 }
 
-export const buySilverChest = async () => {
-
+export const buySilverChest = async (web3, chainId, address) => {
+  console.debug('buySilverChest', chainId, web3, address);
+  const sc = new web3.eth.Contract(nftFactoryAbi, NFT_FACTORY_ADDRESS[chainId]);
+  let ret = await sc.methods.buySilverChest().send({ from: address });
+  console.debug('buySilverChest ret', ret);
+  return ret;
 }
 
 export const stakeZoo = async (type) => {

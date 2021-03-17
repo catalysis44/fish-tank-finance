@@ -1,3 +1,6 @@
+import { notification, Switch } from 'antd';
+
+
 export function commafy(num, fixed=null) {
   if (!num) {
     return '0';
@@ -48,3 +51,84 @@ export const calcLockTimeBoost = (lockDays) => {
   }
   return boosting;
 }
+
+const openNotificationBell = () => {
+  const args = {
+    message: 'Notification Title',
+    description:
+      <div>
+        {"xxxxxxxxxxxxxxxxxx xxxxx xxxxx"}
+        <br />
+        {"xxxxxxxxxxxxxxxxxx xx   xxxxxxxxxx"}
+        <br />
+        {"xxxxxx xxxxxxxx xxxxxxxxx "}
+        <a href="" className="button">TX hash on Wanscan</a>
+      </div>,
+    duration: 0,
+    placement: 'bottomRight',
+    icon: <img src="assets/notification/bell.png" />,
+  };
+  notification.open(args);
+};
+
+const openNotificationTrophy = () => {
+  const args = {
+    message: 'Notification Title',
+    description:
+      <div>
+        {"xxxxxxxxxxxxxxxxxx xxxxx xxxxx"}
+        <br />
+        {"xxxxxxxxxxxxxxxxxx xx   xxxxxxxxxx"}
+        <br />
+        {"xxxxxx xxxxxxxx xxxxxxxxx "}
+        <a href="" className="button">TX hash on Wanscan</a>
+      </div>,
+    duration: 0,
+    placement: 'bottomRight',
+    icon: <img src="assets/notification/trophy.png" />,
+  };
+  notification.open(args);
+};
+
+const openNotificationExclamation = () => {
+  const args = {
+    message: 'Notification Title',
+    description:
+      <div>
+        {"xxxxxxxxxxxxxxxxxx xxxxx xxxxx"}
+        <br />
+        {"xxxxxxxxxxxxxxxxxx xx   xxxxxxxxxx"}
+        <br />
+        {"xxxxxx xxxxxxxx xxxxxxxxx "}
+        <a href="" className="button">TX hash on Wanscan</a>
+      </div>,
+
+    duration: 0,
+    placement: 'bottomRight',
+    icon: <img src="assets/notification/exclamation.png" />,
+  };
+  notification.open(args);
+};
+
+export const openNotificationBottle = (title, item, description) => {
+  const args = {
+    // message: 'GOLDEN CHEST HAS BEEN OPENED',
+    message: title,
+    description:
+      <div>
+        {"You got \" "}
+        <b>{item}</b>
+        {"\", "}
+        <br />
+        {/* {"your boost card has been transfered to your wallet "} */}
+        {description}
+        <a href="" className="button">Check your collection</a>
+      </div>,
+    duration: 0,
+    placement: 'bottomRight',
+    icon: <img src="assets/notification/bottle.png" />,
+    className: 'open-chestbox-notification',
+
+  };
+  notification.open(args);
+};

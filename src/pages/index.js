@@ -12,85 +12,10 @@ import { StorageContext } from '../hooks';
 export default function () {
   const [txWaiting, setTxWaiting] = useState(false);
 
-  const openNotification = () => {
-    const args = {
-      message: 'Notification Title',
-      description:
-        <div>
-          {"xxxxxxxxxxxxxxxxxx xxxxx xxxxx"}
-          <br />
-          {"xxxxxxxxxxxxxxxxxx xx   xxxxxxxxxx"}
-          <br />
-          {"xxxxxx xxxxxxxx xxxxxxxxx "}
-          <a href="" className="button">TX hash on Wanscan</a>
-        </div>,
-      duration: 0,
-      placement: 'bottomRight',
-      icon: <img src="assets/notification/bell.png" />,
-    };
-    notification.open(args);
-  };
-  const openNotification2 = () => {
-    const args = {
-      message: 'Notification Title',
-      description:
-        <div>
-          {"xxxxxxxxxxxxxxxxxx xxxxx xxxxx"}
-          <br />
-          {"xxxxxxxxxxxxxxxxxx xx   xxxxxxxxxx"}
-          <br />
-          {"xxxxxx xxxxxxxx xxxxxxxxx "}
-          <a href="" className="button">TX hash on Wanscan</a>
-        </div>,
-      duration: 0,
-      placement: 'bottomRight',
-      icon: <img src="assets/notification/trophy.png" />,
-    };
-    notification.open(args);
-  };
-  const openNotification3 = () => {
-    const args = {
-      message: 'Notification Title',
-      description:
-        <div>
-          {"xxxxxxxxxxxxxxxxxx xxxxx xxxxx"}
-          <br />
-          {"xxxxxxxxxxxxxxxxxx xx   xxxxxxxxxx"}
-          <br />
-          {"xxxxxx xxxxxxxx xxxxxxxxx "}
-          <a href="" className="button">TX hash on Wanscan</a>
-        </div>,
-
-      duration: 0,
-      placement: 'bottomRight',
-      icon: <img src="assets/notification/exclamation.png" />,
-    };
-    notification.open(args);
-  };
-  const openNotification4 = () => {
-    const args = {
-      message: 'GOLDEN CHEST HAS BEEN OPENED',
-      description:
-        <div>
-          {"You got \" "}
-          <b>Wasabi Ginger Sake</b>
-          {"\", "}
-          <br />
-          {"your boost card has been transfered to your wallet "}
-          <a href="" className="button">Check your collection</a>
-        </div>,
-      duration: 0,
-      placement: 'bottomRight',
-      icon: <img src="assets/notification/bottle.png" />,
-      className: 'open-chestbox-notification',
-
-    };
-    notification.open(args);
-  };
-  //openNotification();
-  //openNotification2();
+  // openNotification();
+  // openNotification2();
   // openNotification3();
-  //openNotification4();
+  // openNotification4();
 
   function toggleFilter() {
     document.getElementById('toggle_filter').classList.toggle("toggled");

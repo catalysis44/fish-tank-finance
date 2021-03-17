@@ -5,9 +5,9 @@ import '../../../node_modules/animate.css/animate.min.css';
 import React, { useContext } from 'react';
 import { WalletContext } from '../../wallet/Wallet';
 import { NFT_FACTORY_ADDRESS, ZOO_TOKEN_ADDRESS } from '../../config';
-import { approveExpedition, checkApproveExpedition, deposit, withdraw } from '../../wallet/send';
+import { approveExpedition, buySilverChest, checkApproveExpedition, deposit, withdraw } from '../../wallet/send';
 import BigNumber from 'bignumber.js';
-import { commafy } from '../../utils';
+import { commafy, openNotificationBottle } from '../../utils';
 
 
 
@@ -17,6 +17,13 @@ export default function ChestboxBuyModal(props) {
     props.setModal(0);
   }
   const [modal, setModal] = useState(0);
+  const [tokenId, setTokenId] = useState('0');
+  const [level, setLevel] = useState('0');
+  const [categroy, setCategroy] = useState('0');
+  const [item, setItem] = useState('0');
+  const [name, setName] = useState('0');
+  const [icon, setIcon] = useState('');
+  const [meta, setMeta] = useState('');
 
   const wallet = useContext(WalletContext);
   const chainId = wallet.networkId;
@@ -89,8 +96,26 @@ export default function ChestboxBuyModal(props) {
           </div>
           <div className={styles.action}>
           <a className={styles.action_btn} disabled={!approved}  onClick={()=>{
-              closeModal();
-              setModal(1);
+            setTxWaiting(true);
+            if (type === 'silver') {
+              buySilverChest(web3, chainId, address).then(ret=>{
+                if (ret.events.MintNFT.returnValues.level === '0') {
+                  closeModal();
+                  openNotificationBottle(type.toUpperCase() + ' CHEST HAS BEEN OPENED', 'Nothing...', 'Unfortunately, you get nothing, 10 times in a row nothing, the next time 100% got non-rare NFT.');
+                } else {
+                  closeModal();
+                  setTokenId(ret.events.MintNFT.returnValues.tokenId);
+                  
+                  setModal(1);
+                }
+                setTxWaiting(false);
+              }).catch(err=>{
+                console.error('buySilverChest error', err);
+                setTxWaiting(false);
+              });
+            } else {
+
+            }
           }}>
                 Buy & Open Chest
           </a>
