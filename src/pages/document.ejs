@@ -105,8 +105,8 @@
     document.getElementById('progress').innerHTML = `
         <div class="logo"><img src="logo_loading.png" /></div>
         <div class="progress progress-bar-container">
-          <div class="bordered">
-            <img src="border_loading.png" />
+          <div  class="bordered">
+            <img id="bordered_image" src="border_loading.png" />
           </div>
           <div class="loading-text">
             Loading...
@@ -119,13 +119,19 @@
           If you're using it for the first time, it might take a few minutes...
         </div>
       `;
+    let bordered_image = document.getElementById('bordered_image');
+    let bar = document.querySelector('#progress .progress-bar');
+    bar.style.display = 'none';
+    bordered_image.onload = function(){
+      bar.style.display = 'block';
+    }
     window.onload = function () {
       let bar = document.querySelector('#progress .progress-bar');
       bar.classList.remove('loading');
       bar.classList.add('full');
       if (document.getElementById('progress')) {
           document.body.removeChild(document.getElementById('progress'));
-        }
+      }
     }
   </script>
 </body>
