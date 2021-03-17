@@ -1,0 +1,16 @@
+{
+  "name": "Burnished Gold Ingot",
+  "description": "Burnished Gold Ingot",
+  "image": "ipfs://ipfs/QmQ2Kej6LFvx7P3BZqL5hn4aCXSkGo83pyuSJnNQG4xanH/Burnished_Gold_Ingot.png",
+  "attributes": [
+    {
+      "category": "6"
+    },
+    {
+      "level": "3"
+    },
+    {
+      "item": "2"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "Sticky Cheese Tart",
+  "description": "Sticky Cheese Tart",
+  "image": "ipfs://ipfs/QmQ2Kej6LFvx7P3BZqL5hn4aCXSkGo83pyuSJnNQG4xanH/Sticky_Cheese_Tart.png",
+  "attributes": [
+    {
+      "category": "2"
+    },
+    {
+      "level": "3"
+    },
+    {
+      "item": "2"
+    }
+  ]
+}

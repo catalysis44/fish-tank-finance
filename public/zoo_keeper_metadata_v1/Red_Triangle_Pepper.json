@@ -1,0 +1,16 @@
+{
+  "name": "Red Triangle Pepper",
+  "description": "Red Triangle Pepper",
+  "image": "ipfs://ipfs/QmQ2Kej6LFvx7P3BZqL5hn4aCXSkGo83pyuSJnNQG4xanH/Red_Triangle_Pepper.png",
+  "attributes": [
+    {
+      "category": "2"
+    },
+    {
+      "level": "2"
+    },
+    {
+      "item": "4"
+    }
+  ]
+}

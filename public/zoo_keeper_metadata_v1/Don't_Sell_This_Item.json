@@ -1,0 +1,16 @@
+{
+  "name": "Don't Sell This Item",
+  "description": "Don't Sell This Item",
+  "image": "ipfs://ipfs/QmQ2Kej6LFvx7P3BZqL5hn4aCXSkGo83pyuSJnNQG4xanH/Don't_Sell_This_Item.png",
+  "attributes": [
+    {
+      "category": "6"
+    },
+    {
+      "level": "2"
+    },
+    {
+      "item": "5"
+    }
+  ]
+}

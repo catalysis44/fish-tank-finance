@@ -1,0 +1,16 @@
+{
+  "name": "Distilled Water",
+  "description": "Distilled Water",
+  "image": "ipfs://ipfs/QmQ2Kej6LFvx7P3BZqL5hn4aCXSkGo83pyuSJnNQG4xanH/Distilled_Water.png",
+  "attributes": [
+    {
+      "category": "4"
+    },
+    {
+      "level": "1"
+    },
+    {
+      "item": "2"
+    }
+  ]
+}

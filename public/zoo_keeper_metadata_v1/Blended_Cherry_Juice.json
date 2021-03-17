@@ -1,0 +1,16 @@
+{
+  "name": "Blended Cherry Juice",
+  "description": "Blended Cherry Juice",
+  "image": "ipfs://ipfs/QmQ2Kej6LFvx7P3BZqL5hn4aCXSkGo83pyuSJnNQG4xanH/Blended_Cherry_Juice.png",
+  "attributes": [
+    {
+      "category": "1"
+    },
+    {
+      "level": "2"
+    },
+    {
+      "item": "4"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "Precious Diamond Stone",
+  "description": "Precious Diamond Stone",
+  "image": "ipfs://ipfs/QmQ2Kej6LFvx7P3BZqL5hn4aCXSkGo83pyuSJnNQG4xanH/Precious_Diamond_Stone.png",
+  "attributes": [
+    {
+      "category": "6"
+    },
+    {
+      "level": "3"
+    },
+    {
+      "item": "3"
+    }
+  ]
+}

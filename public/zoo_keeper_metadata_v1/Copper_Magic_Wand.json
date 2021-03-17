@@ -1,0 +1,16 @@
+{
+  "name": "Copper Magic Wand",
+  "description": "Copper Magic Wand",
+  "image": "ipfs://ipfs/QmQ2Kej6LFvx7P3BZqL5hn4aCXSkGo83pyuSJnNQG4xanH/Copper_Magic_Wand.png",
+  "attributes": [
+    {
+      "category": "6"
+    },
+    {
+      "level": "4"
+    },
+    {
+      "item": "1"
+    }
+  ]
+}

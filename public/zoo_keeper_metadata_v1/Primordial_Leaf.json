@@ -1,0 +1,16 @@
+{
+  "name": "Primordial Leaf",
+  "description": "Primordial Leaf",
+  "image": "ipfs://ipfs/QmQ2Kej6LFvx7P3BZqL5hn4aCXSkGo83pyuSJnNQG4xanH/Primordial_Leaf.png",
+  "attributes": [
+    {
+      "category": "6"
+    },
+    {
+      "level": "2"
+    },
+    {
+      "item": "4"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "Ice Fresh Mint",
+  "description": "Ice Fresh Mint",
+  "image": "ipfs://ipfs/QmQ2Kej6LFvx7P3BZqL5hn4aCXSkGo83pyuSJnNQG4xanH/Ice_Fresh_Mint.png",
+  "attributes": [
+    {
+      "category": "3"
+    },
+    {
+      "level": "1"
+    },
+    {
+      "item": "3"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "Stardust Corn Flour",
+  "description": "Stardust Corn Flour",
+  "image": "ipfs://ipfs/QmQ2Kej6LFvx7P3BZqL5hn4aCXSkGo83pyuSJnNQG4xanH/Stardust_Corn_Flour.png",
+  "attributes": [
+    {
+      "category": "2"
+    },
+    {
+      "level": "1"
+    },
+    {
+      "item": "1"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "Natural Copper Nugget",
+  "description": "Natural Copper Nugget",
+  "image": "ipfs://ipfs/QmQ2Kej6LFvx7P3BZqL5hn4aCXSkGo83pyuSJnNQG4xanH/Natural_Copper_Nugget.png",
+  "attributes": [
+    {
+      "category": "6"
+    },
+    {
+      "level": "2"
+    },
+    {
+      "item": "1"
+    }
+  ]
+}

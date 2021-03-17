@@ -1,0 +1,16 @@
+{
+  "name": "Grilled Salmon Steak",
+  "description": "Grilled Salmon Steak",
+  "image": "ipfs://ipfs/QmQ2Kej6LFvx7P3BZqL5hn4aCXSkGo83pyuSJnNQG4xanH/Grilled_Salmon_Steak.png",
+  "attributes": [
+    {
+      "category": "2"
+    },
+    {
+      "level": "2"
+    },
+    {
+      "item": "5"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "Magical Pepper Seed",
+  "description": "Magical Pepper Seed",
+  "image": "ipfs://ipfs/QmQ2Kej6LFvx7P3BZqL5hn4aCXSkGo83pyuSJnNQG4xanH/Magical_Pepper_Seed.png",
+  "attributes": [
+    {
+      "category": "5"
+    },
+    {
+      "level": "1"
+    },
+    {
+      "item": "3"
+    }
+  ]
+}

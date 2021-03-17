@@ -1,0 +1,16 @@
+{
+  "name": "Box of Chocolates",
+  "description": "Box of Chocolates",
+  "image": "ipfs://ipfs/QmQ2Kej6LFvx7P3BZqL5hn4aCXSkGo83pyuSJnNQG4xanH/Box_of_Chocolates.png",
+  "attributes": [
+    {
+      "category": "4"
+    },
+    {
+      "level": "1"
+    },
+    {
+      "item": "4"
+    }
+  ]
+}

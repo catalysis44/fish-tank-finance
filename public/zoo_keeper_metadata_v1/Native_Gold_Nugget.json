@@ -1,0 +1,16 @@
+{
+  "name": "Native Gold Nugget",
+  "description": "Native Gold Nugget",
+  "image": "ipfs://ipfs/QmQ2Kej6LFvx7P3BZqL5hn4aCXSkGo83pyuSJnNQG4xanH/Native_Gold_Nugget.png",
+  "attributes": [
+    {
+      "category": "6"
+    },
+    {
+      "level": "2"
+    },
+    {
+      "item": "2"
+    }
+  ]
+}

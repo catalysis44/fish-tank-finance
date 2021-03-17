@@ -1,0 +1,16 @@
+{
+  "name": "Green Square Pepper",
+  "description": "Green Square Pepper",
+  "image": "ipfs://ipfs/QmQ2Kej6LFvx7P3BZqL5hn4aCXSkGo83pyuSJnNQG4xanH/Green_Square_Pepper.png",
+  "attributes": [
+    {
+      "category": "2"
+    },
+    {
+      "level": "1"
+    },
+    {
+      "item": "4"
+    }
+  ]
+}

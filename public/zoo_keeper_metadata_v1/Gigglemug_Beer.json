@@ -1,0 +1,16 @@
+{
+  "name": "Gigglemug Beer",
+  "description": "Gigglemug Beer",
+  "image": "ipfs://ipfs/QmQ2Kej6LFvx7P3BZqL5hn4aCXSkGo83pyuSJnNQG4xanH/Gigglemug_Beer.png",
+  "attributes": [
+    {
+      "category": "4"
+    },
+    {
+      "level": "1"
+    },
+    {
+      "item": "1"
+    }
+  ]
+}

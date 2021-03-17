@@ -1,0 +1,16 @@
+{
+  "name": "MultiVitamin Water",
+  "description": "MultiVitamin Water",
+  "image": "ipfs://ipfs/QmQ2Kej6LFvx7P3BZqL5hn4aCXSkGo83pyuSJnNQG4xanH/MultiVitamin_Water.png",
+  "attributes": [
+    {
+      "category": "4"
+    },
+    {
+      "level": "3"
+    },
+    {
+      "item": "2"
+    }
+  ]
+}

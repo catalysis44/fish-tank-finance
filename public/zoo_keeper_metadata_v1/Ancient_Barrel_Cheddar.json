@@ -1,0 +1,16 @@
+{
+  "name": "Ancient Barrel Cheddar",
+  "description": "Ancient Barrel Cheddar",
+  "image": "ipfs://ipfs/QmQ2Kej6LFvx7P3BZqL5hn4aCXSkGo83pyuSJnNQG4xanH/Ancient_Barrel_Cheddar.png",
+  "attributes": [
+    {
+      "category": "2"
+    },
+    {
+      "level": "4"
+    },
+    {
+      "item": "2"
+    }
+  ]
+}

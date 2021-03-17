@@ -1,0 +1,16 @@
+{
+  "name": "Polished Copper Ingot",
+  "description": "Polished Copper Ingot",
+  "image": "ipfs://ipfs/QmQ2Kej6LFvx7P3BZqL5hn4aCXSkGo83pyuSJnNQG4xanH/Polished_Copper_Ingot.png",
+  "attributes": [
+    {
+      "category": "6"
+    },
+    {
+      "level": "3"
+    },
+    {
+      "item": "1"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "Green Tea Powder",
+  "description": "Green Tea Powder",
+  "image": "ipfs://ipfs/QmQ2Kej6LFvx7P3BZqL5hn4aCXSkGo83pyuSJnNQG4xanH/Green_Tea_Powder.png",
+  "attributes": [
+    {
+      "category": "5"
+    },
+    {
+      "level": "2"
+    },
+    {
+      "item": "5"
+    }
+  ]
+}

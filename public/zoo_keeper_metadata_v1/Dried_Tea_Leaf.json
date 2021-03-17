@@ -1,0 +1,16 @@
+{
+  "name": "Dried Tea Leaf",
+  "description": "Dried Tea Leaf",
+  "image": "ipfs://ipfs/QmQ2Kej6LFvx7P3BZqL5hn4aCXSkGo83pyuSJnNQG4xanH/Dried_Tea_Leaf.png",
+  "attributes": [
+    {
+      "category": "5"
+    },
+    {
+      "level": "1"
+    },
+    {
+      "item": "5"
+    }
+  ]
+}

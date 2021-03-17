@@ -1,0 +1,16 @@
+{
+  "name": "Mystical Dragon Fang",
+  "description": "Mystical Dragon Fang",
+  "image": "ipfs://ipfs/QmQ2Kej6LFvx7P3BZqL5hn4aCXSkGo83pyuSJnNQG4xanH/Mystical_Dragon_Fang.png",
+  "attributes": [
+    {
+      "category": "4"
+    },
+    {
+      "level": "2"
+    },
+    {
+      "item": "5"
+    }
+  ]
+}

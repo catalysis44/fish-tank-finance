@@ -1,0 +1,16 @@
+{
+  "name": "Rare Diamond Ore",
+  "description": "Rare Diamond Ore",
+  "image": "ipfs://ipfs/QmQ2Kej6LFvx7P3BZqL5hn4aCXSkGo83pyuSJnNQG4xanH/Rare_Diamond_Ore.png",
+  "attributes": [
+    {
+      "category": "6"
+    },
+    {
+      "level": "1"
+    },
+    {
+      "item": "3"
+    }
+  ]
+}

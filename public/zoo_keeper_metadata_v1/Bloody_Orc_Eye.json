@@ -1,0 +1,16 @@
+{
+  "name": "Bloody Orc Eye",
+  "description": "Bloody Orc Eye",
+  "image": "ipfs://ipfs/QmQ2Kej6LFvx7P3BZqL5hn4aCXSkGo83pyuSJnNQG4xanH/Bloody_Orc_Eye.png",
+  "attributes": [
+    {
+      "category": "4"
+    },
+    {
+      "level": "3"
+    },
+    {
+      "item": "5"
+    }
+  ]
+}

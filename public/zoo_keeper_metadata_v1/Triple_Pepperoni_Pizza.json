@@ -1,0 +1,16 @@
+{
+  "name": "Triple Pepperoni Pizza",
+  "description": "Triple Pepperoni Pizza",
+  "image": "ipfs://ipfs/QmQ2Kej6LFvx7P3BZqL5hn4aCXSkGo83pyuSJnNQG4xanH/Triple_Pepperoni_Pizza.png",
+  "attributes": [
+    {
+      "category": "2"
+    },
+    {
+      "level": "4"
+    },
+    {
+      "item": "4"
+    }
+  ]
+}

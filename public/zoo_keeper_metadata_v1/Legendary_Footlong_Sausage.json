@@ -1,0 +1,16 @@
+{
+  "name": "Legendary Footlong Sausage",
+  "description": "Legendary Footlong Sausage",
+  "image": "ipfs://ipfs/QmQ2Kej6LFvx7P3BZqL5hn4aCXSkGo83pyuSJnNQG4xanH/Legendary_Footlong_Sausage.png",
+  "attributes": [
+    {
+      "category": "2"
+    },
+    {
+      "level": "3"
+    },
+    {
+      "item": "3"
+    }
+  ]
+}

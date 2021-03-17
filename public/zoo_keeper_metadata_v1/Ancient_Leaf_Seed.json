@@ -1,0 +1,16 @@
+{
+  "name": "Ancient Leaf Seed",
+  "description": "Ancient Leaf Seed",
+  "image": "ipfs://ipfs/QmQ2Kej6LFvx7P3BZqL5hn4aCXSkGo83pyuSJnNQG4xanH/Ancient_Leaf_Seed.png",
+  "attributes": [
+    {
+      "category": "6"
+    },
+    {
+      "level": "1"
+    },
+    {
+      "item": "4"
+    }
+  ]
+}
