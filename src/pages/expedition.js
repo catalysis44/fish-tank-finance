@@ -35,11 +35,13 @@ export default function (props) {
         rules={'Burn your Zoo and has a 100% chance of getting a random NFT collectible.'}
         type={'golden'}
         setTxWaiting={setTxWaiting}
+        zooBalance={storage.zooBalance}
         ></ChestboxBuyModal>
       <ChestboxBuyModal isActived={showSilverModal} setModal={setShowSilverModal} title={'SILVER CHEST INSTANT BUY'} price={(new BigNumber(storage.goldenPrice)).div(10)}
         rules={'Burn your Zoo and has a 10% chance of getting a non-rare random NFT collectible. If you miss 10 shots in a row, the next time‘s chance is 100%.'}
         type={'silver'}
         setTxWaiting={setTxWaiting}
+        zooBalance={storage.zooBalance}
         ></ChestboxBuyModal>
 
       <div className={styles.row} style={{ paddingBottom: 0 }}>

@@ -80,7 +80,7 @@ function BasicLayout(props) {
                       <div>1 ZOO = <span>$10.32</span></div>
                       <div>MC <span>$41,548,555.22</span></div>
                       <div>Current supply</div>
-                      <div><span>154,456,25 ZOO</span></div>
+                      <div><span>{commafy(storage.zooTotalSupply)} ZOO</span></div>
                   </div>
                 
               </div>

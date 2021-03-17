@@ -19,6 +19,7 @@
     "ahooks": "^2.9.6",
     "animate.css": "^4.1.1",
     "antd": "^4.12.2",
+    "axios": "^0.21.1",
     "bignumber.js": "^9.0.1",
     "bulma": "^0.9.2",
     "dataloader": "^2.0.0",

@@ -7,6 +7,24 @@ export default function OpenChestboxModal(props) {
     props.setModal(0);
   }
 
+  const categorys = [
+    "Fruits",
+    "Foods",
+    "Sweets",
+    "Potions",
+    "Spices",
+    "Magic",
+  ]
+
+  const categoryIcons = [
+    "/assets/category/fruits.png",
+    "/assets/category/dishes.png",
+    "/assets/category/sweets.png",
+    "/assets/category/potions.png",
+    "/assets/category/spices.png",
+    "/assets/category/magic.png",
+  ]
+
 
   return (
     <div id="OpenChestBoxModal" className={`modal  ${props.isActived === 0 ? "" : "is-active"}`}>
@@ -16,48 +34,52 @@ export default function OpenChestboxModal(props) {
           <a onClick={closeModal} className="close"><img src="assets/remove16x16.png" /></a>
           <div className={styles.header}>
             <div className={styles.star}>
-              <img src="assets/star18x18.png" /><img src="assets/star18x18.png" /><img src="assets/star18x18.png" />
+              {
+                Array.from({length: props.level}).map(v=>{
+                  return <img src="assets/star18x18.png" />
+                })
+              }
             </div>
             <div className={styles.title}>
-              Wonderland Cheery Jam
+              {props.name}
             </div>
             <div className={styles.supply}>
-              <img src="assets/gem/common18x18.png" /> total supply: 100
+              <img src="assets/gem/common18x18.png" /> total supply: 1
             </div>
           </div>
 
           <div className={styles.item_wrapper}>
             <div className={styles.item}>
-              <img src="assets/item80x80.png" className={styles.float_item}/>
+              <img src={props.icon} className={styles.float_item}/>
               <img src="assets/openedBox80x80.png" className={styles.openedBox}/>
             </div>
             <div  className={styles.item_description}>
               <div className={styles.description}>
                 <span>Card #</span>
-                55,555,555
+                {props.tokenId}
               </div>
               <div className={styles.description}>
-                <span><img src="assets/apple24x24.png"/> Fruits</span>
+                <span><img src={categoryIcons[props.category-1]}/>{categorys[props.category-1]}</span>
               </div>
               <div className={styles.description} style={{background:'#e1e5da'}}>
-                <span><img src="assets/rocket24x24.png"/> +5.15%</span>
+                <span><img src="assets/rocket24x24.png"/> +{(props.boost * 100).toFixed(2)}%</span>
               </div>
               <div className={styles.description} style={{background:'#e1e5da'}}>
-                <span><img src="assets/hourglass24x24.png" style={{height:20}}/> -12:40</span>
+                <span><img src="assets/hourglass24x24.png" style={{height:20}}/> -{(props.reduce * 100).toFixed(2)}%</span>
               </div>
             </div>
           </div>
 
           <div className={styles.horizontal_line}></div>
           <div className={styles.rule}>
-            <div>GOLD CHEST HAS BEEN OPENED</div>
-            <span>You got "<a href="">Wasabi Ginger Sake</a>",
+            <div>{props.type.toUpperCase()} CHEST HAS BEEN OPENED</div>
+            <span>You got "<a>{props.name}</a>",
           your boost card has been transfered
           to you wallet</span>
           </div>
 
           <div className={styles.action}>
-            <a className={styles.action_btn}>
+            <a className={styles.action_btn} href="/safe">
               Check your Safe
               </a>
           </div>

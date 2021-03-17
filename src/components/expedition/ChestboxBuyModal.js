@@ -5,10 +5,10 @@ import '../../../node_modules/animate.css/animate.min.css';
 import React, { useContext } from 'react';
 import { WalletContext } from '../../wallet/Wallet';
 import { NFT_FACTORY_ADDRESS, ZOO_TOKEN_ADDRESS } from '../../config';
-import { approveExpedition, buySilverChest, checkApproveExpedition, deposit, withdraw } from '../../wallet/send';
+import { approveExpedition, buyGoldenChest, buySilverChest, checkApproveExpedition, deposit, withdraw } from '../../wallet/send';
 import BigNumber from 'bignumber.js';
-import { commafy, openNotificationBottle } from '../../utils';
-
+import { commafy, openNotificationBottle, openNotificationExclamation } from '../../utils';
+import { getNftInfo } from '../../hooks/nftInfo';
 
 
 export default function ChestboxBuyModal(props) {
@@ -24,6 +24,8 @@ export default function ChestboxBuyModal(props) {
   const [name, setName] = useState('0');
   const [icon, setIcon] = useState('');
   const [meta, setMeta] = useState('');
+  const [boost, setBoost] = useState(0);
+  const [reduce, setReduce] = useState(0);
 
   const wallet = useContext(WalletContext);
   const chainId = wallet.networkId;
@@ -35,7 +37,9 @@ export default function ChestboxBuyModal(props) {
   const setTxWaiting = props.setTxWaiting;
   const type = props.type;
   const price = props.price;
-  console.debug('price:', price);
+  const zooBalance = new BigNumber(props.zooBalance);
+
+  console.debug('price:', price, zooBalance);
   useEffect(()=>{
     if (!chainId || !address || !connected || !web3) {
       return;
@@ -52,7 +56,11 @@ export default function ChestboxBuyModal(props) {
 
   return (
     <React.Fragment>
-    <OpenChestboxModal isActived={modal} setModal={setModal} type={type}></OpenChestboxModal>
+    <OpenChestboxModal isActived={modal} 
+      setModal={setModal} type={type} 
+      icon={icon} level={level} name={name} 
+      boost={boost} reduce={reduce} 
+      categroy={categroy} tokenId={tokenId}></OpenChestboxModal>
     <div className={`modal  ${props.isActived === 0 ? "" : "is-active"}`}>
       <div className="modal-background" onClick={closeModal}></div>
       <div style={{ maxWidth: 400 }} className="modal-card animate__animated  animate__fadeInUp animate__faster">
@@ -96,6 +104,12 @@ export default function ChestboxBuyModal(props) {
           </div>
           <div className={styles.action}>
           <a className={styles.action_btn} disabled={!approved}  onClick={()=>{
+            if (!zooBalance.gte(price)) {
+              openNotificationExclamation("Zoo balance not enough");
+              closeModal();
+              return;
+            }
+
             setTxWaiting(true);
             if (type === 'silver') {
               buySilverChest(web3, chainId, address).then(ret=>{
@@ -103,10 +117,20 @@ export default function ChestboxBuyModal(props) {
                   closeModal();
                   openNotificationBottle(type.toUpperCase() + ' CHEST HAS BEEN OPENED', 'Nothing...', 'Unfortunately, you get nothing, 10 times in a row nothing, the next time 100% got non-rare NFT.');
                 } else {
-                  closeModal();
-                  setTokenId(ret.events.MintNFT.returnValues.tokenId);
-                  
-                  setModal(1);
+                  getNftInfo(ret.events.MintNFT.returnValues.tokenId, web3, chainId).then(obj=>{
+                    console.debug('nft meta', obj);
+                    setTokenId(ret.events.MintNFT.returnValues.tokenId);
+                    setLevel(ret.events.MintNFT.returnValues.level);
+                    setCategroy(ret.events.MintNFT.returnValues.categroy);
+                    setItem(ret.events.MintNFT.returnValues.item);
+                    setIcon(obj.image);
+                    setName(obj.name);
+                    closeModal();
+                    setModal(1);
+                    openNotificationBottle(type.toUpperCase() + ' CHEST HAS BEEN OPENED', obj.name, 'Your boost card has been transfered to your wallet.');
+                  }).catch(err=>{
+                    console.error('getNftInfo error', err);
+                  });
                 }
                 setTxWaiting(false);
               }).catch(err=>{
@@ -114,7 +138,26 @@ export default function ChestboxBuyModal(props) {
                 setTxWaiting(false);
               });
             } else {
-
+              buyGoldenChest(web3, chainId, address).then(ret=>{
+                getNftInfo(ret.events.MintNFT.returnValues.tokenId, web3, chainId).then(obj=>{
+                  console.debug('nft meta', obj);
+                  setTokenId(ret.events.MintNFT.returnValues.tokenId);
+                  setLevel(ret.events.MintNFT.returnValues.level);
+                  setCategroy(ret.events.MintNFT.returnValues.categroy);
+                  setItem(ret.events.MintNFT.returnValues.item);
+                  setIcon(obj.image);
+                  setName(obj.name);
+                  closeModal();
+                  setModal(1);
+                  openNotificationBottle(type.toUpperCase() + ' CHEST HAS BEEN OPENED', obj.name, 'Your boost card has been transfered to your wallet.');
+                }).catch(err=>{
+                  console.error('getNftInfo error', err);
+                });
+                setTxWaiting(false);
+              }).catch(err=>{
+                console.error('buyGoldenChest error', err);
+                setTxWaiting(false);
+              });
             }
           }}>
                 Buy & Open Chest

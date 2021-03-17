@@ -15,14 +15,15 @@ export default function CardView(props) {
           <div className={styles.flip_card_inner}>
             <div className={styles.flip_card_front} data-is-max="false"> {/* data-is-max="true" if this is max item */}
               <div className={styles.item_title}>
-                <img src="assets/lemon64x64.png" />
+                <img src={props.icon} />
                 <div className={styles.title}>
-                  Lemon of Bunbury
-                                        <div>
-                    <img src="assets/star18x18.png" />
-                    <img src="assets/star18x18.png" />
-                    <img src="assets/star18x18.png" />
-
+                  {props.name}
+                  <div>
+                    {
+                      Array.from({length: Number(props.attributes[1].value)}).map(v=>{
+                        return <img src="assets/star18x18.png" />
+                      })
+                    }
                   </div>
                 </div>
               </div>

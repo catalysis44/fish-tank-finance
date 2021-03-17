@@ -90,18 +90,18 @@ const openNotificationTrophy = () => {
   notification.open(args);
 };
 
-const openNotificationExclamation = () => {
+export const openNotificationExclamation = (title) => {
   const args = {
-    message: 'Notification Title',
-    description:
-      <div>
-        {"xxxxxxxxxxxxxxxxxx xxxxx xxxxx"}
-        <br />
-        {"xxxxxxxxxxxxxxxxxx xx   xxxxxxxxxx"}
-        <br />
-        {"xxxxxx xxxxxxxx xxxxxxxxx "}
-        <a href="" className="button">TX hash on Wanscan</a>
-      </div>,
+    message: title,
+    // description:
+    //   <div>
+    //     {"xxxxxxxxxxxxxxxxxx xxxxx xxxxx"}
+    //     <br />
+    //     {"xxxxxxxxxxxxxxxxxx xx   xxxxxxxxxx"}
+    //     <br />
+    //     {"xxxxxx xxxxxxxx xxxxxxxxx "}
+    //     <a href="" className="button">TX hash on Wanscan</a>
+    //   </div>,
 
     duration: 0,
     placement: 'bottomRight',
@@ -122,7 +122,7 @@ export const openNotificationBottle = (title, item, description) => {
         <br />
         {/* {"your boost card has been transfered to your wallet "} */}
         {description}
-        <a href="" className="button">Check your collection</a>
+        <a href="/safe" className="button">Check your collection</a>
       </div>,
     duration: 0,
     placement: 'bottomRight',

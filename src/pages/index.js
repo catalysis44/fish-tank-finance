@@ -9,6 +9,7 @@ import { faSortAlphaDown,faSortAmountUp,faSortNumericDown,faSortNumericUp } from
 import Pool from '../components/zoo/Pool';
 import Loader from '../components/loader'
 import { StorageContext } from '../hooks';
+
 export default function () {
   const [txWaiting, setTxWaiting] = useState(false);
 

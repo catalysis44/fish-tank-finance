@@ -93,8 +93,12 @@ export const approveExpedition = async (lpToken, chainId, web3, address) => {
   }
 }
 
-export const buyGoldenChest = async () => {
-
+export const buyGoldenChest = async (web3, chainId, address) => {
+  console.debug('buyGoldenChest', chainId, web3, address);
+  const sc = new web3.eth.Contract(nftFactoryAbi, NFT_FACTORY_ADDRESS[chainId]);
+  let ret = await sc.methods.buyGoldenChest().send({ from: address });
+  console.debug('buyGoldenChest ret', ret);
+  return ret;
 }
 
 export const buySilverChest = async (web3, chainId, address) => {

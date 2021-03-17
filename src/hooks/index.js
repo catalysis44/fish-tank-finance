@@ -1,6 +1,6 @@
 import BigNumber from 'bignumber.js';
 import { useInterval, useLockFn, useReactive } from 'ahooks';
-import { MULTICALL_ADDRESS, RPC_URL, ZOO_TOKEN_ADDRESS, ZOO_FARMING_ADDRESS, ZOO_BOOSTING_ADDRESS, NFT_FACTORY_ADDRESS } from '../config';
+import { MULTICALL_ADDRESS, RPC_URL, ZOO_TOKEN_ADDRESS, ZOO_FARMING_ADDRESS, ZOO_BOOSTING_ADDRESS, NFT_FACTORY_ADDRESS, ZOO_NFT_ADDRESS } from '../config';
 import React, { useCallback, useMemo } from 'react';
 import { getWaspPrice } from './waspPrice';
 const { aggregate } = require('@makerdao/multicall');
@@ -19,6 +19,10 @@ export const initialState = {
   },
   poolInfo: [],
   goldenPrice: 0,
+  zooBurned: 0,
+  zooTotalSupply: 0,
+  nftBalance: 0,
+  nftCards: [],
 }
 
 const differ = (a, b) => {
@@ -85,6 +89,54 @@ export const getZooBalance = (loader, chainId, address) => {
     returns: [['zooBalance', val => (new BigNumber(val.toString())).div(1e18)]]
   });
 }
+
+export const getZooTotalSupply = (loader, chainId) => {
+  return loader.load({
+    target: ZOO_TOKEN_ADDRESS[chainId],
+    call: ['totalSupply()(uint256)'],
+    returns: [['totalSupply', val => (new BigNumber(val.toString())).div(1e18)]]
+  });
+}
+
+export const getUserNftBalance = (loader, chainId, address) => {
+  return loader.load({
+    target: ZOO_NFT_ADDRESS[chainId],
+    call: ['balanceOf(address)(uint256)', address],
+    returns: [['nftBalance', val => Number(val)]]
+  });
+}
+
+export const getUserNftTokenId = (loader, chainId, address, count) => {
+  let calls = Array.from({length:count}, (v,i)=>{return i}).map(i=>{
+    return {
+      target: ZOO_NFT_ADDRESS[chainId],
+      call: ['tokenOfOwnerByIndex(address,uint256)(uint256)', address, i],
+      returns: [['tokenId', val => val.toString()]]
+    }
+  });
+
+  return loader.loadMany(calls);
+}
+
+export const getNftURI = (loader, chainId, tokenIds) => {
+  let calls = tokenIds.map(id=>{
+    return {
+      target: ZOO_NFT_ADDRESS[chainId],
+      call: ['tokenURI(uint256)(string)', id],
+      returns: [['uri', val => val]]
+    }
+  });
+
+  return loader.loadMany(calls);
+}
+
+// export const getZooBurned = (loader, chainId, address) => {
+//   return loader.load({
+//     target: ZOO_TOKEN_ADDRESS[chainId],
+//     call: ['balanceOf(address)(uint256)', '0x'],
+//     returns: [['zooBalance', val => (new BigNumber(val.toString())).div(1e18)]]
+//   });
+// }
 
 export const getZooPools = (loader, chainId, address, poolLength) => {
   let poolIndexs = Array.from({ length: poolLength }, (v, i) => i);
@@ -250,8 +302,16 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
 
   const updater = () => {
     console.debug('timer ~', JSON.stringify(storage, null, 2));
-    if (!loader || !address || !chainId || !connected) {
+    if (!loader) {
       return;
+    }
+
+    if (!address || address === '') {
+      address = '0x00000000000000000000000000000000000000da';
+    }
+
+    if (!chainId) {
+      chainId = 999;
     }
 
     let tmpStorage = Object.assign({...storage});
@@ -259,10 +319,49 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
     getZooBalance(loader, chainId, address).then(ret => {
       console.debug('getZooBalance ret', ret, ret.returnValue.zooBalance);
 
-      tmpStorage = Object.assign({...tmpStorage, zooBalance: ret.returnValue.zooBalance})
+      tmpStorage = Object.assign({...tmpStorage, zooBalance: ret.returnValue.zooBalance});
       setStorage(tmpStorage);
     }).catch(err => {
       console.error('err 1', err);
+    });
+
+    getZooTotalSupply(loader, chainId).then(ret => {
+      console.debug('getZooTotalSupply ret', ret, ret.returnValue.totalSupply);
+
+      tmpStorage = Object.assign({...tmpStorage, zooTotalSupply: ret.returnValue.totalSupply})
+      setStorage(tmpStorage);
+    }).catch(err => {
+      console.error('err 1.1', err);
+    });
+
+    getUserNftBalance(loader, chainId, address).then(ret => {
+      console.debug('getUserNftBalance ret', ret);
+
+      if (ret.returnValue.nftBalance > 0) {
+        getUserNftTokenId(loader, chainId, address, ret.returnValue.nftBalance).then(ret=>{
+          console.debug('getUserNftTokenId ret', ret);
+          let tokenIds = ret.map(v=>{
+            return v.returnValue.tokenId;
+          });
+
+          getNftURI(loader, chainId, tokenIds).then(ret=>{
+            console.debug('getNftURI ret', ret);
+            let cards = ret.map((v,i)=>{
+              return {
+                tokenId: tokenIds[i],
+                uri: v.returnValue.uri,
+              }
+            });
+
+            tmpStorage = Object.assign({...tmpStorage, nftCards: cards});
+            setStorage(tmpStorage);
+          });
+        }).catch(err => {
+          console.error('err 1.2.1', err);
+        });
+      }
+    }).catch(err => {
+      console.error('err 1.2', err);
     });
 
     getFarmingInfo(loader, chainId).then(ret => {
