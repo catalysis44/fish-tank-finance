@@ -7,6 +7,25 @@ import { faCaretDown} from '@fortawesome/free-solid-svg-icons';
 
 export default function CardView(props) {
 
+  const categorys = [
+    "Fruits",
+    "Foods",
+    "Sweets",
+    "Potions",
+    "Spices",
+    "Magic",
+  ]
+
+  const categoryIcons = [
+    "/assets/category/fruits.png",
+    "/assets/category/dishes.png",
+    "/assets/category/sweets.png",
+    "/assets/category/potions.png",
+    "/assets/category/spices.png",
+    "/assets/category/magic.png",
+  ]
+
+  const category = Number(props.attributes[0].value)
 
   return (
     <React.Fragment >
@@ -28,7 +47,7 @@ export default function CardView(props) {
                 </div>
               </div>
               <div className={styles.total_supply}>
-                <img src="assets/gem/common18x18.png" /> Total Supply : 100
+                <img src="assets/gem/common18x18.png" /> Total Supply : 1
                                 </div>
               <div className={styles.item_description}>
                 <div className={styles.description}>
@@ -40,12 +59,12 @@ export default function CardView(props) {
               </div>
               <div className={styles.footer}>
                 <div className={styles.description}>
-                  <span><img src="assets/category/potions.png" /> Potions</span>
+                  <span><img src={categoryIcons[category-1]} /> {categorys[category-1]}</span>
                 </div>
                 <div className={styles.description}>
                   <span>Card #</span>
-                                        555,555,555
-                                        </div>
+                  {props.tokenId}
+                  </div>
 
               </div>
               {/*On Sale : hide it if not on the market*/}
