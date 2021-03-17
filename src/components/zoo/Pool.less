@@ -244,7 +244,7 @@
   {
     display:flex;
     margin-top:20px;
-    margin-bottom:20px;
+    margin-bottom:10px;
     justify-content: space-between;
     .multiplier
     {
@@ -310,30 +310,31 @@
 
   .wrapper_area
   {
-    height:250px;
+    height:260px;
     width: calc(100% + 20px);
     overflow: hidden;
     margin-left: -10px;
     &[data-show-subarea="true"]
     {
       .main_area{
-        margin-top:-250px;
+        margin-top:-260px;
       }
     }
     .main_area{
       width:250px;
-      height:250px;
+      height:260px;
       /*background:green;*/
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       transition: margin .3s ease-in-out;
       margin-left: 10px;
+      padding-top:10px;
     }
     .sub_area
     {
       width:250px;
-      height:250px;
+      height:260px;
       margin-left: 10px;
       display: flex;
       flex-direction: column;
@@ -348,13 +349,110 @@
     flex-direction: column;
     justify-content: space-between;
     .title
-      {
+    {
         font-size:12px;
         color:#000000;
        
         margin-left:10px;
         margin-bottom:3px;
-      }
+    }
+
+    .tipbox_btn
+        {
+          cursor: pointer;
+          position:relative;
+          background:#00a99d;
+          color:white;
+          border-radius: 50%;
+          font-size:14px;
+          width:16px;
+          height:16px;
+          padding-top:0px;
+          margin-left:6px;
+          padding-left:6px;
+          display: inline-block;
+          .tipbox
+          {
+            display:none;
+          }
+          &:hover
+          {
+            .tipbox
+            {
+              display: block;
+              position: absolute;
+              width: 120px;
+              
+              background: #ffff00;
+              border: 2px solid black;
+              border-radius: 4px;
+              left: 24px;
+              top: -10px;
+              padding:0 10px;
+              color:black;
+
+
+              .per_week
+              {
+                display:flex;
+                flex-direction: row;
+                align-items: center;
+                margin:10px 0;
+                justify-content: space-between;
+                img{
+                  width:24px;
+                  height:24px;
+                }
+                div
+                {
+                  line-height:15px;
+                  font-size:18px;
+                  display:flex;
+                  flex-direction: column;
+                  align-items: flex-end;
+                  padding-top:3px;
+                  span
+                  {
+                    font-size:14px;
+                  }
+                }
+              }
+            }
+          }
+          
+        }
+        
+        .tipbox:before {
+          content: '';
+          position: absolute;
+          left: 0;
+          top: 15px;
+          width: 0;
+          height: 0;
+          border: 8px solid transparent;
+          border-right-color: #000000;
+          border-left: 0;
+          margin-top: -8px;
+          margin-left: -8px;
+        }
+        
+        .tipbox:after {
+          
+          content: '';
+          position: absolute;
+          left: 0;
+          top: 15px;
+          width: 0;
+          height: 0;
+          border: 6px solid transparent;
+          border-right-color: #ffff00;
+          border-left: 0;
+          margin-top: -6px;
+          margin-left: -6px;
+          
+        }
+
+
     .harvest_wrapper
     {
       display:flex;
@@ -590,6 +688,7 @@
                   font-size:18px;
                   display:flex;
                   flex-direction: column;
+                  align-items: flex-end;
                   padding-top:3px;
                   span
                   {

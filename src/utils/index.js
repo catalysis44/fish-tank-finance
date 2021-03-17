@@ -1,4 +1,4 @@
-export function commafy(num) {
+export function commafy(num, fixed=null) {
   if (!num) {
     return '0';
   }
@@ -8,10 +8,17 @@ export function commafy(num) {
   if (!num.includes('.')) {
     num += '.0';
   } else {
-    if (num.indexOf('.') > 3) {
-      num = Number(num).toFixed(1);
-    } else if (num.length > 5) {
-      num = Number(num).toFixed(4);
+    if (fixed!=null)
+    {
+      num = Number(num).toFixed(fixed);
+    }
+    else
+    {
+      if (num.indexOf('.') > 3) {
+        num = Number(num).toFixed(1);
+      } else if (num.length > 5) {
+        num = Number(num).toFixed(4);
+      }
     }
   }
 

@@ -87,7 +87,9 @@ export default function Pool(props) {
 
         <div className={styles.avatar}>
           <img src="dummy/giraffe.png" className={styles.lv1} />
-          <img src="assets/sunglass.png" className={styles.lv2} />
+          {
+          poolInfo.lpAmount.toString() > 0 && <img src="assets/sunglass.png" className={styles.lv2} />
+          }
         </div>
         <div className={styles.mul_apy}>
           <div className={styles.multiplier}>
@@ -105,7 +107,29 @@ export default function Pool(props) {
           <div className={styles.main_area}>
             <div className={styles.earned}>
               <div className={styles.title}>
-                ZOO+WASP EARNED
+                ZOO+WASP EARNED 
+                <span className={styles.tipbox_btn}>
+                  ?
+                  <div className={styles.tipbox}>
+                    <div className={styles.per_week}>
+                      <img src="assets/currency/zoo.png"/>
+                      <div>
+                        55,145.21
+                        <span>per week</span>
+                      </div>
+                    </div>
+
+                    <div className={styles.per_week}> {/*display:none if not dualfarm*/}
+                      <img src="assets/currency/wasp.png"/>
+                      <div>
+                        22,145.21
+                        <span>per week</span>
+                      </div>
+                    </div>
+                    
+                    
+                  </div>
+                </span>
               </div>
               <div className={styles.harvest_wrapper}>
                 <div className={styles.earned_amount} data-double-farming="true"> {/*Add "disabled" when non-connected  and data-double-farming="true" when duofarming */}
@@ -166,7 +190,7 @@ export default function Pool(props) {
                         <div className={styles.boosting}>
                           <img src="assets/hourglass24x24.png"/>
                           <div>
-                            +{commafy(calcLockTimeBoost((poolInfo.expirationTime - Date.now()/1000) / (3600 * 24))*100) + '%'}
+                            +{commafy(calcLockTimeBoost((poolInfo.expirationTime - Date.now()/1000) / (3600 * 24))*100,2) + '%'}
                             <span>boost</span>
                           </div>
                         </div>
