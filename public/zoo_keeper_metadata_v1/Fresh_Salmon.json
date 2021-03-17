@@ -1,16 +1,20 @@
 {
   "name": "Fresh Salmon",
   "description": "Fresh Salmon",
-  "image": "ipfs://ipfs/QmQ2Kej6LFvx7P3BZqL5hn4aCXSkGo83pyuSJnNQG4xanH/Fresh_Salmon.png",
+  "background_color": "f3f2f3",
+  "image": "https://zoo-factory.vercel.app/zoo_keeper_icons_v1/Fresh_Salmon.png",
   "attributes": [
     {
-      "category": "2"
+      "trait_type": "category",
+      "value": "2"
     },
     {
-      "level": "1"
+      "trait_type": "level",
+      "value": "1"
     },
     {
-      "item": "5"
+      "trait_type": "item",
+      "value": "5"
     }
   ]
 }

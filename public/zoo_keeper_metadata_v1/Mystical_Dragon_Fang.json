@@ -1,16 +1,20 @@
 {
   "name": "Mystical Dragon Fang",
   "description": "Mystical Dragon Fang",
-  "image": "ipfs://ipfs/QmQ2Kej6LFvx7P3BZqL5hn4aCXSkGo83pyuSJnNQG4xanH/Mystical_Dragon_Fang.png",
+  "background_color": "f3f2f3",
+  "image": "https://zoo-factory.vercel.app/zoo_keeper_icons_v1/Mystical_Dragon_Fang.png",
   "attributes": [
     {
-      "category": "4"
+      "trait_type": "category",
+      "value": "4"
     },
     {
-      "level": "2"
+      "trait_type": "level",
+      "value": "2"
     },
     {
-      "item": "5"
+      "trait_type": "item",
+      "value": "5"
     }
   ]
 }

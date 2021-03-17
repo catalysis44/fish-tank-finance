@@ -1,16 +1,20 @@
 {
   "name": "Ice Mountain Lemonade",
   "description": "Ice Mountain Lemonade",
-  "image": "ipfs://ipfs/QmQ2Kej6LFvx7P3BZqL5hn4aCXSkGo83pyuSJnNQG4xanH/Ice_Mountain_Lemonade.png",
+  "background_color": "f3f2f3",
+  "image": "https://zoo-factory.vercel.app/zoo_keeper_icons_v1/Ice_Mountain_Lemonade.png",
   "attributes": [
     {
-      "category": "1"
+      "trait_type": "category",
+      "value": "1"
     },
     {
-      "level": "3"
+      "trait_type": "level",
+      "value": "3"
     },
     {
-      "item": "2"
+      "trait_type": "item",
+      "value": "2"
     }
   ]
 }

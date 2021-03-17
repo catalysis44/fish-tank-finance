@@ -1,16 +1,20 @@
 {
   "name": "Ham and Cheese Sandwich",
   "description": "Ham and Cheese Sandwich",
-  "image": "ipfs://ipfs/QmQ2Kej6LFvx7P3BZqL5hn4aCXSkGo83pyuSJnNQG4xanH/Ham_and_Cheese_Sandwich.png",
+  "background_color": "f3f2f3",
+  "image": "https://zoo-factory.vercel.app/zoo_keeper_icons_v1/Ham_and_Cheese_Sandwich.png",
   "attributes": [
     {
-      "category": "2"
+      "trait_type": "category",
+      "value": "2"
     },
     {
-      "level": "3"
+      "trait_type": "level",
+      "value": "3"
     },
     {
-      "item": "1"
+      "trait_type": "item",
+      "value": "1"
     }
   ]
 }

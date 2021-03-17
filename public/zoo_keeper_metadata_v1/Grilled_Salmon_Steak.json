@@ -1,16 +1,20 @@
 {
   "name": "Grilled Salmon Steak",
   "description": "Grilled Salmon Steak",
-  "image": "ipfs://ipfs/QmQ2Kej6LFvx7P3BZqL5hn4aCXSkGo83pyuSJnNQG4xanH/Grilled_Salmon_Steak.png",
+  "background_color": "f3f2f3",
+  "image": "https://zoo-factory.vercel.app/zoo_keeper_icons_v1/Grilled_Salmon_Steak.png",
   "attributes": [
     {
-      "category": "2"
+      "trait_type": "category",
+      "value": "2"
     },
     {
-      "level": "2"
+      "trait_type": "level",
+      "value": "2"
     },
     {
-      "item": "5"
+      "trait_type": "item",
+      "value": "5"
     }
   ]
 }

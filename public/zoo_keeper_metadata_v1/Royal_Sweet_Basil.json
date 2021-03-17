@@ -1,16 +1,20 @@
 {
   "name": "Royal Sweet Basil",
   "description": "Royal Sweet Basil",
-  "image": "ipfs://ipfs/QmQ2Kej6LFvx7P3BZqL5hn4aCXSkGo83pyuSJnNQG4xanH/Royal_Sweet_Basil.png",
+  "background_color": "f3f2f3",
+  "image": "https://zoo-factory.vercel.app/zoo_keeper_icons_v1/Royal_Sweet_Basil.png",
   "attributes": [
     {
-      "category": "5"
+      "trait_type": "category",
+      "value": "5"
     },
     {
-      "level": "2"
+      "trait_type": "level",
+      "value": "2"
     },
     {
-      "item": "2"
+      "trait_type": "item",
+      "value": "2"
     }
   ]
 }

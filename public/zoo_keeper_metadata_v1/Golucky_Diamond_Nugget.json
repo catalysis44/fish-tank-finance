@@ -1,16 +1,20 @@
 {
   "name": "Golucky Diamond Nugget",
   "description": "Golucky Diamond Nugget",
-  "image": "ipfs://ipfs/QmQ2Kej6LFvx7P3BZqL5hn4aCXSkGo83pyuSJnNQG4xanH/Golucky_Diamond_Nugget.png",
+  "background_color": "f3f2f3",
+  "image": "https://zoo-factory.vercel.app/zoo_keeper_icons_v1/Golucky_Diamond_Nugget.png",
   "attributes": [
     {
-      "category": "6"
+      "trait_type": "category",
+      "value": "6"
     },
     {
-      "level": "2"
+      "trait_type": "level",
+      "value": "2"
     },
     {
-      "item": "3"
+      "trait_type": "item",
+      "value": "3"
     }
   ]
 }

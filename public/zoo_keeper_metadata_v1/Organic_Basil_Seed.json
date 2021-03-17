@@ -1,16 +1,20 @@
 {
   "name": "Organic Basil Seed",
   "description": "Organic Basil Seed",
-  "image": "ipfs://ipfs/QmQ2Kej6LFvx7P3BZqL5hn4aCXSkGo83pyuSJnNQG4xanH/Organic_Basil_Seed.png",
+  "background_color": "f3f2f3",
+  "image": "https://zoo-factory.vercel.app/zoo_keeper_icons_v1/Organic_Basil_Seed.png",
   "attributes": [
     {
-      "category": "5"
+      "trait_type": "category",
+      "value": "5"
     },
     {
-      "level": "1"
+      "trait_type": "level",
+      "value": "1"
     },
     {
-      "item": "2"
+      "trait_type": "item",
+      "value": "2"
     }
   ]
 }

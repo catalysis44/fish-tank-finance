@@ -1,16 +1,20 @@
 {
   "name": "Gigglemug Beer",
   "description": "Gigglemug Beer",
-  "image": "ipfs://ipfs/QmQ2Kej6LFvx7P3BZqL5hn4aCXSkGo83pyuSJnNQG4xanH/Gigglemug_Beer.png",
+  "background_color": "f3f2f3",
+  "image": "https://zoo-factory.vercel.app/zoo_keeper_icons_v1/Gigglemug_Beer.png",
   "attributes": [
     {
-      "category": "4"
+      "trait_type": "category",
+      "value": "4"
     },
     {
-      "level": "1"
+      "trait_type": "level",
+      "value": "1"
     },
     {
-      "item": "1"
+      "trait_type": "item",
+      "value": "1"
     }
   ]
 }

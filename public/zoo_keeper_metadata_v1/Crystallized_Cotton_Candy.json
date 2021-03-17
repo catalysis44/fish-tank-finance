@@ -1,16 +1,20 @@
 {
   "name": "Crystallized Cotton Candy",
   "description": "Crystallized Cotton Candy",
-  "image": "ipfs://ipfs/QmQ2Kej6LFvx7P3BZqL5hn4aCXSkGo83pyuSJnNQG4xanH/Crystallized_Cotton_Candy.png",
+  "background_color": "f3f2f3",
+  "image": "https://zoo-factory.vercel.app/zoo_keeper_icons_v1/Crystallized_Cotton_Candy.png",
   "attributes": [
     {
-      "category": "3"
+      "trait_type": "category",
+      "value": "3"
     },
     {
-      "level": "3"
+      "trait_type": "level",
+      "value": "3"
     },
     {
-      "item": "3"
+      "trait_type": "item",
+      "value": "3"
     }
   ]
 }

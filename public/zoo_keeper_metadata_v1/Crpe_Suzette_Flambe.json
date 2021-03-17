@@ -1,16 +1,20 @@
 {
   "name": "Crêpe Suzette Flambée",
   "description": "Crêpe Suzette Flambée",
-  "image": "ipfs://ipfs/QmQ2Kej6LFvx7P3BZqL5hn4aCXSkGo83pyuSJnNQG4xanH/Crpe_Suzette_Flambe.png",
+  "background_color": "f3f2f3",
+  "image": "https://zoo-factory.vercel.app/zoo_keeper_icons_v1/Crpe_Suzette_Flambe.png",
   "attributes": [
     {
-      "category": "3"
+      "trait_type": "category",
+      "value": "3"
     },
     {
-      "level": "2"
+      "trait_type": "level",
+      "value": "2"
     },
     {
-      "item": "4"
+      "trait_type": "item",
+      "value": "4"
     }
   ]
 }

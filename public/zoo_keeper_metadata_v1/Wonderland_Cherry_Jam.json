@@ -1,16 +1,20 @@
 {
   "name": "Wonderland Cherry Jam",
   "description": "Wonderland Cherry Jam",
-  "image": "ipfs://ipfs/QmQ2Kej6LFvx7P3BZqL5hn4aCXSkGo83pyuSJnNQG4xanH/Wonderland_Cherry_Jam.png",
+  "background_color": "f3f2f3",
+  "image": "https://zoo-factory.vercel.app/zoo_keeper_icons_v1/Wonderland_Cherry_Jam.png",
   "attributes": [
     {
-      "category": "1"
+      "trait_type": "category",
+      "value": "1"
     },
     {
-      "level": "3"
+      "trait_type": "level",
+      "value": "3"
     },
     {
-      "item": "4"
+      "trait_type": "item",
+      "value": "4"
     }
   ]
 }

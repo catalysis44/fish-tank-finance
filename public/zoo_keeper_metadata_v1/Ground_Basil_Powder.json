@@ -1,16 +1,20 @@
 {
   "name": "Ground Basil Powder",
   "description": "Ground Basil Powder",
-  "image": "ipfs://ipfs/QmQ2Kej6LFvx7P3BZqL5hn4aCXSkGo83pyuSJnNQG4xanH/Ground_Basil_Powder.png",
+  "background_color": "f3f2f3",
+  "image": "https://zoo-factory.vercel.app/zoo_keeper_icons_v1/Ground_Basil_Powder.png",
   "attributes": [
     {
-      "category": "5"
+      "trait_type": "category",
+      "value": "5"
     },
     {
-      "level": "3"
+      "trait_type": "level",
+      "value": "3"
     },
     {
-      "item": "2"
+      "trait_type": "item",
+      "value": "2"
     }
   ]
 }

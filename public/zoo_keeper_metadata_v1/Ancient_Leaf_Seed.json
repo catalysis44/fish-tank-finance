@@ -1,16 +1,20 @@
 {
   "name": "Ancient Leaf Seed",
   "description": "Ancient Leaf Seed",
-  "image": "ipfs://ipfs/QmQ2Kej6LFvx7P3BZqL5hn4aCXSkGo83pyuSJnNQG4xanH/Ancient_Leaf_Seed.png",
+  "background_color": "f3f2f3",
+  "image": "https://zoo-factory.vercel.app/zoo_keeper_icons_v1/Ancient_Leaf_Seed.png",
   "attributes": [
     {
-      "category": "6"
+      "trait_type": "category",
+      "value": "6"
     },
     {
-      "level": "1"
+      "trait_type": "level",
+      "value": "1"
     },
     {
-      "item": "4"
+      "trait_type": "item",
+      "value": "4"
     }
   ]
 }

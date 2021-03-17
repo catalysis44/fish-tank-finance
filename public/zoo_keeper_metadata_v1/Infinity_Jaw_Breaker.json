@@ -1,16 +1,20 @@
 {
   "name": "Infinity Jaw Breaker",
   "description": "Infinity Jaw Breaker",
-  "image": "ipfs://ipfs/QmQ2Kej6LFvx7P3BZqL5hn4aCXSkGo83pyuSJnNQG4xanH/Infinity_Jaw_Breaker.png",
+  "background_color": "f3f2f3",
+  "image": "https://zoo-factory.vercel.app/zoo_keeper_icons_v1/Infinity_Jaw_Breaker.png",
   "attributes": [
     {
-      "category": "3"
+      "trait_type": "category",
+      "value": "3"
     },
     {
-      "level": "4"
+      "trait_type": "level",
+      "value": "4"
     },
     {
-      "item": "3"
+      "trait_type": "item",
+      "value": "3"
     }
   ]
 }

@@ -1,16 +1,20 @@
 {
   "name": "Ancient Barrel Cheddar",
   "description": "Ancient Barrel Cheddar",
-  "image": "ipfs://ipfs/QmQ2Kej6LFvx7P3BZqL5hn4aCXSkGo83pyuSJnNQG4xanH/Ancient_Barrel_Cheddar.png",
+  "background_color": "f3f2f3",
+  "image": "https://zoo-factory.vercel.app/zoo_keeper_icons_v1/Ancient_Barrel_Cheddar.png",
   "attributes": [
     {
-      "category": "2"
+      "trait_type": "category",
+      "value": "2"
     },
     {
-      "level": "4"
+      "trait_type": "level",
+      "value": "4"
     },
     {
-      "item": "2"
+      "trait_type": "item",
+      "value": "2"
     }
   ]
 }

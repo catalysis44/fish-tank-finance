@@ -1,16 +1,20 @@
 {
   "name": "Fragrant Pesto Sauce",
   "description": "Fragrant Pesto Sauce",
-  "image": "ipfs://ipfs/QmQ2Kej6LFvx7P3BZqL5hn4aCXSkGo83pyuSJnNQG4xanH/Fragrant_Pesto_Sauce.png",
+  "background_color": "f3f2f3",
+  "image": "https://zoo-factory.vercel.app/zoo_keeper_icons_v1/Fragrant_Pesto_Sauce.png",
   "attributes": [
     {
-      "category": "5"
+      "trait_type": "category",
+      "value": "5"
     },
     {
-      "level": "4"
+      "trait_type": "level",
+      "value": "4"
     },
     {
-      "item": "2"
+      "trait_type": "item",
+      "value": "2"
     }
   ]
 }

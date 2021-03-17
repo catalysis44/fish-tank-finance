@@ -1,16 +1,20 @@
 {
   "name": "Red Dew Rose",
   "description": "Red Dew Rose",
-  "image": "ipfs://ipfs/QmQ2Kej6LFvx7P3BZqL5hn4aCXSkGo83pyuSJnNQG4xanH/Red_Dew_Rose.png",
+  "background_color": "f3f2f3",
+  "image": "https://zoo-factory.vercel.app/zoo_keeper_icons_v1/Red_Dew_Rose.png",
   "attributes": [
     {
-      "category": "4"
+      "trait_type": "category",
+      "value": "4"
     },
     {
-      "level": "2"
+      "trait_type": "level",
+      "value": "2"
     },
     {
-      "item": "4"
+      "trait_type": "item",
+      "value": "4"
     }
   ]
 }

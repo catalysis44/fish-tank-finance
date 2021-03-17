@@ -1,16 +1,20 @@
 {
   "name": "Epic Salmon Roll",
   "description": "Epic Salmon Roll",
-  "image": "ipfs://ipfs/QmQ2Kej6LFvx7P3BZqL5hn4aCXSkGo83pyuSJnNQG4xanH/Epic_Salmon_Roll.png",
+  "background_color": "f3f2f3",
+  "image": "https://zoo-factory.vercel.app/zoo_keeper_icons_v1/Epic_Salmon_Roll.png",
   "attributes": [
     {
-      "category": "2"
+      "trait_type": "category",
+      "value": "2"
     },
     {
-      "level": "4"
+      "trait_type": "level",
+      "value": "4"
     },
     {
-      "item": "5"
+      "trait_type": "item",
+      "value": "5"
     }
   ]
 }

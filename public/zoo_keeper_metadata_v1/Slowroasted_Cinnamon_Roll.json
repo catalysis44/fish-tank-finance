@@ -1,16 +1,20 @@
 {
   "name": "Slowroasted Cinnamon Roll",
   "description": "Slowroasted Cinnamon Roll",
-  "image": "ipfs://ipfs/QmQ2Kej6LFvx7P3BZqL5hn4aCXSkGo83pyuSJnNQG4xanH/Slowroasted_Cinnamon_Roll.png",
+  "background_color": "f3f2f3",
+  "image": "https://zoo-factory.vercel.app/zoo_keeper_icons_v1/Slowroasted_Cinnamon_Roll.png",
   "attributes": [
     {
-      "category": "3"
+      "trait_type": "category",
+      "value": "3"
     },
     {
-      "level": "2"
+      "trait_type": "level",
+      "value": "2"
     },
     {
-      "item": "5"
+      "trait_type": "item",
+      "value": "5"
     }
   ]
 }

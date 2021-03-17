@@ -1,16 +1,20 @@
 {
   "name": "Blended Cherry Juice",
   "description": "Blended Cherry Juice",
-  "image": "ipfs://ipfs/QmQ2Kej6LFvx7P3BZqL5hn4aCXSkGo83pyuSJnNQG4xanH/Blended_Cherry_Juice.png",
+  "background_color": "f3f2f3",
+  "image": "https://zoo-factory.vercel.app/zoo_keeper_icons_v1/Blended_Cherry_Juice.png",
   "attributes": [
     {
-      "category": "1"
+      "trait_type": "category",
+      "value": "1"
     },
     {
-      "level": "2"
+      "trait_type": "level",
+      "value": "2"
     },
     {
-      "item": "4"
+      "trait_type": "item",
+      "value": "4"
     }
   ]
 }

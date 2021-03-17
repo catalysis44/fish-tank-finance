@@ -1,16 +1,20 @@
 {
   "name": "Wasabi Ginger Sake",
   "description": "Wasabi Ginger Sake",
-  "image": "ipfs://ipfs/QmQ2Kej6LFvx7P3BZqL5hn4aCXSkGo83pyuSJnNQG4xanH/Wasabi_Ginger_Sake.png",
+  "background_color": "f3f2f3",
+  "image": "https://zoo-factory.vercel.app/zoo_keeper_icons_v1/Wasabi_Ginger_Sake.png",
   "attributes": [
     {
-      "category": "4"
+      "trait_type": "category",
+      "value": "4"
     },
     {
-      "level": "2"
+      "trait_type": "level",
+      "value": "2"
     },
     {
-      "item": "1"
+      "trait_type": "item",
+      "value": "1"
     }
   ]
 }

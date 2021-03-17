@@ -1,16 +1,20 @@
 {
   "name": "Native Gold Nugget",
   "description": "Native Gold Nugget",
-  "image": "ipfs://ipfs/QmQ2Kej6LFvx7P3BZqL5hn4aCXSkGo83pyuSJnNQG4xanH/Native_Gold_Nugget.png",
+  "background_color": "f3f2f3",
+  "image": "https://zoo-factory.vercel.app/zoo_keeper_icons_v1/Native_Gold_Nugget.png",
   "attributes": [
     {
-      "category": "6"
+      "trait_type": "category",
+      "value": "6"
     },
     {
-      "level": "2"
+      "trait_type": "level",
+      "value": "2"
     },
     {
-      "item": "2"
+      "trait_type": "item",
+      "value": "2"
     }
   ]
 }

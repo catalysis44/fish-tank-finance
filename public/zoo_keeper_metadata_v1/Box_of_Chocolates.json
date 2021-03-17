@@ -1,16 +1,20 @@
 {
   "name": "Box of Chocolates",
   "description": "Box of Chocolates",
-  "image": "ipfs://ipfs/QmQ2Kej6LFvx7P3BZqL5hn4aCXSkGo83pyuSJnNQG4xanH/Box_of_Chocolates.png",
+  "background_color": "f3f2f3",
+  "image": "https://zoo-factory.vercel.app/zoo_keeper_icons_v1/Box_of_Chocolates.png",
   "attributes": [
     {
-      "category": "4"
+      "trait_type": "category",
+      "value": "4"
     },
     {
-      "level": "1"
+      "trait_type": "level",
+      "value": "1"
     },
     {
-      "item": "4"
+      "trait_type": "item",
+      "value": "4"
     }
   ]
 }

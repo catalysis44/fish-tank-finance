@@ -1,16 +1,20 @@
 {
   "name": "Spectral Gold Powder",
   "description": "Spectral Gold Powder",
-  "image": "ipfs://ipfs/QmQ2Kej6LFvx7P3BZqL5hn4aCXSkGo83pyuSJnNQG4xanH/Spectral_Gold_Powder.png",
+  "background_color": "f3f2f3",
+  "image": "https://zoo-factory.vercel.app/zoo_keeper_icons_v1/Spectral_Gold_Powder.png",
   "attributes": [
     {
-      "category": "6"
+      "trait_type": "category",
+      "value": "6"
     },
     {
-      "level": "4"
+      "trait_type": "level",
+      "value": "4"
     },
     {
-      "item": "2"
+      "trait_type": "item",
+      "value": "2"
     }
   ]
 }

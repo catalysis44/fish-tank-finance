@@ -1,16 +1,20 @@
 {
   "name": "Parasol Sugar Pancake",
   "description": "Parasol Sugar Pancake",
-  "image": "ipfs://ipfs/QmQ2Kej6LFvx7P3BZqL5hn4aCXSkGo83pyuSJnNQG4xanH/Parasol_Sugar_Pancake.png",
+  "background_color": "f3f2f3",
+  "image": "https://zoo-factory.vercel.app/zoo_keeper_icons_v1/Parasol_Sugar_Pancake.png",
   "attributes": [
     {
-      "category": "3"
+      "trait_type": "category",
+      "value": "3"
     },
     {
-      "level": "1"
+      "trait_type": "level",
+      "value": "1"
     },
     {
-      "item": "4"
+      "trait_type": "item",
+      "value": "4"
     }
   ]
 }
