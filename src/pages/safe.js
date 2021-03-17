@@ -298,12 +298,15 @@ export default function () {
 
 
           </div>
-
+          
+          <div className={styles.row}>
           {
             cards.map(v=>{
               return <CardView icon={v.image} name={v.name} tokenId={v.tokenId} attributes={v.attributes} />
             })
           }
+          
+          </div>
 
         </div>
       </div>
