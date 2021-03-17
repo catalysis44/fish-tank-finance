@@ -10,7 +10,7 @@ import BigNumber from 'bignumber.js';
 import { useCountDown, useClickAway } from 'ahooks';
 import { WalletContext } from '../../wallet/Wallet';
 import { approve, checkApprove, deposit, withdraw } from '../../wallet/send';
-import { WWAN_ADDRESS } from '../../config';
+import { WWAN_ADDRESS, ZOO_FARMING_ADDRESS } from '../../config';
 
 
 

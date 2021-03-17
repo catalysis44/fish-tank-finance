@@ -5,10 +5,14 @@ import ChestboxBuyModal from '../components/expedition/ChestboxBuyModal';
 import { StorageContext } from '../hooks';
 import { commafy } from '../utils';
 import { WalletContext } from '../wallet/Wallet';
+import { OmitProps } from 'antd/lib/transfer/ListBody';
+import Loader from '../components/loader'
+import BigNumber from 'bignumber.js';
 
 
-export default function () {
-  const [modal, setModal] = useState(0);
+export default function (props) {
+  const [txWaiting, setTxWaiting] = useState(false);
+
 
   const [showGoldenModal, setShowGoldenModal] = useState(0);
   const [showSilverModal, setShowSilverModal] = useState(0);
@@ -23,15 +27,19 @@ export default function () {
 
   return (
     <React.Fragment>
-
+      {
+        txWaiting && <Loader/>
+      }
       {/* For Instant Chest - NFT / Artifact */}
-      <ChestboxBuyModal isActived={showGoldenModal} setModal={setShowGoldenModal} title={'GOLD CHEST INSTANT BUY'} price={commafy(storage.goldenPrice)}
+      <ChestboxBuyModal isActived={showGoldenModal} setModal={setShowGoldenModal} title={'GOLD CHEST INSTANT BUY'} price={storage.goldenPrice}
         rules={'Burn your Zoo and has a 100% chance of getting a random NFT collectible.'}
         type={'golden'}
+        setTxWaiting={setTxWaiting}
         ></ChestboxBuyModal>
-      <ChestboxBuyModal isActived={showSilverModal} setModal={setShowSilverModal} title={'SILVER CHEST INSTANT BUY'} price={commafy(storage.goldenPrice / 10)}
+      <ChestboxBuyModal isActived={showSilverModal} setModal={setShowSilverModal} title={'SILVER CHEST INSTANT BUY'} price={(new BigNumber(storage.goldenPrice)).div(10)}
         rules={'Burn your Zoo and has a 10% chance of getting a non-rare random NFT collectible. If you miss 10 shots in a row, the next time‘s chance is 100%.'}
         type={'silver'}
+        setTxWaiting={setTxWaiting}
         ></ChestboxBuyModal>
 
       <div className={styles.row} style={{ paddingBottom: 0 }}>
