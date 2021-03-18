@@ -118,7 +118,7 @@ export default function ChestboxBuyModal(props) {
                   openNotificationBottle(type.toUpperCase() + ' CHEST HAS BEEN OPENED', 'Nothing...', 'Unfortunately, you get nothing, 10 times in a row nothing, the next time 100% got non-rare NFT.');
                 } else {
                   getNftInfo(ret.events.MintNFT.returnValues.tokenId, web3, chainId).then(obj=>{
-                    console.debug('nft meta', obj);
+                    console.debug('nftmeta111', obj);
                     setTokenId(ret.events.MintNFT.returnValues.tokenId);
                     setLevel(ret.events.MintNFT.returnValues.level);
                     setCategory(ret.events.MintNFT.returnValues.category);
@@ -140,7 +140,7 @@ export default function ChestboxBuyModal(props) {
             } else {
               buyGoldenChest(web3, chainId, address).then(ret=>{
                 getNftInfo(ret.events.MintNFT.returnValues.tokenId, web3, chainId).then(obj=>{
-                  console.debug('nft meta', obj);
+                  console.debug('nftmeta222', obj);
                   setTokenId(ret.events.MintNFT.returnValues.tokenId);
                   setLevel(ret.events.MintNFT.returnValues.level);
                   setCategory(ret.events.MintNFT.returnValues.categroy);
