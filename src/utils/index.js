@@ -1,4 +1,4 @@
-import { notification, Switch } from 'antd';
+import { notification } from 'antd';
 
 
 export function commafy(num, fixed=null) {
@@ -120,14 +120,16 @@ export const openNotificationBottle = (title, item, description) => {
         <b>{item}</b>
         {"\", "}
         <br />
-        {/* {"your boost card has been transfered to your wallet "} */}
+        
         {description}
-        <a href="/safe" className="button">Check your collection</a>
+        {
+          item!=='Nothing...' && <a href="/safe" className="button">Check your collection</a>
+        }
       </div>,
     duration: 0,
     placement: 'bottomRight',
     icon: <img src="assets/notification/bottle.png" />,
-    className: 'open-chestbox-notification',
+    className: item==='Nothing...' ? 'open-chestbox-notification' : 'open-chestbox-notification-nothing',
 
   };
   notification.open(args);
