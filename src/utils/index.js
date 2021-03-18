@@ -110,7 +110,7 @@ export const openNotificationExclamation = (title) => {
   notification.open(args);
 };
 
-export const openNotificationBottle = (title, item, description, icon) => {
+export const openNotificationBottle = (title, item, description, icon, nothing) => {
   const args = {
     // message: 'GOLDEN CHEST HAS BEEN OPENED',
     message: title,
@@ -129,7 +129,7 @@ export const openNotificationBottle = (title, item, description, icon) => {
     duration: 0,
     placement: 'bottomRight',
     icon: <img src={icon} />,
-    className: item==='Nothing...' ? 'open-chestbox-notification' : 'open-chestbox-notification-nothing',
+    className: nothing ? 'open-chestbox-notification' : 'open-chestbox-notification-nothing',
 
   };
   notification.open(args);

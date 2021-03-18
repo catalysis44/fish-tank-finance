@@ -85,7 +85,7 @@ export default function () {
 
       <div className={styles.row}>
         {
-          storage.poolInfo.length === 0 && <div>Loading...</div>
+          // storage.poolInfo.length === 0 && <div>Loading...</div>
         }
         {
           storage.poolInfo.map((v, i)=>{

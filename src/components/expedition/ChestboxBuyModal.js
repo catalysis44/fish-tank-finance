@@ -114,8 +114,9 @@ export default function ChestboxBuyModal(props) {
             if (type === 'silver') {
               buySilverChest(web3, chainId, address).then(ret=>{
                 if (ret.events.MintNFT.returnValues.level === '0') {
+                  console.debug('33333', ret);
                   closeModal();
-                  openNotificationBottle(type.toUpperCase() + ' CHEST HAS BEEN OPENED', 'Nothing...', 'Unfortunately, you get nothing, 10 times in a row nothing, the next time 100% got non-rare NFT.');
+                  openNotificationBottle(type.toUpperCase() + ' CHEST HAS BEEN OPENED', 'Nothing...', 'Unfortunately, you get nothing, 9 times in a row nothing, the next time 100% got non-rare NFT.', '', true);
                 } else {
                   getNftInfo(ret.events.MintNFT.returnValues.tokenId, web3, chainId).then(obj=>{
                     console.debug('nftmeta111', obj);
@@ -126,10 +127,10 @@ export default function ChestboxBuyModal(props) {
                     setIcon(obj.image);
                     setName(obj.name);
                     setBoost(obj.boost);
-                    setReduce(obj.reduce);
+                    setReduce(obj.timeReduce);
                     closeModal();
                     setModal(1);
-                    openNotificationBottle(type.toUpperCase() + ' CHEST HAS BEEN OPENED', obj.name, 'Your boost card has been transfered to your wallet.');
+                    openNotificationBottle(type.toUpperCase() + ' CHEST HAS BEEN OPENED', obj.name, 'Your boost card has been transfered to your wallet.', obj.image);
                   }).catch(err=>{
                     console.error('getNftInfo error', err);
                   });
@@ -150,7 +151,7 @@ export default function ChestboxBuyModal(props) {
                   setIcon(obj.image);
                   setName(obj.name);
                   setBoost(obj.boost);
-                  setReduce(obj.reduce);
+                  setReduce(obj.timeReduce);
                   closeModal();
                   setModal(1);
                   openNotificationBottle(type.toUpperCase() + ' CHEST HAS BEEN OPENED', obj.name, 'Your boost card has been transfered to your wallet.', obj.image);
