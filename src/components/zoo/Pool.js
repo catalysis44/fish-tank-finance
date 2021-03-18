@@ -167,17 +167,22 @@ export default function Pool(props) {
               </div>
               <div className={styles.action_wrapper}>
 
-                <a className={styles.connect_wallet} style={{ display: 'none' }}>
-                  Connect Wallet
-                </a>
                 {
-                  !deposited && <a className={styles.deposit_lp} onClick={()=>{setShowDeposit(true)}}>
+                  !connected && <a className={styles.connect_wallet} onClick={()=>{
+                    wallet.connect();
+                  }}>
+                    Connect Wallet
+                  </a>
+                }
+                
+                {
+                  connected && !deposited && <a className={styles.deposit_lp} onClick={()=>{setShowDeposit(true)}}>
                     
                     Deposit WSLP Token
                   </a>
                 }
                 {
-                  deposited && expirated && <a className={styles.withdraw_lp} onClick={()=>{
+                  connected && deposited && expirated && <a className={styles.withdraw_lp} onClick={()=>{
                     setTxWaiting(true);
                     withdraw(pid, '0x' + (new BigNumber(poolInfo.lpAmount.toString())).multipliedBy(1e18).toString(16), chainId, web3, address).then(ret=>{
                       setTxWaiting(false);
@@ -191,7 +196,7 @@ export default function Pool(props) {
                   </a>
                 }
                 {
-                  !expirated && <a className={styles.locked_lp}>
+                  connected && !expirated && <a className={styles.locked_lp}>
                     <div className={styles.tipbox_btn}>
                       ?
                       <div className={styles.tipbox}>
@@ -214,7 +219,7 @@ export default function Pool(props) {
                   </a>
                 }
                 {
-                  deposited && <a className={styles.topup_lp} onClick={()=>{setShowDeposit(true)}}>
+                  connected && deposited && <a className={styles.topup_lp} onClick={()=>{setShowDeposit(true)}}>
                     Top-up
                   </a>
                 }
