@@ -128,7 +128,7 @@ export const openNotificationBottle = (title, item, description, icon, nothing) 
       </div>,
     duration: 0,
     placement: 'bottomRight',
-    icon: <img src={icon} />,
+    icon: icon && <img src={icon} />,
     className: nothing ? 'open-chestbox-notification' : 'open-chestbox-notification-nothing',
 
   };
