@@ -125,6 +125,8 @@ export default function ChestboxBuyModal(props) {
                     setItem(ret.events.MintNFT.returnValues.item);
                     setIcon(obj.image);
                     setName(obj.name);
+                    setBoost(obj.boost);
+                    setReduce(obj.reduce);
                     closeModal();
                     setModal(1);
                     openNotificationBottle(type.toUpperCase() + ' CHEST HAS BEEN OPENED', obj.name, 'Your boost card has been transfered to your wallet.');
@@ -140,16 +142,18 @@ export default function ChestboxBuyModal(props) {
             } else {
               buyGoldenChest(web3, chainId, address).then(ret=>{
                 getNftInfo(ret.events.MintNFT.returnValues.tokenId, web3, chainId).then(obj=>{
-                  console.debug('nftmeta222', obj);
+                  console.debug('nftmeta222', obj, ret);
                   setTokenId(ret.events.MintNFT.returnValues.tokenId);
                   setLevel(ret.events.MintNFT.returnValues.level);
-                  setCategory(ret.events.MintNFT.returnValues.categroy);
+                  setCategory(ret.events.MintNFT.returnValues.category);
                   setItem(ret.events.MintNFT.returnValues.item);
                   setIcon(obj.image);
                   setName(obj.name);
+                  setBoost(obj.boost);
+                  setReduce(obj.reduce);
                   closeModal();
                   setModal(1);
-                  openNotificationBottle(type.toUpperCase() + ' CHEST HAS BEEN OPENED', obj.name, 'Your boost card has been transfered to your wallet.');
+                  openNotificationBottle(type.toUpperCase() + ' CHEST HAS BEEN OPENED', obj.name, 'Your boost card has been transfered to your wallet.', obj.image);
                 }).catch(err=>{
                   console.error('getNftInfo error', err);
                 });

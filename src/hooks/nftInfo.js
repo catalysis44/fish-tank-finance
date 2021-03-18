@@ -20,7 +20,7 @@ export const getNftInfo = async (tokenId, web3, chainId) => {
     name: obj.name,
     image: obj.image,
     meta: obj,
-    boost: boost / 1e12,
-    timeReduce: timeReduce / 1e12,
+    boost: boost / 1e12 - 1,
+    timeReduce: 1 - timeReduce / 1e12,
   };
 }
