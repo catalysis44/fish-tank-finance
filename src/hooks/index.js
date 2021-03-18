@@ -23,6 +23,7 @@ export const initialState = {
   zooTotalSupply: 0,
   nftBalance: 0,
   nftCards: [],
+  blockNumber: 0,
 }
 
 const differ = (a, b) => {
@@ -55,13 +56,15 @@ export const useLoader = (chainId) => {
         })
         console.debug('calls', newCalls.length, newCalls, conf);
         let ret = await aggregate(newCalls, conf);
-
+        console.debug('aggregate ret', ret);;
         Object.keys(ret.results.transformed).map(v => {
           let str = v.split('#');
           if (!newCalls[str[1]].returnValue) {
             newCalls[str[1]].returnValue = {};
           }
           newCalls[str[1]].returnValue[str[0]] = ret.results.transformed[v];
+          newCalls[str[1]].returnValue['blockNumber'] = Number(ret.results.blockNumber.toString());
+
           newCalls[str[1]].returns = newCalls[str[1]].returns.map(r => {
             let r0 = r[0].split('#')[0];
             return [r0, r[1]];
@@ -311,6 +314,14 @@ export const getNFTFactoryInfo = (loader, chainId) => {
 
 export const useDataPump = (storage, setStorage, chainId, address, connected) => {
   const loader = useLoader(chainId);
+  const blockNumber = storage.blockNumber;
+  const updateStorage = (newStorage) => {
+    if (!newStorage.blockNumber || newStorage.blockNumber >= blockNumber) {
+      setStorage(newStorage);
+    } else {
+      console.debug('data from old blockNumber', blockNumber, newStorage.blockNumber);
+    }
+  }
 
   // getWaspPrice().then(ret=>{
   //   console.debug('wasp price', ret);
@@ -335,8 +346,8 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
     getZooBalance(loader, chainId, address).then(ret => {
       console.debug('getZooBalance ret', ret, ret.returnValue.zooBalance);
 
-      tmpStorage = Object.assign({ ...tmpStorage, zooBalance: ret.returnValue.zooBalance });
-      setStorage(tmpStorage);
+      tmpStorage = Object.assign({ ...tmpStorage, zooBalance: ret.returnValue.zooBalance, blockNumber: ret.returnValue.blockNumber });
+      updateStorage(tmpStorage);
     }).catch(err => {
       console.error('err 1', err);
     });
@@ -344,8 +355,8 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
     getZooTotalSupply(loader, chainId).then(ret => {
       console.debug('getZooTotalSupply ret', ret, ret.returnValue.totalSupply);
 
-      tmpStorage = Object.assign({ ...tmpStorage, zooTotalSupply: ret.returnValue.totalSupply })
-      setStorage(tmpStorage);
+      tmpStorage = Object.assign({ ...tmpStorage, zooTotalSupply: ret.returnValue.totalSupply, blockNumber: ret.returnValue.blockNumber })
+      updateStorage(tmpStorage);
     }).catch(err => {
       console.error('err 1.1', err);
     });
@@ -373,7 +384,7 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
             }
             console.debug('cards:', cards);
             tmpStorage = Object.assign({ ...tmpStorage, nftCards: cards });
-            setStorage(tmpStorage);
+            updateStorage(tmpStorage);
           });
         }).catch(err => {
           console.error('err 1.2.1', err);
@@ -391,7 +402,7 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
       });
 
       tmpStorage = Object.assign({ ...tmpStorage, farmingInfo })
-      setStorage(tmpStorage);
+      updateStorage(tmpStorage);
       console.debug('farmingInfo', farmingInfo);
 
       getZooPools(loader, chainId, address, farmingInfo.poolLength).then(ret => {
@@ -426,7 +437,7 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
 
               if (i === farmingInfo.poolLength - 1) {
                 tmpStorage = Object.assign({ ...tmpStorage, poolInfo })
-                setStorage(tmpStorage);
+                updateStorage(tmpStorage);
               }
             }).catch(err => {
               console.error('err 5', err);

@@ -25,6 +25,7 @@ function BasicLayout(props) {
   const address = wallet.address;
   const connected = wallet.connected;
   const provider = wallet.provider;
+  const [loading, setLoading] = useState(false);
   
   const [storage, setStorage] = useLocalStorageState('zoo-keeper-v0.1', initialState);
 
@@ -117,7 +118,7 @@ function BasicLayout(props) {
         <WalletContext.Provider value={wallet} >
           <div id="page_content_wrapper">
             {props.children}
-            <div id="blockCount">13,685,999 <div class="circle animate__animated animate__heartBeat animate__infinite"><FontAwesomeIcon icon={faCircle} /></div></div>
+            <div id="blockCount">{commafy(storage.blockNumber).split('.')[0]} <div class="circle animate__animated animate__heartBeat animate__infinite"><FontAwesomeIcon icon={faCircle} /></div></div>
           </div>
         </WalletContext.Provider>
       </StorageContext.Provider>
