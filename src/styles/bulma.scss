@@ -167,7 +167,7 @@ input[type=text] {
     background-position: 100% 50%;
   }
 }
-.open-chestbox-notification b
+.open-chestbox-notification b,.open-chestbox-notification-nothing b
 {
   color:#00a99d;
   font-weight:normal
@@ -186,6 +186,13 @@ input[type=text] {
   justify-content: center;
   padding-top:7px;
   padding-bottom:5px;
+}
+.open-chestbox-notification-nothing
+{
+  width: 380px;
+  --border-width: 3px;
+  overflow: visible;
+  padding-left:22px;
 }
 .open-chestbox-notification
 {
@@ -219,13 +226,14 @@ input[type=text] {
     animation: moveGradient 4s alternate infinite;
   }
 }
-.open-chestbox-notification .ant-notification-notice-icon
+
+.open-chestbox-notification .ant-notification-notice-icon, .open-chestbox-notification-nothing  .ant-notification-notice-icon
 {
   margin-left:0;
   top: calc(50% - 48px);
   animation: rotation 3s infinite linear;
 }
-.open-chestbox-notification .ant-notification-notice-with-icon
+.open-chestbox-notification .ant-notification-notice-with-icon,  .open-chestbox-notification-nothing .ant-notification-notice-with-icon
 {
   
   background:url(/assets/notification/chest.png) no-repeat 0 100%;
