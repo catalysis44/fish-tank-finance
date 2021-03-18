@@ -28,6 +28,8 @@ export default function CardView(props) {
 
   const category = Number(props.attributes[0].value)
 
+  console.debug('CardView', props);
+
   return (
     <React.Fragment >
      

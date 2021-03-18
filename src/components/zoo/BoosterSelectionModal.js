@@ -1,7 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import styles from './BoosterSelectionModal.less';
 import '../../../node_modules/animate.css/animate.min.css';
 import React from 'react';
+import { StorageContext } from "../../hooks";
+import { WalletContext } from '../../wallet/Wallet';
+import axios from 'axios';
+
 
 export default function BoosterSelectionModal(props) {
   // Open Confirm Modal //
@@ -9,6 +13,48 @@ export default function BoosterSelectionModal(props) {
     props.setModal(0);
   }
   const [modal, setModal] = useState(0);
+
+  const storage = useContext(StorageContext);
+
+  const wallet = useContext(WalletContext);
+  const chainId = wallet.networkId;
+  const connected = wallet.connected;
+  const address = wallet.address;
+  const web3 = wallet.web3;
+
+  const [cards, setCards] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const nftCards = storage.nftCards;
+  const nftBalance = storage.nftBalance;
+
+  useEffect(() => {
+    const func = async ()=>{
+      setLoading(true);
+      const arr = nftCards.map(v=>{
+        return axios.get(v.uri);
+      });
+
+      let rets;
+      try {
+        rets = await Promise.all(arr);
+      } catch (error) {
+        console.error('axio error', error);
+      }
+
+      let objs = rets.map(v=>v.data);
+      
+      setCards(objs.map((v,i)=>{
+        v.tokenId = nftCards[i].tokenId;
+        v.boost = nftCards[i].boost;
+        v.reduce = nftCards[i].reduce;
+        return v;
+      }))
+      setLoading(false);
+    }
+
+    func();
+  }, [chainId, address, nftCards, nftBalance]);
 
   return (
     <React.Fragment>
@@ -49,219 +95,33 @@ export default function BoosterSelectionModal(props) {
           </div>
           <div className={styles.booster_panel}>
             <div className={styles.booster_table}>
+            {
+              loading && "Loading..."
+            }
 
-
-              <div className={styles.booster_row}>
-                <div className={`${styles.booster_col} ${styles.star}`}>
-                   <div className={styles.booster_subcol}>
-                  <img src="assets/star18x18.png"/><img src="assets/star18x18.png"/><img src="assets/star18x18.png"/>
+            {
+              cards.map(v=>{
+                return <div className={styles.booster_row}>
+                  <div className={`${styles.booster_col} ${styles.star}`}>
+                    <div className={styles.booster_subcol}>
+                    <img src="assets/star18x18.png"/><img src="assets/star18x18.png"/><img src="assets/star18x18.png"/>
+                    </div>
+                  </div>
+                  <div className={`${styles.booster_col} ${styles.title}`}>
+                    <div className={styles.booster_subcol}>
+                      <img src="assets/apple24x24.png"/> <div>Sugarspinned Strawberry Pie</div>
+                    </div>
+                  </div>
+                  <div className={`${styles.booster_col} ${styles.stat_action}`}>
+                    <div className={styles.booster_subcol}>
+                      <div className={styles.stat}><span><img src="assets/rocket24x24.png"/>+5.15%</span></div>
+                      <div className={styles.stat}><span><img src="assets/hourglass24x24.png" style={{width:20}}/>-25.12%</span></div>
+                      <a>Attach</a>
+                    </div>
                   </div>
                 </div>
-                <div className={`${styles.booster_col} ${styles.title}`}>
-                  <div className={styles.booster_subcol}>
-                    <img src="assets/apple24x24.png"/> <div>Sugarspinned Strawberry Pie</div>
-                  </div>
-                </div>
-                <div className={`${styles.booster_col} ${styles.stat_action}`}>
-                  <div className={styles.booster_subcol}>
-                    <div className={styles.stat}><span><img src="assets/rocket24x24.png"/>+5.15%</span></div>
-                    <div className={styles.stat}><span><img src="assets/hourglass24x24.png" style={{width:20}}/>-25.12%</span></div>
-                    <a>Attach</a>
-                  </div>
-                </div>
-               
-              </div>
-
-
-
-              <div className={styles.booster_row}>
-                <div className={`${styles.booster_col} ${styles.star}`}>
-                   <div className={styles.booster_subcol}>
-                  <img src="assets/star18x18.png"/><img src="assets/star18x18.png"/><img src="assets/star18x18.png"/>
-                  </div>
-                </div>
-                <div className={`${styles.booster_col} ${styles.title}`}>
-                  <div className={styles.booster_subcol}>
-                    <img src="assets/apple24x24.png"/> <div>Sugarspinned Strawberry Pie</div>
-                  </div>
-                </div>
-                <div className={`${styles.booster_col} ${styles.stat_action}`}>
-                  <div className={styles.booster_subcol}>
-                    <div className={styles.stat}><span><img src="assets/rocket24x24.png"/>+5.15%</span></div>
-                    <div className={styles.stat}><span><img src="assets/hourglass24x24.png" style={{width:20}}/>-25.12%</span></div>
-                    <a>Attach</a>
-                  </div>
-                </div>
-               
-              </div>
-
-
-
-              <div className={styles.booster_row}>
-                <div className={`${styles.booster_col} ${styles.star}`}>
-                   <div className={styles.booster_subcol}>
-                  <img src="assets/star18x18.png"/><img src="assets/star18x18.png"/><img src="assets/star18x18.png"/>
-                  </div>
-                </div>
-                <div className={`${styles.booster_col} ${styles.title}`}>
-                  <div className={styles.booster_subcol}>
-                    <img src="assets/apple24x24.png"/> <div>Sugarspinned Strawberry Pie</div>
-                  </div>
-                </div>
-                <div className={`${styles.booster_col} ${styles.stat_action}`}>
-                  <div className={styles.booster_subcol}>
-                    <div className={styles.stat}><span><img src="assets/rocket24x24.png"/>+5.15%</span></div>
-                    <div className={styles.stat}><span><img src="assets/hourglass24x24.png" style={{width:20}}/>-25.12%</span></div>
-                    <a>Attach</a>
-                  </div>
-                </div>
-               
-              </div>
-
-
-
-              <div className={styles.booster_row}>
-                <div className={`${styles.booster_col} ${styles.star}`}>
-                   <div className={styles.booster_subcol}>
-                  <img src="assets/star18x18.png"/><img src="assets/star18x18.png"/><img src="assets/star18x18.png"/>
-                  </div>
-                </div>
-                <div className={`${styles.booster_col} ${styles.title}`}>
-                  <div className={styles.booster_subcol}>
-                    <img src="assets/apple24x24.png"/> <div>Sugarspinned Strawberry Pie</div>
-                  </div>
-                </div>
-                <div className={`${styles.booster_col} ${styles.stat_action}`}>
-                  <div className={styles.booster_subcol}>
-                    <div className={styles.stat}><span><img src="assets/rocket24x24.png"/>+5.15%</span></div>
-                    <div className={styles.stat}><span><img src="assets/hourglass24x24.png" style={{width:20}}/>-25.12%</span></div>
-                    <a>Attach</a>
-                  </div>
-                </div>
-               
-              </div>
-
-
-
-              <div className={styles.booster_row}>
-                <div className={`${styles.booster_col} ${styles.star}`}>
-                   <div className={styles.booster_subcol}>
-                  <img src="assets/star18x18.png"/><img src="assets/star18x18.png"/><img src="assets/star18x18.png"/>
-                  </div>
-                </div>
-                <div className={`${styles.booster_col} ${styles.title}`}>
-                  <div className={styles.booster_subcol}>
-                    <img src="assets/apple24x24.png"/> <div>Sugarspinned Strawberry Pie</div>
-                  </div>
-                </div>
-                <div className={`${styles.booster_col} ${styles.stat_action}`}>
-                  <div className={styles.booster_subcol}>
-                    <div className={styles.stat}><span><img src="assets/rocket24x24.png"/>+5.15%</span></div>
-                    <div className={styles.stat}><span><img src="assets/hourglass24x24.png" style={{width:20}}/>-25.12%</span></div>
-                    <a>Attach</a>
-                  </div>
-                </div>
-               
-              </div>
-
-
-
-              <div className={styles.booster_row}>
-                <div className={`${styles.booster_col} ${styles.star}`}>
-                   <div className={styles.booster_subcol}>
-                  <img src="assets/star18x18.png"/><img src="assets/star18x18.png"/><img src="assets/star18x18.png"/>
-                  </div>
-                </div>
-                <div className={`${styles.booster_col} ${styles.title}`}>
-                  <div className={styles.booster_subcol}>
-                    <img src="assets/apple24x24.png"/> <div>Sugarspinned Strawberry Pie</div>
-                  </div>
-                </div>
-                <div className={`${styles.booster_col} ${styles.stat_action}`}>
-                  <div className={styles.booster_subcol}>
-                    <div className={styles.stat}><span><img src="assets/rocket24x24.png"/>+5.15%</span></div>
-                    <div className={styles.stat}><span><img src="assets/hourglass24x24.png" style={{width:20}}/>-25.12%</span></div>
-                    <a>Attach</a>
-                  </div>
-                </div>
-               
-              </div>
-
-
-
-              <div className={styles.booster_row}>
-                <div className={`${styles.booster_col} ${styles.star}`}>
-                   <div className={styles.booster_subcol}>
-                  <img src="assets/star18x18.png"/><img src="assets/star18x18.png"/><img src="assets/star18x18.png"/>
-                  </div>
-                </div>
-                <div className={`${styles.booster_col} ${styles.title}`}>
-                  <div className={styles.booster_subcol}>
-                    <img src="assets/apple24x24.png"/> <div>Sugarspinned Strawberry Pie</div>
-                  </div>
-                </div>
-                <div className={`${styles.booster_col} ${styles.stat_action}`}>
-                  <div className={styles.booster_subcol}>
-                    <div className={styles.stat}><span><img src="assets/rocket24x24.png"/>+5.15%</span></div>
-                    <div className={styles.stat}><span><img src="assets/hourglass24x24.png" style={{width:20}}/>-25.12%</span></div>
-                    <a>Attach</a>
-                  </div>
-                </div>
-               
-              </div>
-
-
-
-              <div className={styles.booster_row}>
-                <div className={`${styles.booster_col} ${styles.star}`}>
-                   <div className={styles.booster_subcol}>
-                  <img src="assets/star18x18.png"/><img src="assets/star18x18.png"/><img src="assets/star18x18.png"/>
-                  </div>
-                </div>
-                <div className={`${styles.booster_col} ${styles.title}`}>
-                  <div className={styles.booster_subcol}>
-                    <img src="assets/apple24x24.png"/> <div>Sugarspinned Strawberry Pie</div>
-                  </div>
-                </div>
-                <div className={`${styles.booster_col} ${styles.stat_action}`}>
-                  <div className={styles.booster_subcol}>
-                    <div className={styles.stat}><span><img src="assets/rocket24x24.png"/>+5.15%</span></div>
-                    <div className={styles.stat}><span><img src="assets/hourglass24x24.png" style={{width:20}}/>-25.12%</span></div>
-                    <a>Attach</a>
-                  </div>
-                </div>
-               
-              </div>
-
-
-
-              <div className={styles.booster_row}>
-                <div className={`${styles.booster_col} ${styles.star}`}>
-                   <div className={styles.booster_subcol}>
-                  <img src="assets/star18x18.png"/><img src="assets/star18x18.png"/><img src="assets/star18x18.png"/>
-                  </div>
-                </div>
-                <div className={`${styles.booster_col} ${styles.title}`}>
-                  <div className={styles.booster_subcol}>
-                    <img src="assets/apple24x24.png"/> <div>Sugarspinned Strawberry Pie</div>
-                  </div>
-                </div>
-                <div className={`${styles.booster_col} ${styles.stat_action}`}>
-                  <div className={styles.booster_subcol}>
-                    <div className={styles.stat}><span><img src="assets/rocket24x24.png"/>+5.15%</span></div>
-                    <div className={styles.stat}><span><img src="assets/hourglass24x24.png" style={{width:20}}/>-25.12%</span></div>
-                    <a>Attach</a>
-                  </div>
-                </div>
-               
-              </div>
-
-              
-
-              
-
-
-        
+              })
+            }
               </div>
           </div>
         </section>
