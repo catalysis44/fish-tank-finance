@@ -23,6 +23,10 @@ export default function Pool(props) {
   const [approved, setApproved] = useState(false);
   const [nftId, setNftId] = useState(0);
   const [updateApprove, setUpdateApprove] = useState(0);
+  const [icon, setIcon] = useState(0);
+  const [boost, setBoost] = useState(0);
+  const [reduce, setReduce] = useState(0);
+
   
   const setTxWaiting = props.setTxWaiting;
   const poolInfo = props.poolInfo;
@@ -70,7 +74,12 @@ export default function Pool(props) {
 
   return (
     <React.Fragment >
-      <BoosterSelectionModal isActived={modal} setModal={setModal} setNftId={setNftId}></BoosterSelectionModal>
+      <BoosterSelectionModal isActived={modal} setModal={setModal} 
+        setNftId={setNftId}
+        setIcon={setIcon}
+        setBoost={setBoost}
+        setReduce={setReduce}
+        ></BoosterSelectionModal>
       <div id={'pool_'+pid} className={styles.pool} data-active={poolInfo.lpAmount.toString() > 0}> {/*active true for on staking pool */}
         <div className={styles.bubble} data-equipped-nft="true"> {/*true if equipped an NFT*/}
           <a href="" className={styles.reload}><img src="assets/reload24x24.png" /></a>
@@ -316,23 +325,26 @@ export default function Pool(props) {
 
               <div className={styles.action_wrapper}>
 
-                <a className={styles.select_booster} onClick={() => { setModal(1) }} > {/*Hided it after selected*/}
-                  <img src="assets/plus.svg" />
-                </a>
-
-                <a className={styles.selected_booster} style={{ display: 'none' }}>
-                  <img src="dummy/booster.png" />
-                  <div className={styles.booster}>
-                    <img src="assets/rocket24x24.png" />
-                                    +5.55%
-                                    </div>
-                  <div className={styles.locked_time}>
-                    <img src="assets/hourglass24x24.png" />
-          -524.50
-        </div>
-                  <a className={styles.remove}><img src="assets/remove16x16.png" /></a>
-                  <a className={styles.reload}><img src="assets/reload24x24.png" style={{ display: 'none' }} /></a>
-                </a>
+                {
+                  nftId === 0 && <a className={styles.select_booster} onClick={() => { setModal(1) }} > {/*Hided it after selected*/}
+                    <img src="assets/plus.svg" />
+                  </a>
+                }
+                {
+                  nftId !== 0 && <a className={styles.selected_booster}>
+                    <img src={icon} />
+                    <div className={styles.booster}>
+                      <img src="assets/rocket24x24.png" />
+                      +{(boost*100).toFixed(2)}%
+                      </div>
+                    <div className={styles.locked_time}>
+                      <img src="assets/hourglass24x24.png" />
+                      -{(reduce*100).toFixed(2)}%
+                    </div>
+                    <a className={styles.remove}><img src="assets/remove16x16.png" style={{ display: 'none' }} /></a>
+                    <a className={styles.reload} onClick={() => { setModal(1) }}><img src="assets/reload24x24.png" /></a>
+                  </a>
+                }
 
                 <div className={styles.lp_management}>
 

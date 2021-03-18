@@ -29,6 +29,7 @@ export default function BoosterSelectionModal(props) {
   const nftBalance = storage.nftBalance;
   const setNftId = props.setNftId;
 
+
   useEffect(() => {
     const func = async ()=>{
       setLoading(true);
@@ -125,6 +126,9 @@ export default function BoosterSelectionModal(props) {
                       <div className={styles.stat}><span><img src="assets/hourglass24x24.png" style={{width:20}}/>-{(v.reduce * 100).toFixed(2)}%</span></div>
                       <a onClick={()=>{
                         setNftId(v.tokenId);
+                        props.setIcon(v.image);
+                        props.setBoost(v.boost);
+                        props.setReduce(v.reduce);
                         closeModal();
                       }}>Attach</a>
                     </div>
