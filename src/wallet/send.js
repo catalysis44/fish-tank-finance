@@ -104,7 +104,7 @@ export const buyGoldenChest = async (web3, chainId, address) => {
 export const buySilverChest = async (web3, chainId, address) => {
   console.debug('buySilverChest', chainId, web3, address);
   const sc = new web3.eth.Contract(nftFactoryAbi, NFT_FACTORY_ADDRESS[chainId]);
-  let ret = await sc.methods.buySilverChest().send({ from: address });
+  let ret = await sc.methods.buySilverChest().send({ from: address, gas: 1500000 });
   console.debug('buySilverChest ret', ret);
   return ret;
 }
