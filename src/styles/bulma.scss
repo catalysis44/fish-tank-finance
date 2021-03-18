@@ -233,6 +233,11 @@ input[type=text] {
   top: calc(50% - 48px);
   animation: rotation 3s infinite linear;
 }
+.open-chestbox-notification .ant-notification-notice-icon img, .open-chestbox-notification-nothing  .ant-notification-notice-icon img
+{
+  width:48px;
+  height:48px;
+}
 .open-chestbox-notification .ant-notification-notice-with-icon,  .open-chestbox-notification-nothing .ant-notification-notice-with-icon
 {
   
@@ -264,6 +269,7 @@ input[type=text] {
   margin-left:0;
   top: calc(50% - 24px);
 }
+
 .ant-notification-notice-with-icon .ant-notification-notice-description
 {
   font-size:14px;
