@@ -56,12 +56,14 @@ export default function () {
   const web3 = wallet.web3;
 
   const [cards, setCards] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const nftCards = storage.nftCards;
   const nftBalance = storage.nftBalance;
 
   useEffect(() => {
     const func = async ()=>{
+      setLoading(true);
       const arr = nftCards.map(v=>{
         return axios.get(v.uri);
       });
@@ -79,6 +81,7 @@ export default function () {
         v.tokenId = nftCards[i].tokenId;
         return v;
       }))
+      setLoading(false);
     }
 
     func();
@@ -298,6 +301,9 @@ export default function () {
 
 
           </div>
+          {
+            loading && <div>Loading...</div>
+          }
 
           {
             cards.map(v=>{
