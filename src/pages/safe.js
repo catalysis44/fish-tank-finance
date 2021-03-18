@@ -1,6 +1,7 @@
 import styles from './safe.less';
 import React, { useState } from 'react';
 import CardView from '../components/safe/CardView';
+import ListView from '../components/safe/ListView';
 import '../../node_modules/animate.css/animate.min.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExternalLinkAlt, faSortAlphaDown, faSortAmountUp, faSortNumericDown, faSortNumericUp } from '@fortawesome/free-solid-svg-icons';
@@ -312,7 +313,8 @@ export default function () {
               return <CardView icon={v.image} name={v.name} tokenId={v.tokenId} attributes={v.attributes} boost={v.boost} reduce={v.reduce} />
             })
           }
-          
+
+          {/*<ListView/>*/}
           </div>
 
         </div>
