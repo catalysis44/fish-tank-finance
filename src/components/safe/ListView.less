@@ -80,28 +80,45 @@
                 margin-right:3px;
             }
         }
-        &.buy_action
+        &.onsale_action
         {
             .listview_subcol
             {
                 width:265px;
+                
             }
-
-            .buy_btn
+            .onsale_price
             {
-                background:#00a99d;
+                background:#ffff00;
+                display:flex;
+                flex-direction: column;
+                align-items:center;
+                justify-content: center;
+                height:30px;
+                width:150px;
+                font-size:13px;
+                line-height:11px;
+                border:2px solid black;
+                border-radius:4px;
+                padding-top:3px;
+                margin-right:3px;
+                white-space: nowrap;
+            }
+            .cancel
+            {
+                background:#c1272d;
                 display:flex;
                 color:white;
                 align-items:center;
                 justify-content: center;
                 height:30px;
-                width:100%;
+                width:120px;
                 font-size:16px;
                 line-height:11px;
-                border:2px solid #00a99d;
+                border:2px solid #c1272d;
                 border-radius:4px;
                 padding-top:3px;
-                margin-left:5px;
+                
                 white-space: nowrap;
             }
         }
@@ -127,7 +144,77 @@
           }
   
         }
-        
+        &.market_action
+        {
+            .listview_subcol
+            {
+                width:265px;
+            }
+            .sell_action
+            {
+                color:#00a99d;
+                transition: all 0.1s ease-in-out;
+                background:#e1e5da;
+                width:200px;
+                height:30px;
+                display:flex;
+                align-items: center;
+                justify-content: left;
+                border-radius: 4px;
+                input
+                {
+                    background-color: transparent;
+                    padding-top:4px;
+                    margin-left:5px;
+                    margin-right:5px;
+                    border:0;
+                    color:black;
+                    width: 80px;
+                    outline: none;
+                    text-align: center;
+                    font-size:18px;
+                    height:30px;
+                }
+                .select_currency
+                {
+    
+                .currency_name
+                {
+                    color:black !important;
+                }
+                img
+                {
+                    width:20px;
+                    height:20px;
+                    margin-right:5px;
+                }
+                span
+                {
+                    color:#00a99d;
+                    text-align: right;
+                    margin-right:5px;
+                }
+                
+            }
+            }
+            .sell_btn
+            {
+                background:#00a99d;
+                display:flex;
+                color:white;
+                align-items:center;
+                justify-content: center;
+                height:30px;
+                width:60px;
+                font-size:16px;
+                line-height:11px;
+                border:2px solid #00a99d;
+                border-radius:4px;
+                padding-top:3px;
+                margin-left:5px;
+                white-space: nowrap;
+            }
+        }
         
       }
      

@@ -1,6 +1,7 @@
 import styles from './market.less';
 import React from 'react';
 import CardView from '../components/market/CardView';
+import ListView from '../components/market/ListView';
 import '../../node_modules/animate.css/animate.min.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSortAlphaDown,faSortAmountUp,faSortNumericDown,faSortNumericUp } from '@fortawesome/free-solid-svg-icons';
@@ -205,6 +206,7 @@ export default function () {
                     </div>
                   <div className={styles.row}>
                     <CardView/>
+                    {/*<ListView/>*/}
                   </div>
 
                 </div>

@@ -69,11 +69,56 @@ export default function ListView(props) {
                 </div>
               </div>
 
-              
-              <div className={`${styles.listview_col} ${styles.buy_action}`}>
+              {/*In case of On sale*/}
+              <div className={`${styles.listview_col} ${styles.onsale_action}`} style={{display:'none'}}>
                 <div className={styles.listview_subcol}>
-                    <a className={styles.buy_btn}>
-                      Buy for 5555,555.55 wanBTC
+                    <div className={styles.onsale_price}>
+                      <span>On Sale for</span>
+                        5,230,529 wanUSDT
+                    </div>
+                    <a className={styles.cancel}>
+                      Cancel the SALE
+                    </a>
+                  </div>
+              </div>
+
+              {/*In case of On sale*/}
+              <div className={`${styles.listview_col} ${styles.market_action}`}>
+                  <div className={styles.listview_subcol}>
+                  <div className={styles.sell_action}> {/*Show this when not on sale*/}
+                    <input type="text" value="0.0" />
+                    <div className="dropdown"> {/*add class .is-active to open dropdown*/}
+                      <a className={styles.select_currency} aria-haspopup="true" aria-controls="dropdown-menu">
+                        <img src="assets/currency/wanBTC.png" />
+                        <span className={styles.currency_name}>wanBTC</span>
+                        <span><FontAwesomeIcon icon={faCaretDown} /></span>
+                      </a>
+
+
+                      <div class="dropdown-menu" id="dropdown-menu" role="menu">
+                        <div class="dropdown-content">
+
+                          <a class="dropdown-item">
+                            <img src="assets/currency/zoo.png" /> ZOO
+                                                    </a>
+
+                          <a href="#" class="dropdown-item">
+                            <img src="assets/currency/wanBTC.png" /> wanBTC
+                                                    </a>
+
+                          <a href="#" class="dropdown-item">
+                            <img src="assets/currency/wanETH.png" /> wanETH
+                                                    </a>
+
+                        </div>
+                      </div>
+
+                    </div>
+
+
+                  </div>
+                    <a className={styles.sell_btn}>
+                      SELL
                     </a>
                   </div>
               </div>
@@ -117,11 +162,56 @@ export default function ListView(props) {
                 </div>
               </div>
 
-              
-              <div className={`${styles.listview_col} ${styles.buy_action}`}>
+              {/*In case of On sale*/}
+              <div className={`${styles.listview_col} ${styles.onsale_action}`}>
                 <div className={styles.listview_subcol}>
-                    <a className={styles.buy_btn}>
-                      Buy for 5555,555.55 wanBTC
+                    <div className={styles.onsale_price}>
+                      <span>On Sale for</span>
+                        5,230,529 wanUSDT
+                    </div>
+                    <a className={styles.cancel}>
+                      Cancel the SALE
+                    </a>
+                  </div>
+              </div>
+
+              {/*In case of On sale*/}
+              <div className={`${styles.listview_col} ${styles.market_action}`}  style={{display:'none'}}>
+                  <div className={styles.listview_subcol}>
+                  <div className={styles.sell_action}> {/*Show this when not on sale*/}
+                    <input type="text" value="0.0" />
+                    <div className="dropdown"> {/*add class .is-active to open dropdown*/}
+                      <a className={styles.select_currency} aria-haspopup="true" aria-controls="dropdown-menu">
+                        <img src="assets/currency/wanBTC.png" />
+                        <span className={styles.currency_name}>wanBTC</span>
+                        <span><FontAwesomeIcon icon={faCaretDown} /></span>
+                      </a>
+
+
+                      <div class="dropdown-menu" id="dropdown-menu" role="menu">
+                        <div class="dropdown-content">
+
+                          <a class="dropdown-item">
+                            <img src="assets/currency/zoo.png" /> ZOO
+                                                    </a>
+
+                          <a href="#" class="dropdown-item">
+                            <img src="assets/currency/wanBTC.png" /> wanBTC
+                                                    </a>
+
+                          <a href="#" class="dropdown-item">
+                            <img src="assets/currency/wanETH.png" /> wanETH
+                                                    </a>
+
+                        </div>
+                      </div>
+
+                    </div>
+
+
+                  </div>
+                    <a className={styles.sell_btn}>
+                      SELL
                     </a>
                   </div>
               </div>
