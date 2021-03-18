@@ -25,6 +25,7 @@ export default function OpenChestboxModal(props) {
     "/assets/category/magic.png",
   ]
 
+  console.debug('categroy:', props.categroy);
 
   return (
     <div id="OpenChestBoxModal" className={`modal  ${props.isActived === 0 ? "" : "is-active"}`}>

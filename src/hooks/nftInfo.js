@@ -15,7 +15,7 @@ export const getNftInfo = async (tokenId, web3, chainId) => {
   console.debug('tokenURI ret', ret);
   ret = await axios.get(ret);
   console.debug('tokenURI info', ret.data);
-  let obj = JSON.parse(ret.data);
+  let obj = ret.data;
   return {
     name: obj.name,
     image: obj.image,
