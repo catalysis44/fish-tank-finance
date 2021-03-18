@@ -27,6 +27,7 @@ export default function BoosterSelectionModal(props) {
 
   const nftCards = storage.nftCards;
   const nftBalance = storage.nftBalance;
+  const setNftId = props.setNftId;
 
   useEffect(() => {
     const func = async ()=>{
@@ -43,7 +44,7 @@ export default function BoosterSelectionModal(props) {
       }
 
       let objs = rets.map(v=>v.data);
-      
+
       setCards(objs.map((v,i)=>{
         v.tokenId = nftCards[i].tokenId;
         v.boost = nftCards[i].boost;
@@ -55,6 +56,8 @@ export default function BoosterSelectionModal(props) {
 
     func();
   }, [chainId, address, nftCards, nftBalance]);
+
+  console.debug('cards222', cards);
 
   return (
     <React.Fragment>
@@ -96,7 +99,7 @@ export default function BoosterSelectionModal(props) {
           <div className={styles.booster_panel}>
             <div className={styles.booster_table}>
             {
-              loading && "Loading..."
+              // loading && "Loading..."
             }
 
             {
@@ -104,19 +107,26 @@ export default function BoosterSelectionModal(props) {
                 return <div className={styles.booster_row}>
                   <div className={`${styles.booster_col} ${styles.star}`}>
                     <div className={styles.booster_subcol}>
-                    <img src="assets/star18x18.png"/><img src="assets/star18x18.png"/><img src="assets/star18x18.png"/>
+                      {
+                        Array.from({length: Number(v.attributes[1].value)}).map(v=>{
+                          return <img src="assets/star18x18.png"/>
+                        })
+                      }
                     </div>
                   </div>
                   <div className={`${styles.booster_col} ${styles.title}`}>
                     <div className={styles.booster_subcol}>
-                      <img src="assets/apple24x24.png"/> <div>Sugarspinned Strawberry Pie</div>
+                      <img src={v.image}/> <div>{v.name}</div>
                     </div>
                   </div>
                   <div className={`${styles.booster_col} ${styles.stat_action}`}>
                     <div className={styles.booster_subcol}>
-                      <div className={styles.stat}><span><img src="assets/rocket24x24.png"/>+5.15%</span></div>
-                      <div className={styles.stat}><span><img src="assets/hourglass24x24.png" style={{width:20}}/>-25.12%</span></div>
-                      <a>Attach</a>
+                      <div className={styles.stat}><span><img src="assets/rocket24x24.png"/>+{(v.boost * 100).toFixed(2)}%</span></div>
+                      <div className={styles.stat}><span><img src="assets/hourglass24x24.png" style={{width:20}}/>-{(v.reduce * 100).toFixed(2)}%</span></div>
+                      <a onClick={()=>{
+                        setNftId(v.tokenId);
+                        closeModal();
+                      }}>Attach</a>
                     </div>
                   </div>
                 </div>

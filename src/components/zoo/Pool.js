@@ -70,7 +70,7 @@ export default function Pool(props) {
 
   return (
     <React.Fragment >
-      <BoosterSelectionModal isActived={modal} setModal={setModal}></BoosterSelectionModal>
+      <BoosterSelectionModal isActived={modal} setModal={setModal} setNftId={setNftId}></BoosterSelectionModal>
       <div id={'pool_'+pid} className={styles.pool} data-active={poolInfo.lpAmount.toString() > 0}> {/*active true for on staking pool */}
         <div className={styles.bubble} data-equipped-nft="true"> {/*true if equipped an NFT*/}
           <a href="" className={styles.reload}><img src="assets/reload24x24.png" /></a>
