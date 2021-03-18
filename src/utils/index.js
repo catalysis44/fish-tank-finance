@@ -123,13 +123,13 @@ export const openNotificationBottle = (title, item, description, icon, nothing) 
         
         {description}
         {
-          item!=='Nothing...' && <a href="/safe" className="button">Check your collection</a>
+          !nothing && <a href="/safe" className="button">Check your collection</a>
         }
       </div>,
     duration: 0,
     placement: 'bottomRight',
     icon: <img src={icon} />,
-    className: nothing ? 'open-chestbox-notification' : 'open-chestbox-notification-nothing',
+    className: nothing ? 'open-chestbox-notification-nothing' : 'open-chestbox-notification',
 
   };
   notification.open(args);
