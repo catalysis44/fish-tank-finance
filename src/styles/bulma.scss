@@ -63,9 +63,9 @@ a{
     transition: all 0.3s;
 }
 input[type=text] {   
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
+  -webkit-appearance: none!important;
+  -moz-appearance: none!important;
+  appearance: none !important;
 }
 // Import only what you need from Bulma
 @import 'node_modules/bulma/sass/utilities/_all.sass';
