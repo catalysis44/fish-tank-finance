@@ -3,6 +3,7 @@ import styles from './CardView.less';
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretDown} from '@fortawesome/free-solid-svg-icons';
+import { commafy } from '../../utils';
 
 
 export default function CardView(props) {
@@ -51,10 +52,10 @@ export default function CardView(props) {
                                 </div>
               <div className={styles.item_description}>
                 <div className={styles.description}>
-                  <span><img src="assets/rocket24x24.png" /> +5.15%</span>
+                  <span><img src="assets/rocket24x24.png" /> +{commafy(props.boost*100, 2)}%</span>
                 </div>
                 <div className={styles.description}>
-                  <span><img src="assets/hourglass24x24.png" style={{ height: 20 }} /> -15.25%</span>
+                  <span><img src="assets/hourglass24x24.png" style={{ height: 20 }} /> -{commafy(props.reduce*100, 2)}%</span>
                 </div>
               </div>
               <div className={styles.footer}>

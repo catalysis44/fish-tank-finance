@@ -107,7 +107,7 @@ export const getUserNftBalance = (loader, chainId, address) => {
 }
 
 export const getUserNftTokenId = (loader, chainId, address, count) => {
-  let calls = Array.from({length:count}, (v,i)=>{return i}).map(i=>{
+  let calls = Array.from({ length: count }, (v, i) => { return i }).map(i => {
     return {
       target: ZOO_NFT_ADDRESS[chainId],
       call: ['tokenOfOwnerByIndex(address,uint256)(uint256)', address, i],
@@ -118,14 +118,30 @@ export const getUserNftTokenId = (loader, chainId, address, count) => {
   return loader.loadMany(calls);
 }
 
-export const getNftURI = (loader, chainId, tokenIds) => {
-  let calls = tokenIds.map(id=>{
+export const getNftBaseInfo = (loader, chainId, tokenIds) => {
+  let calls = tokenIds.map(id => {
     return {
       target: ZOO_NFT_ADDRESS[chainId],
       call: ['tokenURI(uint256)(string)', id],
       returns: [['uri', val => val]]
     }
   });
+
+  calls = calls.concat(tokenIds.map(id => {
+    return {
+      target: ZOO_NFT_ADDRESS[chainId],
+      call: ['getBoosting(uint256)(uint256)', id],
+      returns: [['boost', val => (val / 1e12 - 1)]]
+    }
+  }));
+
+  calls = calls.concat(tokenIds.map(id => {
+    return {
+      target: ZOO_NFT_ADDRESS[chainId],
+      call: ['getLockTimeReduce(uint256)(uint256)', id],
+      returns: [['reduce', val => (1 - val / 1e12)]]
+    }
+  }));
 
   return loader.loadMany(calls);
 }
@@ -314,12 +330,12 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
       chainId = 999;
     }
 
-    let tmpStorage = Object.assign({...storage});
+    let tmpStorage = Object.assign({ ...storage });
 
     getZooBalance(loader, chainId, address).then(ret => {
       console.debug('getZooBalance ret', ret, ret.returnValue.zooBalance);
 
-      tmpStorage = Object.assign({...tmpStorage, zooBalance: ret.returnValue.zooBalance});
+      tmpStorage = Object.assign({ ...tmpStorage, zooBalance: ret.returnValue.zooBalance });
       setStorage(tmpStorage);
     }).catch(err => {
       console.error('err 1', err);
@@ -328,7 +344,7 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
     getZooTotalSupply(loader, chainId).then(ret => {
       console.debug('getZooTotalSupply ret', ret, ret.returnValue.totalSupply);
 
-      tmpStorage = Object.assign({...tmpStorage, zooTotalSupply: ret.returnValue.totalSupply})
+      tmpStorage = Object.assign({ ...tmpStorage, zooTotalSupply: ret.returnValue.totalSupply })
       setStorage(tmpStorage);
     }).catch(err => {
       console.error('err 1.1', err);
@@ -338,22 +354,25 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
       console.debug('getUserNftBalance ret', ret);
 
       if (ret.returnValue.nftBalance > 0) {
-        getUserNftTokenId(loader, chainId, address, ret.returnValue.nftBalance).then(ret=>{
+        getUserNftTokenId(loader, chainId, address, ret.returnValue.nftBalance).then(ret => {
           console.debug('getUserNftTokenId ret', ret);
-          let tokenIds = ret.map(v=>{
+          let tokenIds = ret.map(v => {
             return v.returnValue.tokenId;
           });
 
-          getNftURI(loader, chainId, tokenIds).then(ret=>{
-            console.debug('getNftURI ret', ret);
-            let cards = ret.map((v,i)=>{
-              return {
+          getNftBaseInfo(loader, chainId, tokenIds).then(ret => {
+            console.debug('getNftBaseInfo ret', ret);
+            let cards = [];
+            for (let i = 0; i < tokenIds.length; i++) {
+              cards.push({
                 tokenId: tokenIds[i],
-                uri: v.returnValue.uri,
-              }
-            });
-
-            tmpStorage = Object.assign({...tmpStorage, nftCards: cards});
+                uri: ret[i].returnValue.uri,
+                boost: ret[i + tokenIds.length].returnValue.boost,
+                reduce: ret[i + tokenIds.length * 2].returnValue.reduce,
+              });
+            }
+            console.debug('cards:', cards);
+            tmpStorage = Object.assign({ ...tmpStorage, nftCards: cards });
             setStorage(tmpStorage);
           });
         }).catch(err => {
@@ -371,7 +390,7 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
         farmingInfo[v.returns[0][0]] = v.returnValue[v.returns[0][0]];
       });
 
-      tmpStorage = Object.assign({...tmpStorage, farmingInfo})
+      tmpStorage = Object.assign({ ...tmpStorage, farmingInfo })
       setStorage(tmpStorage);
       console.debug('farmingInfo', farmingInfo);
 
@@ -383,10 +402,10 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
           poolInfo[i] = {
             ...ret[i].returnValue,    // PoolInfo
             ...ret[farmingInfo.poolLength + i].returnValue, // UserInfo
-            ...ret[2*farmingInfo.poolLength + i].returnValue, // PendingZoo
-            ...ret[3*farmingInfo.poolLength + i].returnValue, // PendingWasp
-            ...ret[4*farmingInfo.poolLength + i].returnValue, // Boosting
-            ...ret[5*farmingInfo.poolLength + i].returnValue, // ExpirationTime
+            ...ret[2 * farmingInfo.poolLength + i].returnValue, // PendingZoo
+            ...ret[3 * farmingInfo.poolLength + i].returnValue, // PendingWasp
+            ...ret[4 * farmingInfo.poolLength + i].returnValue, // Boosting
+            ...ret[5 * farmingInfo.poolLength + i].returnValue, // ExpirationTime
           };
         }
 
@@ -406,7 +425,7 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
               poolInfo[i].symbol1 = ret[1].returnValue.symbol1;
 
               if (i === farmingInfo.poolLength - 1) {
-                tmpStorage = Object.assign({...tmpStorage, poolInfo})
+                tmpStorage = Object.assign({ ...tmpStorage, poolInfo })
                 setStorage(tmpStorage);
               }
             }).catch(err => {

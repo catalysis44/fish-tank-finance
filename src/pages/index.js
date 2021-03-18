@@ -85,6 +85,9 @@ export default function () {
 
       <div className={styles.row}>
         {
+          storage.poolInfo.length === 0 && <div>Loading...</div>
+        }
+        {
           storage.poolInfo.map((v, i)=>{
             return <Pool poolInfo={v} pid={i} key={i} setTxWaiting={setTxWaiting}/>
           })

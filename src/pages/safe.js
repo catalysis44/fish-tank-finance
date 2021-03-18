@@ -79,6 +79,8 @@ export default function () {
       
       setCards(objs.map((v,i)=>{
         v.tokenId = nftCards[i].tokenId;
+        v.boost = nftCards[i].boost;
+        v.reduce = nftCards[i].reduce;
         return v;
       }))
       setLoading(false);
@@ -307,7 +309,7 @@ export default function () {
           <div className={styles.row}>
           {
             cards.map(v=>{
-              return <CardView icon={v.image} name={v.name} tokenId={v.tokenId} attributes={v.attributes} />
+              return <CardView icon={v.image} name={v.name} tokenId={v.tokenId} attributes={v.attributes} boost={v.boost} reduce={v.reduce} />
             })
           }
           
