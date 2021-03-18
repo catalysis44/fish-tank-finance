@@ -123,7 +123,7 @@ export const openNotificationBottle = (title, item, description, icon, nothing) 
         
         {description}
         {
-          !nothing && <a href="/safe" className="button">Check your collection</a>
+          !nothing && <a href="/safe" className="button">Check your Safe</a>
         }
       </div>,
     duration: 0,
