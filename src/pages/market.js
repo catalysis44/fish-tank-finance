@@ -203,9 +203,9 @@ export default function () {
                             </div>
                         </div>
                     </div>
-
-                  <CardView/>
-
+                  <div className={styles.row}>
+                    <CardView/>
+                  </div>
 
                 </div>
             </div>

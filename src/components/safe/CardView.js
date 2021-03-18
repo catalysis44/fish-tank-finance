@@ -29,7 +29,7 @@ export default function CardView(props) {
 
   return (
     <React.Fragment >
-      <div className={styles.row}>
+     
         <div className={styles.flip_card}>
           <div className={styles.flip_card_inner}>
             <div className={styles.flip_card_front} data-is-max="false"> {/* data-is-max="true" if this is max item */}
@@ -143,7 +143,6 @@ export default function CardView(props) {
         </div>
 
 
-      </div>
 
 
 
