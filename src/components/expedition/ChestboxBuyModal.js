@@ -19,7 +19,7 @@ export default function ChestboxBuyModal(props) {
   const [modal, setModal] = useState(0);
   const [tokenId, setTokenId] = useState('0');
   const [level, setLevel] = useState('0');
-  const [categroy, setCategroy] = useState('0');
+  const [category, setCategory] = useState('0');
   const [item, setItem] = useState('0');
   const [name, setName] = useState('0');
   const [icon, setIcon] = useState('');
@@ -60,7 +60,7 @@ export default function ChestboxBuyModal(props) {
       setModal={setModal} type={type} 
       icon={icon} level={level} name={name} 
       boost={boost} reduce={reduce} 
-      categroy={categroy} tokenId={tokenId}></OpenChestboxModal>
+      category={category} tokenId={tokenId}></OpenChestboxModal>
     <div className={`modal  ${props.isActived === 0 ? "" : "is-active"}`}>
       <div className="modal-background" onClick={closeModal}></div>
       <div style={{ maxWidth: 400 }} className="modal-card animate__animated  animate__fadeInUp animate__faster">
@@ -121,7 +121,7 @@ export default function ChestboxBuyModal(props) {
                     console.debug('nft meta', obj);
                     setTokenId(ret.events.MintNFT.returnValues.tokenId);
                     setLevel(ret.events.MintNFT.returnValues.level);
-                    setCategroy(ret.events.MintNFT.returnValues.categroy);
+                    setCategory(ret.events.MintNFT.returnValues.category);
                     setItem(ret.events.MintNFT.returnValues.item);
                     setIcon(obj.image);
                     setName(obj.name);
@@ -143,7 +143,7 @@ export default function ChestboxBuyModal(props) {
                   console.debug('nft meta', obj);
                   setTokenId(ret.events.MintNFT.returnValues.tokenId);
                   setLevel(ret.events.MintNFT.returnValues.level);
-                  setCategroy(ret.events.MintNFT.returnValues.categroy);
+                  setCategory(ret.events.MintNFT.returnValues.categroy);
                   setItem(ret.events.MintNFT.returnValues.item);
                   setIcon(obj.image);
                   setName(obj.name);
