@@ -364,7 +364,7 @@ export default function Pool(props) {
                 </div>
                 <div className={styles.liq_row}>
                   <div>Total Liquidity</div>
-                  <div>$1,154,244</div>
+                  <div>{commafy(totalDeposited) + " WSLP"}</div>
                 </div>
                 <div className={styles.liq_row}>
                   <div><a target="view_window" href={"https://info.wanswap.finance/pair/" + lpToken}>View on info.WanSwap.finance <FontAwesomeIcon icon={faExternalLinkSquareAlt} /></a></div>
