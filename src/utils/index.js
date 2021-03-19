@@ -128,8 +128,8 @@ export const openNotificationBottle = (title, item, description, icon, nothing) 
       </div>,
     duration: 0,
     placement: 'bottomRight',
-    icon: icon && <img src={icon} />,
-    className: nothing ? 'open-chestbox-notification-nothing' : 'open-chestbox-notification',
+    icon: <img src={icon} />,
+    className: nothing ? `open-chestbox-notification-nothing silverbox` : `open-chestbox-notification silverbox`,
 
   };
   notification.open(args);

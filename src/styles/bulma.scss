@@ -244,6 +244,11 @@ input[type=text] {
   background:url(/assets/notification/chest.png) no-repeat 0 100%;
 }
 
+.open-chestbox-notification.silver .ant-notification-notice-with-icon,  .open-chestbox-notification-nothing.silverbox .ant-notification-notice-with-icon
+{
+  background:url(/assets/notification/chest_silver.png) no-repeat 0 100%;
+}
+
 .ant-notification-notice-close
 {
   color:black;

@@ -53,7 +53,7 @@ export default function OpenChestboxModal(props) {
           <div className={styles.item_wrapper}>
             <div className={styles.item}>
               <img src={props.icon} className={styles.float_item}/>
-              <img src="assets/openedBox80x80.png" className={styles.openedBox}/>
+              <img src="assets/openedGoldenBox80x80.png" className={styles.openedBox}/>
             </div>
             <div  className={styles.item_description}>
               <div className={styles.description}>
