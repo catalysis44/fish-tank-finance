@@ -1,6 +1,6 @@
 import BigNumber from 'bignumber.js';
 import { useInterval, useLockFn, useReactive } from 'ahooks';
-import { MULTICALL_ADDRESS, RPC_URL, ZOO_TOKEN_ADDRESS, ZOO_FARMING_ADDRESS, ZOO_BOOSTING_ADDRESS, NFT_FACTORY_ADDRESS, ZOO_NFT_ADDRESS } from '../config';
+import { MULTICALL_ADDRESS, RPC_URL, ZOO_TOKEN_ADDRESS, ZOO_FARMING_ADDRESS, ZOO_BOOSTING_ADDRESS, NFT_FACTORY_ADDRESS, ZOO_NFT_ADDRESS, WASP_FARMING_ADDRESS } from '../config';
 import React, { useCallback, useMemo } from 'react';
 import { getWaspPrice } from './waspPrice';
 const { aggregate } = require('@makerdao/multicall');
@@ -250,7 +250,7 @@ export const getZooPools = (loader, chainId, address, poolLength) => {
   return loader.loadMany(calls);
 }
 
-export const getLpInfo = (loader, lpToken, chainId, address) => {
+export const getLpInfo = (loader, lpToken, chainId, address, waspPid) => {
   return loader.loadMany([
     {
       target: lpToken,
@@ -267,11 +267,14 @@ export const getLpInfo = (loader, lpToken, chainId, address) => {
       call: ['balanceOf(address)(uint256)', address],
       returns: [['lpBalance', val => (new BigNumber(val)).div(1e18)]]
     },
-    // {
-    //   target: lpToken,
-    //   call: ['balanceOf(address)(uint256)', ZOO_FARMING_ADDRESS[chainId]],
-    //   returns: [['totalDeposited', val => (new BigNumber(val)).div(1e18)]]
-    // },
+    {
+      target: WASP_FARMING_ADDRESS[chainId],
+      call: ['userInfo(uint256,address)(uint256,uint256)', waspPid, ZOO_FARMING_ADDRESS[chainId]],
+      returns: [
+        ['totalDeposited', val => (new BigNumber(val)).div(1e18)],
+        ['waspFarmingUserRewardDebt', val => (new BigNumber(val)).div(1e18)],
+      ]
+    },
   ]);
 }
 
@@ -311,6 +314,11 @@ export const getFarmingInfo = (loader, chainId) => {
       target: ZOO_FARMING_ADDRESS[chainId],
       call: ['zooPerBlock()(uint256)'],
       returns: [['zooPerBlock', val => (new BigNumber(val.toString())).div(1e18)]]
+    },
+    {
+      target: ZOO_FARMING_ADDRESS[chainId],
+      call: ['totalAllocPoint()(uint256)'],
+      returns: [['totalAllocPoint', val => Number(val)]]
     },
   ]);
 }
@@ -437,12 +445,12 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
         console.debug('poolInfo', poolInfo);
 
         for (let i = 0; i < farmingInfo.poolLength; i++) {
-          getLpInfo(loader, poolInfo[i].lpToken, chainId, address).then(ret => {
+          getLpInfo(loader, poolInfo[i].lpToken, chainId, address, poolInfo[i].waspPid).then(ret => {
             console.debug('getLpInfo', i, ret);
             poolInfo[i].token0 = ret[0].returnValue.token0;
             poolInfo[i].token1 = ret[1].returnValue.token1;
             poolInfo[i].lpBalance = ret[2].returnValue.lpBalance;
-            // poolInfo[i].totalDeposited = ret[3].returnValue.totalDeposited;
+            poolInfo[i].totalDeposited = ret[3].returnValue.totalDeposited;
 
             getTokenSymbols(loader, poolInfo[i].token0, poolInfo[i].token1).then(ret => {
               console.debug('getTokenSymbols', i, ret);

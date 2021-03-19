@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext, useRef } from 'react';
+import { useState, useEffect, useContext, useRef, useMemo } from 'react';
 import styles from './Pool.less';
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -35,11 +35,23 @@ export default function Pool(props) {
   const pid = props.pid;
   console.debug('poolInfo 1', poolInfo);
   console.debug('symbol!!', poolInfo.symbol0, poolInfo.symbol1);
-  const deposited = poolInfo.lpAmount && (new BigNumber(poolInfo.lpAmount)).gt(0);
+  const lpAmount = poolInfo.lpAmount;
+  const deposited = lpAmount && (new BigNumber(lpAmount)).gt(0);
   const expirated = poolInfo.expirationTime * 1000 < Date.now();
   const baseAllocPoint = 100;
   const currentTokenId = poolInfo.tokenId; 
+  const dualFarmingEnable = poolInfo.dualFarmingEnable;
+  const farmingInfo = props.farmingInfo;
+  const totalAllocPoint = farmingInfo.totalAllocPoint;
+  const totalDeposited = poolInfo.totalDeposited;
+  const allocPoint = poolInfo.allocPoint;
+  const zooPerBlock = Number(farmingInfo.zooPerBlock.toString());
+  const blockPerWeek = 120960; //3600/5*24*7
+  console.debug('farmingInfo1', farmingInfo);
 
+  const zooPerWeek = useMemo(()=>{
+    return lpAmount.multipliedBy(zooPerBlock * blockPerWeek * allocPoint / totalAllocPoint).div(totalDeposited);
+  }, [totalAllocPoint, allocPoint, zooPerBlock, blockPerWeek, totalDeposited, lpAmount])
   
   const [countdown, setTargetDate, formattedRes] = useCountDown({
     targetDate: new Date(poolInfo.expirationTime * 1000),
@@ -106,7 +118,13 @@ export default function Pool(props) {
         <div className={styles.bubble} data-equipped-nft={currentTokenId !== 0 ? "true" : "false"}> {/*true if equipped an NFT*/}
           <a href="" className={styles.reload}><img src="assets/reload24x24.png" /></a>
           {
-            currentTokenId !== 0 && icon !== '' && <img src={icon} />
+            currentTokenId !== 0 && icon && <img src={icon} />
+          }
+          {
+            deposited && currentTokenId === 0 && <img src="/assets/equip28x28.png" />
+          }
+          {
+            !deposited && dualFarmingEnable && <img src="/assets/dualfarm28x28.png" />
           }
           
           <div className={styles.bubble_text}>
@@ -123,7 +141,10 @@ export default function Pool(props) {
               deposited && currentTokenId === 0 && <div className={styles.boost_amount}>ATTACH A BOOST CARD TO OPTIMIZE YOUR FARMING</div>
             }
             {
-              !deposited && <div className={styles.boost_amount}>DUAL FARMING ZOO + WASP</div>
+              !deposited && dualFarmingEnable && <div className={styles.boost_amount}>DUAL FARMING ZOO + WASP</div>
+            }
+            {
+              !deposited && !dualFarmingEnable && <div className={styles.boost_amount}>WELCOME FARMING ZOO</div>
             }
           </div>
         </div>
@@ -169,7 +190,7 @@ export default function Pool(props) {
                     <div className={styles.per_week}>
                       <img src="assets/currency/zoo.png"/>
                       <div>
-                        55,145.21
+                        {commafy(zooPerWeek)}
                         <span>per week</span>
                       </div>
                     </div>

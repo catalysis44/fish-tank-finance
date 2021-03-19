@@ -89,7 +89,7 @@ export default function () {
         }
         {
           storage.poolInfo.map((v, i)=>{
-            return <Pool poolInfo={v} pid={i} key={i} setTxWaiting={setTxWaiting}/>
+            return <Pool poolInfo={v} pid={i} key={i} setTxWaiting={setTxWaiting} farmingInfo={storage.farmingInfo}/>
           })
         }
 
