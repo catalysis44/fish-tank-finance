@@ -94,6 +94,15 @@ export default function () {
 
   return (
     <React.Fragment>
+
+      <div className={styles.connect_or_undercontruction}>
+        <div className={styles.title}>
+          My Safe
+        </div>
+        <img src="assets/safe_connect.png"/>
+        <a>Connect Wallet</a>
+      </div>
+      <div className={styles.connected} style={{display:'none'}}> {/* remove display none after connected */}
       <div id="filterbar_backdrop" onClick={removeToggle}></div>
       <a id="toggle_filter" className={styles.toggle_filter} onClick={toggleFilter}><span><img src="assets/magnify24x24.png" /> FILTER</span></a>
       <a id="toggle_tx" className={styles.toggle_tx} onClick={toggleTx}><span><img src="assets/reload24x24.png" /> HISTORY</span></a>
@@ -320,7 +329,7 @@ export default function () {
         </div>
       </div>
 
-
+      </div>
     </React.Fragment>
   );
 }
