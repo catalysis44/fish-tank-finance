@@ -275,6 +275,28 @@ export const getLpInfo = (loader, lpToken, chainId, address, waspPid) => {
         ['waspFarmingUserRewardDebt', val => (new BigNumber(val)).div(1e18)],
       ]
     },
+    {
+      target: WASP_FARMING_ADDRESS[chainId],
+      call: ['totalAllocPoint()(uint256)'],
+      returns: [
+        ['waspTotalAllocPoint', val => Number(val)],
+      ]
+    },
+    {
+      target: WASP_FARMING_ADDRESS[chainId],
+      call: ['poolInfo(uint256)(address,uint256,uint256,uint256)', waspPid],
+      returns: [
+        ['waspLpToken', val => val],
+        ['waspAllocPoint', val => Number(val)],
+        ['waspLastRewardBlock', val => Number(val)],
+        ['waspAccPerShare', val => val],
+      ]
+    },
+    {
+      target: lpToken,
+      call: ['balanceOf(address)(uint256)', WASP_FARMING_ADDRESS[chainId]],
+      returns: [['waspTotalLP', val => (new BigNumber(val)).div(1e18)]]
+    },
   ]);
 }
 
@@ -451,6 +473,9 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
             poolInfo[i].token1 = ret[1].returnValue.token1;
             poolInfo[i].lpBalance = ret[2].returnValue.lpBalance;
             poolInfo[i].totalDeposited = ret[3].returnValue.totalDeposited;
+            poolInfo[i].waspTotalAllocPoint = ret[4].returnValue.waspTotalAllocPoint;
+            poolInfo[i].waspAllocPoint = ret[5].returnValue.waspAllocPoint;
+            poolInfo[i].waspTotalLP = ret[6].returnValue.waspTotalLP;
 
             getTokenSymbols(loader, poolInfo[i].token0, poolInfo[i].token1).then(ret => {
               console.debug('getTokenSymbols', i, ret);

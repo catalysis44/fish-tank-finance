@@ -69,11 +69,24 @@ export default function Pool(props) {
   const allocPoint = poolInfo.allocPoint;
   const zooPerBlock = Number(farmingInfo.zooPerBlock.toString());
   const blockPerWeek = 120960; //3600/5*24*7
+  const waspAllocPoint = poolInfo.waspAllocPoint;
+  const waspTotalAllocPoint = poolInfo.waspTotalAllocPoint;
+  const waspTotalLP = poolInfo.waspTotalLP;
+
+
   console.debug('farmingInfo1', farmingInfo);
 
   const zooPerWeek = useMemo(()=>{
-    return lpAmount && lpAmount && (new BigNumber(lpAmount)).gt(0) && (new BigNumber(lpAmount)).multipliedBy(zooPerBlock * blockPerWeek * allocPoint / totalAllocPoint).div(totalDeposited);
-  }, [totalAllocPoint, allocPoint, zooPerBlock, blockPerWeek, totalDeposited, lpAmount])
+    return lpAmount && (new BigNumber(lpAmount)).gt(0) && (new BigNumber(lpAmount)).multipliedBy(zooPerBlock * blockPerWeek * allocPoint / totalAllocPoint).div(totalDeposited);
+  }, [totalAllocPoint, allocPoint, zooPerBlock, blockPerWeek, totalDeposited, lpAmount]);
+
+  const waspPerWeek = useMemo(()=>{
+    if (!dualFarmingEnable) {
+      return 0;
+    }
+    const waspPerBlock = 12;
+    return lpAmount && (new BigNumber(lpAmount)).gt(0) && (new BigNumber(lpAmount)).multipliedBy(waspPerBlock * blockPerWeek * waspAllocPoint / waspTotalAllocPoint).div(waspTotalLP);
+  }, [waspAllocPoint, waspTotalAllocPoint, waspTotalLP, blockPerWeek, lpAmount, dualFarmingEnable]);
   
   const [countdown, setTargetDate, formattedRes] = useCountDown({
     targetDate: new Date(poolInfo.expirationTime * 1000),
@@ -205,7 +218,13 @@ export default function Pool(props) {
           <div className={styles.main_area}>
             <div className={styles.earned}>
               <div className={styles.title}>
-                ZOO+WASP EARNED 
+                {
+                  dualFarmingEnable && "ZOO+WASP EARNED"
+                }
+                {
+                  !dualFarmingEnable && "ZOO EARNED"
+                }
+                
                 <span className={styles.tipbox_btn}>
                   ?
                   <div className={styles.tipbox}>
@@ -217,14 +236,15 @@ export default function Pool(props) {
                       </div>
                     </div>
 
-                    <div className={styles.per_week}> {/*display:none if not dualfarm*/}
-                      <img src="assets/currency/wasp.png"/>
-                      <div>
-                        loading
-                        <span>per week</span>
+                    {
+                      dualFarmingEnable && <div className={styles.per_week}> {/*display:none if not dualfarm*/}
+                        <img src="assets/currency/wasp.png"/>
+                        <div>
+                          {commafy(waspPerWeek)}
+                          <span>per week</span>
+                        </div>
                       </div>
-                    </div>
-                    
+                    }
                     
                   </div>
                 </span>
@@ -232,7 +252,9 @@ export default function Pool(props) {
               <div className={styles.harvest_wrapper}>
                 <div className={styles.earned_amount} data-double-farming="true"> {/*Add "disabled" when non-connected  and data-double-farming="true" when duofarming */}
                   <div>{commafy(poolInfo.pendingZoo)} ZOO</div>
-                  <div>{commafy(poolInfo.pendingWasp)} WASP</div>
+                  {
+                    dualFarmingEnable && <div>{commafy(poolInfo.pendingWasp)} WASP</div>
+                  }
                 </div>
                 <a className={styles.harvest} onClick={()=>{
                   if (!wallet.connected) {
@@ -327,9 +349,9 @@ export default function Pool(props) {
                   {poolInfo.symbol1 && <img src={'https://token-icons.vercel.app/icon/wanswap/'+poolInfo.symbol1+'.png'} />}
                 </div>
 
-                <a className={styles.add_liquidity} onClick={()=>{
-                  window.open(WANSWAP_URL + '/#/add/'+(poolInfo.token0.toLowerCase() === WWAN_ADDRESS[wallet.networkId] ? 'WAN' : poolInfo.token0) +'/'+ (poolInfo.token1.toLowerCase() === WWAN_ADDRESS[wallet.networkId] ? 'WAN' : poolInfo.token1));
-                }}>
+                <a className={styles.add_liquidity}
+                  target="view_window"
+                  href={ WANSWAP_URL + '/#/add/'+(poolInfo.token0.toLowerCase() === WWAN_ADDRESS[wallet.networkId] ? 'WAN' : poolInfo.token0) +'/'+ (poolInfo.token1.toLowerCase() === WWAN_ADDRESS[wallet.networkId] ? 'WAN' : poolInfo.token1) }>
                   Add Liquidity on WanSwap
                 </a>
 
@@ -345,7 +367,7 @@ export default function Pool(props) {
                   <div>$1,154,244</div>
                 </div>
                 <div className={styles.liq_row}>
-                  <div><a href="">View on WanSwap.com <FontAwesomeIcon icon={faExternalLinkSquareAlt} /></a></div>
+                  <div><a target="view_window" href={"https://info.wanswap.finance/pair/" + lpToken}>View on info.WanSwap.finance <FontAwesomeIcon icon={faExternalLinkSquareAlt} /></a></div>
 
                 </div>
               </div>
