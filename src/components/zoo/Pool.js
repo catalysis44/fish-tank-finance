@@ -13,6 +13,28 @@ import { approve, checkApprove, deposit, withdraw } from '../../wallet/send';
 import { WANSWAP_URL, WWAN_ADDRESS, ZOO_FARMING_ADDRESS } from '../../config';
 import { getNftInfo } from '../../hooks/nftInfo';
 
+const poolAnimals = [
+  '/zoo_keeper_pools/BEAR.png',
+  '/zoo_keeper_pools/CROCODILE.png',
+  '/zoo_keeper_pools/ELEPHANT.png',
+  '/zoo_keeper_pools/GIRAFE.png',
+  '/zoo_keeper_pools/HIPPO.png',
+  '/zoo_keeper_pools/KANGAROO.png',
+  '/zoo_keeper_pools/KOALA.png',
+  '/zoo_keeper_pools/LAMA.png',
+  '/zoo_keeper_pools/LION.png',
+  '/zoo_keeper_pools/MONKEY.png',
+  '/zoo_keeper_pools/PANDA.png',
+  '/zoo_keeper_pools/PENGUIN.png',
+  '/zoo_keeper_pools/POLAR_BEAR.png',
+  '/zoo_keeper_pools/RHINO.png',
+  '/zoo_keeper_pools/TIGER.png',
+  '/zoo_keeper_pools/TOUKAN.png',
+  '/zoo_keeper_pools/TURTOISE.png',
+  '/zoo_keeper_pools/WHALE.png',
+  '/zoo_keeper_pools/WOLF.png',
+  '/zoo_keeper_pools/ZEBRA.png',
+]
 
 
 export default function Pool(props) {
@@ -162,7 +184,7 @@ export default function Pool(props) {
         </div>
 
         <div className={styles.avatar}>
-          <img src="dummy/giraffe.png" className={styles.lv1} />
+          <img src={poolAnimals[pid % poolAnimals.length]} className={styles.lv1} />
           {
           poolInfo.lpAmount.toString() > 0 && <img src="assets/sunglass.png" className={styles.lv2} />
           }
@@ -198,7 +220,7 @@ export default function Pool(props) {
                     <div className={styles.per_week}> {/*display:none if not dualfarm*/}
                       <img src="assets/currency/wasp.png"/>
                       <div>
-                        22,145.21
+                        loading
                         <span>per week</span>
                       </div>
                     </div>
