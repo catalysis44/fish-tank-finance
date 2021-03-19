@@ -116,7 +116,7 @@ export default function ChestboxBuyModal(props) {
                 if (ret.events.MintNFT.returnValues.level === '0') {
                   console.debug('33333', ret);
                   closeModal();
-                  openNotificationOpenedBox(type.toUpperCase() + ' CHEST HAS BEEN OPENED', 'Nothing...', 'Unfortunately, you get nothing, 9 times in a row nothing, the next time 100% got non-rare NFT.', '', true);
+                  openNotificationOpenedBox(type.toUpperCase() + ' CHEST HAS BEEN OPENED', 'Nothing...', 'Unfortunately, you get nothing, 9 times in a row nothing, the next time 100% got non-rare NFT.', 'assets/sliversmoke.png', true);
                 } else {
                   getNftInfo(ret.events.MintNFT.returnValues.tokenId, web3, chainId).then(obj=>{
                     console.debug('nftmeta111', obj);
