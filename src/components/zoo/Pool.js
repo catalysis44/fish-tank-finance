@@ -119,6 +119,12 @@ export default function Pool(props) {
             {
               currentTokenId !== 0 && <div className={styles.boost_amount}>LOCKTIME -{(reduce*100).toFixed(2)}%</div>
             }
+            {
+              deposited && currentTokenId === 0 && <div className={styles.boost_amount}>ATTACH A BOOST CARD TO OPTIMIZE YOUR FARMING</div>
+            }
+            {
+              !deposited && <div className={styles.boost_amount}>DUAL FARMING ZOO + WASP</div>
+            }
           </div>
         </div>
         <div className={styles.header}>
