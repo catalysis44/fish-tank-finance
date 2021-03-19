@@ -19,8 +19,9 @@ export const initialState = {
   },
   poolInfo: [],
   goldenPrice: 0,
-  zooBurned: 0,
-  zooTotalSupply: 0,
+  expeditions: [],
+  zooBurned: new BigNumber(0),
+  zooTotalSupply: new BigNumber(0),
   nftBalance: 0,
   nftCards: [],
   blockNumber: 0,
@@ -149,13 +150,13 @@ export const getNftBaseInfo = (loader, chainId, tokenIds) => {
   return loader.loadMany(calls);
 }
 
-// export const getZooBurned = (loader, chainId, address) => {
-//   return loader.load({
-//     target: ZOO_TOKEN_ADDRESS[chainId],
-//     call: ['balanceOf(address)(uint256)', '0x'],
-//     returns: [['zooBalance', val => (new BigNumber(val.toString())).div(1e18)]]
-//   });
-// }
+export const getZooBurned = (loader, chainId, address) => {
+  return loader.load({
+    target: ZOO_TOKEN_ADDRESS[chainId],
+    call: ['totalBurned()(uint256)'],
+    returns: [['zooBurned', val => (new BigNumber(val.toString())).div(1e18)]]
+  });
+}
 
 export const getZooPools = (loader, chainId, address, poolLength) => {
   let poolIndexs = Array.from({ length: poolLength }, (v, i) => i);
@@ -345,12 +346,54 @@ export const getFarmingInfo = (loader, chainId) => {
   ]);
 }
 
-export const getNFTFactoryInfo = (loader, chainId) => {
+export const getNFTFactoryInfo = (loader, chainId, address) => {
   return loader.loadMany([
     {
       target: NFT_FACTORY_ADDRESS[chainId],
-      call: ['queryGoldenPrice()(uint)'],
+      call: ['queryGoldenPrice()(uint256)'],
       returns: [['goldenPrice', val => (new BigNumber(val)).div(1e18)]]
+    },
+    {
+      target: NFT_FACTORY_ADDRESS[chainId],
+      call: ['stakeInfo(address,uint256)(uint256,uint256,uint256)', address, 0],
+      returns: [
+        ['lockTime', val => Number(val)],
+        ['startTime', val => Number(val)],
+        ['stakeAmount', val => (new BigNumber(val)).div(1e18)],
+      ]
+    },
+    {
+      target: NFT_FACTORY_ADDRESS[chainId],
+      call: ['stakeInfo(address,uint256)(uint256,uint256,uint256)', address, 1],
+      returns: [
+        ['lockTime', val => Number(val)],
+        ['startTime', val => Number(val)],
+        ['stakeAmount', val => (new BigNumber(val)).div(1e18)],
+      ]
+    },
+    {
+      target: NFT_FACTORY_ADDRESS[chainId],
+      call: ['stakeInfo(address,uint256)(uint256,uint256,uint256)', address, 2],
+      returns: [
+        ['lockTime', val => Number(val)],
+        ['startTime', val => Number(val)],
+        ['stakeAmount', val => (new BigNumber(val)).div(1e18)],
+      ]
+    },
+    {
+      target: NFT_FACTORY_ADDRESS[chainId],
+      call: ['stakedAmount(uint256)(uint256)', 0],
+      returns: [['stakedAmount', val => (new BigNumber(val)).div(1e18)]]
+    },
+    {
+      target: NFT_FACTORY_ADDRESS[chainId],
+      call: ['stakedAmount(uint256)(uint256)', 1],
+      returns: [['stakedAmount', val => (new BigNumber(val)).div(1e18)]]
+    },
+    {
+      target: NFT_FACTORY_ADDRESS[chainId],
+      call: ['stakedAmount(uint256)(uint256)', 2],
+      returns: [['stakedAmount', val => (new BigNumber(val)).div(1e18)]]
     },
   ]);
 }
@@ -402,6 +445,15 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
       updateStorage(tmpStorage);
     }).catch(err => {
       console.error('err 1.1', err);
+    });
+
+    getZooBurned(loader, chainId).then(ret => {
+      console.debug('getZooBurned ret', ret, ret.returnValue.totalSupply);
+
+      tmpStorage = Object.assign({ ...tmpStorage, zooBurned: ret.returnValue.zooBurned, blockNumber: ret.returnValue.blockNumber })
+      updateStorage(tmpStorage);
+    }).catch(err => {
+      console.error('err 1.2', err);
     });
 
     getUserNftBalance(loader, chainId, address).then(ret => {
@@ -500,9 +552,17 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
       console.error('err 2', err);
     });
 
-    getNFTFactoryInfo(loader, chainId).then(ret => {
-      console.debug('getNFTFactoryInfo ret', ret);
+    getNFTFactoryInfo(loader, chainId, address).then(ret => {
+      console.debug('getNFTFactoryInfo ret', ret, tmpStorage);
       tmpStorage.goldenPrice = ret[0].returnValue.goldenPrice;
+      if (!tmpStorage.expeditions) {
+        tmpStorage.expeditions = [];
+      }
+      tmpStorage.expeditions[0] = {...ret[1].returnValue, ...ret[4].returnValue};
+      tmpStorage.expeditions[1] = {...ret[2].returnValue, ...ret[5].returnValue};
+      tmpStorage.expeditions[2] = {...ret[3].returnValue, ...ret[6].returnValue};
+
+      updateStorage(tmpStorage);
     }).catch(err => {
       console.error('err 30', err);
     });

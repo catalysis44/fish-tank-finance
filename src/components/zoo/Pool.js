@@ -7,7 +7,7 @@ import { Slider } from 'antd';
 import BoosterSelectionModal from './BoosterSelectionModal';
 import { commafy, checkNumber, calcLockTimeBoost } from '../../utils';
 import BigNumber from 'bignumber.js';
-import { useCountDown, useClickAway } from 'ahooks';
+import { useCountDown } from 'ahooks';
 import { WalletContext } from '../../wallet/Wallet';
 import { approve, checkApprove, deposit, withdraw } from '../../wallet/send';
 import { WANSWAP_URL, WWAN_ADDRESS, ZOO_FARMING_ADDRESS } from '../../config';

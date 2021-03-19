@@ -10,7 +10,7 @@ import { useState } from 'react';
 import { useDataPump, initialState, StorageContext } from '../hooks';
 import { commafy } from '../utils';
 import { useLocalStorageState } from 'ahooks';
-
+import BigNumber from 'bignumber.js';
 
 
 function toggleSidebar()
@@ -31,6 +31,8 @@ function BasicLayout(props) {
 
   useDataPump(storage, setStorage, chainId, address, connected);
   console.debug('chainId', chainId);
+
+  const zooPrice = 16;
   return (
     <div id="wrapper">
       <Wallet wallet={wallet} setWallet={setWallet} />
@@ -78,8 +80,8 @@ function BasicLayout(props) {
               <div className={styles.box}>
                   <img src="assets/zoo32x32.png" class={styles.zoo_icon}/>
                   <div class={styles.detail}>
-                      <div>1 ZOO = <span>$10.32</span></div>
-                      <div>MC <span>$41,548,555.22</span></div>
+                      <div>1 ZOO = <span>${commafy(zooPrice)}</span></div>
+                      <div>MC <span>${commafy((new BigNumber(storage.zooTotalSupply)).minus(storage.zooBurned).multipliedBy(zooPrice))}</span></div>
                       <div>Current supply</div>
                       <div><span>{commafy(storage.zooTotalSupply)} ZOO</span></div>
                   </div>
@@ -90,7 +92,7 @@ function BasicLayout(props) {
                   <img src="assets/burned42x42.png" class={styles.burn_icon}/>
                   <div class={styles.detail}>
                       <div>TOTAL BURNED</div>
-                      <div><span className={styles.burned}>55,012,345.56 ZOO</span></div>
+                      <div><span className={styles.burned}>{commafy(storage.zooBurned)} ZOO</span></div>
                   </div>
               </div>
             </div>

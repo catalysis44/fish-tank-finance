@@ -8,6 +8,8 @@ import { WalletContext } from '../wallet/Wallet';
 import { OmitProps } from 'antd/lib/transfer/ListBody';
 import Loader from '../components/loader'
 import BigNumber from 'bignumber.js';
+import { useCountDown } from 'ahooks';
+import { stakeZoo } from '../wallet/send';
 
 
 export default function (props) {
@@ -18,6 +20,9 @@ export default function (props) {
   const [showSilverModal, setShowSilverModal] = useState(0);
 
   const storage = useContext(StorageContext);
+  const goldenPrice = storage.goldenPrice;
+  const expeditions = storage.expeditions;
+  console.debug('expeditions1', expeditions);
 
   const wallet = useContext(WalletContext);
   const chainId = wallet.networkId;
@@ -25,19 +30,33 @@ export default function (props) {
   const address = wallet.address;
   const web3 = wallet.web3;
 
+  const [countdown0, setTargetDate0, formattedRes0] = useCountDown({
+    targetDate: new Date((expeditions[0].startTime + expeditions[0].lockTime)*1000),
+  });
+
+  const [countdown1, setTargetDate1, formattedRes1] = useCountDown({
+    targetDate: new Date((expeditions[1].startTime + expeditions[1].lockTime)*1000),
+  });
+
+  const [countdown2, setTargetDate2, formattedRes2] = useCountDown({
+    targetDate: new Date((expeditions[2].startTime + expeditions[2].lockTime)*1000),
+  });
+
+  console.debug('countdown0', countdown0, countdown1, countdown2);
+
   return (
     <React.Fragment>
       {
         txWaiting && <Loader/>
       }
       {/* For Instant Chest - NFT / Artifact */}
-      <ChestboxBuyModal isActived={showGoldenModal} setModal={setShowGoldenModal} title={'GOLD CHEST INSTANT BUY'} price={storage.goldenPrice}
+      <ChestboxBuyModal isActived={showGoldenModal} setModal={setShowGoldenModal} title={'GOLD CHEST INSTANT BUY'} price={goldenPrice}
         rules={'Burn your Zoo and has a 100% chance of getting a random NFT collectible.'}
         type={'golden'}
         setTxWaiting={setTxWaiting}
         zooBalance={storage.zooBalance}
         ></ChestboxBuyModal>
-      <ChestboxBuyModal isActived={showSilverModal} setModal={setShowSilverModal} title={'SILVER CHEST INSTANT BUY'} price={(new BigNumber(storage.goldenPrice)).div(10)}
+      <ChestboxBuyModal isActived={showSilverModal} setModal={setShowSilverModal} title={'SILVER CHEST INSTANT BUY'} price={(new BigNumber(goldenPrice)).div(10)}
         rules={'Burn your Zoo and has a 10% chance of getting a non-rare random NFT collectible. If you miss 10 shots in a row, the next time‘s chance is 100%.'}
         type={'silver'}
         setTxWaiting={setTxWaiting}
@@ -130,22 +149,22 @@ export default function (props) {
             <img src="dummy/desert.png" className={styles.cover} />
             <div className={styles.tvl}>
               <div className={styles.amount}>
-                555,555,555.00
-                            </div>
-                            ZOO LOCKED
-                        </div>
+                {commafy(expeditions[0] && expeditions[0].stakedAmount)}
+                </div>
+                ZOO LOCKED
+            </div>
           </div>
           <div className={styles.title}>
             THE LOST ARK
-                    </div>
+          </div>
           <div className={styles.condition}>
             <div className={styles.minimum}>
               <img src="assets/zoo32x32.png" />
-                            25,000
-                        </div>
+              {commafy(goldenPrice*10).split('.')[0]}
+              </div>
             <div className={styles.hour}>
               <img src="assets/hourglass24x24.png" />
-              <span>72 Hours</span>
+              <span>48 Hours</span>
 
             </div>
           </div>
@@ -163,15 +182,30 @@ export default function (props) {
 
             </div>
           </div>
-          <a className={styles.action_btn}>
-            Stake ZOO
-                    </a>
-          <a className={styles.action_btn} style={{ display: 'none' }}>
-            Claim 1 Artifact
-                    </a>
-          <a className={styles.pending_btn} style={{ display: 'none' }}>
-            35:45:15 Left
-                    </a>
+          {
+            expeditions[0] && expeditions[0].startTime === 0 && <a className={styles.action_btn} onClick={()=>{
+              setTxWaiting(true);
+              stakeZoo(0, web3, chainId, address).then(ret=>{
+                setTxWaiting(false);
+                console.log(ret);
+              }).catch(err=>{
+                console.log(err);
+                setTxWaiting(false);
+              })
+            }}>
+              Stake ZOO
+            </a>
+          }
+          {
+            expeditions[0] && expeditions[0].startTime !== 0 && countdown0 <= 0 && <a className={styles.action_btn}>
+              Claim 1 Artifact
+            </a>
+          }
+          {
+            expeditions[0] && expeditions[0].startTime !== 0 && countdown0 > 0 && <a className={styles.action_btn}>
+              {formattedRes0.days}:{formattedRes0.hours}:{formattedRes0.minutes}:{formattedRes0.seconds} Left
+            </a>
+          }
         </div>
 
         <div className={styles.pool} data-active="true"> {/*active true for on staking pool */}
@@ -179,23 +213,22 @@ export default function (props) {
             <img src="dummy/cave.png" className={styles.cover} />
             <div className={styles.tvl}>
               <div className={styles.amount}>
-                555,555,555.00
-                            </div>
-                            ZOO LOCKED
-                        </div>
+                {commafy(expeditions[1] && expeditions[1].stakedAmount)}
+                </div>
+                ZOO LOCKED
+            </div>
           </div>
           <div className={styles.title}>
             THE MIGHTY CAVE
-                    </div>
+          </div>
           <div className={styles.condition}>
             <div className={styles.minimum}>
               <img src="assets/zoo32x32.png" />
-                            25,000
-                        </div>
+              {commafy(goldenPrice).split('.')[0]}
+              </div>
             <div className={styles.hour}>
               <img src="assets/hourglass24x24.png" />
-              <span>72 Hours</span>
-
+              <span>15 Days</span>
             </div>
           </div>
 
@@ -212,15 +245,30 @@ export default function (props) {
 
             </div>
           </div>
-          <a className={styles.action_btn} style={{ display: 'none' }}>
-            Stake ZOO
-                    </a>
-          <a className={styles.action_btn}>
-            Claim 1 Golden Chest
-                    </a>
-          <a className={styles.pending_btn} style={{ display: 'none' }}>
-            35:45:15 Left
-                    </a>
+          {
+            expeditions[1] && expeditions[1].startTime === 0 && <a className={styles.action_btn} onClick={()=>{
+              setTxWaiting(true);
+              stakeZoo(1, web3, chainId, address).then(ret=>{
+                console.log(ret);
+                setTxWaiting(false);
+              }).catch(err=>{
+                console.log(err);
+                setTxWaiting(false);
+              })
+            }}>
+              Stake ZOO
+            </a>
+          }
+          {
+            expeditions[1] && expeditions[1].startTime !== 0 && countdown1 <= 0 && <a className={styles.action_btn}>
+              Claim 1 Artifact
+            </a>
+          }
+          {
+            expeditions[1] && expeditions[1].startTime !== 0 && countdown1 > 0 && <a className={styles.action_btn}>
+              {formattedRes1.days}:{formattedRes1.hours}:{formattedRes1.minutes}:{formattedRes1.seconds} Left
+            </a>
+          }
         </div>
 
         <div className={styles.pool} data-active="true"> {/*active true for on staking pool */}
@@ -228,23 +276,22 @@ export default function (props) {
             <img src="dummy/jungle.png" className={styles.cover} />
             <div className={styles.tvl}>
               <div className={styles.amount}>
-                555,555,555.00
-                            </div>
-                            ZOO LOCKED
-                        </div>
+              {commafy(expeditions[2] && expeditions[2].stakedAmount)}
+              </div>
+              ZOO LOCKED
+          </div>
           </div>
           <div className={styles.title}>
             THE SECRET JUNGLE
-                    </div>
+          </div>
           <div className={styles.condition}>
             <div className={styles.minimum}>
               <img src="assets/zoo32x32.png" />
-                            25,000
-                        </div>
+              {commafy(goldenPrice / 2).split('.')[0]}
+            </div>
             <div className={styles.hour}>
               <img src="assets/hourglass24x24.png" />
-              <span>72 Hours</span>
-
+              <span>30 Days</span>
             </div>
           </div>
 
@@ -261,15 +308,30 @@ export default function (props) {
 
             </div>
           </div>
-          <a className={styles.action_btn} style={{ display: 'none' }}>
-            Stake ZOO
-                    </a>
-          <a className={styles.action_btn} style={{ display: 'none' }}>
-            Claim 1 Golden Chest
-                    </a>
-          <a className={styles.pending_btn}>
-            35:45:15 Left
-                    </a>
+          {
+            expeditions[2] && expeditions[2].startTime === 0 && <a className={styles.action_btn} onClick={()=>{
+              setTxWaiting(true);
+              stakeZoo(2, web3, chainId, address).then(ret=>{
+                console.log(ret);
+                setTxWaiting(false);
+              }).catch(err=>{
+                console.log(err);
+                setTxWaiting(false);
+              })
+            }}>
+              Stake ZOO
+            </a>
+          }
+          {
+            expeditions[2] && expeditions[2].startTime !== 0 && countdown2 <= 0 && <a className={styles.action_btn}>
+              Claim 1 Artifact
+            </a>
+          }
+          {
+            expeditions[2] && expeditions[2].startTime !== 0 && countdown2 > 0 && <a className={styles.action_btn}>
+              {formattedRes2.days}:{formattedRes2.hours}:{formattedRes2.minutes}:{formattedRes2.seconds} Left
+            </a>
+          }
         </div>
 
       </div>
