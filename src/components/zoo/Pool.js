@@ -150,8 +150,11 @@ export default function Pool(props) {
         setReduce={setReduce}
         ></BoosterSelectionModal>
       <div id={'pool_'+pid} className={styles.pool} data-active={poolInfo.lpAmount.toString() > 0}> {/*active true for on staking pool */}
-        <div className={styles.bubble} data-equipped-nft={currentTokenId !== 0 ? "true" : "false"}> {/*true if equipped an NFT*/}
-          <a href="" className={styles.reload}><img src="assets/reload24x24.png" /></a>
+        <div className={styles.bubble} data-equipped-nft={currentTokenId !== 0 ? "true" : "false"} style={{display: !deposited && !dualFarmingEnable?'none':'flex'}}> {/*true if equipped an NFT*/}
+          {
+            currentTokenId !== 0 && <a href="" className={styles.reload}><img src="assets/reload24x24.png" /></a>
+          }
+          
           {
             currentTokenId !== 0 && icon && <img src={icon} />
           }
@@ -176,7 +179,7 @@ export default function Pool(props) {
               deposited && currentTokenId === 0 && <div className={styles.boost_amount}>ATTACH A BOOST CARD TO OPTIMIZE YOUR FARMING</div>
             }
             {
-              !deposited && dualFarmingEnable && <div className={styles.boost_amount}>DUAL FARMING ZOO + WASP</div>
+              !deposited && dualFarmingEnable && <div className={styles.boost_amount}>DUAL FARMING <div>ZOO+WASP</div></div>
             }
             {
               !deposited && !dualFarmingEnable && <div className={styles.boost_amount}>WELCOME FARMING ZOO</div>
@@ -250,7 +253,7 @@ export default function Pool(props) {
                 </span>
               </div>
               <div className={styles.harvest_wrapper}>
-                <div className={styles.earned_amount} data-double-farming="true"> {/*Add "disabled" when non-connected  and data-double-farming="true" when duofarming */}
+                <div className={styles.earned_amount} data-double-farming={dualFarmingEnable ?true: false}> {/*Add "disabled" when non-connected  and data-double-farming="true" when duofarming */}
                   <div>{commafy(poolInfo.pendingZoo)} ZOO</div>
                   {
                     dualFarmingEnable && <div>{commafy(poolInfo.pendingWasp)} WASP</div>
