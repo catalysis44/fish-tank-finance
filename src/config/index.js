@@ -54,3 +54,4 @@ export const RPC_URL = {
   '999': "https://gwan-ssl.wandevs.org:46891"
 }
 
+export const WANSWAP_URL = 'https://testnet.wanswap.finance';

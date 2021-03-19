@@ -10,7 +10,7 @@ import BigNumber from 'bignumber.js';
 import { useCountDown, useClickAway } from 'ahooks';
 import { WalletContext } from '../../wallet/Wallet';
 import { approve, checkApprove, deposit, withdraw } from '../../wallet/send';
-import { WWAN_ADDRESS, ZOO_FARMING_ADDRESS } from '../../config';
+import { WANSWAP_URL, WWAN_ADDRESS, ZOO_FARMING_ADDRESS } from '../../config';
 import { getNftInfo } from '../../hooks/nftInfo';
 
 
@@ -50,7 +50,7 @@ export default function Pool(props) {
   console.debug('farmingInfo1', farmingInfo);
 
   const zooPerWeek = useMemo(()=>{
-    return lpAmount.multipliedBy(zooPerBlock * blockPerWeek * allocPoint / totalAllocPoint).div(totalDeposited);
+    return lpAmount && lpAmount && (new BigNumber(lpAmount)).gt(0) && (new BigNumber(lpAmount)).multipliedBy(zooPerBlock * blockPerWeek * allocPoint / totalAllocPoint).div(totalDeposited);
   }, [totalAllocPoint, allocPoint, zooPerBlock, blockPerWeek, totalDeposited, lpAmount])
   
   const [countdown, setTargetDate, formattedRes] = useCountDown({
@@ -306,7 +306,7 @@ export default function Pool(props) {
                 </div>
 
                 <a className={styles.add_liquidity} onClick={()=>{
-                  window.open('https://wanswap.finance/#/add/'+(poolInfo.token0.toLowerCase() === WWAN_ADDRESS[wallet.networkId] ? 'WAN' : poolInfo.token0) +'/'+ (poolInfo.token1.toLowerCase() === WWAN_ADDRESS[wallet.networkId] ? 'WAN' : poolInfo.token1));
+                  window.open(WANSWAP_URL + '/#/add/'+(poolInfo.token0.toLowerCase() === WWAN_ADDRESS[wallet.networkId] ? 'WAN' : poolInfo.token0) +'/'+ (poolInfo.token1.toLowerCase() === WWAN_ADDRESS[wallet.networkId] ? 'WAN' : poolInfo.token1));
                 }}>
                   Add Liquidity on WanSwap
                 </a>
