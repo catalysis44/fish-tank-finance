@@ -110,7 +110,7 @@ export const openNotificationExclamation = (title) => {
   notification.open(args);
 };
 
-export const openNotificationBottle = (title, item, description, icon, nothing) => {
+export const openNotificationOpenedBox = (title, item, description, icon, nothing) => {
   const args = {
     // message: 'GOLDEN CHEST HAS BEEN OPENED',
     message: title,

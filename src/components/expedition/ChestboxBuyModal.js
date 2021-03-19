@@ -7,7 +7,7 @@ import { WalletContext } from '../../wallet/Wallet';
 import { NFT_FACTORY_ADDRESS, ZOO_TOKEN_ADDRESS } from '../../config';
 import { approveExpedition, buyGoldenChest, buySilverChest, checkApproveExpedition, deposit, withdraw } from '../../wallet/send';
 import BigNumber from 'bignumber.js';
-import { commafy, openNotificationBottle, openNotificationExclamation } from '../../utils';
+import { commafy, openNotificationOpenedBox, openNotificationExclamation } from '../../utils';
 import { getNftInfo } from '../../hooks/nftInfo';
 
 
@@ -116,7 +116,7 @@ export default function ChestboxBuyModal(props) {
                 if (ret.events.MintNFT.returnValues.level === '0') {
                   console.debug('33333', ret);
                   closeModal();
-                  openNotificationBottle(type.toUpperCase() + ' CHEST HAS BEEN OPENED', 'Nothing...', 'Unfortunately, you get nothing, 9 times in a row nothing, the next time 100% got non-rare NFT.', '', true);
+                  openNotificationOpenedBox(type.toUpperCase() + ' CHEST HAS BEEN OPENED', 'Nothing...', 'Unfortunately, you get nothing, 9 times in a row nothing, the next time 100% got non-rare NFT.', '', true);
                 } else {
                   getNftInfo(ret.events.MintNFT.returnValues.tokenId, web3, chainId).then(obj=>{
                     console.debug('nftmeta111', obj);
@@ -130,7 +130,7 @@ export default function ChestboxBuyModal(props) {
                     setReduce(obj.timeReduce);
                     closeModal();
                     setModal(1);
-                    openNotificationBottle(type.toUpperCase() + ' CHEST HAS BEEN OPENED', obj.name, 'Your boost card has been transfered to your wallet.', obj.image);
+                    openNotificationOpenedBox(type.toUpperCase() + ' CHEST HAS BEEN OPENED', obj.name, 'Your boost card has been transfered to your wallet.', obj.image);
                   }).catch(err=>{
                     console.error('getNftInfo error', err);
                   });
@@ -154,7 +154,7 @@ export default function ChestboxBuyModal(props) {
                   setReduce(obj.timeReduce);
                   closeModal();
                   setModal(1);
-                  openNotificationBottle(type.toUpperCase() + ' CHEST HAS BEEN OPENED', obj.name, 'Your boost card has been transfered to your wallet.', obj.image);
+                  openNotificationOpenedBox(type.toUpperCase() + ' CHEST HAS BEEN OPENED', obj.name, 'Your boost card has been transfered to your wallet.', obj.image);
                 }).catch(err=>{
                   console.error('getNftInfo error', err);
                 });
