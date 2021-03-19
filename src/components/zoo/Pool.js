@@ -36,6 +36,7 @@ export default function Pool(props) {
   const deposited = poolInfo.lpAmount && (new BigNumber(poolInfo.lpAmount)).gt(0);
   const expirated = poolInfo.expirationTime * 1000 < Date.now();
   const baseAllocPoint = 100;
+  const currentTokenId = poolInfo.tokenId; 
 
   
   const [countdown, setTargetDate, formattedRes] = useCountDown({
@@ -326,7 +327,7 @@ export default function Pool(props) {
               <div className={styles.action_wrapper}>
 
                 {
-                  nftId === 0 && <a className={styles.select_booster} onClick={() => { setModal(1) }} > {/*Hided it after selected*/}
+                  nftId === 0 && currentTokenId === 0 && <a className={styles.select_booster} onClick={() => { setModal(1) }} > {/*Hided it after selected*/}
                     <img src="assets/plus.svg" />
                   </a>
                 }
@@ -341,8 +342,12 @@ export default function Pool(props) {
                       <img src="assets/hourglass24x24.png" />
                       -{(reduce*100).toFixed(2)}%
                     </div>
-                    <a className={styles.remove}><img src="assets/remove16x16.png" style={{ display: 'none' }} /></a>
-                    <a className={styles.reload} onClick={() => { setModal(1) }}><img src="assets/reload24x24.png" /></a>
+                    {
+                      currentTokenId === 0 && <a className={styles.remove} onClick={()=>{ setNftId(0) }}><img src="assets/remove16x16.png" /></a>
+                    }
+                    {
+                      currentTokenId !== 0 && <a className={styles.reload} onClick={() => { setModal(1) }}><img src="assets/reload24x24.png" /></a>
+                    }
                   </a>
                 }
 

@@ -234,6 +234,19 @@ export const getZooPools = (loader, chainId, address, poolLength) => {
     }
   }));
 
+  // nftId
+  calls = calls.concat(poolIndexs.map(v => {
+    return {
+      target: ZOO_BOOSTING_ADDRESS[chainId],
+      call: ['userInfo(uint256,address)(uint256,uint256,uint256)', v, address],
+      returns: [
+        ['startTime', val => Number(val)],
+        ['lockTime', val => Number(val)],
+        ['tokenId', val => Number(val)],
+      ]
+    }
+  }));
+
   return loader.loadMany(calls);
 }
 
@@ -407,8 +420,8 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
 
       getZooPools(loader, chainId, address, farmingInfo.poolLength).then(ret => {
         console.debug('getZooPools ret', ret);
-        let poolInfo = []
-        // TODO: 
+        let poolInfo = [];
+
         for (let i = 0; i < farmingInfo.poolLength; i++) {
           poolInfo[i] = {
             ...ret[i].returnValue,    // PoolInfo
@@ -417,6 +430,7 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
             ...ret[3 * farmingInfo.poolLength + i].returnValue, // PendingWasp
             ...ret[4 * farmingInfo.poolLength + i].returnValue, // Boosting
             ...ret[5 * farmingInfo.poolLength + i].returnValue, // ExpirationTime
+            ...ret[6 * farmingInfo.poolLength + i].returnValue, // BoostUserInfo
           };
         }
 

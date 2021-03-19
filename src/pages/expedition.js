@@ -56,7 +56,7 @@ export default function (props) {
           <div className={styles.condition}>
             <div className={styles.minimum}>
               <img src="assets/zoo32x32.png" />
-              {commafy(storage.goldenPrice)}
+              {commafy(storage.goldenPrice).split('.')[0]}
             </div>
             <div className={styles.hour}>
               <img src="assets/hourglass24x24.png" />
@@ -94,7 +94,7 @@ export default function (props) {
           <div className={styles.condition}>
             <div className={styles.minimum}>
               <img src="assets/zoo32x32.png" />
-              {commafy(storage.goldenPrice / 10)}
+              {commafy(storage.goldenPrice / 10).split('.')[0]}
               </div>
             <div className={styles.hour}>
               <img src="assets/hourglass24x24.png" />
