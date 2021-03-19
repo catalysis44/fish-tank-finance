@@ -17,6 +17,7 @@ export const getNftInfo = async (tokenId, web3, chainId) => {
   console.debug('tokenURI info', ret.data);
   let obj = ret.data;
   return {
+    tokenId: tokenId,
     name: obj.name,
     image: obj.image,
     meta: obj,

@@ -11,6 +11,7 @@ import { useCountDown, useClickAway } from 'ahooks';
 import { WalletContext } from '../../wallet/Wallet';
 import { approve, checkApprove, deposit, withdraw } from '../../wallet/send';
 import { WWAN_ADDRESS, ZOO_FARMING_ADDRESS } from '../../config';
+import { getNftInfo } from '../../hooks/nftInfo';
 
 
 
@@ -26,6 +27,7 @@ export default function Pool(props) {
   const [icon, setIcon] = useState(0);
   const [boost, setBoost] = useState(0);
   const [reduce, setReduce] = useState(0);
+  const [nftName, setNftName] = useState('');
 
   
   const setTxWaiting = props.setTxWaiting;
@@ -65,6 +67,24 @@ export default function Pool(props) {
     });
   }, [chainId, address, connected, lpToken, depositAmount, web3, updateApprove]);
 
+  useEffect(() => {
+    if (currentTokenId === 0 || !connected || !web3) {
+      return;
+    }
+
+    getNftInfo(currentTokenId, web3, chainId).then(ret => {
+      console.debug('nftmeta333', ret);
+      setIcon(ret.image);
+      setBoost(ret.boost);
+      setReduce(ret.timeReduce);
+      setNftId(ret.tokenId);
+      setNftName(ret.name);
+    }).catch(err=>{
+      console.error('getNftInfo 2', err);
+    })
+
+  }, [currentTokenId, web3, chainId, connected]);
+
   if (poolInfo.symbol0 === 'WBTC') {
     poolInfo.symbol0 = 'wanBTC';
   }
@@ -73,6 +93,7 @@ export default function Pool(props) {
     poolInfo.symbol1 = 'wanBTC';
   }
 
+  console.debug('currentInfo', icon, nftId, boost, reduce);
   return (
     <React.Fragment >
       <BoosterSelectionModal isActived={modal} setModal={setModal} 
@@ -82,12 +103,22 @@ export default function Pool(props) {
         setReduce={setReduce}
         ></BoosterSelectionModal>
       <div id={'pool_'+pid} className={styles.pool} data-active={poolInfo.lpAmount.toString() > 0}> {/*active true for on staking pool */}
-        <div className={styles.bubble} data-equipped-nft="true"> {/*true if equipped an NFT*/}
+        <div className={styles.bubble} data-equipped-nft={currentTokenId !== 0 ? "true" : "false"}> {/*true if equipped an NFT*/}
           <a href="" className={styles.reload}><img src="assets/reload24x24.png" /></a>
-          <img src="dummy/equip_item.png" />
+          {
+            currentTokenId !== 0 && icon !== '' && <img src={icon} />
+          }
+          
           <div className={styles.bubble_text}>
-            <div className={styles.name}>Very Red Strawberry</div>
-            <div className={styles.boost_amount}>+150.33%</div>
+            {
+              currentTokenId !== 0 && <div className={styles.name}>{nftName}</div>
+            }
+            {
+              currentTokenId !== 0 && <div className={styles.boost_amount}>REWARD +{(boost*100).toFixed(2)}%</div>
+            }
+            {
+              currentTokenId !== 0 && <div className={styles.boost_amount}>LOCKTIME -{(reduce*100).toFixed(2)}%</div>
+            }
           </div>
         </div>
         <div className={styles.header}>
