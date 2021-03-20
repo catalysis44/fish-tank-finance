@@ -26,7 +26,8 @@ export default function CardView(props) {
     "/assets/category/magic.png",
   ]
 
-  const category = Number(props.attributes[0].value)
+  const category = Number(props.attributes[0].value);
+  const rare = Number(props.attributes[2].value);
 
   console.debug('CardView', props);
 
@@ -35,7 +36,7 @@ export default function CardView(props) {
      
         <div className={styles.flip_card}>
           <div className={styles.flip_card_inner}>
-            <div className={styles.flip_card_front} data-is-max="false"> {/* data-is-max="true" if this is max item */}
+            <div className={styles.flip_card_front} data-is-max={rare === 5 ? "true":"false"}> {/* data-is-max="true" if this is max item */}
               <div className={styles.item_title}>
                 <img src={props.icon} />
                 <div className={styles.title}>
@@ -49,9 +50,32 @@ export default function CardView(props) {
                   </div>
                 </div>
               </div>
-              <div className={styles.total_supply}>
-                <img src="assets/gem/common18x18.png" /> Total Supply : 1
-                                </div>
+              {
+                rare === 1 && <div className={styles.total_supply}>
+                  <img src="assets/gem/common18x18.png" /> Total Supply : 1
+                </div>
+              }
+              {
+                rare === 2 && <div className={styles.total_supply}>
+                  <img src="assets/gem/epic18x18.png" /> Total Supply : 1
+                </div>
+              }
+              {
+                rare === 3 && <div className={styles.total_supply}>
+                  <img src="assets/gem/rare18x18.png" /> Total Supply : 1
+                </div>
+              }
+              {
+                rare === 4 && <div className={styles.total_supply}>
+                  <img src="assets/gem/ultrarare18x18.png" /> Total Supply : 1
+                </div>
+              }
+              {
+                rare === 5 && <div className={styles.total_supply}>
+                  <img src="assets/gem/ultrarare18x18.png" /> Total Supply : 1
+                </div>
+              }
+              
               <div className={styles.item_description}>
                 <div className={styles.description}>
                   <span><img src="assets/rocket24x24.png" /> +{commafy(props.boost*100, 2)}%</span>
