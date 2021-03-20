@@ -245,6 +245,13 @@
 
   .action_btn
   {  
+
+    &[disabled]
+    {
+      background:#e1e5da;
+      border:#e1e5da;
+      color:black;
+    }
     &:hover
     {
         transform:scale(1.05);
@@ -263,6 +270,16 @@
     align-items: center;
     justify-content: center;
     transition: all .1s ease-in-out;
+  }
+
+  .action_wrapper
+  {
+    display:flex;
+    margin:0 -3px;
+    .action_btn
+    {
+      margin:0 3px;
+    }
   }
 
   .pending_btn
