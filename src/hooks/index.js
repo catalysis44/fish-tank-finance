@@ -584,7 +584,7 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
 
 
             getTokenSymbols(loader, poolInfo[i].token0, poolInfo[i].token1).then(ret => {
-              console.debug('getTokenSymbols', i, ret);
+              // console.debug('getTokenSymbols', i, ret);
               poolInfo[i].symbol0 = ret[0].returnValue.symbol0;
               poolInfo[i].symbol1 = ret[1].returnValue.symbol1;
               poolInfo[i].decimals0 = ret[2].returnValue.decimals0;

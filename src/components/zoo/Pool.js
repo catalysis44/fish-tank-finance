@@ -232,7 +232,10 @@ export default function Pool(props) {
       <div id={'pool_'+pid} className={styles.pool} data-active={poolInfo.lpAmount.toString() > 0}> {/*active true for on staking pool */}
         <div className={styles.bubble} data-equipped-nft={currentTokenId !== 0 ? "true" : "false"} style={{display: !deposited && !dualFarmingEnable?'none':'flex'}}> {/*true if equipped an NFT*/}
           {
-            currentTokenId !== 0 && <a href="" className={styles.reload}><img src="assets/reload24x24.png" /></a>
+            currentTokenId !== 0 && <a onClick={()=>{
+              setModal(1);
+              setShowDeposit(true);
+            }} className={styles.reload}><img src="assets/reload24x24.png" /></a>
           }
           
           {
