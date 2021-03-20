@@ -18,7 +18,7 @@ export default function () {
     // Remove TX //
     document.getElementById('toggle_tx').classList.remove("toggled");
     document.getElementById('tx_panel').classList.remove("toggled");
-    document.getElementById('filterbar_backdrop').classList.remove("toggled");
+    //document.getElementById('filterbar_backdrop').classList.remove("toggled");
 
 
     document.getElementById('toggle_filter').classList.toggle("toggled");
@@ -32,7 +32,7 @@ export default function () {
     document.getElementById('toggle_filter').classList.remove("toggled");
     document.getElementById('filter1').classList.remove("toggled");
     document.getElementById('filter2').classList.remove("toggled");
-    document.getElementById('filterbar_backdrop').classList.remove("toggled");
+    //document.getElementById('filterbar_backdrop').classList.remove("toggled");
 
 
     document.getElementById('toggle_tx').classList.toggle("toggled");
