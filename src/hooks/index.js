@@ -2,7 +2,6 @@ import BigNumber from 'bignumber.js';
 import { useInterval, useLockFn, useReactive } from 'ahooks';
 import { MULTICALL_ADDRESS, RPC_URL, ZOO_TOKEN_ADDRESS, ZOO_FARMING_ADDRESS, ZOO_BOOSTING_ADDRESS, NFT_FACTORY_ADDRESS, ZOO_NFT_ADDRESS, WASP_FARMING_ADDRESS } from '../config';
 import React, { useCallback, useMemo } from 'react';
-import { getWaspPrice } from './waspPrice';
 import { updatePrice } from './price';
 const { aggregate } = require('@makerdao/multicall');
 const DataLoader = require('dataloader');

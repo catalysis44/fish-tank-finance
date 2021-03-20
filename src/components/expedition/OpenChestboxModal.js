@@ -37,16 +37,19 @@ export default function OpenChestboxModal(props) {
           <div className={styles.header}>
             <div className={styles.star}>
               {
-                Array.from({length: props.level}).map(v=>{
+                props.level < 4 && Array.from({length: props.level}).map(v=>{
                   return <img src="assets/star18x18.png" />
                 })
+              }
+              {
+                props.level === 4 && <img src="assets/max.png" />
               }
             </div>
             <div className={styles.title}>
               {props.name}
             </div>
             <div className={styles.supply}>
-              <img src="assets/gem/common18x18.png" /> total supply: 1
+              <img src="assets/gem/common18x18.png" /> total supply: {props.itemSupply}
             </div>
           </div>
 

@@ -9,7 +9,7 @@ import { OmitProps } from 'antd/lib/transfer/ListBody';
 import Loader from '../components/loader'
 import BigNumber from 'bignumber.js';
 import { useCountDown } from 'ahooks';
-import { stakeZoo } from '../wallet/send';
+import { stakeClaim, stakeZoo } from '../wallet/send';
 
 
 export default function (props) {
@@ -197,7 +197,16 @@ export default function (props) {
             </a>
           }
           {
-            expeditions[0] && expeditions[0].startTime !== 0 && countdown0 <= 0 && <a className={styles.action_btn}>
+            expeditions[0] && expeditions[0].startTime !== 0 && countdown0 <= 0 && <a className={styles.action_btn} onClick={()=>{
+              setTxWaiting(true);
+              stakeClaim(0, web3, chainId, address).then(ret=>{
+                setTxWaiting(false);
+                console.log(ret);
+              }).catch(err=>{
+                console.log(err);
+                setTxWaiting(false);
+              })
+            }}>
               Claim 1 Artifact
             </a>
           }
@@ -260,7 +269,16 @@ export default function (props) {
             </a>
           }
           {
-            expeditions[1] && expeditions[1].startTime !== 0 && countdown1 <= 0 && <a className={styles.action_btn}>
+            expeditions[1] && expeditions[1].startTime !== 0 && countdown1 <= 0 && <a className={styles.action_btn}  onClick={()=>{
+              setTxWaiting(true);
+              stakeClaim(1, web3, chainId, address).then(ret=>{
+                setTxWaiting(false);
+                console.log(ret);
+              }).catch(err=>{
+                console.log(err);
+                setTxWaiting(false);
+              })
+            }}>
               Claim 1 Artifact
             </a>
           }
@@ -323,7 +341,16 @@ export default function (props) {
             </a>
           }
           {
-            expeditions[2] && expeditions[2].startTime !== 0 && countdown2 <= 0 && <a className={styles.action_btn}>
+            expeditions[2] && expeditions[2].startTime !== 0 && countdown2 <= 0 && <a className={styles.action_btn}  onClick={()=>{
+              setTxWaiting(true);
+              stakeClaim(2, web3, chainId, address).then(ret=>{
+                setTxWaiting(false);
+                console.log(ret);
+              }).catch(err=>{
+                console.log(err);
+                setTxWaiting(false);
+              })
+            }}>
               Claim 1 Artifact
             </a>
           }

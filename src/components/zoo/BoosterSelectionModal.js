@@ -110,9 +110,12 @@ export default function BoosterSelectionModal(props) {
                   <div className={`${styles.booster_col} ${styles.star}`}>
                     <div className={styles.booster_subcol}>
                       {
-                        Array.from({length: Number(v.attributes[1].value)}).map(v=>{
+                        Number(v.attributes[1].value) < 4 && Array.from({length: Number(v.attributes[1].value)}).map(v=>{
                           return <img src="assets/star18x18.png"/>
                         })
+                      }
+                      {
+                        Number(v.attributes[1].value) === 4 && <img src="assets/max.png" />
                       }
                     </div>
                   </div>

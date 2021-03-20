@@ -26,6 +26,7 @@ export default function ChestboxBuyModal(props) {
   const [meta, setMeta] = useState('');
   const [boost, setBoost] = useState(0);
   const [reduce, setReduce] = useState(0);
+  const [itemSupply, setItemSupply] = useState(1);
 
   const wallet = useContext(WalletContext);
   const chainId = wallet.networkId;
@@ -60,6 +61,7 @@ export default function ChestboxBuyModal(props) {
       setModal={setModal} type={type} 
       icon={icon} level={level} name={name} 
       boost={boost} reduce={reduce} 
+      itemSupply={itemSupply}
       category={category} tokenId={tokenId}></OpenChestboxModal>
     <div className={`modal  ${props.isActived === 0 ? "" : "is-active"}`}>
       <div className="modal-background" onClick={closeModal}></div>
@@ -124,6 +126,7 @@ export default function ChestboxBuyModal(props) {
                     setLevel(ret.events.MintNFT.returnValues.level);
                     setCategory(ret.events.MintNFT.returnValues.category);
                     setItem(ret.events.MintNFT.returnValues.item);
+                    setItemSupply(ret.events.MintNFT.returnValues.itemSupply);
                     setIcon(obj.image);
                     setName(obj.name);
                     setBoost(obj.boost);
@@ -148,6 +151,7 @@ export default function ChestboxBuyModal(props) {
                   setLevel(ret.events.MintNFT.returnValues.level);
                   setCategory(ret.events.MintNFT.returnValues.category);
                   setItem(ret.events.MintNFT.returnValues.item);
+                  setItemSupply(ret.events.MintNFT.returnValues.itemSupply);
                   setIcon(obj.image);
                   setName(obj.name);
                   setBoost(obj.boost);

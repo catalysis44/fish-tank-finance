@@ -116,3 +116,11 @@ export const stakeZoo = async (type, web3, chainId, address) => {
   // console.debug('stakeZoo ret', ret);
   return ret;
 }
+
+export const stakeClaim = async (type, web3, chainId, address) => {
+  // console.debug('stakeZoo', type, chainId, web3, address);
+  const sc = new web3.eth.Contract(nftFactoryAbi, NFT_FACTORY_ADDRESS[chainId]);
+  let ret = await sc.methods.stakeClaim(type).send({ from: address });
+  // console.debug('stakeZoo ret', ret);
+  return ret;
+}

@@ -28,6 +28,7 @@ export default function CardView(props) {
 
   const category = Number(props.attributes[0].value);
   const rare = Number(props.attributes[2].value);
+  const level = Number(props.attributes[1].value);
 
   // console.debug('CardView', props);
 
@@ -36,16 +37,19 @@ export default function CardView(props) {
      
         <div className={styles.flip_card}>
           <div className={styles.flip_card_inner}>
-            <div className={styles.flip_card_front} data-is-max={rare === 5 ? "true":"false"}> {/* data-is-max="true" if this is max item */}
+            <div className={styles.flip_card_front} data-is-max={rare === 5 || level === 4 ? "true":"false"}> {/* data-is-max="true" if this is max item */}
               <div className={styles.item_title}>
                 <img src={props.icon} />
                 <div className={styles.title}>
                   {props.name}
                   <div>
                     {
-                      Array.from({length: Number(props.attributes[1].value)}).map(v=>{
+                      level < 4 && Array.from({length: level}).map(v=>{
                         return <img src="assets/star18x18.png" />
                       })
+                    }
+                    {
+                      level === 4 && <img src="assets/max.png" />
                     }
                   </div>
                 </div>
