@@ -140,6 +140,14 @@ export default function Pool(props) {
     poolInfo.symbol1 = 'wanBTC';
   }
 
+  if (poolInfo.symbol0 === 'WWAN') {
+    poolInfo.symbol0 = 'WAN';
+  }
+
+  if (poolInfo.symbol1 === 'WWAN') {
+    poolInfo.symbol1 = 'WAN';
+  }
+
   console.debug('currentInfo', icon, nftId, boost, reduce);
   return (
     <React.Fragment >
@@ -188,7 +196,7 @@ export default function Pool(props) {
         </div>
         <div className={styles.header}>
           <div className={styles.title}>
-            TITLE OF THE POOL
+            {poolInfo.symbol0}-{poolInfo.symbol1}
           </div>
           {/*is-success for KEEPER CHOICE and is-dark for COMMUNITY CHOICE*/}
           <div className="choice button is-success is-outlined">
