@@ -3,9 +3,9 @@ import { useInterval, useLockFn, useReactive } from 'ahooks';
 import { MULTICALL_ADDRESS, RPC_URL, ZOO_TOKEN_ADDRESS, ZOO_FARMING_ADDRESS, ZOO_BOOSTING_ADDRESS, NFT_FACTORY_ADDRESS, ZOO_NFT_ADDRESS, WASP_FARMING_ADDRESS } from '../config';
 import React, { useCallback, useMemo } from 'react';
 import { updatePrice } from './price';
+import { useThrottleFn } from 'ahooks';
 const { aggregate } = require('@makerdao/multicall');
 const DataLoader = require('dataloader');
-
 
 export const initialState = {
   zooBalance: new BigNumber(300),
@@ -445,7 +445,7 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
     if (!newStorage.blockNumber || newStorage.blockNumber >= blockNumber) {
       setStorage(newStorage);
     } else {
-      // console.debug('data from old blockNumber', blockNumber, newStorage.blockNumber);
+      console.debug('data from old blockNumber', blockNumber, newStorage.blockNumber);
     }
   }
 
@@ -467,8 +467,8 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
 
     getZooBalance(loader, chainId, address).then(ret => {
       // console.debug('getZooBalance ret', ret, ret.returnValue.zooBalance);
-
-      tmpStorage = Object.assign({ ...tmpStorage, zooBalance: ret.returnValue.zooBalance, blockNumber: ret.returnValue.blockNumber });
+      tmpStorage.zooBalance = ret.returnValue.zooBalance;
+      tmpStorage.blockNumber = ret.returnValue.blockNumber;
       updateStorage(tmpStorage);
     }).catch(err => {
       console.error('err 1', err);
@@ -476,8 +476,8 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
 
     getZooTotalSupply(loader, chainId).then(ret => {
       // console.debug('getZooTotalSupply ret', ret, ret.returnValue.totalSupply);
-
-      tmpStorage = Object.assign({ ...tmpStorage, zooTotalSupply: ret.returnValue.totalSupply, blockNumber: ret.returnValue.blockNumber })
+      tmpStorage.zooTotalSupply = ret.returnValue.totalSupply;
+      tmpStorage.blockNumber = ret.returnValue.blockNumber;
       updateStorage(tmpStorage);
     }).catch(err => {
       console.error('err 1.1', err);
@@ -485,8 +485,8 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
 
     getZooBurned(loader, chainId).then(ret => {
       // console.debug('getZooBurned ret', ret, ret.returnValue.totalSupply);
-
-      tmpStorage = Object.assign({ ...tmpStorage, zooBurned: ret.returnValue.zooBurned, blockNumber: ret.returnValue.blockNumber })
+      tmpStorage.zooBurned = ret.returnValue.zooBurned;
+      tmpStorage.blockNumber = ret.returnValue.blockNumber;
       updateStorage(tmpStorage);
     }).catch(err => {
       console.error('err 1.2', err);
@@ -525,7 +525,7 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
               });
 
               // console.debug('cards:', cards);
-              tmpStorage = Object.assign({ ...tmpStorage, nftCards: cards });
+              tmpStorage.nftCards = cards;
               updateStorage(tmpStorage);
             }).catch(err=>{
               console.error('err 1.2.1.1', err);
@@ -541,18 +541,18 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
 
     getFarmingInfo(loader, chainId).then(ret => {
       // console.debug('getFarmingInfo ret', ret);
-      let farmingInfo = {};
+      let farmingInfo = tmpStorage.farmingInfo;
       ret.forEach(v => {
         farmingInfo[v.returns[0][0]] = v.returnValue[v.returns[0][0]];
       });
 
-      tmpStorage = Object.assign({ ...tmpStorage, farmingInfo })
+      // tmpStorage = Object.assign({ ...tmpStorage, farmingInfo })
       updateStorage(tmpStorage);
       // console.debug('farmingInfo', farmingInfo);
 
       getZooPools(loader, chainId, address, farmingInfo.poolLength).then(ret => {
         // console.debug('getZooPools ret', ret);
-        let poolInfo = [];
+        let poolInfo = tmpStorage.poolInfo;
 
         for (let i = 0; i < farmingInfo.poolLength; i++) {
           poolInfo[i] = {
@@ -592,10 +592,7 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
 
               updatePrice(poolInfo[i].symbol0, poolInfo[i].symbol1, poolInfo[i].decimals0, poolInfo[i].decimals1, poolInfo[i].reserve0, poolInfo[i].reserve1);
 
-              if (i === farmingInfo.poolLength - 1) {
-                tmpStorage = Object.assign({ ...tmpStorage, poolInfo })
-                updateStorage(tmpStorage);
-              }
+              updateStorage(tmpStorage);
             }).catch(err => {
               console.error('err 5', err);
             });
