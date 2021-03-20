@@ -29,7 +29,7 @@ export default function CardView(props) {
   const category = Number(props.attributes[0].value);
   const rare = Number(props.attributes[2].value);
 
-  console.debug('CardView', props);
+  // console.debug('CardView', props);
 
   return (
     <React.Fragment >

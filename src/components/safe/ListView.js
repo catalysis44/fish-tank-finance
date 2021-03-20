@@ -28,7 +28,7 @@ export default function ListView(props) {
 
   //const category = Number(props.attributes[0].value)
 
-  console.debug('ListView', props);
+  // console.debug('ListView', props);
 
   return (
     <React.Fragment >

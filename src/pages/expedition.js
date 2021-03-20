@@ -22,7 +22,7 @@ export default function (props) {
   const storage = useContext(StorageContext);
   const goldenPrice = storage.goldenPrice;
   const expeditions = storage.expeditions;
-  console.debug('expeditions1', expeditions);
+  // console.debug('expeditions1', expeditions);
 
   const wallet = useContext(WalletContext);
   const chainId = wallet.networkId;
@@ -42,7 +42,7 @@ export default function (props) {
     targetDate: new Date((expeditions[2].startTime + expeditions[2].lockTime)*1000),
   });
 
-  console.debug('countdown0', countdown0, countdown1, countdown2);
+  // console.debug('countdown0', countdown0, countdown1, countdown2);
 
   return (
     <React.Fragment>

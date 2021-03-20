@@ -3,6 +3,7 @@ import { useInterval, useLockFn, useReactive } from 'ahooks';
 import { MULTICALL_ADDRESS, RPC_URL, ZOO_TOKEN_ADDRESS, ZOO_FARMING_ADDRESS, ZOO_BOOSTING_ADDRESS, NFT_FACTORY_ADDRESS, ZOO_NFT_ADDRESS, WASP_FARMING_ADDRESS } from '../config';
 import React, { useCallback, useMemo } from 'react';
 import { getWaspPrice } from './waspPrice';
+import { updatePrice } from './price';
 const { aggregate } = require('@makerdao/multicall');
 const DataLoader = require('dataloader');
 
@@ -55,9 +56,9 @@ export const useLoader = (chainId) => {
           })
           return v;
         })
-        console.debug('calls', newCalls.length, newCalls, conf);
+        // console.debug('calls', newCalls.length, newCalls, conf);
         let ret = await aggregate(newCalls, conf);
-        console.debug('aggregate ret', ret);;
+        // console.debug('aggregate ret', ret);;
         Object.keys(ret.results.transformed).map(v => {
           let str = v.split('#');
           if (!newCalls[str[1]].returnValue) {
@@ -72,7 +73,7 @@ export const useLoader = (chainId) => {
           })
         });
 
-        console.debug('calls to return', newCalls);
+        // console.debug('calls to return', newCalls);
         return newCalls;
       } catch (error) {
         console.error('getBatchData error', error);
@@ -240,7 +241,7 @@ export const getZooPools = (loader, chainId, address, poolLength) => {
       target: ZOO_BOOSTING_ADDRESS[chainId],
       call: ['getMultiplier(uint256,address)(uint256)', v, address],
       returns: [
-        ['getMultiplier', val => (new BigNumber(val)).div(1e10)], //%
+        ['getMultiplier', val => (val / 1e12)], 
       ]
     }
   }));
@@ -319,6 +320,15 @@ export const getLpInfo = (loader, lpToken, chainId, address, waspPid) => {
       call: ['balanceOf(address)(uint256)', WASP_FARMING_ADDRESS[chainId]],
       returns: [['waspTotalLP', val => (new BigNumber(val)).div(1e18)]]
     },
+    {
+      target: lpToken,
+      call: ['getReserves()(uint112,uint112,uint32)'],
+      returns: [
+        ['reserve0', val => val],
+        ['reserve1', val => val],
+        ['reserveTime', val => val],
+      ]
+    },
   ]);
 }
 
@@ -333,6 +343,16 @@ export const getTokenSymbols = (loader, token0, token1) => {
       target: token1,
       call: ['symbol()(string)'],
       returns: [['symbol1', val => val]]
+    },
+    {
+      target: token0,
+      call: ['decimals()(uint8)'],
+      returns: [['decimals0', val => val]]
+    },
+    {
+      target: token1,
+      call: ['decimals()(uint8)'],
+      returns: [['decimals1', val => val]]
     },
   ]);
 }
@@ -426,16 +446,12 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
     if (!newStorage.blockNumber || newStorage.blockNumber >= blockNumber) {
       setStorage(newStorage);
     } else {
-      console.debug('data from old blockNumber', blockNumber, newStorage.blockNumber);
+      // console.debug('data from old blockNumber', blockNumber, newStorage.blockNumber);
     }
   }
 
-  // getWaspPrice().then(ret=>{
-  //   console.debug('wasp price', ret);
-  // })
-
   const updater = () => {
-    console.debug('timer ~', JSON.stringify(storage, null, 2));
+    // console.debug('timer ~', JSON.stringify(storage, null, 2));
     if (!loader) {
       return;
     }
@@ -451,7 +467,7 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
     let tmpStorage = Object.assign({ ...storage });
 
     getZooBalance(loader, chainId, address).then(ret => {
-      console.debug('getZooBalance ret', ret, ret.returnValue.zooBalance);
+      // console.debug('getZooBalance ret', ret, ret.returnValue.zooBalance);
 
       tmpStorage = Object.assign({ ...tmpStorage, zooBalance: ret.returnValue.zooBalance, blockNumber: ret.returnValue.blockNumber });
       updateStorage(tmpStorage);
@@ -460,7 +476,7 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
     });
 
     getZooTotalSupply(loader, chainId).then(ret => {
-      console.debug('getZooTotalSupply ret', ret, ret.returnValue.totalSupply);
+      // console.debug('getZooTotalSupply ret', ret, ret.returnValue.totalSupply);
 
       tmpStorage = Object.assign({ ...tmpStorage, zooTotalSupply: ret.returnValue.totalSupply, blockNumber: ret.returnValue.blockNumber })
       updateStorage(tmpStorage);
@@ -469,7 +485,7 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
     });
 
     getZooBurned(loader, chainId).then(ret => {
-      console.debug('getZooBurned ret', ret, ret.returnValue.totalSupply);
+      // console.debug('getZooBurned ret', ret, ret.returnValue.totalSupply);
 
       tmpStorage = Object.assign({ ...tmpStorage, zooBurned: ret.returnValue.zooBurned, blockNumber: ret.returnValue.blockNumber })
       updateStorage(tmpStorage);
@@ -478,17 +494,17 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
     });
 
     getUserNftBalance(loader, chainId, address).then(ret => {
-      console.debug('getUserNftBalance ret', ret);
+      // console.debug('getUserNftBalance ret', ret);
 
       if (ret.returnValue.nftBalance > 0) {
         getUserNftTokenId(loader, chainId, address, ret.returnValue.nftBalance).then(ret => {
-          console.debug('getUserNftTokenId ret', ret);
+          // console.debug('getUserNftTokenId ret', ret);
           let tokenIds = ret.map(v => {
             return v.returnValue.tokenId;
           });
 
           getNftBaseInfo(loader, chainId, tokenIds).then(ret => {
-            console.debug('getNftBaseInfo ret', ret);
+            // console.debug('getNftBaseInfo ret', ret);
             let cards = [];
             for (let i = 0; i < tokenIds.length; i++) {
               cards.push({
@@ -503,13 +519,13 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
             Promise.all(cards.map(v=>{
               return getNftItemSupply(loader, chainId, v.tokenInfo.level, v.tokenInfo.category, v.tokenInfo.item);
             })).then(ret => {
-              console.debug('getNftItemSupply ret', ret);
+              // console.debug('getNftItemSupply ret', ret);
               cards = cards.map((v,i)=>{
                 v.itemSupply = ret[i].returnValue.itemSupply;
                 return v;
               });
 
-              console.debug('cards:', cards);
+              // console.debug('cards:', cards);
               tmpStorage = Object.assign({ ...tmpStorage, nftCards: cards });
               updateStorage(tmpStorage);
             }).catch(err=>{
@@ -525,7 +541,7 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
     });
 
     getFarmingInfo(loader, chainId).then(ret => {
-      console.debug('getFarmingInfo ret', ret);
+      // console.debug('getFarmingInfo ret', ret);
       let farmingInfo = {};
       ret.forEach(v => {
         farmingInfo[v.returns[0][0]] = v.returnValue[v.returns[0][0]];
@@ -533,10 +549,10 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
 
       tmpStorage = Object.assign({ ...tmpStorage, farmingInfo })
       updateStorage(tmpStorage);
-      console.debug('farmingInfo', farmingInfo);
+      // console.debug('farmingInfo', farmingInfo);
 
       getZooPools(loader, chainId, address, farmingInfo.poolLength).then(ret => {
-        console.debug('getZooPools ret', ret);
+        // console.debug('getZooPools ret', ret);
         let poolInfo = [];
 
         for (let i = 0; i < farmingInfo.poolLength; i++) {
@@ -551,11 +567,11 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
           };
         }
 
-        console.debug('poolInfo', poolInfo);
+        // console.debug('poolInfo', poolInfo);
 
         for (let i = 0; i < farmingInfo.poolLength; i++) {
           getLpInfo(loader, poolInfo[i].lpToken, chainId, address, poolInfo[i].waspPid).then(ret => {
-            console.debug('getLpInfo', i, ret);
+            // console.debug('getLpInfo', i, ret);
             poolInfo[i].token0 = ret[0].returnValue.token0;
             poolInfo[i].token1 = ret[1].returnValue.token1;
             poolInfo[i].lpBalance = ret[2].returnValue.lpBalance;
@@ -563,11 +579,19 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
             poolInfo[i].waspTotalAllocPoint = ret[4].returnValue.waspTotalAllocPoint;
             poolInfo[i].waspAllocPoint = ret[5].returnValue.waspAllocPoint;
             poolInfo[i].waspTotalLP = ret[6].returnValue.waspTotalLP;
+            poolInfo[i].reserve0 = ret[7].returnValue.reserve0;
+            poolInfo[i].reserve1 = ret[7].returnValue.reserve1;
+            poolInfo[i].reserveTime = ret[7].returnValue.reserveTime;
+
 
             getTokenSymbols(loader, poolInfo[i].token0, poolInfo[i].token1).then(ret => {
-              console.debug('getTokenSymbols', i, ret);
+              // console.debug('getTokenSymbols', i, ret);
               poolInfo[i].symbol0 = ret[0].returnValue.symbol0;
               poolInfo[i].symbol1 = ret[1].returnValue.symbol1;
+              poolInfo[i].decimals0 = ret[2].returnValue.decimals0;
+              poolInfo[i].decimals1 = ret[3].returnValue.decimals1;
+
+              updatePrice(poolInfo[i].symbol0, poolInfo[i].symbol1, poolInfo[i].decimals0, poolInfo[i].decimals1, poolInfo[i].reserve0, poolInfo[i].reserve1);
 
               if (i === farmingInfo.poolLength - 1) {
                 tmpStorage = Object.assign({ ...tmpStorage, poolInfo })
@@ -588,7 +612,7 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
     });
 
     getNFTFactoryInfo(loader, chainId, address).then(ret => {
-      console.debug('getNFTFactoryInfo ret', ret, tmpStorage);
+      // console.debug('getNFTFactoryInfo ret', ret, tmpStorage);
       tmpStorage.goldenPrice = ret[0].returnValue.goldenPrice;
       if (!tmpStorage.expeditions) {
         tmpStorage.expeditions = [];

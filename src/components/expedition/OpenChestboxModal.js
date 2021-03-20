@@ -25,7 +25,7 @@ export default function OpenChestboxModal(props) {
     "/assets/category/magic.png",
   ]
 
-  console.debug('category:', props);
+  // console.debug('category:', props);
 
 
   return (

@@ -6,23 +6,23 @@ const erc721Abi = require('../assets/abi/erc721.json');
 const nftFactoryAbi = require('../assets/abi/nftFactory.json');
 
 export const withdraw = async (pid, amount, chainId, web3, address) => {
-  console.debug('withdraw', pid, amount, chainId, web3, address);
+  // console.debug('withdraw', pid, amount, chainId, web3, address);
   const sc = new web3.eth.Contract(farmingAbi, ZOO_FARMING_ADDRESS[chainId]);
   let ret = await sc.methods.withdraw(pid, amount).send({ from: address });
-  console.debug('withdraw ret', ret);
+  // console.debug('withdraw ret', ret);
   return ret.status;
 }
 
 export const deposit = async (pid, amount, lockTime, nftId, chainId, web3, address) => {
-  console.debug('deposit', pid, amount, lockTime, nftId, chainId, web3, address);
+  // console.debug('deposit', pid, amount, lockTime, nftId, chainId, web3, address);
   const sc = new web3.eth.Contract(farmingAbi, ZOO_FARMING_ADDRESS[chainId]);
   let ret = await sc.methods.deposit(pid, amount, lockTime, nftId).send({ from: address });
-  console.debug('deposit ret', ret);
+  // console.debug('deposit ret', ret);
   return ret.status;
 }
 
 export const approve = async (lpToken, chainId, web3, address) => {
-  console.debug('approve', lpToken, chainId, web3, address);
+  // console.debug('approve', lpToken, chainId, web3, address);
   const erc20 = new web3.eth.Contract(erc20Abi, lpToken);
   let allowance = await erc20.methods.allowance(address, ZOO_FARMING_ADDRESS[chainId]).call();
   let ret;
@@ -34,24 +34,24 @@ export const approve = async (lpToken, chainId, web3, address) => {
   }
 
   ret = await erc20.methods.approve(ZOO_FARMING_ADDRESS[chainId], '0xf000000000000000000000000000000000000000').send({ from: address });
-  console.debug('approve lp ret', ret);
+  // console.debug('approve lp ret', ret);
   if(!ret || !ret.status) {
     throw new Error("approve failed");
   }
   
   const erc721 = new web3.eth.Contract(erc721Abi, ZOO_NFT_ADDRESS[chainId]);
   ret = await erc721.methods.setApprovalForAll(ZOO_BOOSTING_ADDRESS[chainId], true).send({ from: address });
-  console.debug('approve nft ret', ret);
+  // console.debug('approve nft ret', ret);
   if(!ret || !ret.status) {
     throw new Error("approve failed");
   }
 }
 
 export const checkApprove = async (lpToken, amount, chainId, web3, address) => {
-  console.debug('checkApprove', lpToken, chainId, web3, address);
+  // console.debug('checkApprove', lpToken, chainId, web3, address);
   const erc20 = new web3.eth.Contract(erc20Abi, lpToken);
   let allowance = await erc20.methods.allowance(address, ZOO_FARMING_ADDRESS[chainId]).call();
-  console.debug('allowance', allowance.toString(), amount.toString(), (new BigNumber(allowance)).gte(new BigNumber(amount)))
+  // console.debug('allowance', allowance.toString(), amount.toString(), (new BigNumber(allowance)).gte(new BigNumber(amount)))
   if (!(new BigNumber(allowance)).gte(new BigNumber(amount))) {
     return false;
   }
@@ -63,10 +63,10 @@ export const checkApprove = async (lpToken, amount, chainId, web3, address) => {
 }
 
 export const checkApproveExpedition = async (lpToken, amount, chainId, web3, address) => {
-  console.debug('checkApproveExpedition', lpToken, chainId, web3, address);
+  // console.debug('checkApproveExpedition', lpToken, chainId, web3, address);
   const erc20 = new web3.eth.Contract(erc20Abi, lpToken);
   let allowance = await erc20.methods.allowance(address, NFT_FACTORY_ADDRESS[chainId]).call();
-  console.debug('checkApproveExpedition allowance', allowance.toString(), amount.toString(), (new BigNumber(allowance)).gte(new BigNumber(amount)))
+  // console.debug('checkApproveExpedition allowance', allowance.toString(), amount.toString(), (new BigNumber(allowance)).gte(new BigNumber(amount)))
   if (!(new BigNumber(allowance)).gte(new BigNumber(amount))) {
     return false;
   }
@@ -75,7 +75,7 @@ export const checkApproveExpedition = async (lpToken, amount, chainId, web3, add
 }
 
 export const approveExpedition = async (lpToken, chainId, web3, address) => {
-  console.debug('approveExpedition', lpToken, chainId, web3, address);
+  // console.debug('approveExpedition', lpToken, chainId, web3, address);
   const erc20 = new web3.eth.Contract(erc20Abi, lpToken);
   let allowance = await erc20.methods.allowance(address, NFT_FACTORY_ADDRESS[chainId]).call();
   let ret;
@@ -87,32 +87,32 @@ export const approveExpedition = async (lpToken, chainId, web3, address) => {
   }
 
   ret = await erc20.methods.approve(NFT_FACTORY_ADDRESS[chainId], '0xf000000000000000000000000000000000000000').send({ from: address });
-  console.debug('approve lp ret', ret);
+  // console.debug('approve lp ret', ret);
   if(!ret || !ret.status) {
     throw new Error("approve failed");
   }
 }
 
 export const buyGoldenChest = async (web3, chainId, address) => {
-  console.debug('buyGoldenChest', chainId, web3, address);
+  // console.debug('buyGoldenChest', chainId, web3, address);
   const sc = new web3.eth.Contract(nftFactoryAbi, NFT_FACTORY_ADDRESS[chainId]);
   let ret = await sc.methods.buyGoldenChest().send({ from: address });
-  console.debug('buyGoldenChest ret', ret);
+  // console.debug('buyGoldenChest ret', ret);
   return ret;
 }
 
 export const buySilverChest = async (web3, chainId, address) => {
-  console.debug('buySilverChest', chainId, web3, address);
+  // console.debug('buySilverChest', chainId, web3, address);
   const sc = new web3.eth.Contract(nftFactoryAbi, NFT_FACTORY_ADDRESS[chainId]);
   let ret = await sc.methods.buySilverChest().send({ from: address, gas: 1500000 });
-  console.debug('buySilverChest ret', ret);
+  // console.debug('buySilverChest ret', ret);
   return ret;
 }
 
 export const stakeZoo = async (type, web3, chainId, address) => {
-  console.debug('stakeZoo', type, chainId, web3, address);
+  // console.debug('stakeZoo', type, chainId, web3, address);
   const sc = new web3.eth.Contract(nftFactoryAbi, NFT_FACTORY_ADDRESS[chainId]);
   let ret = await sc.methods.stakeZoo(type).send({ from: address });
-  console.debug('stakeZoo ret', ret);
+  // console.debug('stakeZoo ret', ret);
   return ret;
 }

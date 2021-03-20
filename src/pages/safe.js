@@ -96,7 +96,7 @@ export default function () {
     func();
   }, [chainId, address, nftCards, nftBalance]);
 
-  console.debug('new cards', cards);
+  // console.debug('new cards', cards);
 
   return (
     <React.Fragment>

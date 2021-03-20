@@ -59,7 +59,7 @@ export default function BoosterSelectionModal(props) {
     func();
   }, [chainId, address, nftCards, nftBalance]);
 
-  console.debug('cards222', cards);
+  // console.debug('cards222', cards);
 
   return (
     <React.Fragment>

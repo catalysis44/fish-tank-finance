@@ -30,7 +30,7 @@ function BasicLayout(props) {
   const [storage, setStorage] = useLocalStorageState('zoo-keeper-v0.1', initialState);
 
   useDataPump(storage, setStorage, chainId, address, connected);
-  console.debug('chainId', chainId);
+  // console.debug('chainId', chainId);
 
   const zooPrice = 16;
   return (

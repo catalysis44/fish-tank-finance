@@ -39,14 +39,14 @@ export default function ChestboxBuyModal(props) {
   const price = props.price;
   const zooBalance = new BigNumber(props.zooBalance);
 
-  console.debug('price:', price, zooBalance);
+  // console.debug('price:', price, zooBalance);
   useEffect(()=>{
     if (!chainId || !address || !connected || !web3) {
       return;
     }
-    console.debug('checkApproveExpedition begin', updateApprove);
+    // console.debug('checkApproveExpedition begin', updateApprove);
     checkApproveExpedition(ZOO_TOKEN_ADDRESS[chainId], '0x'+(new BigNumber(price)).multipliedBy(1e18).toString(16), chainId, web3, address).then(ret=>{
-      console.debug('checkApproveExpedition', ret);
+      // console.debug('checkApproveExpedition', ret);
       setApproved(ret);
     }).catch(err=>{
       console.error('checkApproveExpedition err', err);
@@ -90,7 +90,7 @@ export default function ChestboxBuyModal(props) {
               approveExpedition(ZOO_TOKEN_ADDRESS[chainId], chainId, web3, address).then(ret=>{
                 setTxWaiting(false);
                 setUpdateApprove(updateApprove + 1);
-                console.debug('approve bt ret', ret);
+                // console.debug('approve bt ret', ret);
               }).catch(err=>{
                 setTxWaiting(false);
                 console.error('approve failed', err);
@@ -114,12 +114,12 @@ export default function ChestboxBuyModal(props) {
             if (type === 'silver') {
               buySilverChest(web3, chainId, address).then(ret=>{
                 if (ret.events.MintNFT.returnValues.level === '0') {
-                  console.debug('33333', ret);
+                  // console.debug('33333', ret);
                   closeModal();
                   openNotificationOpenedBox(type.toUpperCase() + ' CHEST HAS BEEN OPENED', 'Nothing...', 'Unfortunately, you get nothing, 9 times in a row nothing, the next time 100% got non-rare NFT.', 'assets/sliversmoke.png', true);
                 } else {
                   getNftInfo(ret.events.MintNFT.returnValues.tokenId, web3, chainId).then(obj=>{
-                    console.debug('nftmeta111', obj);
+                    // console.debug('nftmeta111', obj);
                     setTokenId(ret.events.MintNFT.returnValues.tokenId);
                     setLevel(ret.events.MintNFT.returnValues.level);
                     setCategory(ret.events.MintNFT.returnValues.category);
@@ -143,7 +143,7 @@ export default function ChestboxBuyModal(props) {
             } else {
               buyGoldenChest(web3, chainId, address).then(ret=>{
                 getNftInfo(ret.events.MintNFT.returnValues.tokenId, web3, chainId).then(obj=>{
-                  console.debug('nftmeta222', obj, ret);
+                  // console.debug('nftmeta222', obj, ret);
                   setTokenId(ret.events.MintNFT.returnValues.tokenId);
                   setLevel(ret.events.MintNFT.returnValues.level);
                   setCategory(ret.events.MintNFT.returnValues.category);

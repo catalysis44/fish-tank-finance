@@ -12,6 +12,7 @@ import { WalletContext } from '../../wallet/Wallet';
 import { approve, checkApprove, deposit, withdraw } from '../../wallet/send';
 import { WANSWAP_URL, WWAN_ADDRESS, ZOO_FARMING_ADDRESS } from '../../config';
 import { getNftInfo } from '../../hooks/nftInfo';
+import { getPrices } from '../../hooks/price';
 
 const poolAnimals = [
   '/zoo_keeper_pools/BEAR.png',
@@ -34,6 +35,29 @@ const poolAnimals = [
   '/zoo_keeper_pools/WHALE.png',
   '/zoo_keeper_pools/WOLF.png',
   '/zoo_keeper_pools/ZEBRA.png',
+];
+
+const poolTitles = [
+  'THE BEAR',
+  'THE CROCODILE',
+  'THE ELEPHANT',
+  'THE GIRAFE',
+  'THE HIPPO',
+  'THE KANGAROO',
+  'THE KOALA',
+  'THE LAMA',
+  'THE LION',
+  'THE MONKEY',
+  'THE PANDA',
+  'THE PENGUIN',
+  'THE POLAR_BEAR',
+  'THE RHINO',
+  'THE TIGER',
+  'THE TOUKAN',
+  'THE TURTOISE',
+  'THE WHALE',
+  'THE WOLF',
+  'THE ZEBRA',
 ]
 
 
@@ -55,8 +79,8 @@ export default function Pool(props) {
   const setTxWaiting = props.setTxWaiting;
   const poolInfo = props.poolInfo;
   const pid = props.pid;
-  console.debug('poolInfo 1', poolInfo);
-  console.debug('symbol!!', poolInfo.symbol0, poolInfo.symbol1);
+  // console.debug('poolInfo 1', poolInfo);
+  // console.debug('symbol!!', poolInfo.symbol0, poolInfo.symbol1);
   const lpAmount = poolInfo.lpAmount;
   const deposited = lpAmount && (new BigNumber(lpAmount)).gt(0);
   const expirated = poolInfo.expirationTime * 1000 < Date.now();
@@ -72,12 +96,19 @@ export default function Pool(props) {
   const waspAllocPoint = poolInfo.waspAllocPoint;
   const waspTotalAllocPoint = poolInfo.waspTotalAllocPoint;
   const waspTotalLP = poolInfo.waspTotalLP;
+  let symbol0 = poolInfo.symbol0;
+  let symbol1 = poolInfo.symbol1;
+  const decimals0 = poolInfo.decimals0;
+  const decimals1 = poolInfo.decimals1
+  const reserve0 = poolInfo.reserve0;
+  const reserve1 = poolInfo.reserve1;
 
+  const prices = getPrices();
 
-  console.debug('farmingInfo1', farmingInfo);
+  const multiplier = poolInfo.getMultiplier;
 
   const zooPerWeek = useMemo(()=>{
-    return lpAmount && (new BigNumber(lpAmount)).gt(0) && (new BigNumber(lpAmount)).multipliedBy(zooPerBlock * blockPerWeek * allocPoint / totalAllocPoint).div(totalDeposited);
+    return lpAmount && (new BigNumber(lpAmount)).gt(0) && (new BigNumber(lpAmount)).multipliedBy(zooPerBlock * multiplier * blockPerWeek * allocPoint / totalAllocPoint).div(totalDeposited);
   }, [totalAllocPoint, allocPoint, zooPerBlock, blockPerWeek, totalDeposited, lpAmount]);
 
   const waspPerWeek = useMemo(()=>{
@@ -87,6 +118,43 @@ export default function Pool(props) {
     const waspPerBlock = 12;
     return lpAmount && (new BigNumber(lpAmount)).gt(0) && (new BigNumber(lpAmount)).multipliedBy(waspPerBlock * blockPerWeek * waspAllocPoint / waspTotalAllocPoint).div(waspTotalLP);
   }, [waspAllocPoint, waspTotalAllocPoint, waspTotalLP, blockPerWeek, lpAmount, dualFarmingEnable]);
+
+  const apy = useMemo(()=>{
+    if (decimals0 === 0 || decimals1 === 0 || !prices[symbol0] || !prices[symbol1] || !prices['ZOO'] || !prices['WASP']) {
+      return;
+    }
+
+    // get wslp price
+    const r0 = Number(reserve0.toString());
+    const r1 = Number(reserve1.toString());
+    const d0 = Number(decimals0);
+    const d1 = Number(decimals1);
+
+    const lpPrice = (r0 / 10**d0 * prices[symbol0] + r1 / 10**d1 * prices[symbol1]) / (Math.sqrt(r0 * r1) / 1e18);
+    // console.debug('lpPrice', lpPrice, symbol0, symbol1);
+    
+    const yearReward = zooPerWeek * prices['ZOO'] / 7 * 365 + waspPerWeek * prices['WASP'] / 7 * 365;
+    let apy = Number(lpAmount.toString()) > 0 ? (yearReward / (Number(lpAmount.toString()) * lpPrice)) : 0;
+    // console.debug('apy 1', (apy * 100));
+
+    if (apy === 0) {
+      const zooPerYear = zooPerBlock * (3600/5*24*365) * allocPoint / totalAllocPoint;
+      const waspPerBlock = 12;
+      const waspPerYear = waspPerBlock * blockPerWeek * waspAllocPoint / waspTotalAllocPoint;
+      let apyZoo = zooPerYear * prices['ZOO'] / (totalDeposited * lpPrice);
+      let apyWasp = waspPerYear * prices['WASP'] / (waspTotalLP * lpPrice);
+      if (totalDeposited.toString() !== '0') {
+        apy += apyZoo;
+      }
+      if (waspTotalLP.toString() !== '0') {
+        apy += apyWasp;
+      }
+    }
+
+    // console.debug('apy 3', (apy * 100));
+    return apy * 100;
+  }, [symbol0, symbol1, decimals0, decimals1, reserve0, reserve1, lpAmount, prices, waspPerWeek, zooPerWeek, allocPoint, totalAllocPoint, waspAllocPoint, waspTotalAllocPoint, totalDeposited, waspTotalLP]);
+
   
   const [countdown, setTargetDate, formattedRes] = useCountDown({
     targetDate: new Date(poolInfo.expirationTime * 1000),
@@ -105,9 +173,9 @@ export default function Pool(props) {
     if (!chainId || !address || !connected || !web3) {
       return;
     }
-    console.debug('checkApprove begin', updateApprove);
+    // console.debug('checkApprove begin', updateApprove);
     checkApprove(lpToken, '0x'+(new BigNumber(depositAmount)).multipliedBy(1e18).toString(16), chainId, web3, address).then(ret=>{
-      console.debug('checkApprove', ret);
+      // console.debug('checkApprove', ret);
       setApproved(ret);
     }).catch(err=>{
       console.error('checkApprove err', err);
@@ -120,7 +188,7 @@ export default function Pool(props) {
     }
 
     getNftInfo(currentTokenId, web3, chainId).then(ret => {
-      console.debug('nftmeta333', ret);
+      // console.debug('nftmeta333', ret);
       setIcon(ret.image);
       setBoost(ret.boost);
       setReduce(ret.timeReduce);
@@ -133,22 +201,22 @@ export default function Pool(props) {
   }, [currentTokenId, web3, chainId, connected]);
 
   if (poolInfo.symbol0 === 'WBTC') {
-    poolInfo.symbol0 = 'wanBTC';
+    symbol0 = 'wanBTC';
   }
 
   if (poolInfo.symbol1 === 'WBTC') {
-    poolInfo.symbol1 = 'wanBTC';
+    symbol1 = 'wanBTC';
   }
 
   if (poolInfo.symbol0 === 'WWAN') {
-    poolInfo.symbol0 = 'WAN';
+    symbol0 = 'WAN';
   }
 
   if (poolInfo.symbol1 === 'WWAN') {
-    poolInfo.symbol1 = 'WAN';
+    symbol1 = 'WAN';
   }
 
-  console.debug('currentInfo', icon, nftId, boost, reduce);
+  // console.debug('currentInfo', icon, nftId, boost, reduce);
   return (
     <React.Fragment >
       <BoosterSelectionModal isActived={modal} setModal={setModal} 
@@ -196,7 +264,7 @@ export default function Pool(props) {
         </div>
         <div className={styles.header}>
           <div className={styles.title}>
-            {poolInfo.symbol0}-{poolInfo.symbol1}
+            {poolTitles[pid]}
           </div>
           {/*is-success for KEEPER CHOICE and is-dark for COMMUNITY CHOICE*/}
           <div className="choice button is-success is-outlined">
@@ -220,7 +288,7 @@ export default function Pool(props) {
           </div>
           <div className={styles.apy} >
             <img src="assets/apy36x36.png" />
-            <span>555.55%</span>
+            <span>{commafy(apy).split('.')[0]}%</span>
 
           </div>
         </div>
@@ -309,7 +377,7 @@ export default function Pool(props) {
                     setTxWaiting(true);
                     withdraw(pid, '0x' + (new BigNumber(poolInfo.lpAmount.toString())).multipliedBy(1e18).toString(16), chainId, web3, address).then(ret=>{
                       setTxWaiting(false);
-                      console.debug('withdraw bt ret', ret);
+                      // console.debug('withdraw bt ret', ret);
                     }).catch(err=>{
                       setTxWaiting(false);
                       console.error('withdraw failed', err);
@@ -356,8 +424,8 @@ export default function Pool(props) {
               <div className={styles.coin_info}>
 
                 <div className={styles.coins}>
-                  {poolInfo.symbol0 && <img src={'https://token-icons.vercel.app/icon/wanswap/'+poolInfo.symbol0+'.png'} />}
-                  {poolInfo.symbol1 && <img src={'https://token-icons.vercel.app/icon/wanswap/'+poolInfo.symbol1+'.png'} />}
+                  {symbol0 && <img src={'https://token-icons.vercel.app/icon/wanswap/'+symbol0+'.png'} />}
+                  {symbol1 && <img src={'https://token-icons.vercel.app/icon/wanswap/'+symbol1+'.png'} />}
                 </div>
 
                 <a className={styles.add_liquidity}
@@ -371,7 +439,7 @@ export default function Pool(props) {
               <div className={styles.liq_detail}>
                 <div className={styles.liq_row}>
                   <div>Deposit</div>
-                  <div>{poolInfo.symbol0}-{poolInfo.symbol1} <a 
+                  <div>{symbol0}-{symbol1} <a 
                    target="view_window"
                    href={ WANSWAP_URL + '/#/add/'+(poolInfo.token0.toLowerCase() === WWAN_ADDRESS[wallet.networkId] ? 'WAN' : poolInfo.token0) +'/'+ (poolInfo.token1.toLowerCase() === WWAN_ADDRESS[wallet.networkId] ? 'WAN' : poolInfo.token1) }
                   ><FontAwesomeIcon icon={faExternalLinkSquareAlt} /></a></div>
@@ -410,8 +478,8 @@ export default function Pool(props) {
                     MAX
                   </a>
                   <div className={styles.coins}>
-                    {poolInfo.symbol0 && <img src={'https://token-icons.vercel.app/icon/wanswap/'+poolInfo.symbol0+'.png'} />}
-                    {poolInfo.symbol1 && <img src={'https://token-icons.vercel.app/icon/wanswap/'+poolInfo.symbol1+'.png'} />}
+                    {symbol0 && <img src={'https://token-icons.vercel.app/icon/wanswap/'+symbol0+'.png'} />}
+                    {symbol1 && <img src={'https://token-icons.vercel.app/icon/wanswap/'+symbol1+'.png'} />}
                   </div>
                 </div>
               </div>
@@ -478,7 +546,7 @@ export default function Pool(props) {
                     approve(poolInfo.lpToken, chainId, web3, address).then(ret=>{
                       setTxWaiting(false);
                       setUpdateApprove(updateApprove + 1);
-                      console.debug('approve bt ret', ret);
+                      // console.debug('approve bt ret', ret);
                     }).catch(err=>{
                       setTxWaiting(false);
                       console.error('approve failed', err);
@@ -491,7 +559,7 @@ export default function Pool(props) {
                     setTxWaiting(true);
                     deposit(pid, '0x' + (new BigNumber(depositAmount)).multipliedBy(1e18).toString(16), lockDays*3600*24, nftId, chainId, web3, address).then(ret=>{
                       setTxWaiting(false);
-                      console.debug('deposit bt ret', ret);
+                      // console.debug('deposit bt ret', ret);
                       setShowDeposit(false)
                     }).catch(err=>{
                       setTxWaiting(false);

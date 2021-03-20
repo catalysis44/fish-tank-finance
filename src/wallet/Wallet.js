@@ -53,7 +53,7 @@ class Wallet extends React.Component {
       return;
     }
 
-    console.debug('new web3modal');
+    // console.debug('new web3modal');
     this.web3Modal = new Web3Modal({
       network: 'mainnet',
       cacheProvider: true,
@@ -63,7 +63,7 @@ class Wallet extends React.Component {
   }
 
   componentDidMount() {
-    console.debug('web3Modal.cachedProvider', this.web3Modal.cachedProvider);
+    // console.debug('web3Modal.cachedProvider', this.web3Modal.cachedProvider);
     if (this.web3Modal.cachedProvider) {
       if (this.web3Modal.cachedProvider === 'wanmask' && !window.wanchain) {
         this.web3Modal.clearCachedProvider();
@@ -107,7 +107,7 @@ class Wallet extends React.Component {
       await this.setWallet({ ...this.props.wallet, address: accounts[0] });
     });
     provider.on("chainChanged", async (event) => {
-      console.debug('event', event);
+      // console.debug('event', event);
       const { web3 } = this.props.wallet;
       if (web3) {
         const networkId = await web3.eth.net.getId();
