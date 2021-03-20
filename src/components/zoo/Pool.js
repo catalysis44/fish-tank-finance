@@ -66,7 +66,6 @@ export default function Pool(props) {
 
   const [showDeposit, setShowDeposit] = useState(false);
   const [depositAmount, setDepositAmount] = useState(0);
-  const [lockDays, setLockDays] = useState(0);
   const [approved, setApproved] = useState(false);
   const [nftId, setNftId] = useState(0);
   const [updateApprove, setUpdateApprove] = useState(0);
@@ -160,6 +159,8 @@ export default function Pool(props) {
     targetDate: new Date(poolInfo.expirationTime * 1000),
   });
 
+  const [lockDays, setLockDays] = useState(parseInt(countdown/1000/3600/24));
+
   const { days, hours, minutes, seconds } = formattedRes;
 
   const wallet = useContext(WalletContext);
@@ -216,6 +217,7 @@ export default function Pool(props) {
     symbol1 = 'WAN';
   }
 
+  console.debug('pooInfo', pid, symbol0, symbol1, JSON.stringify(poolInfo, null, 2));
   // console.debug('currentInfo', icon, nftId, boost, reduce);
   return (
     <React.Fragment >
@@ -394,7 +396,7 @@ export default function Pool(props) {
                         <div className={styles.boosting}>
                           <img src="assets/hourglass24x24.png"/>
                           <div>
-                            +{commafy(calcLockTimeBoost((poolInfo.expirationTime - Date.now()/1000) / (3600 * 24))*100,2) + '%'}
+                            +{commafy(calcLockTimeBoost(poolInfo.lockTime / (3600 * 24))*100,2) + '%'}
                             <span>boost</span>
                           </div>
                         </div>
@@ -496,7 +498,7 @@ export default function Pool(props) {
                   {lockDays} days
                 </div>
                 <div className={styles.lock_action}>
-                  <Slider value={lockDays} min={0} max={180} tooltipVisible={false} onChange={(e)=>{
+                  <Slider value={lockDays} min={parseInt(countdown/1000/3600/24)} max={180} tooltipVisible={false} onChange={(e)=>{
                     setLockDays(e);
                   }} />
                 </div>
