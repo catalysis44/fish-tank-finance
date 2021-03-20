@@ -101,6 +101,7 @@ export default function Pool(props) {
   const decimals1 = poolInfo.decimals1
   const reserve0 = poolInfo.reserve0;
   const reserve1 = poolInfo.reserve1;
+  const [wslpPrice, setWslpPrice] = useState(0);
 
   const prices = getPrices();
 
@@ -131,6 +132,7 @@ export default function Pool(props) {
 
     const lpPrice = (r0 / 10**d0 * prices[symbol0] + r1 / 10**d1 * prices[symbol1]) / (Math.sqrt(r0 * r1) / 1e18);
     // console.debug('lpPrice', lpPrice, symbol0, symbol1);
+    setWslpPrice(lpPrice);
     
     const yearReward = zooPerWeek * prices['ZOO'] / 7 * 365 + waspPerWeek * prices['WASP'] / 7 * 365;
     let apy = Number(lpAmount.toString()) > 0 ? (yearReward / (Number(lpAmount.toString()) * lpPrice)) : 0;
@@ -217,7 +219,7 @@ export default function Pool(props) {
     symbol1 = 'WAN';
   }
 
-  console.debug('pooInfo', pid, symbol0, symbol1, JSON.stringify(poolInfo, null, 2));
+  // console.debug('pooInfo', pid, symbol0, symbol1, JSON.stringify(poolInfo, null, 2));
   // console.debug('currentInfo', icon, nftId, boost, reduce);
   return (
     <React.Fragment >
@@ -356,7 +358,7 @@ export default function Pool(props) {
 
             <div className={styles.staked}>
               <div className={styles.title}>
-                WSLP STAKED: {poolInfo.lpAmount.toString()}
+                WSLP STAKED: ${commafy(poolInfo.lpAmount * wslpPrice)}
               </div>
               <div className={styles.action_wrapper}>
 
@@ -448,7 +450,7 @@ export default function Pool(props) {
                 </div>
                 <div className={styles.liq_row}>
                   <div>Total Liquidity</div>
-                  <div>{commafy(totalDeposited) + " WSLP"}</div>
+                  <div>${commafy(totalDeposited * wslpPrice).split('.')[0]}</div>
                 </div>
                 <div className={styles.liq_row}>
                   <div><a target="view_window" href={"https://info.wanswap.finance/pair/" + lpToken}>View on info.WanSwap.finance <FontAwesomeIcon icon={faExternalLinkSquareAlt} /></a></div>
