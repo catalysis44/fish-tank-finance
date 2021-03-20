@@ -1,5 +1,6 @@
 import { ZOO_NFT_ADDRESS } from '../config';
 import axios from 'axios';
+import { axioGet } from '../utils/cache';
 
 const erc721Abi = require('../assets/abi/erc721.json');
 const zooNFTAbi = require('../assets/abi/zooNFT.json');
@@ -13,7 +14,7 @@ export const getNftInfo = async (tokenId, web3, chainId) => {
   let timeReduce = await sc.methods.getLockTimeReduce(tokenId).call();
 
   console.debug('tokenURI ret', ret);
-  ret = await axios.get(ret);
+  ret = await axioGet(ret);
   console.debug('tokenURI info', ret.data);
   let obj = ret.data;
   return {

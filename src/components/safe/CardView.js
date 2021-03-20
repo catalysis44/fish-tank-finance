@@ -52,27 +52,27 @@ export default function CardView(props) {
               </div>
               {
                 rare === 1 && <div className={styles.total_supply}>
-                  <img src="assets/gem/common18x18.png" /> Total Supply : 1
+                  <img src="assets/gem/common18x18.png" /> Total Supply: {props.itemSupply}
                 </div>
               }
               {
                 rare === 2 && <div className={styles.total_supply}>
-                  <img src="assets/gem/epic18x18.png" /> Total Supply : 1
+                  <img src="assets/gem/epic18x18.png" /> Total Supply: {props.itemSupply}
                 </div>
               }
               {
                 rare === 3 && <div className={styles.total_supply}>
-                  <img src="assets/gem/rare18x18.png" /> Total Supply : 1
+                  <img src="assets/gem/rare18x18.png" /> Total Supply: {props.itemSupply}
                 </div>
               }
               {
                 rare === 4 && <div className={styles.total_supply}>
-                  <img src="assets/gem/ultrarare18x18.png" /> Total Supply : 1
+                  <img src="assets/gem/ultrarare18x18.png" /> Total Supply: {props.itemSupply}
                 </div>
               }
               {
                 rare === 5 && <div className={styles.total_supply}>
-                  <img src="assets/gem/ultrarare18x18.png" /> Total Supply : 1
+                  <img src="assets/gem/ultrarare18x18.png" /> Total Supply: {props.itemSupply}
                 </div>
               }
               

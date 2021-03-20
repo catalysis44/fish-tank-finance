@@ -5,6 +5,7 @@ import React from 'react';
 import { StorageContext } from "../../hooks";
 import { WalletContext } from '../../wallet/Wallet';
 import axios from 'axios';
+import { axioGet } from '../../utils/cache';
 
 
 export default function BoosterSelectionModal(props) {
@@ -34,7 +35,7 @@ export default function BoosterSelectionModal(props) {
     const func = async ()=>{
       setLoading(true);
       const arr = nftCards.map(v=>{
-        return axios.get(v.uri);
+        return axioGet(v.uri);
       });
 
       let rets;

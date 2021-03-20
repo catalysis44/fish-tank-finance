@@ -147,7 +147,28 @@ export const getNftBaseInfo = (loader, chainId, tokenIds) => {
     }
   }));
 
+  calls = calls.concat(tokenIds.map(id => {
+    return {
+      target: ZOO_NFT_ADDRESS[chainId],
+      call: ['tokenInfo(uint256)(uint256,uint256,uint256,uint256)', id],
+      returns: [
+        ['level', val => Number(val)],
+        ['category', val => Number(val)],
+        ['item', val => Number(val)],
+        ['random', val => Number(val)],
+      ]
+    }
+  }));
+
   return loader.loadMany(calls);
+}
+
+export const getNftItemSupply = (loader, chainId, level, category, item) => {
+  return loader.load({
+    target: ZOO_NFT_ADDRESS[chainId],
+    call: ['itemSupply(uint256,uint256,uint256)(uint256)', level, category, item],
+    returns: [['itemSupply', val => Number(val)]]
+  });
 }
 
 export const getZooBurned = (loader, chainId, address) => {
@@ -475,11 +496,25 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
                 uri: ret[i].returnValue.uri,
                 boost: ret[i + tokenIds.length].returnValue.boost,
                 reduce: ret[i + tokenIds.length * 2].returnValue.reduce,
+                tokenInfo: { ...ret[i + tokenIds.length * 3].returnValue},
               });
             }
-            console.debug('cards:', cards);
-            tmpStorage = Object.assign({ ...tmpStorage, nftCards: cards });
-            updateStorage(tmpStorage);
+
+            Promise.all(cards.map(v=>{
+              return getNftItemSupply(loader, chainId, v.tokenInfo.level, v.tokenInfo.category, v.tokenInfo.item);
+            })).then(ret => {
+              console.debug('getNftItemSupply ret', ret);
+              cards = cards.map((v,i)=>{
+                v.itemSupply = ret[i].returnValue.itemSupply;
+                return v;
+              });
+
+              console.debug('cards:', cards);
+              tmpStorage = Object.assign({ ...tmpStorage, nftCards: cards });
+              updateStorage(tmpStorage);
+            }).catch(err=>{
+              console.error('err 1.2.1.1', err);
+            })
           });
         }).catch(err => {
           console.error('err 1.2.1', err);

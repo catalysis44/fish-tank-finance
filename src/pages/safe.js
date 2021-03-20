@@ -12,6 +12,7 @@ import { commafy } from '../utils';
 import { WalletContext } from '../wallet/Wallet';
 import { useRequest } from 'ahooks';
 import axios from 'axios';
+import { axioGet } from '../utils/cache';
 
 export default function () {
   function toggleFilter() {
@@ -66,7 +67,7 @@ export default function () {
     const func = async ()=>{
       setLoading(true);
       const arr = nftCards.map(v=>{
-        return axios.get(v.uri);
+        return axioGet(v.uri);
       });
 
       let rets;
@@ -86,6 +87,7 @@ export default function () {
         v.tokenId = nftCards[i].tokenId;
         v.boost = nftCards[i].boost;
         v.reduce = nftCards[i].reduce;
+        v.itemSupply = nftCards[i].itemSupply;
         return v;
       }))
       setLoading(false);
@@ -325,7 +327,7 @@ export default function () {
           <div className={styles.row}>
           {
             cards.map(v=>{
-              return <CardView icon={v.image} name={v.name} tokenId={v.tokenId} attributes={v.attributes} boost={v.boost} reduce={v.reduce} />
+              return <CardView icon={v.image} name={v.name} tokenId={v.tokenId} attributes={v.attributes} boost={v.boost} reduce={v.reduce} itemSupply={v.itemSupply}/>
             })
           }
 

@@ -363,7 +363,10 @@ export default function Pool(props) {
               <div className={styles.liq_detail}>
                 <div className={styles.liq_row}>
                   <div>Deposit</div>
-                  <div>{poolInfo.symbol0}-{poolInfo.symbol1} <a href=""><FontAwesomeIcon icon={faExternalLinkSquareAlt} /></a></div>
+                  <div>{poolInfo.symbol0}-{poolInfo.symbol1} <a 
+                   target="view_window"
+                   href={ WANSWAP_URL + '/#/add/'+(poolInfo.token0.toLowerCase() === WWAN_ADDRESS[wallet.networkId] ? 'WAN' : poolInfo.token0) +'/'+ (poolInfo.token1.toLowerCase() === WWAN_ADDRESS[wallet.networkId] ? 'WAN' : poolInfo.token1) }
+                  ><FontAwesomeIcon icon={faExternalLinkSquareAlt} /></a></div>
                 </div>
                 <div className={styles.liq_row}>
                   <div>Total Liquidity</div>
