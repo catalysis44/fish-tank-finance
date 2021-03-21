@@ -3,7 +3,7 @@ import { notification } from 'antd';
 
 export function commafy(num, fixed=null) {
   if (!num) {
-    return '0';
+    return '--';
   }
 
   num = num.toString();

@@ -1,15 +1,16 @@
 import styles from './expedition.less';
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useState } from 'react';
 import ChestboxBuyModal from '../components/expedition/ChestboxBuyModal';
 import { StorageContext } from '../hooks';
-import { commafy } from '../utils';
+import { commafy, openNotificationExclamation } from '../utils';
 import { WalletContext } from '../wallet/Wallet';
 import { OmitProps } from 'antd/lib/transfer/ListBody';
 import Loader from '../components/loader'
 import BigNumber from 'bignumber.js';
 import { useCountDown } from 'ahooks';
-import { stakeClaim, stakeZoo } from '../wallet/send';
+import { approve, checkApprove, stakeClaim, stakeZoo } from '../wallet/send';
+import { ZOO_TOKEN_ADDRESS } from '../config';
 
 
 export default function (props) {
@@ -18,10 +19,17 @@ export default function (props) {
 
   const [showGoldenModal, setShowGoldenModal] = useState(0);
   const [showSilverModal, setShowSilverModal] = useState(0);
+  const [stakingZoo, setStakingZoo] = useState(false);
+  const [stakingZoo1, setStakingZoo1] = useState(false);
+  const [stakingZoo2, setStakingZoo2] = useState(false);
+  const [approved, setApproved] = useState(false);
+  const [updateApprove, setUpdateApprove] = useState(0);
+
 
   const storage = useContext(StorageContext);
   const goldenPrice = storage.goldenPrice;
   const expeditions = storage.expeditions;
+  const zooBalance = storage.zooBalance;
   // console.debug('expeditions1', expeditions);
 
   const wallet = useContext(WalletContext);
@@ -43,6 +51,19 @@ export default function (props) {
   });
 
   // console.debug('countdown0', countdown0, countdown1, countdown2);
+
+  useEffect(()=>{
+    if (!chainId || !address || !connected || !web3) {
+      return;
+    }
+    // console.debug('checkApprove begin', updateApprove);
+    checkApprove(ZOO_TOKEN_ADDRESS[chainId], '0x'+(new BigNumber(goldenPrice)).multipliedBy(1e18).toString(16), chainId, web3, address).then(ret=>{
+      // console.debug('checkApprove', ret);
+      setApproved(ret);
+    }).catch(err=>{
+      console.error('checkApprove err', err);
+    });
+  }, [chainId, address, connected, goldenPrice, web3, updateApprove]);
 
   return (
     <React.Fragment>
@@ -101,16 +122,6 @@ export default function (props) {
               BUY GOLDEN CHEST
             </a>
           </div>
-
-          <div className={styles.action_wrapper}> 
-            <a className={styles.action_btn} disabled>
-              Approve
-            </a>
-            <a className={styles.action_btn}>
-              Validate
-            </a>
-          </div>
-
         </div>
 
         <div className={styles.pool} id="silver_pool">
@@ -194,17 +205,45 @@ export default function (props) {
 
             </div>
           </div>
-          <div className={styles.action_wrapper}>
-            {
-              expeditions[0] && expeditions[0].startTime === 0 && <a className={styles.action_btn} onClick={() => {
+          {
+            stakingZoo && <div className={styles.action_wrapper}> 
+              <a className={styles.action_btn} disabled={approved} onClick={()=>{
+                setTxWaiting(true);
+                approve(ZOO_TOKEN_ADDRESS[chainId], chainId, web3, address).then(ret=>{
+                  setTxWaiting(false);
+                  setUpdateApprove(updateApprove + 1);
+                  // console.debug('approve bt ret', ret);
+                }).catch(err=>{
+                  setTxWaiting(false);
+                  console.error('approve failed', err);
+                });
+              }}>
+                Approve
+              </a>
+              <a className={styles.action_btn} disabled={!approved}  onClick={() => {
+                if (!zooBalance.gte(goldenPrice*10)) {
+                  openNotificationExclamation("ZOO balance not enough");
+                  return;
+                }
                 setTxWaiting(true);
                 stakeZoo(0, web3, chainId, address).then(ret => {
                   setTxWaiting(false);
                   console.log(ret);
+                  setStakingZoo(false);
                 }).catch(err => {
                   console.log(err);
                   setTxWaiting(false);
                 })
+              }}>
+                Validate
+              </a>
+            </div>
+          }
+          
+          <div className={styles.action_wrapper}>
+            {
+              expeditions[0] && expeditions[0].startTime === 0 && !stakingZoo && <a className={styles.action_btn} onClick={()=>{
+                setStakingZoo(true);
               }}>
                 Stake ZOO
               </a>
@@ -268,17 +307,44 @@ export default function (props) {
 
             </div>
           </div>
-          <div className={styles.action_wrapper}>
-            {
-              expeditions[1] && expeditions[1].startTime === 0 && <a className={styles.action_btn} onClick={() => {
+          {
+            stakingZoo1 && <div className={styles.action_wrapper}> 
+              <a className={styles.action_btn} disabled={approved}  onClick={()=>{
+                setTxWaiting(true);
+                approve(ZOO_TOKEN_ADDRESS[chainId], chainId, web3, address).then(ret=>{
+                  setTxWaiting(false);
+                  setUpdateApprove(updateApprove + 1);
+                  // console.debug('approve bt ret', ret);
+                }).catch(err=>{
+                  setTxWaiting(false);
+                  console.error('approve failed', err);
+                });
+              }}>
+                Approve
+              </a>
+              <a className={styles.action_btn} disabled={!approved}  onClick={() => {
+                if (!zooBalance.gte(goldenPrice)) {
+                  openNotificationExclamation("ZOO balance not enough");
+                  return;
+                }
                 setTxWaiting(true);
                 stakeZoo(1, web3, chainId, address).then(ret => {
-                  console.log(ret);
                   setTxWaiting(false);
+                  console.log(ret);
+                  setStakingZoo1(false);
                 }).catch(err => {
                   console.log(err);
                   setTxWaiting(false);
                 })
+              }}>
+                Validate
+              </a>
+            </div>
+          }
+          <div className={styles.action_wrapper}>
+            {
+              expeditions[1] && expeditions[1].startTime === 0 && !stakingZoo1 && <a className={styles.action_btn} onClick={() => {
+                setStakingZoo1(true);
               }}>
                 Stake ZOO
               </a>
@@ -342,17 +408,44 @@ export default function (props) {
 
             </div>
           </div>
+          {
+            stakingZoo2 && <div className={styles.action_wrapper}> 
+              <a className={styles.action_btn} disabled={approved}  onClick={()=>{
+                setTxWaiting(true);
+                approve(ZOO_TOKEN_ADDRESS[chainId], chainId, web3, address).then(ret=>{
+                  setTxWaiting(false);
+                  setUpdateApprove(updateApprove + 1);
+                  // console.debug('approve bt ret', ret);
+                }).catch(err=>{
+                  setTxWaiting(false);
+                  console.error('approve failed', err);
+                });
+              }}>
+                Approve
+              </a>
+              <a className={styles.action_btn} disabled={!approved} onClick={() => {
+                if (!zooBalance.gte(goldenPrice / 10)) {
+                  openNotificationExclamation("ZOO balance not enough");
+                  return;
+                }
+                setTxWaiting(true);
+                stakeZoo(2, web3, chainId, address).then(ret => {
+                  setTxWaiting(false);
+                  console.log(ret);
+                  setStakingZoo2(false);
+                }).catch(err => {
+                  console.log(err);
+                  setTxWaiting(false);
+                })
+              }}>
+                Validate
+              </a>
+            </div>
+          }
           <div className={styles.action_wrapper}>
           {
-            expeditions[2] && expeditions[2].startTime === 0 && <a className={styles.action_btn} onClick={() => {
-              setTxWaiting(true);
-              stakeZoo(2, web3, chainId, address).then(ret => {
-                console.log(ret);
-                setTxWaiting(false);
-              }).catch(err => {
-                console.log(err);
-                setTxWaiting(false);
-              })
+            expeditions[2] && expeditions[2].startTime === 0 && !stakingZoo2 && <a className={styles.action_btn} onClick={() => {
+              setStakingZoo2(true);
             }}>
               Stake ZOO
             </a>

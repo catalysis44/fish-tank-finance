@@ -8,7 +8,7 @@ const { aggregate } = require('@makerdao/multicall');
 const DataLoader = require('dataloader');
 
 export const initialState = {
-  zooBalance: new BigNumber(300),
+  zooBalance: new BigNumber(0),
   address: '',
   chainId: 999,
   farmingInfo: {

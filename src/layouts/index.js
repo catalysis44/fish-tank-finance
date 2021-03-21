@@ -99,6 +99,10 @@ function BasicLayout(props) {
             <div className={styles.ext_link}>
               <a href="#" target="_blank">FAQ</a>
               <a href="#" target="_blank">Documentation</a>
+              <a target="_blank" onClick={()=>{
+                window.localStorage.clear();
+                window.location.reload();
+              }}>Reset Cache</a>
             </div>
             <div>
               <div className={styles.social}>
