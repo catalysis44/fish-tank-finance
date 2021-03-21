@@ -1,6 +1,7 @@
 // src/locales/zh-CN.js
 export default {
   WELCOME_TO_UMI_WORLD: '{name}，欢迎光临umi的世界',
+  //layout
   "DISCONNECT": "断开钱包",
   "CONNECT WALLET": "连接钱包",
   "NO WALLET":"未连接钱包",
@@ -14,4 +15,35 @@ export default {
   "FAQ":"常见问题",
   "Documentation":"帮助文档",
   "Reset Cache":"重置缓存",
+
+  //Pool
+  "REWARD":"收益",
+  "LOCKTIME":"锁定时间",
+  "ATTACH A BOOST CARD TO OPTIMIZE YOUR FARMING":"附加一个卡牌来加速你的挖矿",
+  "DUAL FARMING":"双挖",
+  "WELCOME FARMING ZOO":"欢迎挖矿ZOO",
+  "KEEPER CHOICE":"项目方推荐",
+  "per week":"每周",
+  "HARVEST":"收割",
+  "STAKED":"已质押",
+  "Connect Wallet":"连接钱包",
+  "Deposit WSLP Token":"充值WSLP",
+  "Withdraw":"提取",
+  "boost":"加速",
+  "lock time":"锁定时间",
+  "UNLOCKED in":"解锁时间",
+  "Top-up":"充值",
+  "Add Liquidity on WanSwap":"在WanSwap中添加流动性",
+  "Deposit":"流动性池",
+  "Total Liquidity":"总流动性",
+  "DEPOSIT WSLP":"充值 WSLP",
+  "AVAILABLE":"可用的",
+  "MAX":"最大",
+  "LOCK PERIOD":"锁定时长",
+  "BOOST":"加速",
+  "days":"天",
+  "EXTRA BOOST":"额外加速",
+  "Approve":"授权",
+  "Validate":"确认",
+  "EARNED":"收益",
 };
