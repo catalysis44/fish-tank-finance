@@ -11,6 +11,7 @@ import { useDataPump, initialState, StorageContext } from '../hooks';
 import { commafy } from '../utils';
 import { useLocalStorageState } from 'ahooks';
 import BigNumber from 'bignumber.js';
+import { getPrices } from '../hooks/price';
 
 
 function toggleSidebar()
@@ -30,9 +31,11 @@ function BasicLayout(props) {
   const [storage, setStorage] = useLocalStorageState('zoo-keeper-v0.1', initialState);
 
   useDataPump(storage, setStorage, chainId, address, connected);
+
+  const prices = getPrices();
   // console.debug('chainId', chainId);
 
-  const zooPrice = 16;
+  const zooPrice = prices['ZOO'];
   return (
     <div id="wrapper">
       <Wallet wallet={wallet} setWallet={setWallet} />
