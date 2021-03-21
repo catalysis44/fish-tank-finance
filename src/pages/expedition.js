@@ -194,7 +194,7 @@ export default function (props) {
 
           <div className={styles.reward}>
             <div className={styles.type}>
-              <img src="assets/artifact48x48.png" />
+              <img src="assets/goldenbox48x48.png" />
               <div className={styles.x}>×</div>
               <div className={styles.amount}>1</div>
             </div>
