@@ -83,21 +83,17 @@ export default function () {
       }
 
       let objs = rets.map(v=>v.data);
-      
-      setCards(objs.map((v,i)=>{
-        v.tokenId = nftCards[i].tokenId;
-        v.boost = nftCards[i].boost;
-        v.reduce = nftCards[i].reduce;
-        v.itemSupply = nftCards[i].itemSupply;
-        return v;
-      }))
+
+      objs = objs.map((v,i)=>{
+        return {...v, ...nftCards[i]};
+      });
+
+      setCards(objs)
       setLoading(false);
     }
 
     func();
   }, [chainId, address, nftCards, nftBalance]);
-
-  // console.debug('new cards', cards);
 
   return (
     <React.Fragment>
@@ -332,7 +328,7 @@ export default function () {
           <div className={styles.row}>
           {
             !listView && cards.map(v=>{
-              return <CardView icon={v.image} name={v.name} tokenId={v.tokenId} attributes={v.attributes} boost={v.boost} reduce={v.reduce} itemSupply={v.itemSupply}/>
+              return <CardView key={v.tokenId} icon={v.image} name={v.name} tokenId={v.tokenId} attributes={v.attributes} boost={v.boost} reduce={v.reduce} itemSupply={v.itemSupply}/>
             })
           }
 
