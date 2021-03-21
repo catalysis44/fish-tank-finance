@@ -120,23 +120,17 @@ export default function ListView(props) {
                         <span className={styles.currency_name}>wanBTC</span>
                         <span><FontAwesomeIcon icon={faCaretDown} /></span>
                       </a>
-
-
                       <div class="dropdown-menu" id="dropdown-menu" role="menu">
                         <div class="dropdown-content">
-
                           <a class="dropdown-item">
                             <img src="assets/currency/zoo.png" /> ZOO
-                                                    </a>
-
+                          </a>
                           <a href="#" class="dropdown-item">
                             <img src="assets/currency/wanBTC.png" /> wanBTC
-                                                    </a>
-
+                          </a>
                           <a href="#" class="dropdown-item">
                             <img src="assets/currency/wanETH.png" /> wanETH
-                                                    </a>
-
+                          </a>
                         </div>
                       </div>
 
