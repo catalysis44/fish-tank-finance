@@ -3,34 +3,63 @@ import styles from './CardView.less';
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretDown} from '@fortawesome/free-solid-svg-icons';
-import { commafy } from '../../utils';
+import { checkNumber, commafy } from '../../utils';
 
+const currencyList = [
+  {
+    symbol: 'ZOO',
+    icon: 'assets/currency/zoo.png',
+  },
+  {
+    symbol: 'WASP',
+    icon: 'assets/currency/wasp.png',
+  },
+  {
+    symbol: 'wanUSDT',
+    icon: 'assets/currency/wanUSDT.png',
+  },
+  {
+    symbol: 'wanBTC',
+    icon: 'assets/currency/wanBTC.png',
+  },
+  {
+    symbol: 'wanETH',
+    icon: 'assets/currency/wanETH.png',
+  },
+  {
+    symbol: 'WWAN',
+    icon: 'assets/currency/wan.png',
+  },
+]
+
+const categorys = [
+  "Fruits",
+  "Foods",
+  "Sweets",
+  "Potions",
+  "Spices",
+  "Magic",
+]
+
+const categoryIcons = [
+  "/assets/category/fruits.png",
+  "/assets/category/dishes.png",
+  "/assets/category/sweets.png",
+  "/assets/category/potions.png",
+  "/assets/category/spices.png",
+  "/assets/category/magic.png",
+]
 
 export default function CardView(props) {
-
-  const categorys = [
-    "Fruits",
-    "Foods",
-    "Sweets",
-    "Potions",
-    "Spices",
-    "Magic",
-  ]
-
-  const categoryIcons = [
-    "/assets/category/fruits.png",
-    "/assets/category/dishes.png",
-    "/assets/category/sweets.png",
-    "/assets/category/potions.png",
-    "/assets/category/spices.png",
-    "/assets/category/magic.png",
-  ]
-
   const category = Number(props.attributes[0].value);
   const rare = Number(props.attributes[2].value);
   const level = Number(props.attributes[1].value);
 
   // console.debug('CardView', props);
+  const [currency, setCurrency] = useState('ZOO');
+  const [currencyIcon, setCurrencyIcon] = useState('assets/currency/zoo.png');
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [amount, setAmount] = useState('0.0');
 
   return (
     <React.Fragment >
@@ -113,52 +142,60 @@ export default function CardView(props) {
             </div>
             <div className={styles.flip_card_back}>
               <div className={styles.title}>
-                <img src="assets/lemon64x64.png" />
-                                        Lemon of Bunbury
-                                    </div>
+                <img src={props.icon} />
+                  {props.name}
+                </div>
               <div className={styles.item_description}>
                 <div className={styles.description}>
                   <div>
-                    <img src="assets/star18x18.png" />
-                    <img src="assets/star18x18.png" />
-                    <img src="assets/star18x18.png" />
+                    {
+                      level < 4 && Array.from({length: level}).map(v=>{
+                        return <img src="assets/star18x18.png" />
+                      })
+                    }
+                    {
+                      level === 4 && <img src="assets/max.png" />
+                    }
                   </div>
                 </div>
                 <div className={styles.description}>
-                  <span><img src="assets/rocket24x24.png" /> +5.15%</span>
+                  <span><img src="assets/rocket24x24.png" /> +{commafy(props.boost*100, 2)}%</span>
                 </div>
                 <div className={styles.description}>
-                  <span><img src="assets/hourglass24x24.png" style={{ height: 20 }} /> -15.25%</span>
+                  <span><img src="assets/hourglass24x24.png" style={{ height: 20 }} /> -{commafy(props.reduce*100, 2)}%</span>
                 </div>
               </div>
               <a className={styles.withdraw_btn} style={{ display: 'none' }}> {/*Show this one when on sale*/}
-                                        WITHDRAW FROM SALE
-                                    </a>
+                  WITHDRAW FROM SALE
+              </a>
               <div className={styles.sell_action}> {/*Show this when not on sale*/}
-                <input type="text" value="0.0" />
+                <input type="text" value={amount} onChange={e=>{
+                  if (checkNumber(e)) {
+                    setAmount(e.target.value);
+                  }
+                }} />
                 <div className="dropdown is-active">
-                  <a className={styles.select_currency} aria-haspopup="true" aria-controls="dropdown-menu">
-                    <img src="assets/currency/wanBTC.png" />
-                    <span>wanBTC</span>
+                  <a className={styles.select_currency} aria-haspopup="true" aria-controls="dropdown-menu" onClick={()=>{
+                    setShowDropdown(true);
+                  }}>
+                    <img src={currencyIcon} />
+                    <span>{currency}</span>
                     <span><FontAwesomeIcon icon={faCaretDown} /></span>
                   </a>
 
-
                   <div class="dropdown-menu" id="dropdown-menu" role="menu">
-                    <div class="dropdown-content">
-
-                      <a class="dropdown-item">
-                        <img src="assets/currency/zoo.png" /> ZOO
-                                                </a>
-
-                      <a href="#" class="dropdown-item">
-                        <img src="assets/currency/wanBTC.png" /> wanBTC
-                                                </a>
-
-                      <a href="#" class="dropdown-item">
-                        <img src="assets/currency/wanETH.png" /> wanETH
-                                                </a>
-
+                    <div class="dropdown-content" style={{ display: showDropdown ? '':'none' }}>
+                      {
+                        currencyList.map(v=>{
+                          return <a class="dropdown-item" key={v.symbol} onClick={()=>{
+                            setCurrency(v.symbol);
+                            setCurrencyIcon(v.icon);
+                            setShowDropdown(false);
+                          }}>
+                            <img src={v.icon} /> {v.symbol}
+                          </a>
+                        })
+                      }
                     </div>
                   </div>
 

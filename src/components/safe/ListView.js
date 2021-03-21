@@ -5,6 +5,23 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretDown} from '@fortawesome/free-solid-svg-icons';
 import { commafy } from '../../utils';
 
+const categorys = [
+  "Fruits",
+  "Foods",
+  "Sweets",
+  "Potions",
+  "Spices",
+  "Magic",
+]
+
+const categoryIcons = [
+  "/assets/category/fruits.png",
+  "/assets/category/dishes.png",
+  "/assets/category/sweets.png",
+  "/assets/category/potions.png",
+  "/assets/category/spices.png",
+  "/assets/category/magic.png",
+]
 
 export default function ListView(props) {
 
@@ -30,41 +47,51 @@ export default function ListView(props) {
 
   // console.debug('ListView', props);
 
+  const cards = props.cards;
+
   return (
     <React.Fragment >
       <div className={styles.listview_panel}>
         <div className={styles.listview_table}>
-          <div className={styles.listview_row}>
+          {
+            cards.map(v=>{
+              return <div className={styles.listview_row}>
               <div className={`${styles.listview_col} ${styles.star}`}>
-                <img src="assets/star18x18.png"/><img src="assets/star18x18.png"/><img src="assets/star18x18.png"/>
+                {
+                  Number(v.attributes[1].value) < 4 && Array.from({length: Number(v.attributes[1].value)}).map(v=>{
+                    return <img src="assets/star18x18.png" />
+                  })
+                }
+                {
+                  Number(v.attributes[1].value) === 4 && <img src="assets/max.png" />
+                }
               </div>
               <div className={`${styles.listview_col} ${styles.title}`}>
                 <div className={styles.listview_subcol}>
-                  <img src="assets/gem/common18x18.png" className={styles.gem}/> <img src="/dummy/booster.png"/> <div>NFT boost full name</div>
+                  <img src="assets/gem/common18x18.png" className={styles.gem}/> <img src={v.image}/> <div>{v.name}</div>
                 </div>
               </div>
-
               <div className={styles.block_responsive}>
 
               <div className={`${styles.listview_col} ${styles.stat_action}`}>
                 <div className={styles.listview_subcol}>
-                  <div className={styles.stat}><span><img src="assets/rocket24x24.png"/>+21.55%</span></div>
-                  <div className={styles.stat}><span><img src="assets/hourglass24x24.png" style={{width:20}}/>-55.33%</span></div>
+                  <div className={styles.stat}><span><img src="assets/rocket24x24.png"/>+{(v.boost * 100).toFixed(2)}%</span></div>
+                  <div className={styles.stat}><span><img src="assets/hourglass24x24.png" style={{width:20}}/>-{(v.reduce * 100).toFixed(2)}%</span></div>
                 </div>
               </div>
 
               <div className={`${styles.listview_col} ${styles.item_description}`}>
                 <div className={styles.listview_subcol}>
                   <div className={styles.description}>
-                    <span><img src="assets/category/potions.png" /> Potions</span>
+                    <span><img src={categoryIcons[Number(v.attributes[0].value)-1]} /> {categorys[Number(v.attributes[0].value)-1]}</span>
                   </div>
                   <div className={styles.description}>
                     <span>Card #</span>
-                      555,555,555
+                      {v.tokenId}
                   </div>
                   <div className={styles.description}>
                     <span>Total Supply</span>
-                      555,555,555
+                      {v.itemSupply}
                   </div>
                 </div>
               </div>
@@ -124,9 +151,13 @@ export default function ListView(props) {
               </div>
 
               </div>
-
-            
           </div>
+            })
+          }
+
+
+
+
           <div className={styles.listview_row}>
               <div className={`${styles.listview_col} ${styles.star}`}>
                 <img src="assets/star18x18.png"/><img src="assets/star18x18.png"/><img src="assets/star18x18.png"/>

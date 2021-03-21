@@ -10,7 +10,7 @@ import { useEffect, useContext } from 'react';
 import { StorageContext } from '../hooks';
 import { commafy } from '../utils';
 import { WalletContext } from '../wallet/Wallet';
-import { useRequest } from 'ahooks';
+import { useLocalStorageState, useRequest } from 'ahooks';
 import axios from 'axios';
 import { axioGet } from '../utils/cache';
 
@@ -59,6 +59,7 @@ export default function () {
 
   const [cards, setCards] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [listView, setListView] = useLocalStorageState("safeView", false);
 
   const nftCards = storage.nftCards;
   const nftBalance = storage.nftBalance;
@@ -313,8 +314,12 @@ export default function () {
                   View
                                 </div>
                 <div className={styles.view_btn}>
-                  <a className={styles.is_acitve}>Card</a>
-                  <a>List</a>
+                  <a className={ !listView && styles.is_acitve } onClick={()=>{
+                    setListView(false);
+                  }}>Card</a>
+                  <a className={ listView && styles.is_acitve} onClick={()=>{
+                    setListView(true);
+                  }}>List</a>
                 </div>
               </div>
             </div>
@@ -326,12 +331,15 @@ export default function () {
           }
           <div className={styles.row}>
           {
-            cards.map(v=>{
+            !listView && cards.map(v=>{
               return <CardView icon={v.image} name={v.name} tokenId={v.tokenId} attributes={v.attributes} boost={v.boost} reduce={v.reduce} itemSupply={v.itemSupply}/>
             })
           }
 
-          {/*<ListView/>*/}
+          {
+            listView && <ListView cards={cards}/>
+          }
+          
           </div>
 
         </div>
