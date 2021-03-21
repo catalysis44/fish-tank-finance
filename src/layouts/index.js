@@ -12,6 +12,7 @@ import { commafy } from '../utils';
 import { useLocalStorageState } from 'ahooks';
 import BigNumber from 'bignumber.js';
 import { getPrices } from '../hooks/price';
+import { useLanguage } from '../hooks/language';
 
 
 function toggleSidebar()
@@ -35,6 +36,8 @@ function BasicLayout(props) {
   const prices = getPrices();
   // console.debug('chainId', chainId);
 
+  const t = useLanguage();
+
   const zooPrice = prices['ZOO'];
   return (
     <div id="wrapper">
@@ -52,9 +55,9 @@ function BasicLayout(props) {
             } else {
               wallet.resetApp();
             }
-          }}>{connected ? "DISCONNECT" : "CONNECT WALLET"}</a> 
-          <div class="address"><img src="assets/wallet32x32.png"/><span>{address ? address.slice(0, 6) + '...' + address.slice(-6) : 'NO WALLET'}</span></div>
-          {chainId && chainId.toString() !== '1' && chainId.toString() !== '888' && chainId !== "" && <div class="testnet"><span>!! TESTNET !!</span></div>}
+          }}>{connected ? t("DISCONNECT") : t("CONNECT WALLET")}</a> 
+          <div class="address"><img src="assets/wallet32x32.png"/><span>{address ? address.slice(0, 6) + '...' + address.slice(-6) : t('NO WALLET')}</span></div>
+          {chainId && chainId.toString() !== '1' && chainId.toString() !== '888' && chainId !== "" && <div class="testnet"><span>!! {t('TESTNET')} !!</span></div>}
           <div class="balance"><img src="assets/zoo32x32.png"/><span>{commafy(storage.zooBalance)}</span></div>
         </div>
         
@@ -67,12 +70,12 @@ function BasicLayout(props) {
           <aside class="menu">
             
             <ul class="menu-list">
-              <li><NavLink  to="/" activeClassName="is_active"  exact={true}><img src="assets/sidebar/zoo.png"/> <div>The Zoo</div></NavLink></li>
-              <li><NavLink  to="/expedition" activeClassName="is_active"><img src="assets/sidebar/expedition.png"/> <div>The Expedition</div></NavLink></li>
-              <li><NavLink  to="/market" activeClassName="is_active"><img src="assets/sidebar/market.png"/> <div>The Market</div></NavLink></li>
-              <li><NavLink  to="/safe" activeClassName="is_active"><img src="assets/sidebar/safe.png"/> <div>My Safe</div></NavLink></li>
-              <li style={{display:'none'}}><a><img src="assets/sidebar/stake.png"/> <div>Stake Zoo</div></a></li>
-              <li style={{display:'none'}}><a><img src="assets/sidebar/lotto.png"/> <div>Lotto</div></a></li>
+              <li><NavLink  to="/" activeClassName="is_active"  exact={true}><img src="assets/sidebar/zoo.png"/> <div>{t("The Zoo")}</div></NavLink></li>
+              <li><NavLink  to="/expedition" activeClassName="is_active"><img src="assets/sidebar/expedition.png"/> <div>{t("The Expedition")}</div></NavLink></li>
+              <li><NavLink  to="/market" activeClassName="is_active"><img src="assets/sidebar/market.png"/> <div>{t("The Market")}</div></NavLink></li>
+              <li><NavLink  to="/safe" activeClassName="is_active"><img src="assets/sidebar/safe.png"/> <div>{t("My Safe")}</div></NavLink></li>
+              <li style={{display:'none'}}><a><img src="assets/sidebar/stake.png"/> <div>{t("Stake Zoo")}</div></a></li>
+              <li style={{display:'none'}}><a><img src="assets/sidebar/lotto.png"/> <div>{t("Lotto")}</div></a></li>
             </ul>
             
           </aside>
@@ -84,8 +87,8 @@ function BasicLayout(props) {
                   <img src="assets/zoo32x32.png" class={styles.zoo_icon}/>
                   <div class={styles.detail}>
                       <div>1 ZOO = <span>${commafy(zooPrice)}</span></div>
-                      <div>MC <span>${commafy((new BigNumber(storage.zooTotalSupply)).minus(storage.zooBurned).multipliedBy(zooPrice))}</span></div>
-                      <div>Current supply</div>
+                      <div>{t("MC")} <span>${commafy((new BigNumber(storage.zooTotalSupply)).minus(storage.zooBurned).multipliedBy(zooPrice))}</span></div>
+                      <div>{t("Current supply")}</div>
                       <div><span>{commafy(storage.zooTotalSupply)} ZOO</span></div>
                   </div>
                 
@@ -94,18 +97,18 @@ function BasicLayout(props) {
               <div className={styles.box}>
                   <img src="assets/burned42x42.png" class={styles.burn_icon}/>
                   <div class={styles.detail}>
-                      <div>TOTAL BURNED</div>
+                      <div>{t("TOTAL BURNED")}</div>
                       <div><span className={styles.burned}>{commafy(storage.zooBurned)} ZOO</span></div>
                   </div>
               </div>
             </div>
             <div className={styles.ext_link}>
-              <a href="#" target="_blank">FAQ</a>
-              <a href="#" target="_blank">Documentation</a>
+              <a href="#" target="_blank">{t("FAQ")}</a>
+              <a href="#" target="_blank">{t("Documentation")}</a>
               <a target="_blank" onClick={()=>{
                 window.localStorage.clear();
                 window.location.reload();
-              }}>Reset Cache</a>
+              }}>{t("Reset Cache")}</a>
             </div>
             <div>
               <div className={styles.social}>

@@ -3,5 +3,6 @@ export default {
   antd: {},
   favicon: '/favico.png',
   title: 'ZooKeeper',
-  "sass": {}
+  "sass": {},
+  locale: {},
 }
