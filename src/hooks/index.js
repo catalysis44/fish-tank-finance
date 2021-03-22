@@ -508,10 +508,10 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
             for (let i = 0; i < tokenIds.length; i++) {
               cards.push({
                 tokenId: tokenIds[i],
-                uri: ret[i].returnValue.uri,
-                boost: ret[i + tokenIds.length].returnValue.boost,
-                reduce: ret[i + tokenIds.length * 2].returnValue.reduce,
-                tokenInfo: { ...ret[i + tokenIds.length * 3].returnValue},
+                uri: ret[i] && ret[i].returnValue.uri,
+                boost: ret[i] && ret[i + tokenIds.length].returnValue.boost,
+                reduce: ret[i] && ret[i + tokenIds.length * 2].returnValue.reduce,
+                tokenInfo: ret[i] && { ...ret[i + tokenIds.length * 3].returnValue},
               });
             }
 
@@ -556,6 +556,7 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
 
         for (let i = 0; i < farmingInfo.poolLength; i++) {
           poolInfo[i] = {
+            pid: i,
             ...ret[i].returnValue,    // PoolInfo
             ...ret[farmingInfo.poolLength + i].returnValue, // UserInfo
             ...ret[2 * farmingInfo.poolLength + i].returnValue, // PendingZoo

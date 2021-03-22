@@ -126,6 +126,10 @@ export default function Pool(props) {
       return;
     }
 
+    if (allocPoint === 0) {
+      return 0;
+    }
+
     // get wslp price
     const r0 = Number(reserve0.toString());
     const r1 = Number(reserve1.toString());

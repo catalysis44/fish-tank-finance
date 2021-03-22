@@ -1,7 +1,7 @@
 import styles from './index.less';
 
 import { notification, Switch } from 'antd';
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext, useCallback } from 'react';
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSortAlphaDown,faSortAmountUp,faSortNumericDown,faSortNumericUp } from '@fortawesome/free-solid-svg-icons';
@@ -31,7 +31,23 @@ export default function () {
 
   const [onlyStaked, setOnlyStaked] = useLocalStorageState('onlyStaked', false);
   const [onlyActived, setOnlyActived] = useLocalStorageState('onlyActived', false);
+  const [liquiditySort, setLiquiditySort] = useLocalStorageState('liquiditySort', false);
+  const [multiplierSort, setMultiplierSort] = useLocalStorageState('multiplierSort', false);
 
+  const sortFunc = useCallback((a, b)=>{
+    if (!liquiditySort && !multiplierSort) {
+      return a.pid - b.pid;
+    }
+
+    if (multiplierSort) {
+      return b.allocPoint - a.allocPoint;
+    }
+
+    if (liquiditySort) {
+      return Number(b.totalDeposited) - Number(a.totalDeposited);
+    }
+    return b.pid - a.pid;
+  }, [liquiditySort, multiplierSort]);
 
   return (
     <React.Fragment>
@@ -49,7 +65,7 @@ export default function () {
               Sort by
             </div>
             <div className={styles.sort_btn}>
-              <a className={styles.is_acitve}>
+              {/* <a className={styles.is_acitve}>
                 <div className={styles.icon}>
                   <FontAwesomeIcon icon={faSortAlphaDown} />
                 </div>
@@ -60,14 +76,20 @@ export default function () {
                 <FontAwesomeIcon icon={faSortNumericDown} />
                 </div>
               APY
-            </a>
-              <a>
+            </a> */}
+              <a className={ liquiditySort && styles.is_acitve} onClick={()=>{
+                setLiquiditySort(!liquiditySort);
+                setMultiplierSort(false);
+              }}>
                 <div className={styles.icon}>
                 <FontAwesomeIcon icon={faSortNumericDown} />
                 </div>
               Liquidity
-            </a>
-              <a>
+              </a>
+              <a className={ multiplierSort && styles.is_acitve} onClick={()=>{
+                setMultiplierSort(!multiplierSort);
+                setLiquiditySort(false);
+              }}>
                 <div className={styles.icon}>
                 <FontAwesomeIcon icon={faSortNumericDown} />
                 </div>
@@ -81,7 +103,7 @@ export default function () {
               </div>
             <div className={styles.view_btn}>
               <a className={ onlyStaked && styles.is_acitve} onClick={()=>{setOnlyStaked(!onlyStaked)}}>Staked</a>
-              <a className={ onlyActived && styles.is_acitve} onClick={()=>{setOnlyStaked(!onlyActived)}}>Active</a>
+              <a className={ onlyActived && styles.is_acitve} onClick={()=>{setOnlyActived(!onlyActived)}}>Active</a>
             </div>
           </div>
         </div>
@@ -89,14 +111,24 @@ export default function () {
 
       <div className={styles.row}>
         {
-          // storage.poolInfo.length === 0 && <div>Loading...</div>
+          storage.poolInfo.length === 0 && <div>Loading...</div>
         }
         {
-          storage.poolInfo.map((v, i)=>{
-            return <Pool poolInfo={v} pid={i} key={i} setTxWaiting={setTxWaiting} farmingInfo={storage.farmingInfo}/>
+          storage.poolInfo.sort(sortFunc).map((v, i)=>{
+            if (onlyStaked) {
+              if (!v.lpAmount || v.lpAmount.toString() === '0') {
+                return null;
+              }
+            }
+
+            if (onlyActived) {
+              if (!v.allocPoint || v.allocPoint === 0) {
+                return null;
+              }
+            }
+            return <Pool poolInfo={v} pid={v.pid} key={v.pid} setTxWaiting={setTxWaiting} farmingInfo={storage.farmingInfo}/>
           })
         }
-
       </div>
     </React.Fragment>
   );
