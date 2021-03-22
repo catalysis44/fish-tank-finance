@@ -4,7 +4,7 @@ import { notification, Switch } from 'antd';
 import { useState, useEffect, useContext, useCallback } from 'react';
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSortAlphaDown,faSortAmountUp,faSortNumericDown,faSortNumericUp } from '@fortawesome/free-solid-svg-icons';
+import { faSortAlphaDown,faSortAmountUp,faSortNumericDown,faSortNumericUp,faSortNumericDownAlt } from '@fortawesome/free-solid-svg-icons';
 
 import Pool from '../components/zoo/Pool';
 import Loader from '../components/loader'
@@ -91,7 +91,7 @@ export default function () {
                 setLiquiditySort(false);
               }}>
                 <div className={styles.icon}>
-                <FontAwesomeIcon icon={faSortNumericDown} />
+                <FontAwesomeIcon icon={faSortNumericDownAlt} />
                 </div>
               Multiplier
               </a>
