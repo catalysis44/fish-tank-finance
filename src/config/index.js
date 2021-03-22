@@ -55,3 +55,58 @@ export const RPC_URL = {
 }
 
 export const WANSWAP_URL = 'https://testnet.wanswap.finance';
+
+export const trade_tokens = {
+  '1': {
+    'ZOO': {
+      address: ZOO_TOKEN_ADDRESS['999'],
+      decimals: 18
+    },
+    'WASP': {
+      address: WASP_TOKEN_ADDRESS['999'],
+      decimals: 18,
+    },
+    'wanUSDT': {
+      address: '0x3d5950287b45f361774e5fb6e50d70eea06bc167',
+      decimals: 6
+    },
+    'wanETH': {
+      address: '0x48344649b9611a891987b2db33faada3ac1d05ec',
+      decimals: 18
+    },
+    'wanBTC': {
+      address: '0x07fdb4e8f8e420d021b9abeb2b1f6dce150ef77c',
+      decimals: 8
+    },
+    'WWAN': {
+      address: '0x916283cc60fdaf05069796466af164876e35d21f',
+      decimals: 18
+    }
+  },
+  '999': {
+    'ZOO': {
+      address: ZOO_TOKEN_ADDRESS['999'],
+      decimals: 18
+    },
+    'WASP': {
+      address: WASP_TOKEN_ADDRESS['999'],
+      decimals: 18,
+    },
+    'wanUSDT': {
+      address: '0x3d5950287b45f361774e5fb6e50d70eea06bc167',
+      decimals: 6
+    },
+    'wanETH': {
+      address: '0x48344649b9611a891987b2db33faada3ac1d05ec',
+      decimals: 18
+    },
+    'wanBTC': {
+      address: '0x07fdb4e8f8e420d021b9abeb2b1f6dce150ef77c',
+      decimals: 8
+    },
+    'WWAN': {
+      address: '0x916283cc60fdaf05069796466af164876e35d21f',
+      decimals: 18
+    }
+  }
+}

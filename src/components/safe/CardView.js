@@ -66,7 +66,24 @@ export default function CardView(props) {
 
   return (
     <React.Fragment >
-        <ConfirmActionModal isActived={showConfirmActionModal} setModal={setShowConfirmActionModal} ></ConfirmActionModal>
+        <ConfirmActionModal isActived={showConfirmActionModal} setModal={setShowConfirmActionModal}
+          icon={props.icon}
+          name={props.name}
+          amount={amount}
+          level={props.level}
+          categoryName={categorys[category-1]}
+          categoryIcon={categoryIcons[category-1]}
+          tokenId={props.tokenId}
+          itemSupply={props.itemSupply}
+          boost={props.boost}
+          reduce={props.reduce}
+          currency={currency}
+          currencyIcon={currencyIcon}
+          setTxWaiting={props.setTxWaiting}
+          approved={props.approved}
+          updateApprove={props.updateApprove}
+          setUpdateApprove={props.setUpdateApprove}
+        ></ConfirmActionModal>
         <div className={styles.flip_card}>
           <div className={styles.flip_card_inner}>
             <div className={styles.flip_card_front} data-is-max={rare === 5 || level === 4 ? "true":"false"}> {/* data-is-max="true" if this is max item */}
@@ -76,8 +93,8 @@ export default function CardView(props) {
                   {props.name}
                   <div>
                     {
-                      level < 4 && Array.from({length: level}).map(v=>{
-                        return <img src="assets/star18x18.png" />
+                      level < 4 && Array.from({length: level}).map((v,i)=>{
+                        return <img src="assets/star18x18.png" key={i}/>
                       })
                     }
                     {
@@ -152,8 +169,8 @@ export default function CardView(props) {
                 <div className={styles.description}>
                   <div>
                     {
-                      level < 4 && Array.from({length: level}).map(v=>{
-                        return <img src="assets/star18x18.png" />
+                      level < 4 && Array.from({length: level}).map((v,i)=>{
+                        return <img src="assets/star18x18.png" key={i}/>
                       })
                     }
                     {

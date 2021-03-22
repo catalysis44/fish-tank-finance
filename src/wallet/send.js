@@ -1,9 +1,10 @@
 import BigNumber from 'bignumber.js';
-import { ZOO_FARMING_ADDRESS, ZOO_BOOSTING_ADDRESS, ZOO_NFT_ADDRESS, ZOO_TOKEN_ADDRESS, NFT_FACTORY_ADDRESS } from '../config';
+import { ZOO_FARMING_ADDRESS, ZOO_BOOSTING_ADDRESS, ZOO_NFT_ADDRESS, ZOO_TOKEN_ADDRESS, NFT_FACTORY_ADDRESS, NFT_MARKETPLACE_ADDRESS, trade_tokens } from '../config';
 const farmingAbi = require('../assets/abi/farming.json');
 const erc20Abi = require('../assets/abi/erc20.json');
 const erc721Abi = require('../assets/abi/erc721.json');
 const nftFactoryAbi = require('../assets/abi/nftFactory.json');
+const marketAbi = require('../assets/abi/market.json');
 
 export const withdraw = async (pid, amount, chainId, web3, address) => {
   // console.debug('withdraw', pid, amount, chainId, web3, address);
@@ -124,3 +125,31 @@ export const stakeClaim = async (type, web3, chainId, address) => {
   // console.debug('stakeZoo ret', ret);
   return ret;
 }
+
+export const checkMarketSellApprove = async (chainId, web3, address) => {
+  const erc721 = new web3.eth.Contract(erc721Abi, ZOO_NFT_ADDRESS[chainId]);
+  let approved = await erc721.methods.isApprovedForAll(address, NFT_MARKETPLACE_ADDRESS[chainId]).call();
+  return approved;
+}
+
+export const approveMarket = async (chainId, web3, address) => {
+  const erc721 = new web3.eth.Contract(erc721Abi, ZOO_NFT_ADDRESS[chainId]);
+  let ret = await erc721.methods.setApprovalForAll(NFT_MARKETPLACE_ADDRESS[chainId], true).send({ from: address });
+  // console.debug('approve nft ret', ret);
+  if(!ret || !ret.status) {
+    throw new Error("approve failed");
+  }
+  return ret.status;
+}
+
+
+
+export const createOrder = async (tokenId, symbol, price, chainId, web3, address) => {
+  const market = new web3.eth.Contract(marketAbi, NFT_MARKETPLACE_ADDRESS[chainId]);
+  let ret = await market.methods.createOrder(ZOO_NFT_ADDRESS[chainId], tokenId, trade_tokens[chainId][symbol].address, 
+    '0x' + (new BigNumber(price)).multipliedBy(10**trade_tokens[chainId][symbol].decimals).toString(16), 
+    14*24*3600).send({ from: address });
+  return ret;
+}
+
+

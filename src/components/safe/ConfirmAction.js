@@ -1,6 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import styles from './ConfirmAction.less';
 import '../../../node_modules/animate.css/animate.min.css';
+import { WalletContext } from '../../wallet/Wallet';
+import { checkMarketSellApprove, approveMarket, createOrder } from '../../wallet/send';
 export default function ConfirmAction(props) {
   // Open Confirm Modal //
   const closeModal = () => {
@@ -27,6 +29,14 @@ export default function ConfirmAction(props) {
 
   // console.debug('category:', props);
 
+  const setTxWaiting = props.setTxWaiting;
+  const wallet = useContext(WalletContext);
+  const chainId = wallet.networkId;
+  const connected = wallet.connected;
+  const address = wallet.address;
+  const web3 = wallet.web3;
+  const approved = props.approved;
+  const setUpdateApprove = props.setUpdateApprove;
 
   return (
     <div id="ConfirmAction" className={`modal  ${props.isActived === 0 ? "" : "is-active"}`}>
@@ -64,7 +74,7 @@ export default function ConfirmAction(props) {
                 {props.tokenId}
               </div>
               <div className={styles.description}>
-                <span><img src={categoryIcons[props.category-1]}/>{categorys[props.category-1]}</span>
+                <span><img src={props.categoryIcon}/>{props.categoryName}</span>
               </div>
               <div className={styles.description} style={{background:'#e1e5da'}}>
                 <span><img src="assets/rocket24x24.png"/> +{(props.boost * 100).toFixed(2)}%</span>
@@ -78,21 +88,38 @@ export default function ConfirmAction(props) {
           <div className={styles.horizontal_line}></div>
           <div className={styles.rule}>
             <div>BUSINESS IS GROWING</div>
-            <span>"<b>Wasabi Ginger Sake</b>" will be added to the market with a tag price of</span>
+            <span>"<b>{props.name}</b>" will be added to the market with a tag price of</span>
             <div className={styles.price_wrapper}>
-              <img src="assets/currency/wanETH.png"/>
+              <img src={props.currencyIcon}/>
               <div className={styles.price_currency}>
-                <div className={styles.price}>105.151454</div>
-                <div className={styles.currency}>wanETH</div>
+                <div className={styles.price}>{props.amount}</div>
+                <div className={styles.currency}>{props.currency}</div>
               </div>
             </div>
           </div>
 
           <div className={styles.action}>
-            <a className={styles.action_btn} disabled>
+            <a className={styles.action_btn} disabled={approved} onClick={()=>{
+              setTxWaiting(true);
+              approveMarket(chainId, web3, address).then(ret=>{
+                setTxWaiting(false);
+                setUpdateApprove(props.updateApprove + 1);
+              }).catch(err=>{
+                console.error('approveMarket', err);
+                setTxWaiting(false);
+              });
+            }}>
                 APPROVE
             </a>
-            <a className={styles.action_btn}>
+            <a className={styles.action_btn}  disabled={!approved} onClick={()=>{
+              setTxWaiting(true);
+              createOrder(props.tokenId, props.currency, props.amount, chainId, web3, address).then(ret=>{
+                setTxWaiting(false);
+                console.log('createOrder', ret);
+              }).catch(err=>{
+                setTxWaiting(false);
+              });
+            }}>
                 CONFIRM
             </a>
           </div>

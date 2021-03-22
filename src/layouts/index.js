@@ -29,7 +29,7 @@ function BasicLayout(props) {
   const provider = wallet.provider;
   const [loading, setLoading] = useState(false);
   
-  const [storage, setStorage] = useLocalStorageState('zoo-keeper-v0.1', initialState);
+  const [storage, setStorage] = useLocalStorageState('zoo-keeper-' + address + '-' + chainId, initialState);
 
   useDataPump(storage, setStorage, chainId, address, connected);
 

@@ -13,6 +13,9 @@ import { WalletContext } from '../wallet/Wallet';
 import { useLocalStorageState, useRequest } from 'ahooks';
 import axios from 'axios';
 import { axioGet } from '../utils/cache';
+import Loader from '../components/loader'
+import { checkMarketSellApprove } from '../wallet/send';
+
 
 export default function () {
   function toggleFilter() {
@@ -50,6 +53,8 @@ export default function () {
     document.getElementById('tx_panel').classList.remove("toggled");
   }
 
+  const [txWaiting, setTxWaiting] = useState(false);
+
   const storage = useContext(StorageContext);
   const wallet = useContext(WalletContext);
   const chainId = wallet.networkId;
@@ -63,6 +68,21 @@ export default function () {
 
   const nftCards = storage.nftCards;
   const nftBalance = storage.nftBalance;
+  const [updateApprove, setUpdateApprove] = useState(0);
+  const [approved, setApproved] = useState(false);
+
+  useEffect(()=>{
+    if (!chainId || !address || !connected || !web3) {
+      return;
+    }
+    // console.debug('checkApprove begin', updateApprove);
+    checkMarketSellApprove(chainId, web3, address).then(ret=>{
+      // console.debug('checkMarketSellApprove', ret);
+      setApproved(ret);
+    }).catch(err=>{
+      console.error('checkApprove err', err);
+    });
+  }, [chainId, address, connected, web3, updateApprove]);
 
   useEffect(() => {
     const func = async ()=>{
@@ -97,6 +117,9 @@ export default function () {
 
   return (
     <React.Fragment>
+      {
+        txWaiting && <Loader/>
+      }
       {
         !connected && <div className={styles.connect_or_undercontruction}>
           <div className={styles.title}>
@@ -328,12 +351,21 @@ export default function () {
           <div className={styles.row}>
           {
             !listView && cards.map(v=>{
-              return <CardView key={v.tokenId} icon={v.image} name={v.name} tokenId={v.tokenId} attributes={v.attributes} boost={v.boost} reduce={v.reduce} itemSupply={v.itemSupply}/>
+              return <CardView key={v.tokenId} 
+                icon={v.image} name={v.name} tokenId={v.tokenId} 
+                attributes={v.attributes} boost={v.boost} reduce={v.reduce} 
+                setTxWaiting={setTxWaiting}
+                approved={approved}
+                updateApprove={updateApprove}
+                setUpdateApprove={setUpdateApprove}
+                itemSupply={v.itemSupply}/>
             })
           }
 
           {
-            listView && <ListView cards={cards}/>
+            listView && <ListView cards={cards}
+              setTxWaiting={setTxWaiting}
+            />
           }
           
           </div>
