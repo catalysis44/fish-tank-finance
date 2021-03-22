@@ -65,7 +65,7 @@ export default function () {
               Sort by
             </div>
             <div className={styles.sort_btn}>
-              {/* <a className={styles.is_acitve}>
+              <a className={styles.is_acitve}>
                 <div className={styles.icon}>
                   <FontAwesomeIcon icon={faSortAlphaDown} />
                 </div>
@@ -76,7 +76,7 @@ export default function () {
                 <FontAwesomeIcon icon={faSortNumericDown} />
                 </div>
               APY
-            </a> */}
+            </a>
               <a className={ liquiditySort && styles.is_acitve} onClick={()=>{
                 setLiquiditySort(!liquiditySort);
                 setMultiplierSort(false);
