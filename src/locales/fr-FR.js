@@ -16,6 +16,36 @@ export default {
     "Documentation":"Documentation",
     "Reset Cache":"Réinitialiser le cache",
   
-   
+    //Pool
+    "REWARD":"RÉCOMPENSE",
+    "LOCKTIME":"DURÉE DE VERROUILLAGE",
+    "ATTACH A BOOST CARD TO OPTIMIZE YOUR FARMING":"ATTACHER UNE CARTE DE BOOST POUR OPTIMISER VOTRE FARMING",
+    "DUAL FARMING":"FARMING DOUBLE",
+    "WELCOME FARMING ZOO":"BIENVENUE À ZOO FARMING",
+    "KEEPER CHOICE":"LE CHOIX DU KEEPER",
+    "per week":"par semaine",
+    "HARVEST":"RÉCOLTE",
+    "STAKED":"STAKED",
+    "Connect Wallet":"Connecter le wallet",
+    "Deposit WSLP Token":"Faire un dépot de token WSLP ",
+    "Withdraw":"Retirer",
+    "boost":"booster",
+    "lock time":"durée de verrouillage",
+    "UNLOCKED in":"DÉVERROUILLER",
+    "Top-up":"Recharger",
+    "Add Liquidity on WanSwap":"Ajouter de la liquidité sur Wanswap",
+    "Deposit":"Dépot",
+    "Total Liquidity":"Liquidité Totale",
+    "DEPOSIT WSLP":"DÉPOSER WSLP",
+    "AVAILABLE":"DISPONIBLE",
+    "MAX":"MAX",
+    "LOCK PERIOD":"DURÉE DE VERROUILLAGE",
+    "BOOST":"BOOST",
+    "days":"jours",
+    "EXTRA BOOST":"BOOST SUPPLÉMENTAIRE",
+    "Approve":"Approuver",
+    "Validate":"Confirmer",
+    "EARNED":"GAGNÉ",
+
   };
   
