@@ -4,7 +4,7 @@ import '../../node_modules/animate.css/animate.min.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircle } from '@fortawesome/free-solid-svg-icons'
 import Header from '../components/Header';
-import { NavLink } from 'umi';
+import { NavLink, setLocale, getLocale } from 'umi';
 import Wallet, { WalletContext } from '../wallet/Wallet';
 import { useState } from 'react';
 import { useDataPump, initialState, StorageContext } from '../hooks';
@@ -109,6 +109,13 @@ function BasicLayout(props) {
                 window.localStorage.clear();
                 window.location.reload();
               }}>{t("Reset Cache")}</a>
+              <a target="_blank" onClick={()=>{
+                if (getLocale() !== 'en-US') {
+                  setLocale('en-US', false);
+                } else {
+                  setLocale('zh-CN', false);
+                }
+              }}>{t("English/中文")}</a>
             </div>
             <div>
               <div className={styles.social}>

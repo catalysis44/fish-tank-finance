@@ -122,7 +122,7 @@ function Row(props) {
             }} />
             <div className={"dropdown is-active"}> {/*add class .is-active to open dropdown*/}
               <a className={styles.select_currency} aria-haspopup="true" aria-controls="dropdown-menu" onClick={() => {
-                setShowDropdown(true);
+                setShowDropdown(!showDropdown);
               }}>
                 <img src={currencyIcon} />
                 <span className={styles.currency_name}>{currency}</span>

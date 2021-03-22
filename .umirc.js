@@ -4,5 +4,11 @@ export default {
   favicon: '/favico.png',
   title: 'ZooKeeper',
   "sass": {},
-  locale: {},
+  locale: {
+    default: 'en-US',
+    antd: false,
+    title: false,
+    baseNavigator: true,
+    baseSeparator: '-',
+  },
 }

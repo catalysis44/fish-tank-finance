@@ -176,7 +176,7 @@ export default function CardView(props) {
                 }} />
                 <div className="dropdown is-active">
                   <a className={styles.select_currency} aria-haspopup="true" aria-controls="dropdown-menu" onClick={()=>{
-                    setShowDropdown(true);
+                    setShowDropdown(!showDropdown);
                   }}>
                     <img src={currencyIcon} />
                     <span>{currency}</span>
