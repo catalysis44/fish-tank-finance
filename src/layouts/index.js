@@ -109,13 +109,23 @@ function BasicLayout(props) {
                 window.localStorage.clear();
                 window.location.reload();
               }}>{t("Reset Cache")}</a>
-              <a target="_blank" onClick={()=>{
-                if (getLocale() !== 'en-US') {
-                  setLocale('en-US', false);
-                } else {
+              <a onClick={()=>{
+                
+                if (getLocale() === 'zh-CN') {
+                  setLocale('fr-FR', false);
+                }
+                else if(getLocale() === 'en-US')
+                {
                   setLocale('zh-CN', false);
                 }
-              }}>{t("English/中文")}</a>
+                else
+                {
+                  setLocale('en-US', false);
+                }
+                
+                
+                
+              }}>{t("ENG/中文/FR")}</a>
             </div>
             <div>
               <div className={styles.social}>
