@@ -125,7 +125,7 @@ function BasicLayout(props) {
                 
                 
                 
-              }}>{t("ENG/中文/FR")}</a>
+              }}>{t("ENG/中文/FRA")}</a>
             </div>
             <div>
               <div className={styles.social}>
