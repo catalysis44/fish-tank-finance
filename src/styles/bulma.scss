@@ -244,9 +244,14 @@ input[type=text] {
   background:url(/assets/notification/chest.png) no-repeat 0 100%;
 }
 
-.open-chestbox-notification.silver .ant-notification-notice-with-icon,  .open-chestbox-notification-nothing.silverbox .ant-notification-notice-with-icon
+.open-chestbox-notification.silverbox .ant-notification-notice-with-icon,  .open-chestbox-notification-nothing.silverbox .ant-notification-notice-with-icon
 {
   background:url(/assets/notification/chest_silver.png) no-repeat 0 100%;
+}
+// For No box and nothing //
+.open-chestbox-notification-nothing.nobox .ant-notification-notice-with-icon
+{
+  background:none;
 }
 
 .ant-notification-notice-close
