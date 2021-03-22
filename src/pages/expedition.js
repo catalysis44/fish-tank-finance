@@ -3,7 +3,7 @@ import React, { useContext, useEffect } from 'react';
 import { useState } from 'react';
 import ChestboxBuyModal from '../components/expedition/ChestboxBuyModal';
 import { StorageContext } from '../hooks';
-import { commafy, openNotificationExclamation } from '../utils';
+import { commafy, openNotificationExclamation, openNotificationOpenedBox } from '../utils';
 import { WalletContext } from '../wallet/Wallet';
 import { OmitProps } from 'antd/lib/transfer/ListBody';
 import Loader from '../components/loader'
@@ -11,6 +11,7 @@ import BigNumber from 'bignumber.js';
 import { useCountDown } from 'ahooks';
 import { approve, checkApprove, stakeClaim, stakeZoo } from '../wallet/send';
 import { ZOO_TOKEN_ADDRESS } from '../config';
+import { getNftInfo } from '../hooks/nftInfo';
 
 
 export default function (props) {
@@ -254,6 +255,12 @@ export default function (props) {
                 stakeClaim(0, web3, chainId, address).then(ret => {
                   setTxWaiting(false);
                   console.log(ret);
+                  getNftInfo(ret.events.MintNFT.returnValues.tokenId, web3, chainId).then(obj=>{
+                    // console.debug('nftmeta111', obj);
+                    openNotificationOpenedBox('GOLDEN CHEST HAS BEEN OPENED', obj.name, 'Your boost card has been transfered to your wallet.', obj.image);
+                  }).catch(err=>{
+                    console.error('getNftInfo error', err);
+                  });
                 }).catch(err => {
                   console.log(err);
                   setTxWaiting(false);
@@ -355,6 +362,12 @@ export default function (props) {
                 stakeClaim(1, web3, chainId, address).then(ret => {
                   setTxWaiting(false);
                   console.log(ret);
+                  getNftInfo(ret.events.MintNFT.returnValues.tokenId, web3, chainId).then(obj=>{
+                    // console.debug('nftmeta111', obj);
+                    openNotificationOpenedBox('GOLDEN CHEST HAS BEEN OPENED', obj.name, 'Your boost card has been transfered to your wallet.', obj.image);
+                  }).catch(err=>{
+                    console.error('getNftInfo error', err);
+                  });
                 }).catch(err => {
                   console.log(err);
                   setTxWaiting(false);
@@ -456,6 +469,12 @@ export default function (props) {
               stakeClaim(2, web3, chainId, address).then(ret => {
                 setTxWaiting(false);
                 console.log(ret);
+                getNftInfo(ret.events.MintNFT.returnValues.tokenId, web3, chainId).then(obj=>{
+                  // console.debug('nftmeta111', obj);
+                  openNotificationOpenedBox('GOLDEN CHEST HAS BEEN OPENED', obj.name, 'Your boost card has been transfered to your wallet.', obj.image);
+                }).catch(err=>{
+                  console.error('getNftInfo error', err);
+                });
               }).catch(err => {
                 console.log(err);
                 setTxWaiting(false);

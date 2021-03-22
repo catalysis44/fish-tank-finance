@@ -9,6 +9,7 @@ import { faSortAlphaDown,faSortAmountUp,faSortNumericDown,faSortNumericUp } from
 import Pool from '../components/zoo/Pool';
 import Loader from '../components/loader'
 import { StorageContext } from '../hooks';
+import { useLocalStorageState } from 'ahooks';
 
 export default function () {
   const [txWaiting, setTxWaiting] = useState(false);
@@ -27,6 +28,9 @@ export default function () {
   }
 
   const storage = useContext(StorageContext);
+
+  const [onlyStaked, setOnlyStaked] = useLocalStorageState('onlyStaked', false);
+  const [onlyActived, setOnlyActived] = useLocalStorageState('onlyActived', false);
 
 
   return (
@@ -76,8 +80,8 @@ export default function () {
               View only
               </div>
             <div className={styles.view_btn}>
-              <a>Staked</a>
-              <a className={styles.is_acitve}>Active</a>
+              <a className={ onlyStaked && styles.is_acitve} onClick={()=>{setOnlyStaked(!onlyStaked)}}>Staked</a>
+              <a className={ onlyActived && styles.is_acitve} onClick={()=>{setOnlyStaked(!onlyActived)}}>Active</a>
             </div>
           </div>
         </div>
