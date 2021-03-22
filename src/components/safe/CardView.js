@@ -4,6 +4,7 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretDown} from '@fortawesome/free-solid-svg-icons';
 import { checkNumber, commafy } from '../../utils';
+import ConfirmActionModal from './ConfirmAction';
 
 const currencyList = [
   {
@@ -61,9 +62,11 @@ export default function CardView(props) {
   const [showDropdown, setShowDropdown] = useState(false);
   const [amount, setAmount] = useState('0.0');
 
+  const [showConfirmActionModal, setShowConfirmActionModal] = useState(0);
+
   return (
     <React.Fragment >
-     
+        <ConfirmActionModal isActived={showConfirmActionModal} setModal={setShowConfirmActionModal} ></ConfirmActionModal>
         <div className={styles.flip_card}>
           <div className={styles.flip_card_inner}>
             <div className={styles.flip_card_front} data-is-max={rare === 5 || level === 4 ? "true":"false"}> {/* data-is-max="true" if this is max item */}
@@ -203,9 +206,9 @@ export default function CardView(props) {
 
 
               </div>
-              <a className={styles.sell_btn}>
+              <a className={styles.sell_btn} onClick={() => { setShowConfirmActionModal(1) }}>
                 SELL
-                                    </a>
+              </a>
             </div>
           </div>
         </div>
