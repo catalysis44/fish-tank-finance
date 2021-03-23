@@ -133,7 +133,7 @@ export default function ChestboxBuyModal(props) {
                     setReduce(obj.timeReduce);
                     closeModal();
                     setModal(1);
-                    openNotificationOpenedBox(type.toUpperCase() + ' CHEST HAS BEEN OPENED', obj.name, 'Your boost card has been transfered to your wallet.', obj.image);
+                    openNotificationOpenedBox(type.toUpperCase() + ' CHEST HAS BEEN OPENED', obj.name, 'Your boost card has been transfered to your wallet.', obj.image, false, false);
                   }).catch(err=>{
                     console.error('getNftInfo error', err);
                   });
@@ -158,7 +158,7 @@ export default function ChestboxBuyModal(props) {
                   setReduce(obj.timeReduce);
                   closeModal();
                   setModal(1);
-                  openNotificationOpenedBox(type.toUpperCase() + ' CHEST HAS BEEN OPENED', obj.name, 'Your boost card has been transfered to your wallet.', obj.image);
+                  openNotificationOpenedBox(type.toUpperCase() + ' CHEST HAS BEEN OPENED', obj.name, 'Your boost card has been transfered to your wallet.', obj.image, false, true);
                 }).catch(err=>{
                   console.error('getNftInfo error', err);
                 });

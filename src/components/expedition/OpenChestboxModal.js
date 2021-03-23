@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import styles from './OpenChestboxModal.less';
 import '../../../node_modules/animate.css/animate.min.css';
+import { history } from 'umi';
+
 export default function OpenChestboxModal(props) {
   // Open Confirm Modal //
   const closeModal = () => {
@@ -37,12 +39,12 @@ export default function OpenChestboxModal(props) {
           <div className={styles.header}>
             <div className={styles.star}>
               {
-                props.level < 4 && Array.from({length: props.level}).map(v=>{
+                Number(props.level) < 4 && Array.from({length: props.level}).map(v=>{
                   return <img src="assets/star18x18.png" />
                 })
               }
               {
-                props.level === 4 && <img src="assets/max.png" />
+                Number(props.level) === 4 && <img src="assets/max.png" />
               }
             </div>
             <div className={styles.title}>
@@ -84,15 +86,14 @@ export default function OpenChestboxModal(props) {
           </div>
 
           <div className={styles.action}>
-            <a className={styles.action_btn} href="/safe">
+            <a className={styles.action_btn} onClick={()=>{
+              history.push('/safe');
+            }}>
               Check your Safe
               </a>
           </div>
         </section>
       </div>
-
-
-
     </div>
   )
 }

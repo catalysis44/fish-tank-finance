@@ -1,5 +1,5 @@
 import { notification } from 'antd';
-
+import {history} from 'umi';
 
 export function commafy(num, fixed=null) {
   if (!num) {
@@ -110,7 +110,7 @@ export const openNotificationExclamation = (title) => {
   notification.open(args);
 };
 
-export const openNotificationOpenedBox = (title, item, description, icon, nothing) => {
+export const openNotificationOpenedBox = (title, item, description, icon, nothing, golden) => {
   const args = {
     // message: 'GOLDEN CHEST HAS BEEN OPENED',
     message: title,
@@ -123,13 +123,15 @@ export const openNotificationOpenedBox = (title, item, description, icon, nothin
         
         {description}
         {
-          !nothing && <a href="/safe" className="button">Check your Safe</a>
+          !nothing && <a onClick={()=>{
+            history.push('/safe');
+          }} className="button">Check your Safe</a>
         }
       </div>,
     duration: 0,
     placement: 'bottomRight',
     icon: <img src={icon} />,
-    className: nothing ? `open-chestbox-notification-nothing silverbox` : `open-chestbox-notification silverbox`,
+    className: nothing ? `open-chestbox-notification-nothing silverbox` : (golden ? `open-chestbox-notification` : `open-chestbox-notification silverbox`),
 
   };
   notification.open(args);

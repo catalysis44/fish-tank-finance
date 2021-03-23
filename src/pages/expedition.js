@@ -40,28 +40,28 @@ export default function (props) {
   const web3 = wallet.web3;
 
   const [countdown0, setTargetDate0, formattedRes0] = useCountDown({
-    targetDate: new Date((expeditions[0].startTime + expeditions[0].lockTime) * 1000),
+    targetDate: new Date(expeditions && expeditions[0] && (expeditions[0].startTime + expeditions[0].lockTime) * 1000),
   });
 
   const [countdown1, setTargetDate1, formattedRes1] = useCountDown({
-    targetDate: new Date((expeditions[1].startTime + expeditions[1].lockTime) * 1000),
+    targetDate: new Date(expeditions && expeditions[1] && (expeditions[1].startTime + expeditions[1].lockTime) * 1000),
   });
 
   const [countdown2, setTargetDate2, formattedRes2] = useCountDown({
-    targetDate: new Date((expeditions[2].startTime + expeditions[2].lockTime) * 1000),
+    targetDate: new Date(expeditions && expeditions[2] && (expeditions[2].startTime + expeditions[2].lockTime) * 1000),
   });
 
   // console.debug('countdown0', countdown0, countdown1, countdown2);
 
-  useEffect(()=>{
+  useEffect(() => {
     if (!chainId || !address || !connected || !web3) {
       return;
     }
     // console.debug('checkApprove begin', updateApprove);
-    checkApprove(ZOO_TOKEN_ADDRESS[chainId], '0x'+(new BigNumber(goldenPrice)).multipliedBy(1e18).toString(16), chainId, web3, address).then(ret=>{
+    checkApprove(ZOO_TOKEN_ADDRESS[chainId], '0x' + (new BigNumber(goldenPrice)).multipliedBy(1e18).toString(16), chainId, web3, address).then(ret => {
       // console.debug('checkApprove', ret);
       setApproved(ret);
-    }).catch(err=>{
+    }).catch(err => {
       console.error('checkApprove err', err);
     });
   }, [chainId, address, connected, goldenPrice, web3, updateApprove]);
@@ -207,22 +207,22 @@ export default function (props) {
             </div>
           </div>
           {
-            stakingZoo && <div className={styles.action_wrapper}> 
-              <a className={styles.action_btn} disabled={approved} onClick={()=>{
+            stakingZoo && <div className={styles.action_wrapper}>
+              <a className={styles.action_btn} disabled={approved} onClick={() => {
                 setTxWaiting(true);
-                approve(ZOO_TOKEN_ADDRESS[chainId], chainId, web3, address).then(ret=>{
+                approve(ZOO_TOKEN_ADDRESS[chainId], chainId, web3, address).then(ret => {
                   setTxWaiting(false);
                   setUpdateApprove(updateApprove + 1);
                   // console.debug('approve bt ret', ret);
-                }).catch(err=>{
+                }).catch(err => {
                   setTxWaiting(false);
                   console.error('approve failed', err);
                 });
               }}>
                 Approve
               </a>
-              <a className={styles.action_btn} disabled={!approved}  onClick={() => {
-                if (!zooBalance.gte(goldenPrice*10)) {
+              <a className={styles.action_btn} disabled={!approved} onClick={() => {
+                if (!zooBalance.gte(goldenPrice * 10)) {
                   openNotificationExclamation("ZOO balance not enough");
                   return;
                 }
@@ -240,10 +240,10 @@ export default function (props) {
               </a>
             </div>
           }
-          
+
           <div className={styles.action_wrapper}>
             {
-              expeditions[0] && expeditions[0].startTime === 0 && !stakingZoo && <a className={styles.action_btn} onClick={()=>{
+              expeditions[0] && expeditions[0].startTime === 0 && !stakingZoo && <a className={styles.action_btn} onClick={() => {
                 setStakingZoo(true);
               }}>
                 Stake ZOO
@@ -255,10 +255,10 @@ export default function (props) {
                 stakeClaim(0, web3, chainId, address).then(ret => {
                   setTxWaiting(false);
                   console.log(ret);
-                  getNftInfo(ret.events.MintNFT.returnValues.tokenId, web3, chainId).then(obj=>{
+                  getNftInfo(ret.events.MintNFT.returnValues.tokenId, web3, chainId).then(obj => {
                     // console.debug('nftmeta111', obj);
-                    openNotificationOpenedBox('GOLDEN CHEST HAS BEEN OPENED', obj.name, 'Your boost card has been transfered to your wallet.', obj.image);
-                  }).catch(err=>{
+                    openNotificationOpenedBox('GOLDEN CHEST HAS BEEN OPENED', obj.name, 'Your boost card has been transfered to your wallet.', obj.image, false, true);
+                  }).catch(err => {
                     console.error('getNftInfo error', err);
                   });
                 }).catch(err => {
@@ -315,21 +315,21 @@ export default function (props) {
             </div>
           </div>
           {
-            stakingZoo1 && <div className={styles.action_wrapper}> 
-              <a className={styles.action_btn} disabled={approved}  onClick={()=>{
+            stakingZoo1 && <div className={styles.action_wrapper}>
+              <a className={styles.action_btn} disabled={approved} onClick={() => {
                 setTxWaiting(true);
-                approve(ZOO_TOKEN_ADDRESS[chainId], chainId, web3, address).then(ret=>{
+                approve(ZOO_TOKEN_ADDRESS[chainId], chainId, web3, address).then(ret => {
                   setTxWaiting(false);
                   setUpdateApprove(updateApprove + 1);
                   // console.debug('approve bt ret', ret);
-                }).catch(err=>{
+                }).catch(err => {
                   setTxWaiting(false);
                   console.error('approve failed', err);
                 });
               }}>
                 Approve
               </a>
-              <a className={styles.action_btn} disabled={!approved}  onClick={() => {
+              <a className={styles.action_btn} disabled={!approved} onClick={() => {
                 if (!zooBalance.gte(goldenPrice)) {
                   openNotificationExclamation("ZOO balance not enough");
                   return;
@@ -362,10 +362,10 @@ export default function (props) {
                 stakeClaim(1, web3, chainId, address).then(ret => {
                   setTxWaiting(false);
                   console.log(ret);
-                  getNftInfo(ret.events.MintNFT.returnValues.tokenId, web3, chainId).then(obj=>{
+                  getNftInfo(ret.events.MintNFT.returnValues.tokenId, web3, chainId).then(obj => {
                     // console.debug('nftmeta111', obj);
-                    openNotificationOpenedBox('GOLDEN CHEST HAS BEEN OPENED', obj.name, 'Your boost card has been transfered to your wallet.', obj.image);
-                  }).catch(err=>{
+                    openNotificationOpenedBox('GOLDEN CHEST HAS BEEN OPENED', obj.name, 'Your boost card has been transfered to your wallet.', obj.image, false, true);
+                  }).catch(err => {
                     console.error('getNftInfo error', err);
                   });
                 }).catch(err => {
@@ -422,14 +422,14 @@ export default function (props) {
             </div>
           </div>
           {
-            stakingZoo2 && <div className={styles.action_wrapper}> 
-              <a className={styles.action_btn} disabled={approved}  onClick={()=>{
+            stakingZoo2 && <div className={styles.action_wrapper}>
+              <a className={styles.action_btn} disabled={approved} onClick={() => {
                 setTxWaiting(true);
-                approve(ZOO_TOKEN_ADDRESS[chainId], chainId, web3, address).then(ret=>{
+                approve(ZOO_TOKEN_ADDRESS[chainId], chainId, web3, address).then(ret => {
                   setTxWaiting(false);
                   setUpdateApprove(updateApprove + 1);
                   // console.debug('approve bt ret', ret);
-                }).catch(err=>{
+                }).catch(err => {
                   setTxWaiting(false);
                   console.error('approve failed', err);
                 });
@@ -456,38 +456,38 @@ export default function (props) {
             </div>
           }
           <div className={styles.action_wrapper}>
-          {
-            expeditions[2] && expeditions[2].startTime === 0 && !stakingZoo2 && <a className={styles.action_btn} onClick={() => {
-              setStakingZoo2(true);
-            }}>
-              Stake ZOO
+            {
+              expeditions[2] && expeditions[2].startTime === 0 && !stakingZoo2 && <a className={styles.action_btn} onClick={() => {
+                setStakingZoo2(true);
+              }}>
+                Stake ZOO
             </a>
-          }
-          {
-            expeditions[2] && expeditions[2].startTime !== 0 && countdown2 <= 0 && <a className={styles.action_btn} onClick={() => {
-              setTxWaiting(true);
-              stakeClaim(2, web3, chainId, address).then(ret => {
-                setTxWaiting(false);
-                console.log(ret);
-                getNftInfo(ret.events.MintNFT.returnValues.tokenId, web3, chainId).then(obj=>{
-                  // console.debug('nftmeta111', obj);
-                  openNotificationOpenedBox('GOLDEN CHEST HAS BEEN OPENED', obj.name, 'Your boost card has been transfered to your wallet.', obj.image);
-                }).catch(err=>{
-                  console.error('getNftInfo error', err);
-                });
-              }).catch(err => {
-                console.log(err);
-                setTxWaiting(false);
-              })
-            }}>
-              Claim 1 Artifact
+            }
+            {
+              expeditions[2] && expeditions[2].startTime !== 0 && countdown2 <= 0 && <a className={styles.action_btn} onClick={() => {
+                setTxWaiting(true);
+                stakeClaim(2, web3, chainId, address).then(ret => {
+                  setTxWaiting(false);
+                  console.log(ret);
+                  getNftInfo(ret.events.MintNFT.returnValues.tokenId, web3, chainId).then(obj => {
+                    // console.debug('nftmeta111', obj);
+                    openNotificationOpenedBox('GOLDEN CHEST HAS BEEN OPENED', obj.name, 'Your boost card has been transfered to your wallet.', obj.image, false, true);
+                  }).catch(err => {
+                    console.error('getNftInfo error', err);
+                  });
+                }).catch(err => {
+                  console.log(err);
+                  setTxWaiting(false);
+                })
+              }}>
+                Claim 1 Artifact
             </a>
-          }
-          {
-            expeditions[2] && expeditions[2].startTime !== 0 && countdown2 > 0 && <a className={styles.action_btn}>
-              {formattedRes2.days}:{formattedRes2.hours}:{formattedRes2.minutes}:{formattedRes2.seconds} Left
+            }
+            {
+              expeditions[2] && expeditions[2].startTime !== 0 && countdown2 > 0 && <a className={styles.action_btn}>
+                {formattedRes2.days}:{formattedRes2.hours}:{formattedRes2.minutes}:{formattedRes2.seconds} Left
             </a>
-          }
+            }
           </div>
         </div>
 
