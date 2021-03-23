@@ -189,23 +189,23 @@ export default function () {
             <div className={styles.title}>
               Class
                     </div>
-            <div className={styles.filter_rarity}>
+            <div className={styles.filter_class}>
               <Checkbox.Group style={{ width: '100%' }} >
                 <Row gutter={[5, 10]}>
                   <Col span={12}>
-                    <Checkbox value="N"><img src="assets/grade/N.png" /> <span>Normal</span></Checkbox>
+                    <Checkbox value="N"><img src="assets/grade/N.png" /></Checkbox>
                   </Col>
                   <Col span={12}>
-                    <Checkbox value="R"><img src="assets/grade/R.png" /> <span>Rare</span></Checkbox>
+                    <Checkbox value="R"><img src="assets/grade/R.png" /></Checkbox>
                   </Col>
                   <Col span={12}>
-                    <Checkbox value="SR"><img src="assets/grade/SR.png" /> <span>Super Rare</span></Checkbox>
+                    <Checkbox value="SR"><img src="assets/grade/SR.png" /></Checkbox>
                   </Col>
                   <Col span={12}>
-                    <Checkbox value="SSR"><img src="assets/grade/SSR.png" /> <span>Super<sup>2</sup> Rare</span></Checkbox>
+                    <Checkbox value="SSR"><img src="assets/grade/SSR.png" /></Checkbox>
                   </Col>
                   <Col span={12}>
-                    <Checkbox value="UR"><img src="assets/grade/UR.png" /> <span>Ultra Rare</span></Checkbox>
+                    <Checkbox value="UR"><img src="assets/grade/UR.png" /></Checkbox>
                   </Col>
 
                 </Row>

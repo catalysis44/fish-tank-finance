@@ -87,31 +87,6 @@ export default function CardView(props) {
                   </div>
                 </div>
               </div>
-              {
-                rare === 1 && <div className={styles.total_supply}>
-                  <img src="assets/gem/common18x18.png" /> Total Supply: {props.itemSupply}
-                </div>
-              }
-              {
-                rare === 2 && <div className={styles.total_supply}>
-                  <img src="assets/gem/epic18x18.png" /> Total Supply: {props.itemSupply}
-                </div>
-              }
-              {
-                rare === 3 && <div className={styles.total_supply}>
-                  <img src="assets/gem/rare18x18.png" /> Total Supply: {props.itemSupply}
-                </div>
-              }
-              {
-                rare === 4 && <div className={styles.total_supply}>
-                  <img src="assets/gem/ultrarare18x18.png" /> Total Supply: {props.itemSupply}
-                </div>
-              }
-              {
-                rare === 5 && <div className={styles.total_supply}>
-                  <img src="assets/gem/ultrarare18x18.png" /> Total Supply: {props.itemSupply}
-                </div>
-              }
               
               <div className={styles.item_description}>
                 <div className={styles.description}>
@@ -126,9 +101,11 @@ export default function CardView(props) {
                   <span><img src={categoryIcons[category-1]} /> {categorys[category-1]}</span>
                 </div>
                 <div className={styles.description}>
-                  <span>Card #</span>
-                  {props.tokenId}
+                  <span>Total Supply</span>
+                    {props.itemSupply}
                   </div>
+
+                  
 
               </div>
               {/*On Sale : hide it if not on the market*/}
@@ -147,8 +124,28 @@ export default function CardView(props) {
             <div className={styles.flip_card_back}>
               <div className={styles.title}>
                 <img src={props.icon} />
-                  {props.name}
+                <div className={styles.title_card_number}>
+                  <span>{props.name}</span>
+                  <span className={styles.card_number}>Card #{props.tokenId}</span>
                 </div>
+              </div>
+              <div className={styles.class}>
+                {
+                  rare === 1 && <img src="assets/grade/N.png" /> 
+                }
+                {
+                  rare === 2 && <img src="assets/grade/R.png" /> 
+                }
+                {
+                  rare === 3 && <img src="assets/grade/SR.png" /> 
+                }
+                {
+                  rare === 4 && <img src="assets/grade/SSR.png" /> 
+                }
+                {
+                  rare === 5 && <img src="assets/grade/UR.png" /> 
+                }
+              </div>
               <div className={styles.item_description}>
                 <div className={styles.description}>
                   <div>

@@ -32,11 +32,10 @@ function Card(props) {
                 level === 4 && <img src="assets/max.png" />
               }
             </div>
+            
           </div>
         </div>
-        <div className={styles.total_supply}>
-          <img src="assets/gem/common18x18.png" /> Total Supply: {props.itemSupply}
-                          </div>
+       
         <div className={styles.item_description}>
           <div className={styles.description}>
             <span><img src="assets/rocket24x24.png" /> +{(props.boost*100).toFixed(2)}%</span>
@@ -50,8 +49,8 @@ function Card(props) {
             <span><img src={categoryIcons[category - 1]} /> {categorys[category-1]}</span>
           </div>
           <div className={styles.description}>
-            <span>Card #</span>
-            {props.tokenId}
+          <span>Total Supply</span>
+            {props.itemSupply}
             </div>
           <div className={styles.price}>
             <img src="assets/currency/zoo.png" />
@@ -65,8 +64,15 @@ function Card(props) {
       <div className={styles.flip_card_back}>
         <div className={styles.title}>
           <img src="assets/lemon64x64.png" />
-                                  Lemon of Bunbury
-                              </div>
+          <div className={styles.title_card_number}>
+                  <span>Lemon of Bunbury</span>
+                  <span className={styles.card_number}>Card #555</span>
+                </div>
+              
+        </div>
+        <div className={styles.class}>
+          <img src="assets/grade/UR.png" /> 
+        </div>
         <div className={styles.item_description}>
           <div className={styles.description}>
             <div>

@@ -93,6 +93,7 @@
             line-height: 18px;
             .title
             {
+              margin-top:5px;
               text-align: left;
               color:black;
               img
@@ -238,14 +239,35 @@
           color:white;
           .title
           {
-            margin-top:-16px;
-            text-align: center;
+            margin-top: -12px;
+            text-align: left;
+            margin-left: -15px;
+            width: 220px;
+            display: flex;
+            line-height: 16px;
+            align-items: center;
+            .title_card_number
+            {
+              display:flex;
+              flex-direction: column;
+              margin-top:3px;
+              .card_number
+              {
+                font-size:13px;
+              }
+            }
             img
             {
-              width:48px;
-              height:48px;
+              width:42px;
+              height:42px;
               margin-right:5px;
             }
+          }
+          .class
+          {
+            position:absolute;
+            top:10px;
+            right:10px;
           }
           .withdraw_btn
           {
@@ -328,10 +350,10 @@
               background:white;
               box-shadow:2px 2px #00000020;
               position:absolute;
-              bottom:12px;
+              bottom:10px;
               right:10px;
               width:64px;
-              height:26px;
+              height:30px;
               display:flex;
               align-items: center;
               justify-content: center;
