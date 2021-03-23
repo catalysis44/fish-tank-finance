@@ -53,7 +53,7 @@ function Row(props) {
     </div>
     <div className={`${styles.listview_col} ${styles.title}`}>
       <div className={styles.listview_subcol}>
-        <img src="assets/gem/common18x18.png" className={styles.gem} /> <img src={props.icon} /> <div>{props.name}</div>
+        <img src="assets/grade/N.png" className={styles.gem} /> <img src={props.icon} /> <div>{props.name}</div>
       </div>
     </div>
     <div className={styles.block_responsive}>
@@ -164,7 +164,7 @@ export default function ListView(props) {
             </div>
             <div className={`${styles.listview_col} ${styles.title}`}>
               <div className={styles.listview_subcol}>
-                <img src="assets/gem/common18x18.png" className={styles.gem} /> <img src="/dummy/booster.png" /> <div>NFT boost full name</div>
+                <img src="assets/grade/N.png" className={styles.gem} /> <img src="/dummy/booster.png" /> <div>NFT boost full name</div>
               </div>
             </div>
 

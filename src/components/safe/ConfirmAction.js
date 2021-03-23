@@ -42,7 +42,7 @@ export default function ConfirmAction(props) {
               {props.name}
             </div>
             <div className={styles.supply}>
-              <img src="assets/gem/common18x18.png" /> total supply: {props.itemSupply}
+            <img src="assets/grade/N.png" /> total supply: {props.itemSupply}
             </div>
           </div>
 
