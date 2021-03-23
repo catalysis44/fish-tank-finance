@@ -187,22 +187,25 @@ export default function () {
               <a><img src="assets/max.png" /></a>
             </div>
             <div className={styles.title}>
-              Rarity
+              Class
                     </div>
             <div className={styles.filter_rarity}>
               <Checkbox.Group style={{ width: '100%' }} >
                 <Row gutter={[5, 10]}>
                   <Col span={12}>
-                    <Checkbox value="A"><img src="assets/gem/common18x18.png" /> <span>Common</span></Checkbox>
+                    <Checkbox value="N"><img src="assets/grade/N.png" /> <span>Normal</span></Checkbox>
                   </Col>
                   <Col span={12}>
-                    <Checkbox value="B"><img src="assets/gem/epic18x18.png" /> <span>Epic</span></Checkbox>
+                    <Checkbox value="R"><img src="assets/grade/R.png" /> <span>Rare</span></Checkbox>
                   </Col>
                   <Col span={12}>
-                    <Checkbox value="C"><img src="assets/gem/rare18x18.png" /> <span>Rare</span></Checkbox>
+                    <Checkbox value="SR"><img src="assets/grade/SR.png" /> <span>Super Rare</span></Checkbox>
                   </Col>
                   <Col span={12}>
-                    <Checkbox value="D"><img src="assets/gem/ultrarare18x18.png" /> <span>Ultra Rare</span></Checkbox>
+                    <Checkbox value="SSR"><img src="assets/grade/SSR.png" /> <span>Super<sup>2</sup> Rare</span></Checkbox>
+                  </Col>
+                  <Col span={12}>
+                    <Checkbox value="UR"><img src="assets/grade/UR.png" /> <span>Ultra Rare</span></Checkbox>
                   </Col>
 
                 </Row>
