@@ -2,31 +2,13 @@ import { useState, useEffect } from 'react';
 import styles from './OpenChestboxModal.less';
 import '../../../node_modules/animate.css/animate.min.css';
 import { history } from 'umi';
+import {categorys, categoryIcons} from '../../config';
 
 export default function OpenChestboxModal(props) {
   // Open Confirm Modal //
   const closeModal = () => {
     props.setModal(0);
   }
-
-  const categorys = [
-    "Fruits",
-    "Foods",
-    "Sweets",
-    "Potions",
-    "Spices",
-    "Magic",
-  ]
-
-  const categoryIcons = [
-    "/assets/category/fruits.png",
-    "/assets/category/dishes.png",
-    "/assets/category/sweets.png",
-    "/assets/category/potions.png",
-    "/assets/category/spices.png",
-    "/assets/category/magic.png",
-  ]
-
   // console.debug('category:', props);
 
 

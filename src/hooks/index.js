@@ -1,9 +1,8 @@
 import BigNumber from 'bignumber.js';
 import { useInterval, useLockFn, useReactive } from 'ahooks';
-import { MULTICALL_ADDRESS, RPC_URL, ZOO_TOKEN_ADDRESS, ZOO_FARMING_ADDRESS, ZOO_BOOSTING_ADDRESS, NFT_FACTORY_ADDRESS, ZOO_NFT_ADDRESS, WASP_FARMING_ADDRESS } from '../config';
+import { MULTICALL_ADDRESS, RPC_URL, ZOO_TOKEN_ADDRESS, ZOO_FARMING_ADDRESS, ZOO_BOOSTING_ADDRESS, NFT_FACTORY_ADDRESS, ZOO_NFT_ADDRESS, WASP_FARMING_ADDRESS, NFT_MARKETPLACE_ADDRESS } from '../config';
 import React, { useCallback, useMemo } from 'react';
 import { updatePrice } from './price';
-import { useThrottleFn } from 'ahooks';
 const { aggregate } = require('@makerdao/multicall');
 const DataLoader = require('dataloader');
 
@@ -25,6 +24,8 @@ export const initialState = {
   nftBalance: 0,
   nftCards: [],
   blockNumber: 0,
+  marketOrderCount: 0,
+  markets: [],
 }
 
 const differ = (a, b) => {
@@ -37,7 +38,7 @@ const differ = (a, b) => {
 
 export const StorageContext = React.createContext(initialState, differ);
 
-export const useLoader = (chainId) => {
+const useLoader = (chainId) => {
   const loader = useMemo(() => {
     if (!chainId) {
       return undefined;
@@ -86,7 +87,7 @@ export const useLoader = (chainId) => {
   return loader;
 }
 
-export const getZooBalance = (loader, chainId, address) => {
+const getZooBalance = (loader, chainId, address) => {
   return loader.load({
     target: ZOO_TOKEN_ADDRESS[chainId],
     call: ['balanceOf(address)(uint256)', address],
@@ -94,7 +95,7 @@ export const getZooBalance = (loader, chainId, address) => {
   });
 }
 
-export const getZooTotalSupply = (loader, chainId) => {
+const getZooTotalSupply = (loader, chainId) => {
   return loader.load({
     target: ZOO_TOKEN_ADDRESS[chainId],
     call: ['totalSupply()(uint256)'],
@@ -102,7 +103,7 @@ export const getZooTotalSupply = (loader, chainId) => {
   });
 }
 
-export const getUserNftBalance = (loader, chainId, address) => {
+const getUserNftBalance = (loader, chainId, address) => {
   return loader.load({
     target: ZOO_NFT_ADDRESS[chainId],
     call: ['balanceOf(address)(uint256)', address],
@@ -110,7 +111,7 @@ export const getUserNftBalance = (loader, chainId, address) => {
   });
 }
 
-export const getUserNftTokenId = (loader, chainId, address, count) => {
+const getUserNftTokenId = (loader, chainId, address, count) => {
   let calls = Array.from({ length: count }, (v, i) => { return i }).map(i => {
     return {
       target: ZOO_NFT_ADDRESS[chainId],
@@ -122,7 +123,7 @@ export const getUserNftTokenId = (loader, chainId, address, count) => {
   return loader.loadMany(calls);
 }
 
-export const getNftBaseInfo = (loader, chainId, tokenIds) => {
+const getNftBaseInfo = (loader, chainId, tokenIds) => {
   let calls = tokenIds.map(id => {
     return {
       target: ZOO_NFT_ADDRESS[chainId],
@@ -163,7 +164,7 @@ export const getNftBaseInfo = (loader, chainId, tokenIds) => {
   return loader.loadMany(calls);
 }
 
-export const getNftItemSupply = (loader, chainId, level, category, item) => {
+const getNftItemSupply = (loader, chainId, level, category, item) => {
   return loader.load({
     target: ZOO_NFT_ADDRESS[chainId],
     call: ['itemSupply(uint256,uint256,uint256)(uint256)', level, category, item],
@@ -171,7 +172,7 @@ export const getNftItemSupply = (loader, chainId, level, category, item) => {
   });
 }
 
-export const getZooBurned = (loader, chainId, address) => {
+const getZooBurned = (loader, chainId, address) => {
   return loader.load({
     target: ZOO_TOKEN_ADDRESS[chainId],
     call: ['totalBurned()(uint256)'],
@@ -179,7 +180,7 @@ export const getZooBurned = (loader, chainId, address) => {
   });
 }
 
-export const getZooPools = (loader, chainId, address, poolLength) => {
+const getZooPools = (loader, chainId, address, poolLength) => {
   let poolIndexs = Array.from({ length: poolLength }, (v, i) => i);
 
   //PoolInfo
@@ -240,7 +241,7 @@ export const getZooPools = (loader, chainId, address, poolLength) => {
       target: ZOO_BOOSTING_ADDRESS[chainId],
       call: ['getMultiplier(uint256,address)(uint256)', v, address],
       returns: [
-        ['getMultiplier', val => (val / 1e12)], 
+        ['getMultiplier', val => (val / 1e12)],
       ]
     }
   }));
@@ -272,7 +273,7 @@ export const getZooPools = (loader, chainId, address, poolLength) => {
   return loader.loadMany(calls);
 }
 
-export const getLpInfo = (loader, lpToken, chainId, address, waspPid) => {
+const getLpInfo = (loader, lpToken, chainId, address, waspPid) => {
   return loader.loadMany([
     {
       target: lpToken,
@@ -331,7 +332,7 @@ export const getLpInfo = (loader, lpToken, chainId, address, waspPid) => {
   ]);
 }
 
-export const getTokenSymbols = (loader, token0, token1) => {
+const getTokenSymbols = (loader, token0, token1) => {
   return loader.loadMany([
     {
       target: token0,
@@ -356,7 +357,7 @@ export const getTokenSymbols = (loader, token0, token1) => {
   ]);
 }
 
-export const getFarmingInfo = (loader, chainId) => {
+const getFarmingInfo = (loader, chainId) => {
   return loader.loadMany([
     {
       target: ZOO_FARMING_ADDRESS[chainId],
@@ -386,7 +387,7 @@ export const getFarmingInfo = (loader, chainId) => {
   ]);
 }
 
-export const getNFTFactoryInfo = (loader, chainId, address) => {
+const getNFTFactoryInfo = (loader, chainId, address) => {
   return loader.loadMany([
     {
       target: NFT_FACTORY_ADDRESS[chainId],
@@ -436,6 +437,48 @@ export const getNFTFactoryInfo = (loader, chainId, address) => {
       returns: [['stakedAmount', val => (new BigNumber(val)).div(1e18)]]
     },
   ]);
+}
+
+const getMarketCount = (loader, chainId) => {
+  return loader.load({
+    target: NFT_MARKETPLACE_ADDRESS[chainId],
+    call: ['orderCount()(uint256)'],
+    returns: [['orderCount', val => Number(val)]]
+  });
+}
+
+const getMarketOrderIds = (count, loader, chainId) => {
+  let calls = Array.from({ length: count }, (v, i) => i).map(v => {
+    return {
+      target: NFT_MARKETPLACE_ADDRESS[chainId],
+      call: ['getOrderId(uint256)(uint256,bool)', v],
+      returns: [
+        ['id', val => '0x' + (new BigNumber(val.toString())).toString(16)],
+        ['isValid', val => val],
+      ]
+    }
+  });
+
+  return loader.loadMany(calls);
+}
+
+const getMarketOrders = (orderIds, loader, chainId) => {
+  let calls = orderIds.map(v => {
+    return {
+      target: NFT_MARKETPLACE_ADDRESS[chainId],
+      call: ['getOrderById(uint256)(address,uint256,address,uint256,uint256,uint256)', v],
+      returns: [
+        ['owner', val => val],
+        ['tokenId', val => val.toString()],
+        ['token', val => val],
+        ['price', val => val.toString()],
+        ['expiration', val => Number(val)],
+        ['createTime', val => Number(val)],
+      ]
+    }
+  });
+
+  return loader.loadMany(calls);
 }
 
 export const useDataPump = (storage, setStorage, chainId, address, connected) => {
@@ -511,15 +554,15 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
                 uri: ret[i] && ret[i].returnValue.uri,
                 boost: ret[i] && ret[i + tokenIds.length].returnValue.boost,
                 reduce: ret[i] && ret[i + tokenIds.length * 2].returnValue.reduce,
-                tokenInfo: ret[i] && { ...ret[i + tokenIds.length * 3].returnValue},
+                tokenInfo: ret[i] && { ...ret[i + tokenIds.length * 3].returnValue },
               });
             }
 
-            Promise.all(cards.map(v=>{
+            Promise.all(cards.map(v => {
               return getNftItemSupply(loader, chainId, v.tokenInfo.level, v.tokenInfo.category, v.tokenInfo.item);
             })).then(ret => {
               // console.debug('getNftItemSupply ret', ret);
-              cards = cards.map((v,i)=>{
+              cards = cards.map((v, i) => {
                 v.itemSupply = ret[i].returnValue.itemSupply;
                 return v;
               });
@@ -527,7 +570,7 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
               // console.debug('cards:', cards);
               tmpStorage.nftCards = cards;
               updateStorage(tmpStorage);
-            }).catch(err=>{
+            }).catch(err => {
               console.error('err 1.2.1.1', err);
             })
           });
@@ -614,15 +657,76 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
       if (!tmpStorage.expeditions) {
         tmpStorage.expeditions = [];
       }
-      tmpStorage.expeditions[0] = {...ret[1].returnValue, ...ret[4].returnValue};
-      tmpStorage.expeditions[1] = {...ret[2].returnValue, ...ret[5].returnValue};
-      tmpStorage.expeditions[2] = {...ret[3].returnValue, ...ret[6].returnValue};
+      tmpStorage.expeditions[0] = { ...ret[1].returnValue, ...ret[4].returnValue };
+      tmpStorage.expeditions[1] = { ...ret[2].returnValue, ...ret[5].returnValue };
+      tmpStorage.expeditions[2] = { ...ret[3].returnValue, ...ret[6].returnValue };
 
       updateStorage(tmpStorage);
     }).catch(err => {
       console.error('err 30', err);
     });
 
+    getMarketCount(loader, chainId).then(ret => {
+      // console.debug('getMarketCount', ret);
+      tmpStorage.marketOrderCount = ret.returnValue.orderCount;
+      getMarketOrderIds(ret.returnValue.orderCount, loader, chainId).then(ret => {
+        // console.debug('getMarketOrderIds', ret);
+        let goodOrders = ret.filter(v => {
+          return v.returnValue.isValid;
+        });
+        let goodOrderIds = goodOrders.map(v => {
+          return v.returnValue.id;
+        })
+        // console.debug('goodOrderIds', goodOrderIds);
+
+        getMarketOrders(goodOrderIds, loader, chainId).then(ret => {
+          // console.debug('getMarketOrders', ret);
+          tmpStorage.markets = ret.map(v=>{
+            return {
+              ...v.returnValue
+            };
+          });
+
+          let tokenIds = tmpStorage.markets.map(v=>{
+            return v.tokenId;
+          })
+
+          getNftBaseInfo(loader, chainId, tokenIds).then(ret => {
+            // console.debug('getNftBaseInfo ret', ret);
+            for (let i = 0; i < tmpStorage.markets.length; i++) {
+              tmpStorage.markets[i] = {
+                ...tmpStorage.markets[i],
+                uri: ret[i] && ret[i].returnValue.uri,
+                boost: ret[i] && ret[i + tokenIds.length].returnValue.boost,
+                reduce: ret[i] && ret[i + tokenIds.length * 2].returnValue.reduce,
+                tokenInfo: ret[i] && { ...ret[i + tokenIds.length * 3].returnValue},
+              };
+            }
+
+            Promise.all(tmpStorage.markets.map(v => {
+              return getNftItemSupply(loader, chainId, v.tokenInfo.level, v.tokenInfo.category, v.tokenInfo.item);
+            })).then(ret => {
+              // console.debug('getNftItemSupply ret', ret);
+              tmpStorage.markets = tmpStorage.markets.map((v, i) => {
+                v.itemSupply = ret[i].returnValue.itemSupply;
+                return v;
+              });
+
+              console.debug('tmpStorage.markets:', tmpStorage.markets);
+              updateStorage(tmpStorage);
+            }).catch(err => {
+              console.error('err 1.2.1.1', err);
+            })
+          });
+        }).catch(err => {
+          console.error('err getMarketOrders', err);
+        })
+      }).catch(err => {
+        console.error('err getMarketOrderIds', err);
+      })
+    }).catch(err => {
+      console.error('err getMarketCount', err);
+    })
   };
 
 

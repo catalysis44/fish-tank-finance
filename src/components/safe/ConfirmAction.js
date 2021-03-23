@@ -3,31 +3,14 @@ import styles from './ConfirmAction.less';
 import '../../../node_modules/animate.css/animate.min.css';
 import { WalletContext } from '../../wallet/Wallet';
 import { checkMarketSellApprove, approveMarket, createOrder } from '../../wallet/send';
+import {categorys, categoryIcons} from '../../config';
+
+
 export default function ConfirmAction(props) {
   // Open Confirm Modal //
   const closeModal = () => {
     props.setModal(0);
   }
-
-  const categorys = [
-    "Fruits",
-    "Foods",
-    "Sweets",
-    "Potions",
-    "Spices",
-    "Magic",
-  ]
-
-  const categoryIcons = [
-    "/assets/category/fruits.png",
-    "/assets/category/dishes.png",
-    "/assets/category/sweets.png",
-    "/assets/category/potions.png",
-    "/assets/category/spices.png",
-    "/assets/category/magic.png",
-  ]
-
-  // console.debug('category:', props);
 
   const setTxWaiting = props.setTxWaiting;
   const wallet = useContext(WalletContext);

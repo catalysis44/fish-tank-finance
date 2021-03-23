@@ -4,31 +4,11 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretDown} from '@fortawesome/free-solid-svg-icons';
 import { commafy } from '../../utils';
+import {categorys, categoryIcons} from '../../config';
+
 
 
 export default function ListView(props) {
-
-  const categorys = [
-    "Fruits",
-    "Foods",
-    "Sweets",
-    "Potions",
-    "Spices",
-    "Magic",
-  ]
-
-  const categoryIcons = [
-    "/assets/category/fruits.png",
-    "/assets/category/dishes.png",
-    "/assets/category/sweets.png",
-    "/assets/category/potions.png",
-    "/assets/category/spices.png",
-    "/assets/category/magic.png",
-  ]
-
-  //const category = Number(props.attributes[0].value)
-
-  // console.debug('ListView', props);
 
   return (
     <React.Fragment >
