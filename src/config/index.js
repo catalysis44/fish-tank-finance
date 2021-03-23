@@ -110,3 +110,22 @@ export const trade_tokens = {
     }
   }
 }
+
+
+export const categorys = [
+  "Fruits",
+  "Foods",
+  "Sweets",
+  "Potions",
+  "Spices",
+  "Magic",
+]
+
+export const categoryIcons = [
+  "/assets/category/fruits.png",
+  "/assets/category/dishes.png",
+  "/assets/category/sweets.png",
+  "/assets/category/potions.png",
+  "/assets/category/spices.png",
+  "/assets/category/magic.png",
+]

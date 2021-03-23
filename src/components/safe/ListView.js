@@ -4,6 +4,7 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import { checkNumber, commafy } from '../../utils';
+import {categorys, categoryIcons} from '../../config';
 
 const currencyList = [
   {
@@ -30,24 +31,6 @@ const currencyList = [
     symbol: 'WWAN',
     icon: 'assets/currency/wan.png',
   },
-]
-
-const categorys = [
-  "Fruits",
-  "Foods",
-  "Sweets",
-  "Potions",
-  "Spices",
-  "Magic",
-]
-
-const categoryIcons = [
-  "/assets/category/fruits.png",
-  "/assets/category/dishes.png",
-  "/assets/category/sweets.png",
-  "/assets/category/potions.png",
-  "/assets/category/spices.png",
-  "/assets/category/magic.png",
 ]
 
 function Row(props) {
