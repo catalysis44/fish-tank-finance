@@ -66,9 +66,14 @@ export default function ListView(props) {
               <div className={`${styles.listview_col} ${styles.star}`}>
                 <img src="assets/star18x18.png"/><img src="assets/star18x18.png"/><img src="assets/star18x18.png"/>
               </div>
+              <div className={`${styles.listview_col} ${styles.class}`}>
+              <div className={styles.listview_subcol}>
+                <img src="assets/grade/N.png" /> 
+              </div>
+            </div>
               <div className={`${styles.listview_col} ${styles.title}`}>
                 <div className={styles.listview_subcol}>
-                <img src="assets/grade/N.png" className={styles.gem}/> <img src="/dummy/booster.png"/> <div>NFT boost full name</div>
+                <div  className={styles.content}><img src="/dummy/booster.png"/> NFT boost full name</div>
                 </div>
               </div>
 
