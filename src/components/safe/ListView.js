@@ -3,8 +3,10 @@ import styles from './ListView.less';
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
-import { checkNumber, commafy } from '../../utils';
-import {categorys, categoryIcons} from '../../config';
+import { checkNumber, commafy, getSymbolFromTokenAddress } from '../../utils';
+import { categorys, categoryIcons } from '../../config';
+import { WalletContext } from '../../wallet/Wallet';
+import ConfirmActionModal from './ConfirmAction';
 
 const currencyList = [
   {
@@ -40,6 +42,20 @@ function Row(props) {
   const [showDropdown, setShowDropdown] = useState(false);
   const [amount, setAmount] = useState('0.0');
   const rare = Number(props.attributes[2].value);
+  const isOnSell = props.isOnSell;
+  const onSellPrice = props.onSellPrice;
+  const onSellToken = props.onSellToken;
+
+  const wallet = useContext(WalletContext);
+  const chainId = wallet.networkId;
+  const connected = wallet.connected;
+  const address = wallet.address;
+  const web3 = wallet.web3;
+
+  const ret = getSymbolFromTokenAddress(onSellToken, chainId);
+  const symbol = ret && ret.symbol;
+  const decimals = ret && ret.decimals;
+
 
   return <div className={styles.listview_row} key={props.tokenId}>
     <div className={`${styles.listview_col} ${styles.star}`}>
@@ -99,62 +115,66 @@ function Row(props) {
       </div>
 
       {/*In case of On sale*/}
-      <div className={`${styles.listview_col} ${styles.onsale_action}`} style={{ display: 'none' }}>
-        <div className={styles.listview_subcol}>
-          <div className={styles.onsale_price}>
-            <span>On Sale for</span>
-              5,230,529 wanUSDT
+      {
+        isOnSell && <div className={`${styles.listview_col} ${styles.onsale_action}`} >
+          <div className={styles.listview_subcol}>
+            <div className={styles.onsale_price}>
+              <span>On Sale for</span>
+              {commafy(onSellPrice / 10**decimals)} {symbol}
           </div>
-          <a className={styles.cancel}>
-            Cancel the SALE
+            <a className={styles.cancel}>
+              Cancel the SALE
           </a>
+          </div>
         </div>
-      </div>
+      }
+
 
       {/*In case of On sale*/}
-      <div className={`${styles.listview_col} ${styles.market_action}`}>
-        <div className={styles.listview_subcol}>
-          <div className={styles.sell_action}> {/*Show this when not on sale*/}
-            <input type="text" value={amount} onChange={e => {
-              if (checkNumber(e)) {
-                setAmount(e.target.value);
-              }
-            }} />
-            <div className={"dropdown is-active"}> {/*add class .is-active to open dropdown*/}
-              <a className={styles.select_currency} aria-haspopup="true" aria-controls="dropdown-menu" onClick={() => {
-                setShowDropdown(!showDropdown);
-              }}>
-                <img src={currencyIcon} />
-                <span className={styles.currency_name}>{currency}</span>
-                <span><FontAwesomeIcon icon={faCaretDown} /></span>
-              </a>
-              {
-                showDropdown && <div class="dropdown-menu" id="dropdown-menu" role="menu">
-                  <div class="dropdown-content">
-                    {
-                      currencyList.map(c => {
-                        return <a class="dropdown-item" onClick={() => {
-                          setShowDropdown(false);
-                          setCurrencyIcon(c.icon);
-                          setCurrency(c.symbol);
-                        }}>
-                          <img src={c.icon} /> {c.symbol}
-                        </a>
-                      })
-                    }
+
+      {
+        !isOnSell && <div className={`${styles.listview_col} ${styles.market_action}`}>
+          <div className={styles.listview_subcol}>
+            <div className={styles.sell_action}> {/*Show this when not on sale*/}
+              <input type="text" value={amount} onChange={e => {
+                if (checkNumber(e)) {
+                  setAmount(e.target.value);
+                }
+              }} />
+              <div className={"dropdown is-active"}> {/*add class .is-active to open dropdown*/}
+                <a className={styles.select_currency} aria-haspopup="true" aria-controls="dropdown-menu" onClick={() => {
+                  setShowDropdown(!showDropdown);
+                }}>
+                  <img src={currencyIcon} />
+                  <span className={styles.currency_name}>{currency}</span>
+                  <span><FontAwesomeIcon icon={faCaretDown} /></span>
+                </a>
+                {
+                  showDropdown && <div class="dropdown-menu" id="dropdown-menu" role="menu">
+                    <div class="dropdown-content">
+                      {
+                        currencyList.map(c => {
+                          return <a class="dropdown-item" onClick={() => {
+                            setShowDropdown(false);
+                            setCurrencyIcon(c.icon);
+                            setCurrency(c.symbol);
+                          }}>
+                            <img src={c.icon} /> {c.symbol}
+                          </a>
+                        })
+                      }
+                    </div>
                   </div>
-                </div>
-              }
-
+                }
+              </div>
             </div>
-
-
-          </div>
-          <a className={styles.sell_btn}>
-            SELL
+            <a className={styles.sell_btn}>
+              SELL
           </a>
+          </div>
         </div>
-      </div>
+      }
+
 
     </div>
   </div>
@@ -164,111 +184,51 @@ export default function ListView(props) {
 
   const cards = props.cards;
   // console.log('cards', cards);
+  const [showConfirmActionModal, setShowConfirmActionModal] = useState(0);
+  const [currentOrder, setCurrentOrder] = useState({});
+  const setTxWaiting = props.setTxWaiting;
 
   return (
     <React.Fragment >
+      <ConfirmActionModal isActived={showConfirmActionModal} setModal={setShowConfirmActionModal}
+        icon={currentOrder.icon}
+        name={currentOrder.name}
+        amount={currentOrder.amount}
+        level={currentOrder.level}
+        rare={currentOrder.rare}
+        categoryName={currentOrder.categoryName}
+        categoryIcon={currentOrder.categoryIcon}
+        tokenId={currentOrder.tokenId}
+        itemSupply={currentOrder.itemSupply}
+        boost={currentOrder.boost}
+        reduce={currentOrder.reduce}
+        currency={currentOrder.currency}
+        currencyIcon={currentOrder.currencyIcon}
+        setTxWaiting={props.setTxWaiting}
+        approved={props.approved}
+        updateApprove={props.updateApprove}
+        setUpdateApprove={props.setUpdateApprove}
+      ></ConfirmActionModal>
+
       <div className={styles.listview_panel}>
         <div className={styles.listview_table}>
           {
-            cards.map(v=>{
-              return <Row  key={v.tokenId} icon={v.image} name={v.name} tokenId={v.tokenId} attributes={v.attributes} boost={v.boost} reduce={v.reduce} itemSupply={v.itemSupply} />
+            cards.map(v => {
+              return <Row
+                key={v.tokenId}
+                icon={v.image}
+                name={v.name}
+                tokenId={v.tokenId}
+                attributes={v.attributes}
+                boost={v.boost}
+                reduce={v.reduce}
+                itemSupply={v.itemSupply}
+                isOnSell={v.isOnSell}
+                onSellPrice={v.onSellPrice}
+                onSellToken={v.onSellToken}
+              />
             })
           }
-
-          <div className={styles.listview_row}>
-            <div className={`${styles.listview_col} ${styles.star}`}>
-              <img src="assets/star18x18.png" /><img src="assets/star18x18.png" /><img src="assets/star18x18.png" />
-            </div>
-            <div className={`${styles.listview_col} ${styles.title}`}>
-              <div className={styles.listview_subcol}>
-                <img src="assets/grade/N.png" className={styles.gem} /> <img src="/dummy/booster.png" /> <div>NFT boost full name</div>
-              </div>
-            </div>
-
-            <div className={styles.block_responsive}>
-
-              <div className={`${styles.listview_col} ${styles.stat_action}`}>
-                <div className={styles.listview_subcol}>
-                  <div className={styles.stat}><span><img src="assets/rocket24x24.png" />+21.55%</span></div>
-                  <div className={styles.stat}><span><img src="assets/hourglass24x24.png" style={{ width: 20 }} />-55.33%</span></div>
-                </div>
-              </div>
-
-              <div className={`${styles.listview_col} ${styles.item_description}`}>
-                <div className={styles.listview_subcol}>
-                  <div className={styles.description}>
-                    <span><img src="assets/category/potions.png" /> Potions</span>
-                  </div>
-                  <div className={styles.description}>
-                    <span>Card #</span>
-                      555,555,555
-                  </div>
-                  <div className={styles.description}>
-                    <span>Total Supply</span>
-                      555,555,555
-                  </div>
-                </div>
-              </div>
-
-              {/*In case of On sale*/}
-              <div className={`${styles.listview_col} ${styles.onsale_action}`}>
-                <div className={styles.listview_subcol}>
-                  <div className={styles.onsale_price}>
-                    <span>On Sale for</span>
-                        5,230,529 wanUSDT
-                    </div>
-                  <a className={styles.cancel}>
-                    Cancel the SALE
-                    </a>
-                </div>
-              </div>
-
-              {/*In case of On sale*/}
-              <div className={`${styles.listview_col} ${styles.market_action}`} style={{ display: 'none' }}>
-                <div className={styles.listview_subcol}>
-                  <div className={styles.sell_action}> {/*Show this when not on sale*/}
-                    <input type="text" value="0.0" />
-                    <div className="dropdown"> {/*add class .is-active to open dropdown*/}
-                      <a className={styles.select_currency} aria-haspopup="true" aria-controls="dropdown-menu">
-                        <img src="assets/currency/wanBTC.png" />
-                        <span className={styles.currency_name}>wanBTC</span>
-                        <span><FontAwesomeIcon icon={faCaretDown} /></span>
-                      </a>
-
-
-                      <div class="dropdown-menu" id="dropdown-menu" role="menu">
-                        <div class="dropdown-content">
-
-                          <a class="dropdown-item">
-                            <img src="assets/currency/zoo.png" /> ZOO
-                                                    </a>
-
-                          <a href="#" class="dropdown-item">
-                            <img src="assets/currency/wanBTC.png" /> wanBTC
-                                                    </a>
-
-                          <a href="#" class="dropdown-item">
-                            <img src="assets/currency/wanETH.png" /> wanETH
-                                                    </a>
-
-                        </div>
-                      </div>
-
-                    </div>
-
-
-                  </div>
-                  <a className={styles.sell_btn}>
-                    SELL
-                    </a>
-                </div>
-              </div>
-
-            </div>
-
-
-          </div>
-
         </div>
       </div>
     </React.Fragment>

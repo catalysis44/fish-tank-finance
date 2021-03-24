@@ -385,6 +385,9 @@ export default function () {
               {
                 listView && <ListView cards={cards}
                   setTxWaiting={setTxWaiting}
+                  approved={approved}
+                  updateApprove={updateApprove}
+                  setUpdateApprove={setUpdateApprove}
                 />
               }
 
