@@ -693,9 +693,12 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
 
           getNftBaseInfo(loader, chainId, tokenIds).then(ret => {
             // console.debug('getNftBaseInfo ret', ret);
+            
             for (let i = 0; i < tmpStorage.markets.length; i++) {
+              // console.log('goodOrderIds', goodOrderIds[i]);
               tmpStorage.markets[i] = {
                 ...tmpStorage.markets[i],
+                orderId: goodOrderIds[i],
                 uri: ret[i] && ret[i].returnValue.uri,
                 boost: ret[i] && ret[i + tokenIds.length].returnValue.boost,
                 reduce: ret[i] && ret[i + tokenIds.length * 2].returnValue.reduce,

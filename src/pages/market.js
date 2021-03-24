@@ -1,5 +1,5 @@
 import styles from './market.less';
-import React from 'react';
+import React, {useState} from 'react';
 import CardView from '../components/market/CardView';
 import ListView from '../components/market/ListView';
 import '../../node_modules/animate.css/animate.min.css';
@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSortAlphaDown, faSortAmountUp, faSortNumericDown, faSortNumericUp } from '@fortawesome/free-solid-svg-icons';
 import { Slider, Checkbox, Row, Col } from 'antd';
 import { useEffect } from 'react';
+import Loader from '../components/loader'
 
 
 export default function () {
@@ -18,10 +19,14 @@ export default function () {
 
   }
 
+  const [txWaiting, setTxWaiting] = useState(false);
 
 
   return (
     <React.Fragment>
+      {
+        txWaiting && <Loader />
+      }
       <div id="filterbar_backdrop" onClick={toggleFilter}></div>
       <a id="toggle_filter" className={styles.toggle_filter} onClick={toggleFilter}><span><img src="assets/magnify24x24.png" /> FILTER</span></a>
       <div className={styles.content_wrapper}>
@@ -210,7 +215,7 @@ export default function () {
             </div>
           </div>
           <div className={styles.row}>
-            <CardView />
+            <CardView setTxWaiting={setTxWaiting}/>
             {/*<ListView/>*/}
           </div>
 

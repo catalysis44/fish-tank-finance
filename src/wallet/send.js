@@ -155,3 +155,46 @@ export const cancelOrder = async (tokenId, symbol, chainId, web3, address) => {
   let ret = await market.methods.cancelOrder(ZOO_NFT_ADDRESS[chainId], tokenId, trade_tokens[chainId][symbol].address).send({ from: address });
   return ret;
 }
+
+export const buyOrder = async (orderId, chainId, web3, address) => {
+  console.log('buyOrder', orderId, chainId, address)
+  const market = new web3.eth.Contract(marketAbi, NFT_MARKETPLACE_ADDRESS[chainId]);
+  let ret = await market.methods.buyOrder(orderId).send({ from: address });
+  return ret;
+}
+
+export const checkMarketBuyApprove = async (token, amount, chainId, web3, address) => {
+  console.log('checkMarketBuyApprove', token, amount, chainId);
+  if (!token || !amount || !chainId || !web3 || !address) {
+    return false;
+  }
+  
+  const erc20 = new web3.eth.Contract(erc20Abi, token);
+  let allowance = await erc20.methods.allowance(address, NFT_MARKETPLACE_ADDRESS[chainId]).call();
+  console.log('allowance', allowance.toString(), amount.toString());
+  if (!(new BigNumber(allowance)).gte(new BigNumber(amount))) {
+    return false;
+  }
+  return true;
+}
+
+export const approveForMarketBuy = async (token, chainId, web3, address) => {
+  // console.debug('approve', lpToken, chainId, web3, address);
+  const erc20 = new web3.eth.Contract(erc20Abi, token);
+  let allowance = await erc20.methods.allowance(address, NFT_MARKETPLACE_ADDRESS[chainId]).call();
+  let ret;
+  if (allowance.toString() !== '0') {
+    ret = await erc20.methods.approve(NFT_MARKETPLACE_ADDRESS[chainId], '0x0').send({ from: address });
+    if(!ret || !ret.status) {
+      throw new Error("approve failed");
+    }
+  }
+
+  ret = await erc20.methods.approve(NFT_MARKETPLACE_ADDRESS[chainId], '0xf000000000000000000000000000000000000000').send({ from: address });
+  // console.debug('approve lp ret', ret);
+  if(!ret || !ret.status) {
+    throw new Error("approve failed");
+  }
+  return ret.status;
+}
+
