@@ -266,7 +266,7 @@ export default function (props) {
                   setTxWaiting(false);
                 })
               }}>
-                Claim 1 Artifact
+                Claim 1 Golden Chest
               </a>
             }
             {
@@ -373,7 +373,7 @@ export default function (props) {
                   setTxWaiting(false);
                 })
               }}>
-                Claim 1 Artifact
+               Claim 1 Golden Chest
               </a>
             }
             {
@@ -480,7 +480,7 @@ export default function (props) {
                   setTxWaiting(false);
                 })
               }}>
-                Claim 1 Artifact
+               Claim 1 Golden Chest
             </a>
             }
             {
