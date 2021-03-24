@@ -10,7 +10,7 @@ export default function OpenChestboxModal(props) {
     props.setModal(0);
   }
   // console.debug('category:', props);
-
+  const rare = props.rare;
 
   return (
     <div id="OpenChestBoxModal" className={`modal  ${props.isActived === 0 ? "" : "is-active"}`}>
@@ -33,7 +33,21 @@ export default function OpenChestboxModal(props) {
               {props.name}
             </div>
             <div className={styles.supply}>
-              <img src="assets/grade/N.png" /> total supply: {props.itemSupply}
+            {
+                rare === 1 && <img src="assets/grade/N.png" />
+              }
+              {
+                rare === 2 && <img src="assets/grade/R.png" />
+              }
+              {
+                rare === 3 && <img src="assets/grade/SR.png" />
+              }
+              {
+                rare === 4 && <img src="assets/grade/SSR.png" />
+              }
+              {
+                rare === 5 && <img src="assets/grade/UR.png" />
+              } total supply: {props.itemSupply}
             </div>
           </div>
 

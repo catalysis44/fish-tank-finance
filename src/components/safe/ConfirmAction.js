@@ -20,6 +20,7 @@ export default function ConfirmAction(props) {
   const web3 = wallet.web3;
   const approved = props.approved;
   const setUpdateApprove = props.setUpdateApprove;
+  const rare = props.rare;
 
   return (
     <div id="ConfirmAction" className={`modal  ${props.isActived === 0 ? "" : "is-active"}`}>
@@ -42,7 +43,22 @@ export default function ConfirmAction(props) {
               {props.name}
             </div>
             <div className={styles.supply}>
-            <img src="assets/grade/N.png" /> total supply: {props.itemSupply}
+              {
+                rare === 1 && <img src="assets/grade/N.png" />
+              }
+              {
+                rare === 2 && <img src="assets/grade/R.png" />
+              }
+              {
+                rare === 3 && <img src="assets/grade/SR.png" />
+              }
+              {
+                rare === 4 && <img src="assets/grade/SSR.png" />
+              }
+              {
+                rare === 5 && <img src="assets/grade/UR.png" />
+              }
+            total supply: {props.itemSupply}
             </div>
           </div>
 
@@ -99,6 +115,7 @@ export default function ConfirmAction(props) {
               createOrder(props.tokenId, props.currency, props.amount, chainId, web3, address).then(ret=>{
                 setTxWaiting(false);
                 console.log('createOrder', ret);
+                closeModal();
               }).catch(err=>{
                 setTxWaiting(false);
               });

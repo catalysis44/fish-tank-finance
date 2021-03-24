@@ -1,5 +1,6 @@
 import { notification } from 'antd';
 import {history} from 'umi';
+import { trade_tokens } from '../config';
 
 export function commafy(num, fixed=null) {
   if (!num) {
@@ -136,3 +137,23 @@ export const openNotificationOpenedBox = (title, item, description, icon, nothin
   };
   notification.open(args);
 };
+
+export const getSymbolFromTokenAddress = (address, chainId) => {
+  if (!address) {
+    return;
+  }
+  const tokens = trade_tokens[chainId];
+  let symbol;
+  let decimals;
+  Object.keys(tokens).map(v=>{
+    if (tokens[v].address.toLowerCase() === address.toLowerCase()) {
+      symbol = v;
+      decimals = tokens[v].decimals;
+    }
+  });
+
+  return {
+    symbol,
+    decimals
+  };
+}

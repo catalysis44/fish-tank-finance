@@ -712,7 +712,7 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
                 return v;
               });
 
-              console.debug('tmpStorage.markets:', tmpStorage.markets);
+              // console.debug('tmpStorage.markets:', tmpStorage.markets);
               updateStorage(tmpStorage);
             }).catch(err => {
               console.error('err 1.2.1.1', err);

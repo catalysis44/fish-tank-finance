@@ -229,7 +229,7 @@ export default function (props) {
                 setTxWaiting(true);
                 stakeZoo(0, web3, chainId, address).then(ret => {
                   setTxWaiting(false);
-                  console.log(ret);
+                  // console.log(ret);
                   setStakingZoo(false);
                 }).catch(err => {
                   console.log(err);

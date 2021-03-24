@@ -107,7 +107,7 @@ export default function CardView(props) {
 
   const marketOrderCount = storage.marketOrderCount;
   const markets = storage.markets;
-  console.debug('markets', markets);
+  // console.debug('markets', markets);
 
   const [cards, setCards] = useState([]);
 
@@ -136,7 +136,7 @@ export default function CardView(props) {
       objs = objs.map((v, i) => {
         return { ...v, ...markets[i] };
       });
-      console.log('objs', objs);
+      // console.log('objs', objs);
       setCards(objs);
     }
 

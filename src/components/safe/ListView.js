@@ -39,6 +39,7 @@ function Row(props) {
   const [currencyIcon, setCurrencyIcon] = useState('assets/currency/zoo.png');
   const [showDropdown, setShowDropdown] = useState(false);
   const [amount, setAmount] = useState('0.0');
+  const rare = Number(props.attributes[2].value);
 
   return <div className={styles.listview_row} key={props.tokenId}>
     <div className={`${styles.listview_col} ${styles.star}`}>
@@ -53,7 +54,23 @@ function Row(props) {
     </div>
     <div className={`${styles.listview_col} ${styles.title}`}>
       <div className={styles.listview_subcol}>
-        <img src="assets/grade/N.png" className={styles.gem} /> <img src={props.icon} /> <div>{props.name}</div>
+        {
+          rare === 1 && <img src="assets/grade/N.png" />
+        }
+        {
+          rare === 2 && <img src="assets/grade/R.png" />
+        }
+        {
+          rare === 3 && <img src="assets/grade/SR.png" />
+        }
+        {
+          rare === 4 && <img src="assets/grade/SSR.png" />
+        }
+        {
+          rare === 5 && <img src="assets/grade/UR.png" />
+        }
+        {/* <img src="assets/grade/N.png" className={styles.gem} />  */}
+        <img src={props.icon} /> <div>{props.name}</div>
       </div>
     </div>
     <div className={styles.block_responsive}>

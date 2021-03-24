@@ -61,6 +61,7 @@ export default function ChestboxBuyModal(props) {
       setModal={setModal} type={type} 
       icon={icon} level={level} name={name} 
       boost={boost} reduce={reduce} 
+      rare={item}
       itemSupply={itemSupply}
       category={category} tokenId={tokenId}></OpenChestboxModal>
     <div className={`modal  ${props.isActived === 0 ? "" : "is-active"}`}>
