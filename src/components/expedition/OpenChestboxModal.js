@@ -22,7 +22,7 @@ export default function OpenChestboxModal(props) {
             <div className={styles.star}>
               {
                 Number(props.level) < 4 && Array.from({length: props.level}).map(v=>{
-                  return <img src="assets/star20x20.png" />
+                  return <img src="assets/star18x18.png" />
                 })
               }
               {

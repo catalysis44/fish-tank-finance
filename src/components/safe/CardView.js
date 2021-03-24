@@ -78,7 +78,7 @@ export default function CardView(props) {
                   <div>
                     {
                       level < 4 && Array.from({length: level}).map((v,i)=>{
-                        return <img src="assets/star20x20.png" key={i}/>
+                        return <img src="assets/star18x18.png" key={i}/>
                       })
                     }
                     {
@@ -151,7 +151,7 @@ export default function CardView(props) {
                   <div>
                     {
                       level < 4 && Array.from({length: level}).map((v,i)=>{
-                        return <img src="assets/star20x20.png" key={i}/>
+                        return <img src="assets/star18x18.png" key={i}/>
                       })
                     }
                     {
