@@ -71,9 +71,9 @@ export default function () {
             Level
                     </div>
           <div className={styles.filter_level}>
-            <a className={styles.is_active}><img src="assets/star18x18.png" /></a>
-            <a><img src="assets/star18x18.png" /><img src="assets/star18x18.png" /></a>
-            <a><img src="assets/star18x18.png" /><img src="assets/star18x18.png" /><img src="assets/star18x18.png" /></a>
+            <a className={styles.is_active}><img src="assets/star20x20.png" /></a>
+            <a><img src="assets/star20x20.png" /><img src="assets/star20x20.png" /></a>
+            <a><img src="assets/star20x20.png" /><img src="assets/star20x20.png" /><img src="assets/star20x20.png" /></a>
             <a><img src="assets/max.png" /></a>
           </div>
           <div className={styles.title}>

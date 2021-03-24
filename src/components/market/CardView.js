@@ -25,7 +25,7 @@ function Card(props) {
               <div>
               {
                 level < 4 && Array.from({length: level}).map(v=>{
-                  return <img src="assets/star18x18.png"/>
+                  return <img src="assets/star20x20.png"/>
                 })
               }
               {
@@ -76,9 +76,9 @@ function Card(props) {
         <div className={styles.item_description}>
           <div className={styles.description}>
             <div>
-              <img src="assets/star18x18.png" />
-              <img src="assets/star18x18.png" />
-              <img src="assets/star18x18.png" />
+              <img src="assets/star20x20.png" />
+              <img src="assets/star20x20.png" />
+              <img src="assets/star20x20.png" />
             </div>
           </div>
           <div className={styles.description}>

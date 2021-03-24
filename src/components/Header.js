@@ -46,7 +46,7 @@ export default function Header(props) {
             </div>
 
             <div className={styles.box} style={{display:'none'}}>
-                <img src="assets/burned42x42.png" class={styles.burn_icon}/>
+                <img src="assets/burn.png" class={styles.burn_icon}/>
                 <div class={styles.burn}>
                     <div class={styles.burn_text}>TOTAL BURNED</div>
                     <div class={styles.burn_amount}>55,012,345.56 ZOO</div>
