@@ -95,7 +95,7 @@ function BasicLayout(props) {
               </div>
               
               <div className={styles.box}>
-                  <img src="assets/burned42x42.png" class={styles.burn_icon}/>
+                  <img src="assets/burn.png" class={styles.burn_icon}/>
                   <div class={styles.detail}>
                       <div>{t("TOTAL BURNED")}</div>
                       <div><span className={styles.burned}>{commafy(storage.zooBurned)} ZOO</span></div>
