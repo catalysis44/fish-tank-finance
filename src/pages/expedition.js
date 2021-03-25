@@ -165,6 +165,15 @@ export default function (props) {
           </div>
         </div>
 
+        <div className={styles.pool_empty}>
+            <div className={styles.symbol}>
+              ?
+            </div>
+            <div className={styles.caption}>
+              <div>Coming</div>
+              <div>Soon</div>
+            </div>
+        </div>
       </div>
 
       <div className={styles.row} style={{ paddingTop: 0 }}>
