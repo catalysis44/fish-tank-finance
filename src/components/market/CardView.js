@@ -88,10 +88,18 @@ function Card(props) {
           <div className={styles.description}>
             <span><img src={categoryIcons[category - 1]} /> {categorys[category - 1]}</span>
           </div>
-          <div className={styles.description}>
-            <span>Total Supply</span>
-            {props.itemSupply}
-          </div>
+          <div className={styles.description_supply}>
+                <div className={styles.gauge} data-level="4"> {/*LV 1-5*/ }
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                </div>
+                <span>Total Supply</span>
+                {props.itemSupply}
+              </div>
+
           <div className={styles.price}>
             <img src={currencyIcon} />
             <div>

@@ -112,10 +112,18 @@ function Row(props) {
             <span>Card #</span>
             {props.tokenId}
           </div>
-          <div className={styles.description}>
-            <span>Total Supply</span>
-            {props.itemSupply}
-          </div>
+          <div className={styles.description_supply}>
+                <div className={styles.gauge} data-level="4"> {/*LV 1-5*/ }
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                </div>
+                <span>Total Supply</span>
+                {props.itemSupply}
+              </div>
+
         </div>
       </div>
 
