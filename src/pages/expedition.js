@@ -270,7 +270,7 @@ export default function (props) {
               </a>
             }
             {
-              expeditions[0] && expeditions[0].startTime !== 0 && countdown0 > 0 && <a className={styles.action_btn}>
+              expeditions[0] && expeditions[0].startTime !== 0 && countdown0 > 0 && <a className={styles.action_btn} disabled>
                 {formattedRes0.days}:{formattedRes0.hours}:{formattedRes0.minutes}:{formattedRes0.seconds} Left
               </a>
             }
@@ -377,7 +377,7 @@ export default function (props) {
               </a>
             }
             {
-              expeditions[1] && expeditions[1].startTime !== 0 && countdown1 > 0 && <a className={styles.action_btn}>
+              expeditions[1] && expeditions[1].startTime !== 0 && countdown1 > 0 && <a className={styles.action_btn} disabled>
                 {formattedRes1.days}:{formattedRes1.hours}:{formattedRes1.minutes}:{formattedRes1.seconds} Left
               </a>
             }
@@ -484,7 +484,7 @@ export default function (props) {
             </a>
             }
             {
-              expeditions[2] && expeditions[2].startTime !== 0 && countdown2 > 0 && <a className={styles.action_btn}>
+              expeditions[2] && expeditions[2].startTime !== 0 && countdown2 > 0 && <a className={styles.action_btn} disabled>
                 {formattedRes2.days}:{formattedRes2.hours}:{formattedRes2.minutes}:{formattedRes2.seconds} Left
             </a>
             }
