@@ -243,13 +243,14 @@
 }
 @media screen and (max-width: 1360px)
 {
-    
+
     .listview_row
     {
         display:block !important;
         text-align: center;
         padding-top:10px;
         padding-bottom:10px;
+        position:relative;
     }
     .star,.class
     {
@@ -258,8 +259,12 @@
     }
     .title
     {
-        display:flex !important;
+        display:inline-flex !important;
         justify-content: center;
+        position: absolute;
+        top: 40px;
+        left: 50%;
+        transform: translateX(-50%);
     }
     .block_responsive
     {
@@ -267,6 +272,7 @@
         justify-content: center;
         align-items: center;
         flex-wrap: wrap;
+        margin-top:30px;
         
     }
 }

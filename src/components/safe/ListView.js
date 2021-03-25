@@ -58,42 +58,46 @@ function Row(props) {
 
 
   return <div className={styles.listview_row} key={props.tokenId}>
-    <div className={`${styles.listview_col} ${styles.star}`}>
-      {
-        Number(props.attributes[1].value) < 4 && Array.from({ length: Number(props.attributes[1].value) }).map(v => {
-          return <img src="assets/star18x18.png" />
-        })
-      }
-      {
-        Number(props.attributes[1].value) === 4 && <img src="assets/max.png" />
-      }
-    </div>
-    <div className={`${styles.listview_col} ${styles.class}`}>
-      <div className={styles.listview_subcol}>
-        {
-          rare === 1 && <img src="assets/grade/N.png" />
-        }
-        {
-          rare === 2 && <img src="assets/grade/R.png" />
-        }
-        {
-          rare === 3 && <img src="assets/grade/SR.png" />
-        }
-        {
-          rare === 4 && <img src="assets/grade/SSR.png" />
-        }
-        {
-          rare === 5 && <img src="assets/grade/UR.png" />
-        }
+    
+        <div className={`${styles.listview_col} ${styles.star}`}>
+          {
+            Number(props.attributes[1].value) < 4 && Array.from({ length: Number(props.attributes[1].value) }).map(v => {
+              return <img src="assets/star18x18.png" />
+            })
+          }
+          {
+            Number(props.attributes[1].value) === 4 && <img src="assets/max.png" />
+          }
+        </div>
+
+        <div className={`${styles.listview_col} ${styles.title}`}>
+          <div className={styles.listview_subcol}>
+
+            {/* <img src="assets/grade/N.png" className={styles.gem} />  */}
+            <div className={styles.content}><img src={props.icon} /> {props.name}</div>
+          </div>
+        </div>
+        <div className={`${styles.listview_col} ${styles.class}`}>
+        <div className={styles.listview_subcol}>
+          {
+            rare === 1 && <img src="assets/grade/N.png" />
+          }
+          {
+            rare === 2 && <img src="assets/grade/R.png" />
+          }
+          {
+            rare === 3 && <img src="assets/grade/SR.png" />
+          }
+          {
+            rare === 4 && <img src="assets/grade/SSR.png" />
+          }
+          {
+            rare === 5 && <img src="assets/grade/UR.png" />
+          }
+        </div>
       </div>
-    </div>
-    <div className={`${styles.listview_col} ${styles.title}`}>
-      <div className={styles.listview_subcol}>
-        
-        {/* <img src="assets/grade/N.png" className={styles.gem} />  */}
-         <div className={styles.content}><img src={props.icon} /> {props.name}</div>
-      </div>
-    </div>
+    
+
     <div className={styles.block_responsive}>
 
       <div className={`${styles.listview_col} ${styles.stat_action}`}>
@@ -113,19 +117,21 @@ function Row(props) {
             {props.tokenId}
           </div>
           <div className={styles.description_supply}>
-                <div className={styles.gauge} data-level="4"> {/*LV 1-5*/ }
-                  <div></div>
-                  <div></div>
-                  <div></div>
-                  <div></div>
-                  <div></div>
-                </div>
-                <span>Total Supply</span>
-                {props.itemSupply}
-              </div>
+            <div className={styles.gauge} data-level="4"> {/*LV 1-5*/}
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
+            <span>Total Supply</span>
+            {props.itemSupply}
+          </div>
 
         </div>
       </div>
+
+      
 
       {/*In case of On sale*/}
       {
@@ -133,8 +139,8 @@ function Row(props) {
           <div className={styles.listview_subcol}>
             <div className={styles.onsale_price}>
               <span>On Sale for</span>
-              {commafy(onSellPrice / 10**decimals)} {symbol}
-          </div>
+              {commafy(onSellPrice / 10 ** decimals)} {symbol}
+            </div>
             <a className={styles.cancel}>
               Cancel the SALE
           </a>
