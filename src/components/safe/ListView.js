@@ -3,7 +3,7 @@ import styles from './ListView.less';
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
-import { checkNumber, commafy, getSymbolFromTokenAddress } from '../../utils';
+import { checkNumber, commafy, getSupplyLevel, getSymbolFromTokenAddress } from '../../utils';
 import { categorys, categoryIcons } from '../../config';
 import { WalletContext } from '../../wallet/Wallet';
 import ConfirmActionModal from './ConfirmAction';
@@ -117,7 +117,7 @@ function Row(props) {
             {props.tokenId}
           </div>
           <div className={styles.description_supply}>
-            <div className={styles.gauge} data-level="4"> {/*LV 1-5*/}
+            <div className={styles.gauge} data-level={getSupplyLevel(props.itemSupply)}> {/*LV 1-5*/}
               <div></div>
               <div></div>
               <div></div>
