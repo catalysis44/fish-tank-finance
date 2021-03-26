@@ -129,3 +129,30 @@ export const categoryIcons = [
   "/assets/category/spices.png",
   "/assets/category/magic.png",
 ]
+
+export const currencyList = [
+  {
+    symbol: 'ZOO',
+    icon: 'assets/currency/zoo.png',
+  },
+  {
+    symbol: 'WASP',
+    icon: 'assets/currency/wasp.png',
+  },
+  {
+    symbol: 'wanUSDT',
+    icon: 'assets/currency/wanUSDT.png',
+  },
+  {
+    symbol: 'wanBTC',
+    icon: 'assets/currency/wanBTC.png',
+  },
+  {
+    symbol: 'wanETH',
+    icon: 'assets/currency/wanETH.png',
+  },
+  {
+    symbol: 'WWAN',
+    icon: 'assets/currency/wan.png',
+  },
+];

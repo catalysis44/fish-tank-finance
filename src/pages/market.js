@@ -8,6 +8,7 @@ import { faSortAlphaDown, faSortAmountUp, faSortNumericDown, faSortNumericUp } f
 import { Slider, Checkbox, Row, Col } from 'antd';
 import { useEffect } from 'react';
 import Loader from '../components/loader'
+import { useLocalStorageState } from 'ahooks';
 
 
 export default function () {
@@ -20,6 +21,8 @@ export default function () {
   }
 
   const [txWaiting, setTxWaiting] = useState(false);
+  const [listView, setListView] = useLocalStorageState("marketView", false);
+
 
 
   return (
@@ -208,15 +211,20 @@ export default function () {
                   View
                                 </div>
                 <div className={styles.view_btn}>
-                  <a className={styles.is_acitve}>Card</a>
-                  <a>List</a>
+                  <a className={listView ? '' : styles.is_acitve} onClick={()=>{setListView(false)}}>Card</a>
+                  <a className={listView ? styles.is_acitve : ''} onClick={()=>{setListView(true)}}>List</a>
                 </div>
               </div>
             </div>
           </div>
           <div className={styles.row}>
-            <CardView setTxWaiting={setTxWaiting}/>
-            {/*<ListView/>*/}
+            {
+              !listView && <CardView setTxWaiting={setTxWaiting}/>
+            }
+            {
+              listView && <ListView setTxWaiting={setTxWaiting}/>
+            }
+            
           </div>
 
         </div>

@@ -11,32 +11,8 @@ import { categorys, categoryIcons } from '../../config';
 import { commafy, getSupplyLevel, getSymbolFromTokenAddress } from '../../utils';
 import ConfirmActionModal from './ConfirmAction';
 import BigNumber from 'bignumber.js';
-const currencyList = [
-  {
-    symbol: 'ZOO',
-    icon: 'assets/currency/zoo.png',
-  },
-  {
-    symbol: 'WASP',
-    icon: 'assets/currency/wasp.png',
-  },
-  {
-    symbol: 'wanUSDT',
-    icon: 'assets/currency/wanUSDT.png',
-  },
-  {
-    symbol: 'wanBTC',
-    icon: 'assets/currency/wanBTC.png',
-  },
-  {
-    symbol: 'wanETH',
-    icon: 'assets/currency/wanETH.png',
-  },
-  {
-    symbol: 'WWAN',
-    icon: 'assets/currency/wan.png',
-  },
-];
+import { currencyList } from '../../config';
+
 
 function Card(props) {
   const category = Number(props.attributes[0].value);

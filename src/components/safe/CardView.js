@@ -8,34 +8,8 @@ import ConfirmActionModal from './ConfirmAction';
 import { categorys, categoryIcons } from '../../config';
 import { cancelOrder } from '../../wallet/send';
 import { WalletContext } from '../../wallet/Wallet';
+import { currencyList } from '../../config';
 
-
-const currencyList = [
-  {
-    symbol: 'ZOO',
-    icon: 'assets/currency/zoo.png',
-  },
-  {
-    symbol: 'WASP',
-    icon: 'assets/currency/wasp.png',
-  },
-  {
-    symbol: 'wanUSDT',
-    icon: 'assets/currency/wanUSDT.png',
-  },
-  {
-    symbol: 'wanBTC',
-    icon: 'assets/currency/wanBTC.png',
-  },
-  {
-    symbol: 'wanETH',
-    icon: 'assets/currency/wanETH.png',
-  },
-  {
-    symbol: 'WWAN',
-    icon: 'assets/currency/wan.png',
-  },
-];
 
 export default function CardView(props) {
   const category = Number(props.attributes[0].value);
