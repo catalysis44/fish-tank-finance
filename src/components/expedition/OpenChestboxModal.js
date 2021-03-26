@@ -10,7 +10,7 @@ export default function OpenChestboxModal(props) {
     props.setModal(0);
   }
   // console.debug('category:', props);
-  const rare = props.rare;
+  const rare = Number(props.rare);
 
   return (
     <div id="OpenChestBoxModal" className={`modal  ${props.isActived === 0 ? "" : "is-active"}`}>
