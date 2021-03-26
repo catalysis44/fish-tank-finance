@@ -235,6 +235,9 @@ export default function CardView(props) {
         currencyIcon={currentOrder.currencyIcon}
         setTxWaiting={props.setTxWaiting}
       ></ConfirmActionModal>
+      <div className={styles.total_items}>
+          Total Items: {commafy(cards.length,null,false)}
+      </div>
       {
         cards.map(v => {
           return <Card key={v.tokenId}

@@ -212,7 +212,9 @@ export default function ListView(props) {
         currencyIcon={currentOrder.currencyIcon}
         setTxWaiting={props.setTxWaiting}
       ></ConfirmActionModal>
-
+      <div className={styles.total_items}>
+          Total Items: {commafy(cards.length,null,false)}
+      </div>
       <div className={styles.listview_panel}>
         <div className={styles.listview_table}>
           {

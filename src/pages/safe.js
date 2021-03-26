@@ -361,6 +361,9 @@ export default function () {
 
 
             </div>
+            <div className={styles.total_items}>
+              Total Items: {commafy(cards.length,null,false)}
+            </div>
             {
               // loading && <div>Loading...</div>
             }

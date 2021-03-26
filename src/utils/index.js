@@ -2,7 +2,7 @@ import { notification } from 'antd';
 import {history} from 'umi';
 import { trade_tokens } from '../config';
 
-export function commafy(num, fixed=null) {
+export function commafy(num, fixed=null, is_decimal=true) {
   if (!num) {
     return '--';
   }
@@ -10,7 +10,10 @@ export function commafy(num, fixed=null) {
   num = num.toString();
 
   if (!num.includes('.')) {
-    num += '.0';
+    if (is_decimal)
+    {
+      num += '.0';
+    }
   } else {
     if (fixed!=null)
     {

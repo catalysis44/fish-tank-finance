@@ -217,6 +217,7 @@ export default function () {
               </div>
             </div>
           </div>
+          
           <div className={styles.row}>
             {
               !listView && <CardView setTxWaiting={setTxWaiting}/>
