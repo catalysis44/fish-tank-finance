@@ -157,3 +157,17 @@ export const getSymbolFromTokenAddress = (address, chainId) => {
     decimals
   };
 }
+
+export const getSupplyLevel = (supply) => {
+  if (supply === 1) {
+    return 1;
+  }
+
+  const base = 5;
+
+  if (parseInt(supply/base) + 1 <= 5) {
+    return parseInt(supply/base) + 1;
+  }
+
+  return 5;
+}

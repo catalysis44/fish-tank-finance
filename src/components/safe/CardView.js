@@ -3,7 +3,7 @@ import styles from './CardView.less';
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
-import { checkNumber, commafy, getSymbolFromTokenAddress } from '../../utils';
+import { checkNumber, commafy, getSupplyLevel, getSymbolFromTokenAddress } from '../../utils';
 import ConfirmActionModal from './ConfirmAction';
 import { categorys, categoryIcons } from '../../config';
 import { cancelOrder } from '../../wallet/send';
@@ -120,11 +120,11 @@ export default function CardView(props) {
               </div>
               <div className={styles.description_supply}>
                 <div className={styles.gauge} data-level="4"> {/*LV 1-5*/ }
-                  <div></div>
-                  <div></div>
-                  <div></div>
-                  <div></div>
-                  <div></div>
+                  {
+                    Array.from({length: getSupplyLevel(props.itemSupply)}).map((v,i)=>{
+                      return <div key={i}></div>
+                    })
+                  }
                 </div>
                 <span>Total Supply</span>
                 {props.itemSupply}
