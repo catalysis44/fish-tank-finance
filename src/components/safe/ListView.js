@@ -7,6 +7,7 @@ import { checkNumber, commafy, getSupplyLevel, getSymbolFromTokenAddress } from 
 import { categorys, categoryIcons, trade_tokens } from '../../config';
 import { WalletContext } from '../../wallet/Wallet';
 import ConfirmActionModal from './ConfirmAction';
+import { cancelOrder } from '../../wallet/send';
 
 const currencyList = [
   {
@@ -59,47 +60,48 @@ function Row(props) {
   const symbol = ret && ret.symbol;
   const decimals = ret && ret.decimals;
 
+  const setTxWaiting = props.setTxWaiting;
 
   return <div className={styles.listview_row} key={props.tokenId}>
-    
-        <div className={`${styles.listview_col} ${styles.star}`}>
-          {
-            Number(props.attributes[1].value) < 4 && Array.from({ length: Number(props.attributes[1].value) }).map(v => {
-              return <img src="assets/star18x18.png" />
-            })
-          }
-          {
-            Number(props.attributes[1].value) === 4 && <img src="assets/max.png" />
-          }
-        </div>
 
-        <div className={`${styles.listview_col} ${styles.title}`}>
-          <div className={styles.listview_subcol}>
+    <div className={`${styles.listview_col} ${styles.star}`}>
+      {
+        Number(props.attributes[1].value) < 4 && Array.from({ length: Number(props.attributes[1].value) }).map(v => {
+          return <img src="assets/star18x18.png" />
+        })
+      }
+      {
+        Number(props.attributes[1].value) === 4 && <img src="assets/max.png" />
+      }
+    </div>
 
-            {/* <img src="assets/grade/N.png" className={styles.gem} />  */}
-            <div className={styles.content}><img src={props.icon} /> {props.name}</div>
-          </div>
-        </div>
-        <div className={`${styles.listview_col} ${styles.class}`}>
-        <div className={styles.listview_subcol}>
-          {
-            rare === 1 && <img src="assets/grade/N.png" />
-          }
-          {
-            rare === 2 && <img src="assets/grade/R.png" />
-          }
-          {
-            rare === 3 && <img src="assets/grade/SR.png" />
-          }
-          {
-            rare === 4 && <img src="assets/grade/SSR.png" />
-          }
-          {
-            rare === 5 && <img src="assets/grade/UR.png" />
-          }
-        </div>
+    <div className={`${styles.listview_col} ${styles.title}`}>
+      <div className={styles.listview_subcol}>
+
+        {/* <img src="assets/grade/N.png" className={styles.gem} />  */}
+        <div className={styles.content}><img src={props.icon} /> {props.name}</div>
       </div>
-    
+    </div>
+    <div className={`${styles.listview_col} ${styles.class}`}>
+      <div className={styles.listview_subcol}>
+        {
+          rare === 1 && <img src="assets/grade/N.png" />
+        }
+        {
+          rare === 2 && <img src="assets/grade/R.png" />
+        }
+        {
+          rare === 3 && <img src="assets/grade/SR.png" />
+        }
+        {
+          rare === 4 && <img src="assets/grade/SSR.png" />
+        }
+        {
+          rare === 5 && <img src="assets/grade/UR.png" />
+        }
+      </div>
+    </div>
+
 
     <div className={styles.block_responsive}>
 
@@ -134,7 +136,7 @@ function Row(props) {
         </div>
       </div>
 
-      
+
 
       {/*In case of On sale*/}
       {
@@ -144,7 +146,16 @@ function Row(props) {
               <span>On Sale for</span>
               {commafy(onSellPrice / 10 ** decimals)} {symbol}
             </div>
-            <a className={styles.cancel}>
+            <a className={styles.cancel} onClick={() => {
+              setTxWaiting(true);
+              cancelOrder(props.tokenId, symbol, chainId, web3, address).then(ret => {
+                setTxWaiting(false);
+                console.log('createOrder', ret);
+              }).catch(err => {
+                console.error('cancelOrder', err);
+                setTxWaiting(false);
+              });
+            }}>
               Cancel the SALE
           </a>
           </div>
@@ -190,7 +201,7 @@ function Row(props) {
                 }
               </div>
             </div>
-            <a className={styles.sell_btn} onClick={()=>{
+            <a className={styles.sell_btn} onClick={() => {
               let currentOrder = {
                 icon: props.icon,
                 name: props.name,
@@ -275,6 +286,7 @@ export default function ListView(props) {
                 onSellToken={v.onSellToken}
                 setShowConfirmActionModal={setShowConfirmActionModal}
                 setCurrentOrder={setCurrentOrder}
+                setTxWaiting={setTxWaiting}
               />
             })
           }

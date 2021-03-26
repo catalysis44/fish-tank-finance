@@ -208,7 +208,7 @@ export default function CardView(props) {
         return;
       }
 
-      console.log('markets', markets);
+      // console.log('markets', markets);
       const arr = markets.map(v => {
         return axioGet(v.uri);
       });

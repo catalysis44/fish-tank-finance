@@ -165,14 +165,14 @@ export const buyOrder = async (orderId, chainId, web3, address) => {
 }
 
 export const checkMarketBuyApprove = async (token, amount, chainId, web3, address) => {
-  console.log('checkMarketBuyApprove', token, amount, chainId);
+  // console.log('checkMarketBuyApprove', token, amount, chainId);
   if (!token || !amount || !chainId || !web3 || !address) {
     return false;
   }
   
   const erc20 = new web3.eth.Contract(erc20Abi, token);
   let allowance = await erc20.methods.allowance(address, NFT_MARKETPLACE_ADDRESS[chainId]).call();
-  console.log('allowance', allowance.toString(), amount.toString());
+  // console.log('allowance', allowance.toString(), amount.toString());
   if (!(new BigNumber(allowance)).gte(new BigNumber(amount))) {
     return false;
   }

@@ -131,7 +131,7 @@ export default function ConfirmAction(props) {
                 APPROVE
             </a>
             <a className={styles.action_btn}  disabled={!approved} onClick={()=>{
-              console.log('on buyOrder')
+              // console.log('on buyOrder')
               setTxWaiting(true);
               buyOrder(props.orderId, chainId, web3, address).then(ret=>{
                 setTxWaiting(false);
