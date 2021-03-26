@@ -155,11 +155,11 @@ export default function () {
                     </div>
               <a className={styles.clear_filter}>Clear Filter</a>
 
-              <div className={styles.filter_by}>
+              <div className={styles.filter_by} style={{display:'none'}}>
                 <a className={styles.is_active}>By Type</a>
                 <a>By Name</a>
               </div>
-              <div className={styles.filter_ability}>
+              <div className={styles.filter_ability} style={{marginTop:15}}>
                 <div className={styles.ability_title}>
                   <img src="assets/rocket24x24.png" />
                   <div>
