@@ -167,6 +167,11 @@ export default function Pool(props) {
     targetDate: new Date(poolInfo.expirationTime * 1000),
   });
 
+  const expirationTime = poolInfo.expirationTime;
+  useEffect(()=>{
+    setTargetDate(new Date(poolInfo.expirationTime * 1000));
+  }, [expirationTime]);
+
   const [lockDays, setLockDays] = useState(parseInt(countdown/1000/3600/24));
 
   const { days, hours, minutes, seconds } = formattedRes;
