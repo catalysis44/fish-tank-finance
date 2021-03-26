@@ -119,19 +119,16 @@ export default function CardView(props) {
                 <span><img src={categoryIcons[category - 1]} /> {categorys[category - 1]}</span>
               </div>
               <div className={styles.description_supply}>
-                <div className={styles.gauge} data-level="4"> {/*LV 1-5*/ }
-                  {
-                    Array.from({length: getSupplyLevel(props.itemSupply)}).map((v,i)=>{
-                      return <div key={i}></div>
-                    })
-                  }
+                <div className={styles.gauge} data-level={getSupplyLevel(props.itemSupply)}> {/*LV 1-5*/ }
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
                 </div>
                 <span>Total Supply</span>
                 {props.itemSupply}
               </div>
-
-
-
             </div>
             {/*On Sale : hide it if not on the market*/}
             {
