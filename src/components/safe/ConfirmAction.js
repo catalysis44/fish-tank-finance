@@ -117,6 +117,7 @@ export default function ConfirmAction(props) {
                 console.log('createOrder', ret);
                 closeModal();
               }).catch(err=>{
+                console.error('createOrder', err);
                 setTxWaiting(false);
               });
             }}>

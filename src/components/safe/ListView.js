@@ -4,7 +4,7 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import { checkNumber, commafy, getSupplyLevel, getSymbolFromTokenAddress } from '../../utils';
-import { categorys, categoryIcons } from '../../config';
+import { categorys, categoryIcons, trade_tokens } from '../../config';
 import { WalletContext } from '../../wallet/Wallet';
 import ConfirmActionModal from './ConfirmAction';
 
@@ -40,8 +40,11 @@ function Row(props) {
   const [currency, setCurrency] = useState('ZOO');
   const [currencyIcon, setCurrencyIcon] = useState('assets/currency/zoo.png');
   const [showDropdown, setShowDropdown] = useState(false);
-  const [amount, setAmount] = useState('0.0');
+  const [amount, setAmount] = useState();
   const rare = Number(props.attributes[2].value);
+  const level = Number(props.attributes[1].value);
+  const category = Number(props.attributes[0].value);
+
   const isOnSell = props.isOnSell;
   const onSellPrice = props.onSellPrice;
   const onSellToken = props.onSellToken;
@@ -155,7 +158,7 @@ function Row(props) {
         !isOnSell && <div className={`${styles.listview_col} ${styles.market_action}`}>
           <div className={styles.listview_subcol}>
             <div className={styles.sell_action}> {/*Show this when not on sale*/}
-              <input type="text" value={amount} onChange={e => {
+              <input type="text" value={amount} placeholder={'0.0'} onChange={e => {
                 if (checkNumber(e)) {
                   setAmount(e.target.value);
                 }
@@ -187,7 +190,29 @@ function Row(props) {
                 }
               </div>
             </div>
-            <a className={styles.sell_btn}>
+            <a className={styles.sell_btn} onClick={()=>{
+              let currentOrder = {
+                icon: props.icon,
+                name: props.name,
+                amount: amount,
+                level,
+                rare,
+                token: props.token,
+                decimals: trade_tokens[chainId][currency].decimals,
+                orderId: props.orderId,
+                categoryName: categorys[category - 1],
+                categoryIcon: categoryIcons[category - 1],
+                tokenId: props.tokenId,
+                itemSupply: props.itemSupply,
+                boost: props.boost,
+                reduce: props.reduce,
+                currency: isOnSell ? symbol : currency,
+                currencyIcon: currencyIcon,
+              };
+              console.log('currentOrder', currentOrder);
+              props.setCurrentOrder(currentOrder);
+              props.setShowConfirmActionModal(1);
+            }}>
               SELL
           </a>
           </div>
@@ -215,6 +240,8 @@ export default function ListView(props) {
         amount={currentOrder.amount}
         level={currentOrder.level}
         rare={currentOrder.rare}
+        token={currentOrder.token}
+        currency={currentOrder.currency}
         categoryName={currentOrder.categoryName}
         categoryIcon={currentOrder.categoryIcon}
         tokenId={currentOrder.tokenId}
@@ -237,6 +264,7 @@ export default function ListView(props) {
                 key={v.tokenId}
                 icon={v.image}
                 name={v.name}
+                token={v.token}
                 tokenId={v.tokenId}
                 attributes={v.attributes}
                 boost={v.boost}
@@ -245,6 +273,8 @@ export default function ListView(props) {
                 isOnSell={v.isOnSell}
                 onSellPrice={v.onSellPrice}
                 onSellToken={v.onSellToken}
+                setShowConfirmActionModal={setShowConfirmActionModal}
+                setCurrentOrder={setCurrentOrder}
               />
             })
           }

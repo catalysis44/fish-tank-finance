@@ -143,6 +143,7 @@ export const approveMarket = async (chainId, web3, address) => {
 }
 
 export const createOrder = async (tokenId, symbol, price, chainId, web3, address) => {
+  console.log('createOrder', tokenId, symbol, price, chainId, web3, address);
   const market = new web3.eth.Contract(marketAbi, NFT_MARKETPLACE_ADDRESS[chainId]);
   let ret = await market.methods.createOrder(ZOO_NFT_ADDRESS[chainId], tokenId, trade_tokens[chainId][symbol].address, 
     '0x' + (new BigNumber(price)).multipliedBy(10**trade_tokens[chainId][symbol].decimals).toString(16), 
