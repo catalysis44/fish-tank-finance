@@ -7,6 +7,9 @@ const prices = {
 
 
 export const getPrices = ()=>{
+  if (prices['WBTC']) {
+    prices['wanBTC'] = prices['WBTC'];
+  }
   return prices;
 }
 

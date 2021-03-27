@@ -1,14 +1,17 @@
 import styles from './market.less';
-import React, {useState} from 'react';
+import React, { useCallback, useContext, useState } from 'react';
 import CardView from '../components/market/CardView';
 import ListView from '../components/market/ListView';
 import '../../node_modules/animate.css/animate.min.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSortAlphaDown, faSortAmountUp, faSortNumericDown, faSortNumericUp } from '@fortawesome/free-solid-svg-icons';
+import { faSortAlphaDown, faSortAmountUp, faSortNumericDown, faSortNumericUp, faSortNumericDownAlt } from '@fortawesome/free-solid-svg-icons';
 import { Slider, Checkbox, Row, Col } from 'antd';
 import { useEffect } from 'react';
 import Loader from '../components/loader'
 import { useLocalStorageState } from 'ahooks';
+import { getSymbolFromTokenAddress } from '../utils';
+import { WalletContext } from '../wallet/Wallet';
+import { getPrices } from '../hooks/price';
 
 
 export default function () {
@@ -23,6 +26,54 @@ export default function () {
   const [txWaiting, setTxWaiting] = useState(false);
   const [listView, setListView] = useLocalStorageState("marketView", false);
 
+  const wallet = useContext(WalletContext);
+  const chainId = wallet.networkId;
+
+  const [sortType, setSortType] = useState('');
+
+  const [filters, setFilters] = useState({});
+
+  const prices = getPrices();
+
+  const sortFunc = useCallback((a, b) => {
+    if (sortType === '') {
+      return 0;
+    }
+
+    if (sortType === 'name') {
+      return a.name > b.name ? 1 : -1;
+    }
+
+    if (sortType === 'totalSupply') {
+      return a.itemSupply - b.itemSupply;
+    }
+
+    if (sortType === 'price') {
+      let priceA = a.price;
+      let priceB = b.price;
+      let retA = getSymbolFromTokenAddress(a.token, chainId);
+      let retB = getSymbolFromTokenAddress(b.token, chainId);
+      priceA = priceA / 10 ** retA.decimals;
+      priceB = priceB / 10 ** retB.decimals;
+      priceA = priceA * prices[retA.symbol];
+      priceB = priceB * prices[retB.symbol];
+      return priceA - priceB;
+    }
+
+    if (sortType === 'boost') {
+      return b.boost - a.boost;
+    }
+
+    if (sortType === 'reduce') {
+      return b.reduce - a.reduce;
+    }
+
+
+  }, [sortType, chainId, prices]);
+
+  const filterFunc = useCallback((v) => {
+    return true;
+  }, [filters]);
 
 
   return (
@@ -40,11 +91,11 @@ export default function () {
                     </div>
           <a className={styles.clear_filter}>Clear Filter</a>
 
-          <div className={styles.filter_by} style={{display:'none'}}>
+          <div className={styles.filter_by} style={{ display: 'none' }}>
             <a className={styles.is_active}>By Type</a>
             <a>By Name</a>
           </div>
-          <div className={styles.filter_ability} style={{marginTop:15}}>
+          <div className={styles.filter_ability} style={{ marginTop: 15 }}>
             <div className={styles.ability_title}>
               <img src="assets/rocket24x24.png" />
               <div>
@@ -116,24 +167,24 @@ export default function () {
                     </div>
           <div className={styles.filter_class}>
             <Checkbox.Group style={{ width: '100%' }} >
-            <Row gutter={[5, 10]}>
-                  <Col span={12}>
-                    <Checkbox value="N"><img src="assets/grade/N.png" /></Checkbox>
-                  </Col>
-                  <Col span={12}>
-                    <Checkbox value="R"><img src="assets/grade/R.png" /></Checkbox>
-                  </Col>
-                  <Col span={12}>
-                    <Checkbox value="SR"><img src="assets/grade/SR.png" /></Checkbox>
-                  </Col>
-                  <Col span={12}>
-                    <Checkbox value="SSR"><img src="assets/grade/SSR.png" /></Checkbox>
-                  </Col>
-                  <Col span={12}>
-                    <Checkbox value="UR"><img src="assets/grade/UR.png" /></Checkbox>
-                  </Col>
+              <Row gutter={[5, 10]}>
+                <Col span={12}>
+                  <Checkbox value="N"><img src="assets/grade/N.png" /></Checkbox>
+                </Col>
+                <Col span={12}>
+                  <Checkbox value="R"><img src="assets/grade/R.png" /></Checkbox>
+                </Col>
+                <Col span={12}>
+                  <Checkbox value="SR"><img src="assets/grade/SR.png" /></Checkbox>
+                </Col>
+                <Col span={12}>
+                  <Checkbox value="SSR"><img src="assets/grade/SSR.png" /></Checkbox>
+                </Col>
+                <Col span={12}>
+                  <Checkbox value="UR"><img src="assets/grade/UR.png" /></Checkbox>
+                </Col>
 
-                </Row>
+              </Row>
             </Checkbox.Group>
           </div>
           <div className={styles.title}>
@@ -172,60 +223,70 @@ export default function () {
               <div className={styles.sorting}>
                 <div className={styles.title}>
                   Sort by
-                                </div>
+                </div>
                 <div className={styles.sort_btn}>
-                  <a className={styles.is_acitve}>
+                  <a className={sortType === 'name' && styles.is_acitve} onClick={() => {
+                    setSortType(sortType === 'name' ? '' : 'name');
+                  }}>
                     <div className={styles.icon}>
                       <FontAwesomeIcon icon={faSortAlphaDown} />
                     </div>
-                                        Name
-                                    </a>
-                  <a>
+                      Name
+                    </a>
+                  <a className={sortType === 'totalSupply' && styles.is_acitve} onClick={() => {
+                    setSortType(sortType === 'totalSupply' ? '' : 'totalSupply');
+                  }}>
                     <div className={styles.icon}>
                       <FontAwesomeIcon icon={faSortNumericDown} />
                     </div>
-                                         Total supply
-                                    </a>
-                  <a>
+                      Total supply
+                    </a>
+                  <a className={sortType === 'price' && styles.is_acitve} onClick={() => {
+                    setSortType(sortType === 'price' ? '' : 'price');
+                  }}>
                     <div className={styles.icon}>
                       <FontAwesomeIcon icon={faSortNumericDown} />
                     </div>
-                                Price
-                                </a>
-                  <a>
+                      Price
+                    </a>
+                  <a className={sortType === 'boost' && styles.is_acitve} onClick={() => {
+                    setSortType(sortType === 'boost' ? '' : 'boost');
+                  }}>
                     <div className={styles.icon}>
-                      <FontAwesomeIcon icon={faSortNumericDown} />
+                      <FontAwesomeIcon icon={faSortNumericDownAlt} />
                     </div>
-                                    Boost reward
-                                    </a>
-                  <a>
+                      Boost reward
+                    </a>
+                  <a className={sortType === 'reduce' && styles.is_acitve} onClick={() => {
+                    setSortType(sortType === 'reduce' ? '' : 'reduce');
+                  }}>
                     <div className={styles.icon}>
-                      <FontAwesomeIcon icon={faSortNumericDown} />
+                      <FontAwesomeIcon icon={faSortNumericDownAlt} />
                     </div>
-                                Time reducer
-                                </a>
+                    Time reducer
+                    </a>
                 </div>
               </div>
               <div className={styles.view_selection}>
                 <div className={styles.title}>
                   View
-                                </div>
+                </div>
                 <div className={styles.view_btn}>
-                  <a className={listView ? '' : styles.is_acitve} onClick={()=>{setListView(false)}}>Card</a>
-                  <a className={listView ? styles.is_acitve : ''} onClick={()=>{setListView(true)}}>List</a>
+                  <a className={listView ? '' : styles.is_acitve} onClick={() => { setListView(false) }}>Card</a>
+                  <a className={listView ? styles.is_acitve : ''} onClick={() => { setListView(true) }}>List</a>
                 </div>
               </div>
             </div>
           </div>
-          
+
           <div className={styles.row}>
             {
-              !listView && <CardView setTxWaiting={setTxWaiting}/>
+              !listView && <CardView setTxWaiting={setTxWaiting} sortFunc={sortFunc} filterFunc={filterFunc} />
             }
             {
-              listView && <ListView setTxWaiting={setTxWaiting}/>
+              listView && <ListView setTxWaiting={setTxWaiting} sortFunc={sortFunc} filterFunc={filterFunc} />
             }
-            
+
           </div>
 
         </div>

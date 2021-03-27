@@ -10,6 +10,7 @@ import Pool from '../components/zoo/Pool';
 import Loader from '../components/loader'
 import { StorageContext } from '../hooks';
 import { useLocalStorageState } from 'ahooks';
+import { getPrices } from '../hooks/price';
 
 export default function () {
   const [txWaiting, setTxWaiting] = useState(false);
@@ -28,6 +29,7 @@ export default function () {
   }
 
   const storage = useContext(StorageContext);
+  const prices = getPrices();
 
   const [onlyStaked, setOnlyStaked] = useLocalStorageState('onlyStaked', false);
   const [onlyActived, setOnlyActived] = useLocalStorageState('onlyActived', false);
@@ -44,7 +46,7 @@ export default function () {
     }
 
     if (liquiditySort) {
-      return Number(b.totalDeposited) - Number(a.totalDeposited);
+      return Number(b.totalDeposited * prices[b.symbol0] * prices[b.symbol1]) - Number(a.totalDeposited * prices[a.symbol0] * prices[a.symbol1]);
     }
     return b.pid - a.pid;
   }, [liquiditySort, multiplierSort]);

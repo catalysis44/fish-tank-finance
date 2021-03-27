@@ -173,6 +173,9 @@ export default function CardView(props) {
   const nftCards = storage.nftCards;
   // console.debug('markets', markets);
 
+  const sortFunc = props.sortFunc;
+  const filterFunc = props.filterFunc;
+
   const [cards, setCards] = useState([]);
 
   const [showConfirmActionModal, setShowConfirmActionModal] = useState(0);
@@ -239,7 +242,7 @@ export default function CardView(props) {
           Total Items: {commafy(cards.length,null,false)}
       </div>
       {
-        cards.map(v => {
+        cards.sort(sortFunc).map(v => {
           return <Card key={v.tokenId}
             orderId={v.orderId}
             image={v.image}
