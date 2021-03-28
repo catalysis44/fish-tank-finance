@@ -31,6 +31,7 @@ export default function (props) {
   const goldenPrice = storage.goldenPrice;
   const expeditions = storage.expeditions;
   const zooBalance = storage.zooBalance;
+  const expeditionString = JSON.stringify(expeditions)
   // console.debug('expeditions1', expeditions);
 
   const wallet = useContext(WalletContext);
@@ -55,7 +56,7 @@ export default function (props) {
     setTargetDate0(new Date(expeditions && expeditions[0] && (expeditions[0].startTime + expeditions[0].lockTime) * 1000));
     setTargetDate1(new Date(expeditions && expeditions[1] && (expeditions[1].startTime + expeditions[1].lockTime) * 1000));
     setTargetDate2(new Date(expeditions && expeditions[2] && (expeditions[2].startTime + expeditions[2].lockTime) * 1000));
-  }, [expeditions]);
+  }, [expeditions, expeditionString, chainId, address, connected, web3]);
 
   // console.debug('countdown0', countdown0, countdown1, countdown2);
 
