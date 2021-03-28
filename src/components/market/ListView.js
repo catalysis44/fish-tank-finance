@@ -151,6 +151,9 @@ export default function ListView(props) {
   const nftCards = storage.nftCards;
   // console.debug('markets', markets);
 
+  const sortFunc = props.sortFunc;
+  const filterFunc = props.filterFunc;
+
   const [cards, setCards] = useState([]);
 
   const [showConfirmActionModal, setShowConfirmActionModal] = useState(0);
@@ -218,7 +221,7 @@ export default function ListView(props) {
       <div className={styles.listview_panel}>
         <div className={styles.listview_table}>
           {
-            cards.map(v => {
+            cards.filter(filterFunc).sort(sortFunc).map(v => {
               return <Row key={v.tokenId}
                 orderId={v.orderId}
                 image={v.image}

@@ -78,7 +78,6 @@ export default function () {
   }, [sortType, chainId, prices]);
 
   const filterFunc = useCallback((v) => {
-    console.log('filterFunc', v);
     let level = Number(v.attributes[1].value);
     let category = Number(v.attributes[0].value);
     let cateName = categorys[category - 1];
