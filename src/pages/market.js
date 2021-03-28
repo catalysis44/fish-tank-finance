@@ -26,9 +26,13 @@ export default function () {
 
   const [txWaiting, setTxWaiting] = useState(false);
   const [listView, setListView] = useLocalStorageState("marketView", false);
+  
 
   const wallet = useContext(WalletContext);
+
   const chainId = wallet.networkId;
+
+  const prices = getPrices();
 
   const [sortType, setSortType] = useState('');
 
@@ -37,9 +41,6 @@ export default function () {
   const [boostSlider, setBoostSlider] = useState(0);
 
   const [reduceSlider, setReduceSlider] = useState(0);
-
-
-  const prices = getPrices();
 
   const sortFunc = useCallback((a, b) => {
     if (sortType === '') {
@@ -220,7 +221,7 @@ export default function () {
             Level
           </div>
           <div className={styles.filter_level}>
-            <a className={filters.level === 1 && styles.is_active}><img src="assets/star18x18.png" onClick={() => { onSetFilterLevel(1) }} /></a>
+            <a className={filters.level === 1 && styles.is_active} onClick={() => { onSetFilterLevel(1) }}><img src="assets/star18x18.png"  /></a>
             <a className={filters.level === 2 && styles.is_active} onClick={() => { onSetFilterLevel(2) }}><img src="assets/star18x18.png" /><img src="assets/star18x18.png" /></a>
             <a className={filters.level === 3 && styles.is_active} onClick={() => { onSetFilterLevel(3) }}><img src="assets/star18x18.png" /><img src="assets/star18x18.png" /><img src="assets/star18x18.png" /></a>
             <a className={filters.level === 4 && styles.is_active} onClick={() => { onSetFilterLevel(4) }}><img src="assets/max.png" /></a>
@@ -281,28 +282,26 @@ export default function () {
             Category
           </div>
           <div className={styles.filter_category}>
-            <Checkbox.Group style={{ width: '100%' }} >
+            <Checkbox.Group style={{ width: '100%' }} value={Object.keys(filters)} >
               <Row gutter={[5, 10]}>
                 <Col span={12}>
-                  <Checkbox value="A" onClick={() => { onSetFilterCurrency('Fruits') }}><img src="assets/category/fruits.png" /> <span>Fruits</span></Checkbox>
+                  <Checkbox value="Fruits" onClick={() => { onSetFilterCurrency('Fruits') }}><img src="assets/category/fruits.png" /> <span>Fruits</span></Checkbox>
                 </Col>
                 <Col span={12}>
-                  <Checkbox value="B" onClick={() => { onSetFilterCurrency('Foods') }}><img src="assets/category/dishes.png" /> <span>Foods</span></Checkbox>
+                  <Checkbox value="Foods" onClick={() => { onSetFilterCurrency('Foods') }}><img src="assets/category/dishes.png" /> <span>Foods</span></Checkbox>
                 </Col>
                 <Col span={12}>
-                  <Checkbox value="C" onClick={() => { onSetFilterCurrency('Sweets') }}><img src="assets/category/sweets.png" /> <span>Sweets</span></Checkbox>
+                  <Checkbox value="Sweets" onClick={() => { onSetFilterCurrency('Sweets') }}><img src="assets/category/sweets.png" /> <span>Sweets</span></Checkbox>
                 </Col>
                 <Col span={12}>
-                  <Checkbox value="D" onClick={() => { onSetFilterCurrency('Potions') }}><img src="assets/category/potions.png" /> <span>Potions</span></Checkbox>
+                  <Checkbox value="Potions" onClick={() => { onSetFilterCurrency('Potions') }}><img src="assets/category/potions.png" /> <span>Potions</span></Checkbox>
                 </Col>
                 <Col span={12}>
-                  <Checkbox value="E" onClick={() => { onSetFilterCurrency('Spices') }}><img src="assets/category/spices.png" /> <span>Spices</span></Checkbox>
+                  <Checkbox value="Spices" onClick={() => { onSetFilterCurrency('Spices') }}><img src="assets/category/spices.png" /> <span>Spices</span></Checkbox>
                 </Col>
                 <Col span={12}>
-                  <Checkbox value="F" onClick={() => { onSetFilterCurrency('Magic') }}><img src="assets/category/magic.png" /> <span>Magic</span></Checkbox>
+                  <Checkbox value="Magic" onClick={() => { onSetFilterCurrency('Magic') }}><img src="assets/category/magic.png" /> <span>Magic</span></Checkbox>
                 </Col>
-
-
               </Row>
             </Checkbox.Group>
           </div>

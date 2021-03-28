@@ -217,6 +217,8 @@ export default function ListView(props) {
   const [showConfirmActionModal, setShowConfirmActionModal] = useState(0);
   const [currentOrder, setCurrentOrder] = useState({});
   const setTxWaiting = props.setTxWaiting;
+  const sortFunc = props.sortFunc;
+  const filterFunc = props.filterFunc;
 
   return (
     <React.Fragment >
@@ -245,7 +247,7 @@ export default function ListView(props) {
       <div className={styles.listview_panel}>
         <div className={styles.listview_table}>
           {
-            cards.map(v => {
+            cards.filter(filterFunc).sort(sortFunc).map(v => {
               return <Row
                 key={v.tokenId}
                 icon={v.image}
