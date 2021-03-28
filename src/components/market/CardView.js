@@ -242,7 +242,7 @@ export default function CardView(props) {
           Total Items: {commafy(cards.length,null,false)}
       </div>
       {
-        cards.sort(sortFunc).map(v => {
+        cards.filter(filterFunc).sort(sortFunc).map(v => {
           return <Card key={v.tokenId}
             orderId={v.orderId}
             image={v.image}

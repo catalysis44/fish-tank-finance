@@ -12,6 +12,7 @@ import { useLocalStorageState } from 'ahooks';
 import { getSymbolFromTokenAddress } from '../utils';
 import { WalletContext } from '../wallet/Wallet';
 import { getPrices } from '../hooks/price';
+import { categorys } from '../config';
 
 
 export default function () {
@@ -32,6 +33,11 @@ export default function () {
   const [sortType, setSortType] = useState('');
 
   const [filters, setFilters] = useState({});
+
+  const [boostSlider, setBoostSlider] = useState(0);
+
+  const [reduceSlider, setReduceSlider] = useState(0);
+
 
   const prices = getPrices();
 
@@ -72,9 +78,86 @@ export default function () {
   }, [sortType, chainId, prices]);
 
   const filterFunc = useCallback((v) => {
-    return true;
-  }, [filters]);
+    console.log('filterFunc', v);
+    let level = Number(v.attributes[1].value);
+    let category = Number(v.attributes[0].value);
+    let cateName = categorys[category - 1];
+    let item = Number(v.attributes[2].value);
+    let ret = getSymbolFromTokenAddress(v.token, chainId);
+    let symbol = ret.symbol;
+    if (filters.level && filters.level !== level) {
+      return false;
+    }
 
+    let cs = ['ZOO', 'wanBTC', 'wanETH', 'WASP', 'WWAN', 'wanUSDT'];
+    let found = false;
+    Object.keys(filters).map(v => {
+      if (cs.includes(v)) {
+        found = true;
+      }
+    });
+
+    if (found) {
+      if (!filters[symbol]) {
+        return false;
+      }
+    }
+
+    found = false;
+    let items = ['N', 'R', 'SR', 'SSR', 'UR'];
+    Object.keys(filters).map(v => {
+      if (items.includes(v)) {
+        found = true;
+      }
+    });
+    if (found) {
+      if (!filters[items[item - 1]]) {
+        return false;
+      }
+    }
+
+    found = false;
+    Object.keys(filters).map(v => {
+      if (categorys.includes(v)) {
+        found = true;
+      }
+    });
+    if (found) {
+      if (!filters[cateName]) {
+        return false;
+      }
+    }
+
+    if (v.boost * 100 < boostSlider) {
+      return false;
+    }
+
+    if (v.reduce * 100 < reduceSlider) {
+      return false;
+    }
+
+    return true;
+  }, [filters, chainId, boostSlider, reduceSlider]);
+
+  const onSetFilterLevel = (level) => {
+    if (filters.level !== level) {
+      setFilters({ ...filters, level });
+    } else {
+      let tmp = Object.assign({ ...filters });
+      delete tmp.level;
+      setFilters(tmp);
+    }
+  }
+
+  const onSetFilterCurrency = (type) => {
+    if (!filters[type]) {
+      setFilters({ ...filters, [type]: true });
+    } else {
+      let tmp = Object.assign({ ...filters });
+      delete tmp[type];
+      setFilters(tmp);
+    }
+  }
 
   return (
     <React.Fragment>
@@ -87,9 +170,13 @@ export default function () {
 
         <div id="filter1" className={styles.filter_panel}>
           <div className={styles.title}>
-            Filter (0)
-                    </div>
-          <a className={styles.clear_filter}>Clear Filter</a>
+            Filter ({Object.keys(filters).length})
+          </div>
+          <a className={styles.clear_filter} onClick={() => {
+            setBoostSlider(0);
+            setReduceSlider(0);
+            setFilters({});
+          }}>Clear Filter</a>
 
           <div className={styles.filter_by} style={{ display: 'none' }}>
             <a className={styles.is_active}>By Type</a>
@@ -104,9 +191,11 @@ export default function () {
               </div>
             </div>
             <div className={styles.ability_slider}>
-              +12.0%
-                            <div className={styles.slider}>
-                <Slider defaultValue={12} min={0} max={50} tooltipVisible={false} />
+              +{boostSlider}%
+              <div className={styles.slider}>
+                <Slider value={boostSlider} min={0} max={70} tooltipVisible={false} onChange={e=>{
+                  setBoostSlider(e);
+                }} />
               </div>
             </div>
 
@@ -120,44 +209,46 @@ export default function () {
               </div>
             </div>
             <div className={styles.ability_slider}>
-              -5.25%
-                            <div className={styles.slider}>
-                <Slider defaultValue={5} min={0} max={20} tooltipVisible={false} />
+              -{reduceSlider}%
+              <div className={styles.slider}>
+                <Slider value={reduceSlider} min={0} max={20} tooltipVisible={false} onChange={e=>{
+                  setReduceSlider(e);
+                }} />
               </div>
             </div>
           </div>
           <div className={styles.title}>
             Level
-                    </div>
+          </div>
           <div className={styles.filter_level}>
-            <a className={styles.is_active}><img src="assets/star18x18.png" /></a>
-            <a><img src="assets/star18x18.png" /><img src="assets/star18x18.png" /></a>
-            <a><img src="assets/star18x18.png" /><img src="assets/star18x18.png" /><img src="assets/star18x18.png" /></a>
-            <a><img src="assets/max.png" /></a>
+            <a className={filters.level === 1 && styles.is_active}><img src="assets/star18x18.png" onClick={() => { onSetFilterLevel(1) }} /></a>
+            <a className={filters.level === 2 && styles.is_active} onClick={() => { onSetFilterLevel(2) }}><img src="assets/star18x18.png" /><img src="assets/star18x18.png" /></a>
+            <a className={filters.level === 3 && styles.is_active} onClick={() => { onSetFilterLevel(3) }}><img src="assets/star18x18.png" /><img src="assets/star18x18.png" /><img src="assets/star18x18.png" /></a>
+            <a className={filters.level === 4 && styles.is_active} onClick={() => { onSetFilterLevel(4) }}><img src="assets/max.png" /></a>
           </div>
           <div className={styles.title}>
             Currency
                     </div>
           <div className={styles.filter_currency}>
-            <Checkbox.Group style={{ width: '100%' }} >
+            <Checkbox.Group style={{ width: '100%' }} value={Object.keys(filters)}>
               <Row gutter={[5, 10]}>
                 <Col span={12}>
-                  <Checkbox value="A"><img src="assets/currency/zoo.png" /> <span>ZOO</span></Checkbox>
+                  <Checkbox value="ZOO" onClick={() => { onSetFilterCurrency('ZOO') }}><img src="assets/currency/zoo.png" /> <span>ZOO</span></Checkbox>
                 </Col>
                 <Col span={12}>
-                  <Checkbox value="B"><img src="assets/currency/wanBTC.png" /> <span>wanBTC</span></Checkbox>
+                  <Checkbox value="wanBTC" onClick={() => { onSetFilterCurrency('wanBTC') }}><img src="assets/currency/wanBTC.png" /> <span>wanBTC</span></Checkbox>
                 </Col>
                 <Col span={12}>
-                  <Checkbox value="C"><img src="assets/currency/wan.png" /><span> WAN</span></Checkbox>
+                  <Checkbox value="WWAN" onClick={() => { onSetFilterCurrency('WWAN') }}><img src="assets/currency/wan.png" /><span> WWAN</span></Checkbox>
                 </Col>
                 <Col span={12}>
-                  <Checkbox value="D"><img src="assets/currency/wanUSDT.png" /> <span>wanUSDT</span></Checkbox>
+                  <Checkbox value="wanUSDT" onClick={() => { onSetFilterCurrency('wanUSDT') }}><img src="assets/currency/wanUSDT.png" /> <span>wanUSDT</span></Checkbox>
                 </Col>
                 <Col span={12}>
-                  <Checkbox value="E"><img src="assets/currency/wasp.png" /> <span>WASP</span></Checkbox>
+                  <Checkbox value="WASP" onClick={() => { onSetFilterCurrency('WASP') }}><img src="assets/currency/wasp.png" /> <span>WASP</span></Checkbox>
                 </Col>
                 <Col span={12}>
-                  <Checkbox value="F"><img src="assets/currency/wanETH.png" /> <span>wanETH</span></Checkbox>
+                  <Checkbox value="wanETH" onClick={() => { onSetFilterCurrency('wanETH') }}><img src="assets/currency/wanETH.png" /> <span>wanETH</span></Checkbox>
                 </Col>
               </Row>
             </Checkbox.Group>
@@ -166,22 +257,22 @@ export default function () {
             Class
                     </div>
           <div className={styles.filter_class}>
-            <Checkbox.Group style={{ width: '100%' }} >
+            <Checkbox.Group style={{ width: '100%' }} value={Object.keys(filters)}>
               <Row gutter={[5, 10]}>
                 <Col span={12}>
-                  <Checkbox value="N"><img src="assets/grade/N.png" /></Checkbox>
+                  <Checkbox value="N" onClick={() => { onSetFilterCurrency('N') }}><img src="assets/grade/N.png" /></Checkbox>
                 </Col>
                 <Col span={12}>
-                  <Checkbox value="R"><img src="assets/grade/R.png" /></Checkbox>
+                  <Checkbox value="R" onClick={() => { onSetFilterCurrency('R') }}><img src="assets/grade/R.png" /></Checkbox>
                 </Col>
                 <Col span={12}>
-                  <Checkbox value="SR"><img src="assets/grade/SR.png" /></Checkbox>
+                  <Checkbox value="SR" onClick={() => { onSetFilterCurrency('SR') }}><img src="assets/grade/SR.png" /></Checkbox>
                 </Col>
                 <Col span={12}>
-                  <Checkbox value="SSR"><img src="assets/grade/SSR.png" /></Checkbox>
+                  <Checkbox value="SSR" onClick={() => { onSetFilterCurrency('SSR') }}><img src="assets/grade/SSR.png" /></Checkbox>
                 </Col>
                 <Col span={12}>
-                  <Checkbox value="UR"><img src="assets/grade/UR.png" /></Checkbox>
+                  <Checkbox value="UR" onClick={() => { onSetFilterCurrency('UR') }}><img src="assets/grade/UR.png" /></Checkbox>
                 </Col>
 
               </Row>
@@ -189,27 +280,27 @@ export default function () {
           </div>
           <div className={styles.title}>
             Category
-                    </div>
+          </div>
           <div className={styles.filter_category}>
             <Checkbox.Group style={{ width: '100%' }} >
               <Row gutter={[5, 10]}>
                 <Col span={12}>
-                  <Checkbox value="A"><img src="assets/category/fruits.png" /> <span>Fruits</span></Checkbox>
+                  <Checkbox value="A" onClick={() => { onSetFilterCurrency('Fruits') }}><img src="assets/category/fruits.png" /> <span>Fruits</span></Checkbox>
                 </Col>
                 <Col span={12}>
-                  <Checkbox value="B"><img src="assets/category/dishes.png" /> <span>Dishes</span></Checkbox>
+                  <Checkbox value="B" onClick={() => { onSetFilterCurrency('Foods') }}><img src="assets/category/dishes.png" /> <span>Foods</span></Checkbox>
                 </Col>
                 <Col span={12}>
-                  <Checkbox value="C"><img src="assets/category/sweets.png" /> <span>Sweets</span></Checkbox>
+                  <Checkbox value="C" onClick={() => { onSetFilterCurrency('Sweets') }}><img src="assets/category/sweets.png" /> <span>Sweets</span></Checkbox>
                 </Col>
                 <Col span={12}>
-                  <Checkbox value="D"><img src="assets/category/potions.png" /> <span>Potions</span></Checkbox>
+                  <Checkbox value="D" onClick={() => { onSetFilterCurrency('Potions') }}><img src="assets/category/potions.png" /> <span>Potions</span></Checkbox>
                 </Col>
                 <Col span={12}>
-                  <Checkbox value="E"><img src="assets/category/spices.png" /> <span>Spices</span></Checkbox>
+                  <Checkbox value="E" onClick={() => { onSetFilterCurrency('Spices') }}><img src="assets/category/spices.png" /> <span>Spices</span></Checkbox>
                 </Col>
                 <Col span={12}>
-                  <Checkbox value="F"><img src="assets/category/magic.png" /> <span>Magic</span></Checkbox>
+                  <Checkbox value="F" onClick={() => { onSetFilterCurrency('Magic') }}><img src="assets/category/magic.png" /> <span>Magic</span></Checkbox>
                 </Col>
 
 
