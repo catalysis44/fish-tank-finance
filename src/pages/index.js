@@ -11,6 +11,7 @@ import Loader from '../components/loader'
 import { StorageContext } from '../hooks';
 import { useLocalStorageState } from 'ahooks';
 import { getPrices } from '../hooks/price';
+import { useLanguage } from '../hooks/language';
 
 export default function () {
   const [txWaiting, setTxWaiting] = useState(false);
@@ -19,6 +20,8 @@ export default function () {
   // openNotification2();
   // openNotification3();
   // openNotification4();
+
+  const t = useLanguage();
 
   function toggleFilter() {
     document.getElementById('toggle_filter').classList.toggle("toggled");
@@ -57,14 +60,14 @@ export default function () {
         txWaiting && <Loader/>
       }
       <div id="filterbar_backdrop" onClick={toggleFilter}></div>
-      <a id="toggle_filter" className={styles.toggle_filter} onClick={toggleFilter}><span><img src="assets/magnify24x24.png" /> FILTER</span></a>
+      <a id="toggle_filter" className={styles.toggle_filter} onClick={toggleFilter}><span><img src="assets/magnify24x24.png" /> {t("FILTER")}</span></a>
       <div className={styles.filter_row}>
 
         <div id="filter1" className={styles.box}>
 
           <div className={styles.sorting}>
             <div className={styles.title}>
-              Sort by
+              {t("Sort by")}
             </div>
             <div className={styles.sort_btn}>
               {/* <a className={styles.is_acitve}>
@@ -86,7 +89,7 @@ export default function () {
                 <div className={styles.icon}>
                 <FontAwesomeIcon icon={faSortNumericDownAlt} />
                 </div>
-              Liquidity
+              {t("Liquidity")}
               </a>
               <a className={ multiplierSort && styles.is_acitve} onClick={()=>{
                 setMultiplierSort(!multiplierSort);
@@ -95,17 +98,17 @@ export default function () {
                 <div className={styles.icon}>
                 <FontAwesomeIcon icon={faSortNumericDownAlt} />
                 </div>
-              Multiplier
+              {t("Multiplier")}
               </a>
             </div>
           </div>
           <div className={styles.view_selection}>
             <div className={styles.title}>
-              View only
+              {t("View only")}
               </div>
             <div className={styles.view_btn}>
-              <a className={ onlyStaked && styles.is_acitve} onClick={()=>{setOnlyStaked(!onlyStaked)}}>Staked</a>
-              <a className={ onlyActived && styles.is_acitve} onClick={()=>{setOnlyActived(!onlyActived)}}>Active</a>
+              <a className={ onlyStaked && styles.is_acitve} onClick={()=>{setOnlyStaked(!onlyStaked)}}>{t("Staked")}</a>
+              <a className={ onlyActived && styles.is_acitve} onClick={()=>{setOnlyActived(!onlyActived)}}>{t("Active")}</a>
             </div>
           </div>
         </div>
@@ -113,7 +116,7 @@ export default function () {
 
       <div className={styles.row}>
         {
-          storage.poolInfo.length === 0 && <div>Loading...</div>
+          storage.poolInfo.length === 0 && <div>{t("Loading...(Please switch network to wanchain)")}</div>
         }
         {
           storage.poolInfo.sort(sortFunc).map((v, i)=>{

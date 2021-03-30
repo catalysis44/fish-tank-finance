@@ -13,11 +13,12 @@ import { approve, checkApprove, stakeClaim, stakeZoo } from '../wallet/send';
 import { ZOO_TOKEN_ADDRESS } from '../config';
 import { getNftInfo } from '../hooks/nftInfo';
 import { insertHistory } from '../utils/db';
+import { useLanguage } from '../hooks/language';
 
 
 export default function (props) {
   const [txWaiting, setTxWaiting] = useState(false);
-
+  const t = useLanguage();
 
   const [showGoldenModal, setShowGoldenModal] = useState(0);
   const [showSilverModal, setShowSilverModal] = useState(0);
@@ -80,14 +81,14 @@ export default function (props) {
         txWaiting && <Loader />
       }
       {/* For Instant Chest - NFT / Artifact */}
-      <ChestboxBuyModal isActived={showGoldenModal} setModal={setShowGoldenModal} title={'GOLD CHEST INSTANT BUY'} price={goldenPrice}
-        rules={'Burn your Zoo and has a 100% chance of getting a random NFT collectible.'}
+      <ChestboxBuyModal isActived={showGoldenModal} setModal={setShowGoldenModal} title={t('GOLD CHEST INSTANT BUY')} price={goldenPrice}
+        rules={t('Burn your Zoo and has a 100% chance of getting a random NFT collectible.')}
         type={'golden'}
         setTxWaiting={setTxWaiting}
         zooBalance={storage.zooBalance}
       ></ChestboxBuyModal>
-      <ChestboxBuyModal isActived={showSilverModal} setModal={setShowSilverModal} title={'SILVER CHEST INSTANT BUY'} price={(new BigNumber(goldenPrice)).div(10)}
-        rules={'Burn your Zoo and has a 10% chance of getting a non-rare random NFT collectible. If you miss 10 shots in a row, the next time‘s chance is 100%.'}
+      <ChestboxBuyModal isActived={showSilverModal} setModal={setShowSilverModal} title={t('SILVER CHEST INSTANT BUY')} price={(new BigNumber(goldenPrice)).div(10)}
+        rules={t('Burn your Zoo and has a 10% chance of getting a non-rare random NFT collectible. If you miss 9 shots in a row, the next time‘s chance is 100%.')}
         type={'silver'}
         setTxWaiting={setTxWaiting}
         zooBalance={storage.zooBalance}
@@ -100,7 +101,7 @@ export default function (props) {
 
           </div>
           <div className={styles.title}>
-            THE GOLDEN CHEST
+            {t("THE GOLDEN CHEST")}
           </div>
           <div className={styles.condition}>
             <div className={styles.minimum}>
@@ -109,7 +110,7 @@ export default function (props) {
             </div>
             <div className={styles.hour}>
               <img src="assets/hourglass24x24.png" />
-              <span>INSTANT</span>
+              <span>{t("INSTANT")}</span>
 
             </div>
           </div>
@@ -121,14 +122,14 @@ export default function (props) {
               <div className={styles.amount}>1</div>
             </div>
             <div className={styles.description}>
-              <div>SPEND ZOO AND GET</div>
-              <div>1 GOLDEN CHEST</div>
+              <div>{t("SPEND ZOO AND GET")}</div>
+              <div>1 {t("GOLDEN CHEST")}</div>
             </div>
           </div>
 
           <div className={styles.action_wrapper}>
             <a className={styles.action_btn} onClick={() => { setShowGoldenModal(1) }}>
-              BUY GOLDEN CHEST
+              {t("BUY GOLDEN CHEST")}
             </a>
           </div>
         </div>
@@ -139,7 +140,7 @@ export default function (props) {
 
           </div>
           <div className={styles.title}>
-            THE SILVER CHEST
+            {t("THE SILVER CHEST")}
                     </div>
           <div className={styles.condition}>
             <div className={styles.minimum}>
@@ -148,7 +149,7 @@ export default function (props) {
             </div>
             <div className={styles.hour}>
               <img src="assets/hourglass24x24.png" />
-              <span>INSTANT</span>
+              <span>{t("INSTANT")}</span>
 
             </div>
           </div>
@@ -161,14 +162,14 @@ export default function (props) {
             </div>
             <div className={styles.description}>
 
-              <div>SPEND ZOO AND GET</div>
-              <div>1 SILVER CHEST</div>
+              <div>{t("SPEND ZOO AND GET")}</div>
+              <div>1 {t("SILVER CHEST")}</div>
 
             </div>
           </div>
           <div className={styles.action_wrapper}>
             <a className={styles.action_btn} onClick={() => { setShowSilverModal(1) }}>
-              BUY SILVER CHEST
+              {t("BUY SILVER CHEST")}
                     </a>
           </div>
         </div>
@@ -178,8 +179,8 @@ export default function (props) {
               ?
             </div>
             <div className={styles.caption}>
-              <div>Coming</div>
-              <div>Soon</div>
+              <div>{t("Coming")}</div>
+              <div>{t("Soon")}</div>
             </div>
         </div>
       </div>
@@ -192,11 +193,11 @@ export default function (props) {
               <div className={styles.amount}>
                 {commafy(expeditions[0] && expeditions[0].stakedAmount)}
               </div>
-                ZOO LOCKED
+                {t("ZOO LOCKED")}
             </div>
           </div>
           <div className={styles.title}>
-            THE LOST ARK
+            {t("THE LOST ARK")}
           </div>
           <div className={styles.condition}>
             <div className={styles.minimum}>
@@ -205,7 +206,7 @@ export default function (props) {
             </div>
             <div className={styles.hour}>
               <img src="assets/hourglass24x24.png" />
-              <span>48 Hours</span>
+              <span>48 {t("Hours")}</span>
 
             </div>
           </div>
@@ -217,10 +218,9 @@ export default function (props) {
               <div className={styles.amount}>1</div>
             </div>
             <div className={styles.description}>
-              <div>STAKE AND LOCK</div>
-              <div>ZOO AND GET</div>
-              <div>1 GOLDEN CHEST</div>
-
+              <div>{t("STAKE AND LOCK")}</div>
+              <div>{t("ZOO AND GET")}</div>
+              <div>1 {t("GOLDEN CHEST")}</div>
             </div>
           </div>
           {
@@ -236,7 +236,7 @@ export default function (props) {
                   console.error('approve failed', err);
                 });
               }}>
-                Approve
+                {t("Approve")}
               </a>
               <a className={styles.action_btn} disabled={!approved} onClick={() => {
                 if (!zooBalance.gte(goldenPrice * 10)) {
@@ -253,7 +253,7 @@ export default function (props) {
                   setTxWaiting(false);
                 })
               }}>
-                Validate
+                {t("Validate")}
               </a>
             </div>
           }
@@ -263,7 +263,7 @@ export default function (props) {
               expeditions[0] && expeditions[0].startTime === 0 && !stakingZoo && <a className={styles.action_btn} onClick={() => {
                 setStakingZoo(true);
               }}>
-                Stake ZOO
+                {t("Stake ZOO")}
               </a>
             }
             {
@@ -273,7 +273,7 @@ export default function (props) {
                   setTxWaiting(false);
                   console.log(ret);
                   getNftInfo(ret.events.MintNFT.returnValues.tokenId, web3, chainId).then(obj => {
-                    insertHistory('chest', Date.now(), ret.events.MintNFT.returnValues.tokenId, obj.name, commafy((new BigNumber(ret.events.GoldenBuy.returnValues.price)).div(1e18)), 'ZOO', ret.transactionHash);
+                    insertHistory('chest', Date.now(), ret.events.MintNFT.returnValues.tokenId, obj.name, '0', 'ZOO', ret.transactionHash);
                     // console.debug('nftmeta111', obj);
                     openNotificationOpenedBox('GOLDEN CHEST HAS BEEN OPENED', obj.name, 'Your boost card has been transfered to your wallet.', obj.image, false, true);
                   }).catch(err => {
@@ -284,7 +284,7 @@ export default function (props) {
                   setTxWaiting(false);
                 })
               }}>
-                Claim 1 Golden Chest
+                {t("Claim 1 Golden Chest")}
               </a>
             }
             {
@@ -302,11 +302,11 @@ export default function (props) {
               <div className={styles.amount}>
                 {commafy(expeditions[1] && expeditions[1].stakedAmount)}
               </div>
-                ZOO LOCKED
+                {t("ZOO LOCKED")}
             </div>
           </div>
           <div className={styles.title}>
-            THE MIGHTY CAVE
+            {t("THE MIGHTY CAVE")}
           </div>
           <div className={styles.condition}>
             <div className={styles.minimum}>
@@ -315,7 +315,7 @@ export default function (props) {
             </div>
             <div className={styles.hour}>
               <img src="assets/hourglass24x24.png" />
-              <span>15 Days</span>
+              <span>15 {t("Days")}</span>
             </div>
           </div>
 
@@ -326,9 +326,9 @@ export default function (props) {
               <div className={styles.amount}>1</div>
             </div>
             <div className={styles.description}>
-              <div>STAKE AND LOCK</div>
-              <div>ZOO AND GET</div>
-              <div>1 GOLDEN CHEST</div>
+              <div>{t("STAKE AND LOCK")}</div>
+              <div>{t("ZOO AND GET")}</div>
+              <div>1 {t("GOLDEN CHEST")}</div>
 
             </div>
           </div>
@@ -345,7 +345,7 @@ export default function (props) {
                   console.error('approve failed', err);
                 });
               }}>
-                Approve
+                {t("Approve")}
               </a>
               <a className={styles.action_btn} disabled={!approved} onClick={() => {
                 if (!zooBalance.gte(goldenPrice)) {
@@ -362,7 +362,7 @@ export default function (props) {
                   setTxWaiting(false);
                 })
               }}>
-                Validate
+                {t("Validate")}
               </a>
             </div>
           }
@@ -371,7 +371,7 @@ export default function (props) {
               expeditions[1] && expeditions[1].startTime === 0 && !stakingZoo1 && <a className={styles.action_btn} onClick={() => {
                 setStakingZoo1(true);
               }}>
-                Stake ZOO
+                {t("Stake ZOO")}
               </a>
             }
             {
@@ -393,7 +393,7 @@ export default function (props) {
                   setTxWaiting(false);
                 })
               }}>
-               Claim 1 Golden Chest
+               {t("Claim 1 Golden Chest")}
               </a>
             }
             {
@@ -411,11 +411,11 @@ export default function (props) {
               <div className={styles.amount}>
                 {commafy(expeditions[2] && expeditions[2].stakedAmount)}
               </div>
-              ZOO LOCKED
+              {t("ZOO LOCKED")}
           </div>
           </div>
           <div className={styles.title}>
-            THE SECRET JUNGLE
+            {t("THE SECRET JUNGLE")}
           </div>
           <div className={styles.condition}>
             <div className={styles.minimum}>
@@ -424,7 +424,7 @@ export default function (props) {
             </div>
             <div className={styles.hour}>
               <img src="assets/hourglass24x24.png" />
-              <span>30 Days</span>
+              <span>30 {t("Days")}</span>
             </div>
           </div>
 
@@ -435,9 +435,9 @@ export default function (props) {
               <div className={styles.amount}>1</div>
             </div>
             <div className={styles.description}>
-              <div>STAKE AND LOCK</div>
-              <div>ZOO AND GET</div>
-              <div>1 GOLDEN CHEST</div>
+              <div>{t("STAKE AND LOCK")}</div>
+              <div>{t("ZOO AND GET")}</div>
+              <div>1 {t("GOLDEN CHEST")}</div>
 
             </div>
           </div>
@@ -454,7 +454,7 @@ export default function (props) {
                   console.error('approve failed', err);
                 });
               }}>
-                Approve
+                {t("Approve")}
               </a>
               <a className={styles.action_btn} disabled={!approved} onClick={() => {
                 if (!zooBalance.gte(goldenPrice / 10)) {
@@ -471,7 +471,7 @@ export default function (props) {
                   setTxWaiting(false);
                 })
               }}>
-                Validate
+                {t("Validate")}
               </a>
             </div>
           }
@@ -480,7 +480,7 @@ export default function (props) {
               expeditions[2] && expeditions[2].startTime === 0 && !stakingZoo2 && <a className={styles.action_btn} onClick={() => {
                 setStakingZoo2(true);
               }}>
-                Stake ZOO
+                {t("Stake ZOO")}
             </a>
             }
             {
@@ -501,7 +501,7 @@ export default function (props) {
                   setTxWaiting(false);
                 })
               }}>
-               Claim 1 Golden Chest
+               {t("Claim 1 Golden Chest")}
             </a>
             }
             {

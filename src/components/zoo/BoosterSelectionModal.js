@@ -6,6 +6,7 @@ import { StorageContext } from "../../hooks";
 import { WalletContext } from '../../wallet/Wallet';
 import axios from 'axios';
 import { axioGet } from '../../utils/cache';
+import { useLanguage } from '../../hooks/language';
 
 
 export default function BoosterSelectionModal(props) {
@@ -14,6 +15,8 @@ export default function BoosterSelectionModal(props) {
     props.setModal(0);
   }
   const [modal, setModal] = useState(0);
+  const t = useLanguage();
+
 
   const storage = useContext(StorageContext);
 
@@ -72,20 +75,20 @@ export default function BoosterSelectionModal(props) {
           <div className={styles.filter_panel}>
             
                 <div className={styles.title}>
-                    Sort by
+                    {t("Sort by")}
                 </div>
                 <div className={styles.sort_btn}>
                     <a className={styles.is_acitve}>
                     <div className={styles.icon}>
                         <div>A</div><div>Z</div>
                     </div>
-                     Boost Reward
+                     {t("Boost Reward")}
                     </a>
                     <a>
                     <div className={styles.icon}>
                         <div>A</div><div>Z</div>
                     </div>
-                    Time reducer
+                    {t("Time reducer")}
                     </a>
                     
                 </div>
@@ -134,7 +137,7 @@ export default function BoosterSelectionModal(props) {
                         props.setBoost(v.boost);
                         props.setReduce(v.reduce);
                         closeModal();
-                      }}>Attach</a>
+                      }}>{t("Attach")}</a>
                     </div>
                   </div>
                 </div>
