@@ -47,5 +47,47 @@ export default {
     "Validate":"Confirmer",
     "EARNED":"GAGNÉ",
 
+    "Sort by": "Sort by",
+    "Boost Reward": "Boost Reward",
+    "Time reducer": "Time reducer",
+    "Attach": "Attach",
+
+    //loader.js
+    "Waiting TX Confirmation": "Waiting TX Confirmation",
+
+    //index.js
+    "FILTER": "FILTER",
+    "Liquidity": "Liquidity",
+    "Multiplier": "Multiplier",
+    "View only": "View only",
+    "Staked": "Staked",
+    "Active": "Active",
+    "Loading...(Please switch network to wanchain)": "Loading...(Please switch network to wanchain)",
+
+    //expedition.js
+    "GOLD CHEST INSTANT BUY": "GOLD CHEST INSTANT BUY",
+    "Burn your Zoo and has a 100% chance of getting a random NFT collectible.": "Burn your Zoo and has a 100% chance of getting a random NFT collectible.",
+    "SILVER CHEST INSTANT BUY": "SILVER CHEST INSTANT BUY",
+    "Burn your Zoo and has a 10% chance of getting a non-rare random NFT collectible. If you miss 9 shots in a row, the next time‘s chance is 100%.": "Burn your Zoo and has a 10% chance of getting a non-rare random NFT collectible. If you miss 9 shots in a row, the next time‘s chance is 100%.",
+    "THE GOLDEN CHEST": "THE GOLDEN CHEST",
+    "INSTANT": "INSTANT",
+    "SPEND ZOO AND GET": "SPEND ZOO AND GET",
+    "GOLDEN CHEST": "GOLDEN CHEST",
+    "BUY GOLDEN CHEST": "BUY GOLDEN CHEST",
+    "THE SILVER CHEST": "THE SILVER CHEST",
+    "SILVER CHEST": "SILVER CHEST",
+    "BUY SILVER CHEST": "BUY SILVER CHEST",
+    "Coming": "Coming",
+    "Soon": "Soon",
+    "ZOO LOCKED": "ZOO LOCKED",
+    "THE LOST ARK": "THE LOST ARK",
+    "Hours": "Hours",
+    "STAKE AND LOCK": "STAKE AND LOCK",
+    "ZOO AND GET": "ZOO AND GET",
+    "Stake ZOO": "Stake ZOO",
+    "Claim 1 Golden Chest": "Claim 1 Golden Chest",
+    "THE MIGHTY CAVE": "THE MIGHTY CAVE",
+    "Days": "Days",
+    "THE SECRET JUNGLE": "THE SECRET JUNGLE",
   };
   
