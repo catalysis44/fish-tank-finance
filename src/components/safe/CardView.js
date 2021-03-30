@@ -45,7 +45,7 @@ export default function CardView(props) {
         icon={props.icon}
         name={props.name}
         amount={amount}
-        level={props.level}
+        level={level}
         rare={rare}
         categoryName={categorys[category - 1]}
         categoryIcon={categoryIcons[category - 1]}

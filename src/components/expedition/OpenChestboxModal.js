@@ -47,7 +47,7 @@ export default function OpenChestboxModal(props) {
               }
               {
                 rare === 5 && <img src="assets/grade/UR.png" />
-              } total supply: {props.itemSupply}
+              } <div>total supply: {props.itemSupply}</div>
             </div>
           </div>
 
