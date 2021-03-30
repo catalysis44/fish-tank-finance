@@ -4,6 +4,8 @@ import '../../../node_modules/animate.css/animate.min.css';
 import { WalletContext } from '../../wallet/Wallet';
 import { checkMarketSellApprove, approveMarket, createOrder } from '../../wallet/send';
 import {categorys, categoryIcons} from '../../config';
+import { insertHistory } from '../../utils/db';
+import { commafy } from '../../utils';
 
 
 export default function ConfirmAction(props) {
@@ -113,6 +115,7 @@ export default function ConfirmAction(props) {
             <a className={styles.action_btn}  disabled={!approved} onClick={()=>{
               setTxWaiting(true);
               createOrder(props.tokenId, props.currency, props.amount, chainId, web3, address).then(ret=>{
+                insertHistory('sale', Date.now(), props.tokenId, props.name, commafy(props.amount), props.currency, ret.transactionHash);
                 setTxWaiting(false);
                 console.log('createOrder', ret);
                 closeModal();

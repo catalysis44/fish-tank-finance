@@ -6,6 +6,7 @@ import { checkMarketSellApprove, approveMarket, createOrder, checkMarketBuyAppro
 import {categorys, categoryIcons} from '../../config';
 import { commafy } from '../../utils';
 import BigNumber from 'bignumber.js';
+import { insertHistory } from '../../utils/db';
 
 
 
@@ -134,6 +135,7 @@ export default function ConfirmAction(props) {
               // console.log('on buyOrder')
               setTxWaiting(true);
               buyOrder(props.orderId, chainId, web3, address).then(ret=>{
+                insertHistory('purchase', Date.now(), props.tokenId, props.name, commafy(props.amount), props.currency, ret.transactionHash);
                 setTxWaiting(false);
                 console.log('buyOrder', ret);
                 closeModal();

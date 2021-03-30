@@ -1,5 +1,6 @@
 import BigNumber from 'bignumber.js';
 import { ZOO_FARMING_ADDRESS, ZOO_BOOSTING_ADDRESS, ZOO_NFT_ADDRESS, ZOO_TOKEN_ADDRESS, NFT_FACTORY_ADDRESS, NFT_MARKETPLACE_ADDRESS, trade_tokens } from '../config';
+import { insertHistory } from '../utils/db';
 const farmingAbi = require('../assets/abi/farming.json');
 const erc20Abi = require('../assets/abi/erc20.json');
 const erc721Abi = require('../assets/abi/erc721.json');

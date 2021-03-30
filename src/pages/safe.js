@@ -17,6 +17,12 @@ import Loader from '../components/loader'
 import { checkMarketSellApprove } from '../wallet/send';
 import { getPrices } from '../hooks/price';
 import { categorys } from '../config';
+import { getHistory } from '../utils/db';
+
+
+function TxPanel() {
+  return
+}
 
 
 export default function () {
@@ -83,6 +89,14 @@ export default function () {
   const [boostSlider, setBoostSlider] = useState(0);
 
   const [reduceSlider, setReduceSlider] = useState(0);
+
+  const [txType, setTxType] = useState('purchase');
+
+  const [txPage, setTxPage] = useState(1);
+
+  const txData = getHistory(txType);
+
+  const pageSize = 10;
 
   const sortFunc = useCallback((a, b) => {
     if (sortType === '') {
@@ -200,7 +214,6 @@ export default function () {
       setFilters(tmp);
     }
   }
-
 
   useEffect(() => {
     if (!chainId || !address || !connected || !web3) {
@@ -388,45 +401,35 @@ export default function () {
                 TX history
                </div>
               <div className={styles.history_btn}>
-                <a className={styles.is_active}>Purchase</a>
-                <a>Sale</a>
-                <a>From Chest</a>
+                <a className={txType === 'purchase' && styles.is_active} onClick={() => {
+                  setTxType('purchase');
+                }}>Purchase</a>
+                <a className={txType === 'sale' && styles.is_active} onClick={() => {
+                  setTxType('sale');
+                }}>Sale</a>
+                <a className={txType === 'chest' && styles.is_active} onClick={() => {
+                  setTxType('chest');
+                }}>From Chest</a>
               </div>
 
               <div className={styles.table_wrapper}>
                 <table>
                   <tbody>
-                    <tr>
-                      <td className={styles.name}>#1 ROYAL SWEET BASIL</td>
-                      <td className={styles.price}>0.3495 wanETH</td>
-                      <td className={styles.explorer}><a href="https://www.wanscan.org" target="_blank">TX WanScan  <FontAwesomeIcon icon={faExternalLinkAlt} /></a></td>
-                    </tr>
-                    <tr>
-                      <td className={styles.name}>#1 ROYAL SWEET BASIL</td>
-                      <td className={styles.price}>0.3495 wanETH</td>
-                      <td className={styles.explorer}><a href="https://www.wanscan.org" target="_blank">TX WanScan  <FontAwesomeIcon icon={faExternalLinkAlt} /></a></td>
-                    </tr>
-
-                    <tr>
-                      <td className={styles.name}>#1 ROYAL SWEET BASIL</td>
-                      <td className={styles.price}>0.3495 wanETH</td>
-                      <td className={styles.explorer}><a href="https://www.wanscan.org" target="_blank">TX WanScan  <FontAwesomeIcon icon={faExternalLinkAlt} /></a></td>
-                    </tr>
-                    <tr>
-                      <td className={styles.name}>#1 ROYAL SWEET BASIL</td>
-                      <td className={styles.price}>0.3495 wanETH</td>
-                      <td className={styles.explorer}><a href="https://www.wanscan.org" target="_blank">TX WanScan  <FontAwesomeIcon icon={faExternalLinkAlt} /></a></td>
-                    </tr>
-                    <tr>
-                      <td className={styles.name}>#1 ROYAL SWEET BASIL</td>
-                      <td className={styles.price}>0.3495 wanETH</td>
-                      <td className={styles.explorer}><a href="https://www.wanscan.org" target="_blank">TX WanScan  <FontAwesomeIcon icon={faExternalLinkAlt} /></a></td>
-                    </tr>
-
+                    {
+                      txData && txData.slice((txPage-1) * pageSize, (txPage) * pageSize).map(v => {
+                        return <tr key={v.time}>
+                          <td className={styles.name}>#{v.tokenId} {v.name}</td>
+                          <td className={styles.price}>{v.price} {v.symbol}</td>
+                          <td className={styles.explorer}><a href={"https://" + (Number(chainId) === 888 ? "www" : "testnet") + ".wanscan.org/tx/" + v.txHash} target="_blank">TX WanScan  <FontAwesomeIcon icon={faExternalLinkAlt} /></a></td>
+                        </tr>
+                      })
+                    }
                   </tbody>
                 </table>
                 <div className={styles.table_pagination}>
-                  <Pagination size="small" total={50} />
+                  <Pagination size="small" current={txPage} total={txData ? txData.length : 0} pageSize={pageSize} onChange={e => {
+                    setTxPage(e);
+                  }} />
                 </div>
               </div>
             </div>

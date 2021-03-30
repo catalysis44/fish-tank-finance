@@ -9,6 +9,7 @@ import { approveExpedition, buyGoldenChest, buySilverChest, checkApproveExpediti
 import BigNumber from 'bignumber.js';
 import { commafy, openNotificationOpenedBox, openNotificationExclamation } from '../../utils';
 import { getNftInfo } from '../../hooks/nftInfo';
+import { insertHistory } from '../../utils/db';
 
 
 export default function ChestboxBuyModal(props) {
@@ -123,6 +124,8 @@ export default function ChestboxBuyModal(props) {
                 } else {
                   getNftInfo(ret.events.MintNFT.returnValues.tokenId, web3, chainId).then(obj=>{
                     // console.debug('nftmeta111', obj);
+                    insertHistory('chest', Date.now(), ret.events.MintNFT.returnValues.tokenId, obj.name, commafy(price), 'ZOO', ret.transactionHash);
+
                     setTokenId(ret.events.MintNFT.returnValues.tokenId);
                     setLevel(ret.events.MintNFT.returnValues.level);
                     setCategory(ret.events.MintNFT.returnValues.category);
@@ -147,7 +150,8 @@ export default function ChestboxBuyModal(props) {
             } else {
               buyGoldenChest(web3, chainId, address).then(ret=>{
                 getNftInfo(ret.events.MintNFT.returnValues.tokenId, web3, chainId).then(obj=>{
-                  // console.debug('nftmeta222', obj, ret);
+                  insertHistory('chest', Date.now(), ret.events.MintNFT.returnValues.tokenId, obj.name, commafy((new BigNumber(ret.events.GoldenBuy.returnValues.price)).div(1e18)), 'ZOO', ret.transactionHash);
+
                   setTokenId(ret.events.MintNFT.returnValues.tokenId);
                   setLevel(ret.events.MintNFT.returnValues.level);
                   setCategory(ret.events.MintNFT.returnValues.category);
