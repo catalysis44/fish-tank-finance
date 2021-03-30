@@ -186,7 +186,7 @@ export default function (props) {
       </div>
 
       <div className={styles.row} style={{ paddingTop: 0 }}>
-        <div className={styles.pool} data-active="true"> {/*active true for on staking pool */}
+        <div className={styles.pool} data-active={expeditions[0] && expeditions[0].startTime === 0 && !stakingZoo ? false : true}> {/*active true for on staking pool */}
           <div className={styles.cover_wrapper} >
             <img src="dummy/desert.png" className={styles.cover} />
             <div className={styles.tvl}>
@@ -295,7 +295,7 @@ export default function (props) {
           </div>
         </div>
 
-        <div className={styles.pool} data-active="true"> {/*active true for on staking pool */}
+        <div className={styles.pool} data-active={expeditions[1] && expeditions[1].startTime === 0 && !stakingZoo1?false:true}> {/*active true for on staking pool */}
           <div className={styles.cover_wrapper} >
             <img src="dummy/cave.png" className={styles.cover} />
             <div className={styles.tvl}>
@@ -404,7 +404,7 @@ export default function (props) {
           </div>
         </div>
 
-        <div className={styles.pool} data-active="true"> {/*active true for on staking pool */}
+        <div className={styles.pool} data-active={expeditions[2] && expeditions[2].startTime === 0 && !stakingZoo2?false:true}> {/*active true for on staking pool */}
           <div className={styles.cover_wrapper} >
             <img src="dummy/jungle.png" className={styles.cover} />
             <div className={styles.tvl}>
