@@ -79,7 +79,7 @@ export default function ConfirmAction(props) {
               {
                 rare === 5 && <img src="assets/grade/UR.png" />
               }
-              Total supply: {props.itemSupply}
+              <div>Total supply: {props.itemSupply}</div>
             </div>
           </div>
 

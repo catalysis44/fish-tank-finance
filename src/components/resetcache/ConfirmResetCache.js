@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import styles from './ConfirmResetCache.less';
 import '../../../node_modules/animate.css/animate.min.css';
-import React, { useContext } from 'react';
+import React from 'react';
 import { useLanguage } from '../../hooks/language';
 
 export default function ConfirmResetCache(props) {

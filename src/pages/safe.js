@@ -8,17 +8,16 @@ import { faExternalLinkAlt, faSortAlphaDown, faSortAmountUp, faSortNumericDown, 
 import { Slider, Checkbox, Row, Col, Pagination } from 'antd';
 import { useEffect, useContext } from 'react';
 import { StorageContext } from '../hooks';
-import { commafy, getSymbolFromTokenAddress } from '../utils';
+import { commafy } from '../utils';
 import { WalletContext } from '../wallet/Wallet';
-import { useLocalStorageState, useRequest } from 'ahooks';
-import axios from 'axios';
+import { useLocalStorageState } from 'ahooks';
 import { axioGet } from '../utils/cache';
 import Loader from '../components/loader'
 import { checkMarketSellApprove } from '../wallet/send';
 import { getPrices } from '../hooks/price';
 import { categorys } from '../config';
 import { getHistory } from '../utils/db';
-
+import { useLanguage } from '../hooks/language';
 
 function TxPanel() {
   return
@@ -61,6 +60,7 @@ export default function () {
     document.getElementById('tx_panel').classList.remove("toggled");
   }
 
+  const t = useLanguage();
   const [txWaiting, setTxWaiting] = useState(false);
 
   const storage = useContext(StorageContext);
@@ -451,7 +451,7 @@ export default function () {
                       })
                     }
                     {
-                      txData.length === 0 && <tr><td className={styles.notfound}>Transaciton not found...</td></tr>
+                      txData.length === 0 && <tr><td className={styles.notfound}>{t('Transaciton not found...')}</td></tr>
                     }
                   </tbody>
                 </table>
