@@ -443,9 +443,12 @@ export default function () {
                         </tr>
                       })
                     }
+                    {
+                      txData.length === 0 && <tr><td className={styles.notfound}>Transaciton not found...</td></tr>
+                    }
                   </tbody>
                 </table>
-                <div className={styles.table_pagination}>
+                <div className={styles.table_pagination} style={{display:(txData.length>0?'':'none')}}>
                   <Pagination size="small" current={txPage} total={txData ? txData.length : 0} pageSize={pageSize} onChange={e => {
                     setTxPage(e);
                   }} />
