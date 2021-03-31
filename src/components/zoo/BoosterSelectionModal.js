@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext, useCallback } from 'react';
 import styles from './BoosterSelectionModal.less';
 import '../../../node_modules/animate.css/animate.min.css';
 import React from 'react';
@@ -63,6 +63,23 @@ export default function BoosterSelectionModal(props) {
   }, [chainId, address, nftCards, nftBalance]);
 
   // console.debug('cards222', cards);
+  const [sortType, setSortType] = useState('');
+  const [search, setSearch] = useState('');
+
+  const onSort = useCallback((a, b)=>{
+    if (sortType === 'boost') {
+      return b.boost - a.boost;
+    }
+    return 0;
+  }, [sortType]);
+
+  const onFilter = useCallback((v)=>{
+    if (search && search.length > 0) {
+      return v.name.toLowerCase().includes(search.toLowerCase());
+    }
+
+    return true;
+  }, [search]);
 
   return (
     <React.Fragment>
@@ -78,24 +95,21 @@ export default function BoosterSelectionModal(props) {
                     {t("Sort by")}
                 </div>
                 <div className={styles.sort_btn}>
-                    <a className={styles.is_acitve}>
+                    <a className={sortType==='boost' && styles.is_acitve} onClick={()=>{
+                      setSortType(sortType === 'boost' ? '':'boost');
+                    }}>
                     <div className={styles.icon}>
-                        <div>A</div><div>Z</div>
+                        <div>9</div><div>1</div>
                     </div>
                      {t("Boost Reward")}
                     </a>
-                    <a>
-                    <div className={styles.icon}>
-                        <div>A</div><div>Z</div>
-                    </div>
-                    {t("Time reducer")}
-                    </a>
-                    
                 </div>
                 <div className={styles.search}>
                   <div>
                     <img src="assets/magnify24x24.png"/>
-                    <input type="value" placeholder="Input Boosting Name"></input>
+                    <input type="value" placeholder="Input Boosting Name" value={search} onChange={(e)=>{
+                      setSearch(e.target.value);
+                    }}></input>
                   </div>
                 </div>
 
@@ -108,7 +122,7 @@ export default function BoosterSelectionModal(props) {
             }
 
             {
-              cards.map(v=>{
+              cards.filter(onFilter).sort(onSort).map(v=>{
                 return <div className={styles.booster_row}>
                   <div className={`${styles.booster_col} ${styles.star}`}>
                     <div className={styles.booster_subcol}>
