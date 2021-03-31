@@ -418,9 +418,28 @@ export default function () {
                     {
                       txData && txData.slice((txPage-1) * pageSize, (txPage) * pageSize).map(v => {
                         return <tr key={v.time}>
-                          <td className={styles.name}>#{v.tokenId} {v.name}</td>
-                          <td className={styles.price}>{v.price} {v.symbol}</td>
-                          <td className={styles.explorer}><a href={"https://" + (Number(chainId) === 888 ? "www" : "testnet") + ".wanscan.org/tx/" + v.txHash} target="_blank">TX WanScan  <FontAwesomeIcon icon={faExternalLinkAlt} /></a></td>
+                          <td>
+                            <div className={styles.img_title}>
+                              <div className={styles.img}>
+                                <img src="zoo_keeper_icons_v1/Homestead_Cheese.png"/>
+                                <span>#{v.tokenId}</span>
+                              </div>
+                              <div className={styles.title}>
+                                {v.name}
+                                <div>
+                                  <img src="assets/star18x18.png"/><img src="assets/star18x18.png"/><img src="assets/star18x18.png"/>
+                                </div>
+                              </div>
+                            </div>
+                            
+                          </td>
+                        
+                          <td className={styles.explorer}>
+                            <a href={"https://" + (Number(chainId) === 888 ? "www" : "testnet") + ".wanscan.org/tx/" + v.txHash} target="_blank">TX WanScan  <FontAwesomeIcon icon={faExternalLinkAlt} /></a>
+                            <div className={styles.price}>
+                              {v.price} {v.symbol}
+                            </div>
+                          </td>
                         </tr>
                       })
                     }

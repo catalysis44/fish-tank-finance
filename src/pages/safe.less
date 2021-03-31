@@ -109,14 +109,39 @@
     }
     td
     {
+      vertical-align: middle;
       &.explorer
       {
-        width:79px;
+        width:100px;
+        font-size:14px;
+        
       }
-      &.price
+      .img_title
       {
-        width:78px;
+        display: flex;
+        align-items: center;
+        .title
+        {
+          font-size:14px;
+          line-height:15px;
+        }
+        .img
+        {
+          text-align: center;
+          width:42px;  
+          min-width: 42px;
+        }
+        .img img
+        {
+          width:32px;
+          height:auto;
+        }
+        .img span
+        {
+          display:block;
+        }
       }
+      
       padding:4px;
       border-bottom:1px solid #ccc;
       vertical-align: middle;
