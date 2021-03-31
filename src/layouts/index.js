@@ -147,7 +147,7 @@ function BasicLayout(props) {
       <StorageContext.Provider value={storage} >
         <WalletContext.Provider value={wallet} >
           <div id="page_content_wrapper">
-            <div id={getLocale()}>
+            <div id={getLocale()} style={{height:'100%'}}>
             {props.children}
             <div id="blockCount">{commafy(storage.blockNumber).split('.')[0]} <div class="circle animate__animated animate__heartBeat animate__infinite"><FontAwesomeIcon icon={faCircle} /></div></div>
             </div>
