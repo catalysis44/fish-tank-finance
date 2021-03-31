@@ -13,7 +13,7 @@ import { useLocalStorageState } from 'ahooks';
 import BigNumber from 'bignumber.js';
 import { getPrices } from '../hooks/price';
 import { useLanguage } from '../hooks/language';
-
+import ConfirmResetCache from '../components/resetcache/ConfirmResetCache';
 
 function toggleSidebar()
 {
@@ -39,8 +39,12 @@ function BasicLayout(props) {
   const t = useLanguage();
 
   const zooPrice = prices['ZOO'];
+
+  const [showConfirmResetCacheModal, setConfirmResetCacheModal] = useState(0);
   return (
+    
     <div id="wrapper">
+      <ConfirmResetCache  isActived={showConfirmResetCacheModal} setModal={setConfirmResetCacheModal} />
       <Wallet wallet={wallet} setWallet={setWallet} />
       <div id="sidebar_backdrop" onClick={toggleSidebar}></div>
       <a id="menu_toggle" onClick={toggleSidebar}>›</a>
@@ -105,10 +109,7 @@ function BasicLayout(props) {
             <div className={styles.ext_link}>
               <a href="#" target="_blank">{t("FAQ")}</a>
               <a href="#" target="_blank">{t("Documentation")}</a>
-              <a target="_blank" onClick={()=>{
-                window.localStorage.clear();
-                window.location.reload();
-              }}>{t("Reset Cache")}</a>
+              <a target="_blank" onClick={() => { setConfirmResetCacheModal(1) }}>{t("Reset Cache")}</a>
               <a onClick={()=>{
                 
                 if (getLocale() === 'zh-CN') {
