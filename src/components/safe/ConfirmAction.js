@@ -115,7 +115,7 @@ export default function ConfirmAction(props) {
             <a className={styles.action_btn}  disabled={!approved} onClick={()=>{
               setTxWaiting(true);
               createOrder(props.tokenId, props.currency, props.amount, chainId, web3, address).then(ret=>{
-                insertHistory('sale', Date.now(), props.tokenId, props.name, commafy(props.amount), props.currency, ret.transactionHash);
+                insertHistory('sale', Date.now(), props.tokenId, props.name, props.icon, props.level, commafy(props.amount), props.currency, ret.transactionHash);
                 setTxWaiting(false);
                 console.log('createOrder', ret);
                 closeModal();

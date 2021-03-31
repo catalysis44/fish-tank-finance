@@ -124,7 +124,7 @@ export default function ChestboxBuyModal(props) {
                 } else {
                   getNftInfo(ret.events.MintNFT.returnValues.tokenId, web3, chainId).then(obj=>{
                     // console.debug('nftmeta111', obj);
-                    insertHistory('chest', Date.now(), ret.events.MintNFT.returnValues.tokenId, obj.name, commafy(price), 'ZOO', ret.transactionHash);
+                    insertHistory('chest', Date.now(), ret.events.MintNFT.returnValues.tokenId, obj.name, obj.image, ret.events.MintNFT.returnValues.level, commafy(price), 'ZOO', ret.transactionHash);
 
                     setTokenId(ret.events.MintNFT.returnValues.tokenId);
                     setLevel(ret.events.MintNFT.returnValues.level);
@@ -150,7 +150,7 @@ export default function ChestboxBuyModal(props) {
             } else {
               buyGoldenChest(web3, chainId, address).then(ret=>{
                 getNftInfo(ret.events.MintNFT.returnValues.tokenId, web3, chainId).then(obj=>{
-                  insertHistory('chest', Date.now(), ret.events.MintNFT.returnValues.tokenId, obj.name, commafy((new BigNumber(ret.events.GoldenBuy.returnValues.price)).div(1e18)), 'ZOO', ret.transactionHash);
+                  insertHistory('chest', Date.now(), ret.events.MintNFT.returnValues.tokenId, obj.name, obj.image, ret.events.MintNFT.returnValues.level, commafy((new BigNumber(ret.events.GoldenBuy.returnValues.price)).div(1e18)), 'ZOO', ret.transactionHash);
 
                   setTokenId(ret.events.MintNFT.returnValues.tokenId);
                   setLevel(ret.events.MintNFT.returnValues.level);

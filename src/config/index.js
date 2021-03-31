@@ -156,3 +156,10 @@ export const currencyList = [
     icon: 'assets/currency/wan.png',
   },
 ];
+
+export const gas = {
+  cancelOrder: 137908,
+  createOrder: 342297,
+  buyOrder: 340669,
+  goldenChest: 461290,
+}

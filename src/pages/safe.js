@@ -421,13 +421,20 @@ export default function () {
                           <td>
                             <div className={styles.img_title}>
                               <div className={styles.img}>
-                                <img src="zoo_keeper_icons_v1/Homestead_Cheese.png"/>
+                                <img src={v.image}/>
                                 <span>#{v.tokenId}</span>
                               </div>
                               <div className={styles.title}>
                                 {v.name}
                                 <div>
-                                  <img src="assets/star18x18.png"/><img src="assets/star18x18.png"/><img src="assets/star18x18.png"/>
+                                  {
+                                    Number(v.level) < 4 && Array.from({length: Number(v.level)}).map((v,i)=>{
+                                      return <img src="assets/star18x18.png" key={i} />
+                                    })
+                                  }
+                                  {
+                                    Number(v.level) === 4 && <img src="assets/max.png" />
+                                  }
                                 </div>
                               </div>
                             </div>

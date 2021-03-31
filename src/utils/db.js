@@ -19,8 +19,8 @@ export const getHistory = (type) => {
   return db.get(type).sortBy('time').value().reverse();
 }
 
-export const insertHistory = (type, time, tokenId, name, price, symbol, txHash) => {
+export const insertHistory = (type, time, tokenId, name, image, level, price, symbol, txHash) => {
   db.get(type).push(
-    { time, tokenId, name, price, symbol, txHash, key: time }
+    { time, tokenId, name, image, level, price, symbol, txHash, key: time }
   ).write();
 }
