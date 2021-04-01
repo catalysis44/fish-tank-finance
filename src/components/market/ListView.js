@@ -1,8 +1,6 @@
 import { useState, useEffect, useContext, useRef } from 'react';
 import styles from './ListView.less';
 import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import { commafy, getSupplyLevel, getSymbolFromTokenAddress } from '../../utils';
 import { categorys, categoryIcons } from '../../config';
 import { StorageContext } from '../../hooks';
