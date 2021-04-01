@@ -706,6 +706,10 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
               };
             }
 
+            tmpStorage.markets = tmpStorage.markets.filter(v=>{
+              return v.tokenInfo && v.uri;
+            });
+
             Promise.all(tmpStorage.markets.map(v => {
               return getNftItemSupply(loader, chainId, v.tokenInfo.level, v.tokenInfo.category, v.tokenInfo.item);
             })).then(ret => {

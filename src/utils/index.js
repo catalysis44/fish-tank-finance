@@ -56,21 +56,12 @@ export const calcLockTimeBoost = (lockDays) => {
   return boosting;
 }
 
-const openNotificationBell = () => {
+export const openNotificationBell = (msg, icon) => {
   const args = {
-    message: 'Notification Title',
-    description:
-      <div>
-        {"xxxxxxxxxxxxxxxxxx xxxxx xxxxx"}
-        <br />
-        {"xxxxxxxxxxxxxxxxxx xx   xxxxxxxxxx"}
-        <br />
-        {"xxxxxx xxxxxxxx xxxxxxxxx "}
-        <a href="" className="button">TX hash on Wanscan</a>
-      </div>,
+    message: msg,
     duration: 0,
     placement: 'bottomRight',
-    icon: <img src="assets/notification/bell.png" />,
+    icon: <img width={'48px'} src={icon} />,
   };
   notification.open(args);
 };

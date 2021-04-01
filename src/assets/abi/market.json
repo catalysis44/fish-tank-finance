@@ -136,6 +136,12 @@
         "internalType": "uint256",
         "name": "_expiration",
         "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "_orderId",
+        "type": "uint256"
       }
     ],
     "name": "CreateOrder",
@@ -626,4 +632,3 @@
     "type": "function"
   }
 ]
-

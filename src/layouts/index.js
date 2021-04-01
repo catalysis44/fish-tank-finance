@@ -14,6 +14,7 @@ import BigNumber from 'bignumber.js';
 import { getPrices } from '../hooks/price';
 import { useLanguage } from '../hooks/language';
 import ConfirmResetCache from '../components/resetcache/ConfirmResetCache';
+import { useEventMonitor } from '../utils/events';
 
 function toggleSidebar()
 {
@@ -32,6 +33,8 @@ function BasicLayout(props) {
   const [storage, setStorage] = useLocalStorageState('zoo-keeper-' + address + '-' + chainId, initialState);
 
   useDataPump(storage, setStorage, chainId, address, connected);
+
+  useEventMonitor(wallet.web3, chainId);
 
   const prices = getPrices();
   // console.debug('chainId', chainId);

@@ -6,6 +6,7 @@ import { checkMarketSellApprove, approveMarket, createOrder } from '../../wallet
 import {categorys, categoryIcons} from '../../config';
 import { insertHistory } from '../../utils/db';
 import { commafy } from '../../utils';
+import BigNumber from 'bignumber.js';
 
 
 export default function ConfirmAction(props) {
@@ -115,7 +116,8 @@ export default function ConfirmAction(props) {
             <a className={styles.action_btn}  disabled={!approved} onClick={()=>{
               setTxWaiting(true);
               createOrder(props.tokenId, props.currency, props.amount, chainId, web3, address).then(ret=>{
-                insertHistory('sale', Date.now(), props.tokenId, props.name, props.icon, props.level, commafy(props.amount), props.currency, ret.transactionHash);
+                console.log('createOrder', ret);
+                insertHistory('sale', Date.now(), props.tokenId, props.name, props.icon, props.level, commafy(props.amount), props.currency, ret.transactionHash, 'pending', ret.blockNumber, '0x'+(new BigNumber(ret.events.CreateOrder.returnValues._orderId)).toString(16));
                 setTxWaiting(false);
                 console.log('createOrder', ret);
                 closeModal();

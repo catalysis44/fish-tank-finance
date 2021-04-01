@@ -10,7 +10,7 @@ const marketAbi = require('../assets/abi/market.json');
 export const withdraw = async (pid, amount, chainId, web3, address) => {
   // console.debug('withdraw', pid, amount, chainId, web3, address);
   const sc = new web3.eth.Contract(farmingAbi, ZOO_FARMING_ADDRESS[chainId]);
-  let ret = await sc.methods.withdraw(pid, amount).send({ from: address });
+  let ret = await sc.methods.withdraw(pid, amount).send({ gasPrice: '0x3b9aca00', from: address });
   // console.debug('withdraw ret', ret);
   return ret.status;
 }
@@ -18,7 +18,7 @@ export const withdraw = async (pid, amount, chainId, web3, address) => {
 export const deposit = async (pid, amount, lockTime, nftId, chainId, web3, address) => {
   // console.debug('deposit', pid, amount, lockTime, nftId, chainId, web3, address);
   const sc = new web3.eth.Contract(farmingAbi, ZOO_FARMING_ADDRESS[chainId]);
-  let ret = await sc.methods.deposit(pid, amount, lockTime, nftId).send({ from: address });
+  let ret = await sc.methods.deposit(pid, amount, lockTime, nftId).send({ gasPrice: '0x3b9aca00', from: address });
   // console.debug('deposit ret', ret);
   return ret.status;
 }
@@ -29,20 +29,20 @@ export const approve = async (lpToken, chainId, web3, address) => {
   let allowance = await erc20.methods.allowance(address, ZOO_FARMING_ADDRESS[chainId]).call();
   let ret;
   if (allowance.toString() !== '0') {
-    ret = await erc20.methods.approve(ZOO_FARMING_ADDRESS[chainId], '0x0').send({ from: address });
+    ret = await erc20.methods.approve(ZOO_FARMING_ADDRESS[chainId], '0x0').send({ gasPrice: '0x3b9aca00', from: address });
     if(!ret || !ret.status) {
       throw new Error("approve failed");
     }
   }
 
-  ret = await erc20.methods.approve(ZOO_FARMING_ADDRESS[chainId], '0xf000000000000000000000000000000000000000').send({ from: address });
+  ret = await erc20.methods.approve(ZOO_FARMING_ADDRESS[chainId], '0xf000000000000000000000000000000000000000').send({ gasPrice: '0x3b9aca00', from: address });
   // console.debug('approve lp ret', ret);
   if(!ret || !ret.status) {
     throw new Error("approve failed");
   }
   
   const erc721 = new web3.eth.Contract(erc721Abi, ZOO_NFT_ADDRESS[chainId]);
-  ret = await erc721.methods.setApprovalForAll(ZOO_BOOSTING_ADDRESS[chainId], true).send({ from: address });
+  ret = await erc721.methods.setApprovalForAll(ZOO_BOOSTING_ADDRESS[chainId], true).send({ gasPrice: '0x3b9aca00', from: address });
   // console.debug('approve nft ret', ret);
   if(!ret || !ret.status) {
     throw new Error("approve failed");
@@ -82,13 +82,13 @@ export const approveExpedition = async (lpToken, chainId, web3, address) => {
   let allowance = await erc20.methods.allowance(address, NFT_FACTORY_ADDRESS[chainId]).call();
   let ret;
   if (allowance.toString() !== '0') {
-    ret = await erc20.methods.approve(NFT_FACTORY_ADDRESS[chainId], '0x0').send({ from: address });
+    ret = await erc20.methods.approve(NFT_FACTORY_ADDRESS[chainId], '0x0').send({ gasPrice: '0x3b9aca00', from: address });
     if(!ret || !ret.status) {
       throw new Error("approve failed");
     }
   }
 
-  ret = await erc20.methods.approve(NFT_FACTORY_ADDRESS[chainId], '0xf000000000000000000000000000000000000000').send({ from: address });
+  ret = await erc20.methods.approve(NFT_FACTORY_ADDRESS[chainId], '0xf000000000000000000000000000000000000000').send({ gasPrice: '0x3b9aca00', from: address });
   // console.debug('approve lp ret', ret);
   if(!ret || !ret.status) {
     throw new Error("approve failed");
@@ -98,7 +98,7 @@ export const approveExpedition = async (lpToken, chainId, web3, address) => {
 export const buyGoldenChest = async (web3, chainId, address) => {
   // console.debug('buyGoldenChest', chainId, web3, address);
   const sc = new web3.eth.Contract(nftFactoryAbi, NFT_FACTORY_ADDRESS[chainId]);
-  let ret = await sc.methods.buyGoldenChest().send({ from: address, gas: 1500000 });
+  let ret = await sc.methods.buyGoldenChest().send({ gasPrice: '0x3b9aca00', from: address, gas: 1500000 });
   // console.debug('buyGoldenChest ret', ret);
   return ret;
 }
@@ -106,7 +106,7 @@ export const buyGoldenChest = async (web3, chainId, address) => {
 export const buySilverChest = async (web3, chainId, address) => {
   // console.debug('buySilverChest', chainId, web3, address);
   const sc = new web3.eth.Contract(nftFactoryAbi, NFT_FACTORY_ADDRESS[chainId]);
-  let ret = await sc.methods.buySilverChest().send({ from: address, gas: 1500000 });
+  let ret = await sc.methods.buySilverChest().send({ gasPrice: '0x3b9aca00', from: address, gas: 1500000 });
   // console.debug('buySilverChest ret', ret);
   return ret;
 }
@@ -114,7 +114,7 @@ export const buySilverChest = async (web3, chainId, address) => {
 export const stakeZoo = async (type, web3, chainId, address) => {
   // console.debug('stakeZoo', type, chainId, web3, address);
   const sc = new web3.eth.Contract(nftFactoryAbi, NFT_FACTORY_ADDRESS[chainId]);
-  let ret = await sc.methods.stakeZoo(type).send({ from: address });
+  let ret = await sc.methods.stakeZoo(type).send({ gasPrice: '0x3b9aca00', from: address });
   // console.debug('stakeZoo ret', ret);
   return ret;
 }
@@ -122,7 +122,7 @@ export const stakeZoo = async (type, web3, chainId, address) => {
 export const stakeClaim = async (type, web3, chainId, address) => {
   // console.debug('stakeZoo', type, chainId, web3, address);
   const sc = new web3.eth.Contract(nftFactoryAbi, NFT_FACTORY_ADDRESS[chainId]);
-  let ret = await sc.methods.stakeClaim(type).send({ from: address });
+  let ret = await sc.methods.stakeClaim(type).send({ gasPrice: '0x3b9aca00', from: address });
   // console.debug('stakeZoo ret', ret);
   return ret;
 }
@@ -135,7 +135,7 @@ export const checkMarketSellApprove = async (chainId, web3, address) => {
 
 export const approveMarket = async (chainId, web3, address) => {
   const erc721 = new web3.eth.Contract(erc721Abi, ZOO_NFT_ADDRESS[chainId]);
-  let ret = await erc721.methods.setApprovalForAll(NFT_MARKETPLACE_ADDRESS[chainId], true).send({ from: address });
+  let ret = await erc721.methods.setApprovalForAll(NFT_MARKETPLACE_ADDRESS[chainId], true).send({ gasPrice: '0x3b9aca00', from: address });
   // console.debug('approve nft ret', ret);
   if(!ret || !ret.status) {
     throw new Error("approve failed");
@@ -148,20 +148,20 @@ export const createOrder = async (tokenId, symbol, price, chainId, web3, address
   const market = new web3.eth.Contract(marketAbi, NFT_MARKETPLACE_ADDRESS[chainId]);
   let ret = await market.methods.createOrder(ZOO_NFT_ADDRESS[chainId], tokenId, trade_tokens[chainId][symbol].address, 
     '0x' + (new BigNumber(price)).multipliedBy(10**trade_tokens[chainId][symbol].decimals).toString(16), 
-    14*24*3600).send({ from: address });
+    14*24*3600).send({ gasPrice: '0x3b9aca00', from: address });
   return ret;
 }
 
 export const cancelOrder = async (tokenId, symbol, chainId, web3, address) => {
   const market = new web3.eth.Contract(marketAbi, NFT_MARKETPLACE_ADDRESS[chainId]);
-  let ret = await market.methods.cancelOrder(ZOO_NFT_ADDRESS[chainId], tokenId, trade_tokens[chainId][symbol].address).send({ from: address });
+  let ret = await market.methods.cancelOrder(ZOO_NFT_ADDRESS[chainId], tokenId, trade_tokens[chainId][symbol].address).send({ gasPrice: '0x3b9aca00', from: address });
   return ret;
 }
 
 export const buyOrder = async (orderId, chainId, web3, address) => {
   console.log('buyOrder', orderId, chainId, address)
   const market = new web3.eth.Contract(marketAbi, NFT_MARKETPLACE_ADDRESS[chainId]);
-  let ret = await market.methods.buyOrder(orderId).send({ from: address });
+  let ret = await market.methods.buyOrder(orderId).send({ gasPrice: '0x3b9aca00', from: address });
   return ret;
 }
 
@@ -186,13 +186,13 @@ export const approveForMarketBuy = async (token, chainId, web3, address) => {
   let allowance = await erc20.methods.allowance(address, NFT_MARKETPLACE_ADDRESS[chainId]).call();
   let ret;
   if (allowance.toString() !== '0') {
-    ret = await erc20.methods.approve(NFT_MARKETPLACE_ADDRESS[chainId], '0x0').send({ from: address });
+    ret = await erc20.methods.approve(NFT_MARKETPLACE_ADDRESS[chainId], '0x0').send({ gasPrice: '0x3b9aca00', from: address });
     if(!ret || !ret.status) {
       throw new Error("approve failed");
     }
   }
 
-  ret = await erc20.methods.approve(NFT_MARKETPLACE_ADDRESS[chainId], '0xf000000000000000000000000000000000000000').send({ from: address });
+  ret = await erc20.methods.approve(NFT_MARKETPLACE_ADDRESS[chainId], '0xf000000000000000000000000000000000000000').send({ gasPrice: '0x3b9aca00', from: address });
   // console.debug('approve lp ret', ret);
   if(!ret || !ret.status) {
     throw new Error("approve failed");
