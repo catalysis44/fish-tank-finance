@@ -577,6 +577,9 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
         }).catch(err => {
           console.error('err 1.2.1', err);
         });
+      } else {
+        tmpStorage.nftCards = [];
+        updateStorage(tmpStorage);
       }
     }).catch(err => {
       console.error('err 1.2', err);
