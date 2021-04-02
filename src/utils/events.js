@@ -13,7 +13,7 @@ export const useEventMonitor = (web3, chainId) => {
     }
 
     const hisotrys = getPendingSellHistory('sale');
-    console.debug('pending history', hisotrys);
+    // console.debug('pending history', hisotrys);
     if (hisotrys.length === 0) {
       return;
     }
@@ -28,7 +28,7 @@ export const useEventMonitor = (web3, chainId) => {
       });
     }))
 
-    console.debug('monitor events:', rets);
+    // console.debug('monitor events:', rets);
     hisotrys.map((v, i) => {
       if (rets[i].length > 0) {
         updateHistory('sale', v.time, 'success');

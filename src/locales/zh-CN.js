@@ -19,7 +19,7 @@ export default {
   //Pool
   "REWARD": "收益",
   "LOCKTIME": "锁定时间",
-  "ATTACH A BOOST CARD TO OPTIMIZE YOUR FARMING": "附加一个卡牌来加速你的挖矿",
+  "ATTACH A BOOST CARD TO OPTIMIZE YOUR FARMING": "质押NFT可提升收益",
   "DUAL FARMING": "复合收益",
   "WELCOME FARMING ZOO": "欢迎挖矿ZOO",
   "KEEPER CHOICE": "项目方推荐",

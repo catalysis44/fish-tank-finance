@@ -492,7 +492,7 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
     }
   }
 
-  const updater = () => {
+  const updater = useCallback(() => {
     // console.debug('timer ~', JSON.stringify(storage, null, 2));
     if (!loader) {
       return;
@@ -737,7 +737,7 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
     }).catch(err => {
       console.error('err getMarketCount', err);
     })
-  };
+  }, [chainId, address, storage, connected]);
 
 
   useInterval(updater, 10000, { immediate: true });
