@@ -10,6 +10,7 @@ import BigNumber from 'bignumber.js';
 import { commafy, openNotificationOpenedBox, openNotificationExclamation } from '../../utils';
 import { getNftInfo } from '../../hooks/nftInfo';
 import { insertHistory } from '../../utils/db';
+import { useLanguage } from '../../hooks/language';
 
 
 export default function ChestboxBuyModal(props) {
@@ -40,6 +41,7 @@ export default function ChestboxBuyModal(props) {
   const type = props.type;
   const price = props.price;
   const zooBalance = new BigNumber(props.zooBalance);
+  const t = useLanguage();
 
   // console.debug('price:', price, zooBalance);
   useEffect(()=>{
@@ -80,13 +82,13 @@ export default function ChestboxBuyModal(props) {
             
             <div>
               <div>{props.title}</div>
-              <div>ZOO TO BURN : <span>{commafy(price)}</span></div>
+              <div>{t("ZOO TO BURN")}: <span>{commafy(price)}</span></div>
             </div>
           </div>
           <div className={styles.rule}>
-            <div>RULES</div>
+            <div>{t("RULES")}</div>
             <span>{props.rules}</span>
-            <a>MORE DETAILS ABOUT THE CHEST</a>
+            <a>{t("MORE DETAILS ABOUT THE CHEST")}</a>
           </div>
           <div className={styles.action}>
             <a className={styles.action_btn} disabled={approved} onClick={()=>{
@@ -100,10 +102,10 @@ export default function ChestboxBuyModal(props) {
                 console.error('approve failed', err);
               });
             }} > {/* Can remove 1 button and it will expand 100% automatically*/}
-              Approve
+              {t("Approve")}
             </a>
             <a className={styles.action_btn} style={{display:'none'}}>
-                  Validate
+              {t("Validate")}
             </a>
           </div>
           <div className={styles.action}>
@@ -174,7 +176,7 @@ export default function ChestboxBuyModal(props) {
               });
             }
           }}>
-                Buy & Open Chest
+                {t("Buy & Open Chest")}
           </a>
           </div>
         </section>

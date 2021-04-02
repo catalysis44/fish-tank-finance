@@ -90,5 +90,10 @@ export default {
   "Days": "天",
   "THE SECRET JUNGLE": "诡秘森林",
 
+  "ZOO TO BURN": "燃烧ZOO数量:",
+  "RULES": "规则",
+  "MORE DETAILS ABOUT THE CHEST": "详细宝箱玩法说明",
+  "Buy & Open Chest": "购买并开启宝箱",
+  
 
 };
