@@ -381,7 +381,11 @@ export default function Pool(props) {
                   </a>
                 }
                 {
-                  connected && !deposited && <a className={styles.deposit_lp} onClick={()=>{setShowDeposit(true)}}>
+                  connected && !deposited && <a className={styles.deposit_lp} onClick={()=>{
+                    setDepositAmount(0);
+                    setNftId(0);
+                    setShowDeposit(true)
+                    }}>
                     
                     {t("Deposit WSLP Token")}
                   </a>
