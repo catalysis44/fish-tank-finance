@@ -74,7 +74,17 @@ class Wallet extends React.Component {
   }
 
   onConnect = async () => {
-    const provider = await this.web3Modal.connect();
+    let provider;
+    
+    try {
+      if (window.injectWeb3) {
+        provider = await this.web3Modal.connectTo('wanwallet');
+      } else {
+        provider = await this.web3Modal.connect();
+      }
+    } catch (error) {
+      console.error(error);
+    }
 
     await this.subscribeProvider(provider);
 
