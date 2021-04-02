@@ -274,7 +274,7 @@ export default function Pool(props) {
               !deposited && dualFarmingEnable && <div className={styles.boost_amount}>{t("DUAL FARMING")} <div>ZOO+WASP</div></div>
             }
             {
-              !deposited && !dualFarmingEnable && <div className={styles.boost_amount}>{t("WELCOME FARMING ZOO")}</div>
+              !deposited && !dualFarmingEnable && <div className={styles.boost_amount}>{t("WELCOME TO ZOO FARMING")}</div>
             }
           </div>
         </div>
