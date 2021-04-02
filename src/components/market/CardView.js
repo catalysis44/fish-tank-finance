@@ -54,10 +54,10 @@ function Card(props) {
 
         <div className={styles.item_description}>
           <div className={styles.description}>
-            <span><img src="assets/rocket24x24.png" /> +{(props.boost * 100).toFixed(2)}%</span>
+            <img src="assets/rocket24x24.png" /> <span>+{(props.boost * 100).toFixed(2)}%</span>
           </div>
           <div className={styles.description}>
-            <span><img src="assets/hourglass24x24.png" style={{ height: 20 }} /> -{(props.reduce * 100).toFixed(2)}%</span>
+            <img src="assets/hourglass24x24.png" style={{ width: 20,marginLeft:2 }} /> <span>-{(props.reduce * 100).toFixed(2)}%</span>
           </div>
         </div>
         <div className={styles.footer}>
