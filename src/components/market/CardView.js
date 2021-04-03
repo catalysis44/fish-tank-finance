@@ -12,9 +12,10 @@ import { commafy, getSupplyLevel, getSymbolFromTokenAddress } from '../../utils'
 import ConfirmActionModal from './ConfirmAction';
 import BigNumber from 'bignumber.js';
 import { currencyList } from '../../config';
-
+import { useLanguage } from '../../hooks/language';
 
 function Card(props) {
+  const t = useLanguage();
   const category = Number(props.attributes[0].value);
   const level = Number(props.attributes[1].value);
   const item = Number(props.attributes[2].value);
@@ -72,7 +73,7 @@ function Card(props) {
                   <div></div>
                   <div></div>
                 </div>
-                <span>Total Supply</span>
+                <span>{t('Total Supply')}</span>
                 {props.itemSupply}
               </div>
 
@@ -90,7 +91,7 @@ function Card(props) {
           <img src={props.image} />
           <div className={styles.title_card_number}>
             <span>{props.name}</span>
-            <span className={styles.card_number}>Card #{props.tokenId}</span>
+            <span className={styles.card_number}>{t('Card')} #{props.tokenId}</span>
           </div>
         </div>
         <div className={styles.class}>
@@ -152,7 +153,7 @@ function Card(props) {
 
           props.setShowConfirmActionModal(1);
         }}>
-          Buy for {price && decimals && commafy(price / 10 ** decimals)} {symbol}
+          {t('Buy for')} {price && decimals && commafy(price / 10 ** decimals)} {symbol}
         </a>
       </div>
     </div>
@@ -160,7 +161,7 @@ function Card(props) {
 }
 
 export default function CardView(props) {
-
+  const t = useLanguage();
   const storage = useContext(StorageContext);
   const wallet = useContext(WalletContext);
   const chainId = wallet.networkId;
@@ -239,7 +240,7 @@ export default function CardView(props) {
         setTxWaiting={props.setTxWaiting}
       ></ConfirmActionModal>
       <div className={styles.total_items}>
-          Total Items: {commafy(cards.length,null,false)}
+          {t('Total Items')}: {commafy(cards.length,null,false)}
       </div>
       {
         cards.filter(filterFunc).sort(sortFunc).map(v => {

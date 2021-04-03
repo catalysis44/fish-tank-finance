@@ -13,7 +13,7 @@ import { getSymbolFromTokenAddress } from '../utils';
 import { WalletContext } from '../wallet/Wallet';
 import { getPrices } from '../hooks/price';
 import { categorys } from '../config';
-
+import { useLanguage } from '../hooks/language';
 
 export default function () {
   function toggleFilter() {
@@ -23,7 +23,7 @@ export default function () {
     document.getElementById('filterbar_backdrop').classList.toggle("toggled");
 
   }
-
+  const t = useLanguage();
   const [txWaiting, setTxWaiting] = useState(false);
   const [listView, setListView] = useLocalStorageState("marketView", false);
   
@@ -170,13 +170,13 @@ export default function () {
 
         <div id="filter1" className={styles.filter_panel}>
           <div className={styles.title}>
-            Filter ({Object.keys(filters).length})
+            {t('Filter')} ({Object.keys(filters).length})
           </div>
           <a className={styles.clear_filter} onClick={() => {
             setBoostSlider(0);
             setReduceSlider(0);
             setFilters({});
-          }}>Clear Filter</a>
+          }}>{t('Clear Filter')}</a>
 
           <div className={styles.filter_by} style={{ display: 'none' }}>
             <a className={styles.is_active}>By Type</a>
@@ -186,8 +186,8 @@ export default function () {
             <div className={styles.ability_title}>
               <img src="assets/rocket24x24.png" />
               <div>
-                <span>Minimum</span>
-                <span>Boost reward</span>
+                <span>{t('Minimum')}</span>
+                <span>{t('Boost Reward')}</span>
               </div>
             </div>
             <div className={styles.ability_slider}>
@@ -204,8 +204,8 @@ export default function () {
             <div className={styles.ability_title}>
               <img src="assets/hourglass24x24.png" />
               <div>
-                <span>Minimum</span>
-                <span>Locktime reducer</span>
+                <span>{t('Minimum')}</span>
+                <span>{t('Locktime reducer')}</span>
               </div>
             </div>
             <div className={styles.ability_slider}>
@@ -218,7 +218,7 @@ export default function () {
             </div>
           </div>
           <div className={styles.title}>
-            Level
+            {t('Level')}
           </div>
           <div className={styles.filter_level}>
             <a className={filters.level === 1 && styles.is_active} onClick={() => { onSetFilterLevel(1) }}><img src="assets/star18x18.png"  /></a>
@@ -227,7 +227,7 @@ export default function () {
             <a className={filters.level === 4 && styles.is_active} onClick={() => { onSetFilterLevel(4) }}><img src="assets/max.png" /></a>
           </div>
           <div className={styles.title}>
-            Currency
+            {t('Currency')}
                     </div>
           <div className={styles.filter_currency}>
             <Checkbox.Group style={{ width: '100%' }} value={Object.keys(filters)}>
@@ -254,7 +254,7 @@ export default function () {
             </Checkbox.Group>
           </div>
           <div className={styles.title}>
-            Class
+          {t('Class')}
                     </div>
           <div className={styles.filter_class}>
             <Checkbox.Group style={{ width: '100%' }} value={Object.keys(filters)}>
@@ -279,7 +279,7 @@ export default function () {
             </Checkbox.Group>
           </div>
           <div className={styles.title}>
-            Category
+          {t('Category')}
           </div>
           <div className={styles.filter_category}>
             <Checkbox.Group style={{ width: '100%' }} value={Object.keys(filters)} >
@@ -311,7 +311,7 @@ export default function () {
             <div id="filter2" className={styles.box}>
               <div className={styles.sorting}>
                 <div className={styles.title}>
-                  Sort by
+                  {t('Sort by')}
                 </div>
                 <div className={styles.sort_btn}>
                   <a className={sortType === 'name' && styles.is_acitve} onClick={() => {
@@ -320,7 +320,7 @@ export default function () {
                     <div className={styles.icon}>
                       <FontAwesomeIcon icon={faSortAlphaDown} />
                     </div>
-                      Name
+                    {t('Name')}
                     </a>
                   <a className={sortType === 'totalSupply' && styles.is_acitve} onClick={() => {
                     setSortType(sortType === 'totalSupply' ? '' : 'totalSupply');
@@ -328,7 +328,7 @@ export default function () {
                     <div className={styles.icon}>
                       <FontAwesomeIcon icon={faSortNumericDown} />
                     </div>
-                      Total supply
+                    {t('Total supply')}
                     </a>
                   <a className={sortType === 'price' && styles.is_acitve} onClick={() => {
                     setSortType(sortType === 'price' ? '' : 'price');
@@ -336,7 +336,7 @@ export default function () {
                     <div className={styles.icon}>
                       <FontAwesomeIcon icon={faSortNumericDown} />
                     </div>
-                      Price
+                    {t('Price')}
                     </a>
                   <a className={sortType === 'boost' && styles.is_acitve} onClick={() => {
                     setSortType(sortType === 'boost' ? '' : 'boost');
@@ -344,7 +344,7 @@ export default function () {
                     <div className={styles.icon}>
                       <FontAwesomeIcon icon={faSortNumericDownAlt} />
                     </div>
-                      Boost reward
+                    {t('Boost reward')}
                     </a>
                   <a className={sortType === 'reduce' && styles.is_acitve} onClick={() => {
                     setSortType(sortType === 'reduce' ? '' : 'reduce');
@@ -352,17 +352,17 @@ export default function () {
                     <div className={styles.icon}>
                       <FontAwesomeIcon icon={faSortNumericDownAlt} />
                     </div>
-                    Time reducer
+                    {t('Time reducer')}
                     </a>
                 </div>
               </div>
               <div className={styles.view_selection}>
                 <div className={styles.title}>
-                  View
+                {t('View')}
                 </div>
                 <div className={styles.view_btn}>
-                  <a className={listView ? '' : styles.is_acitve} onClick={() => { setListView(false) }}>Card</a>
-                  <a className={listView ? styles.is_acitve : ''} onClick={() => { setListView(true) }}>List</a>
+                  <a className={listView ? '' : styles.is_acitve} onClick={() => { setListView(false) }}>{t('Card')}</a>
+                  <a className={listView ? styles.is_acitve : ''} onClick={() => { setListView(true) }}>{t('List')}</a>
                 </div>
               </div>
             </div>

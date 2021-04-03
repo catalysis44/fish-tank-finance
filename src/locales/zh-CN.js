@@ -52,6 +52,8 @@ export default {
   "Time reducer": "减少时间",
   "Attach": "使用",
 
+  "View on": "View on",
+
   //loader.js
   "Waiting TX Confirmation": "正在等待交易确认",
 
@@ -95,5 +97,29 @@ export default {
   "MORE DETAILS ABOUT THE CHEST": "详细宝箱玩法说明",
   "Buy & Open Chest": "购买并开启宝箱",
   
-
+  // Market //
+  "Filter":"Filtre",
+  "Clear Filter":"Réinitialiser le filtre",
+  "Minimum":"Minimum",
+  "Boost Reward":"Boost",
+  "Boost reward":"Boost",
+  "Locktime reducer":"Réducteur de durée",
+  "Level":"Niveau",
+  "Currency":"Devise",
+  "Class":"Classe",
+  "Category":"Catégorie",
+  "Total Supply":"Circulation",
+  "Total supply":"Circulation",
+  "Price":"Prix",
+  "Name":"Nom",
+  "Total Items":"Total des Cartes",
+  "Card":"Carte",
+  "List":"Liste",
+  "View":"Afficher",
+  "Buy for":"Acheter pour",
+  "BUYING NFT":"ACHETER NFT",
+  "Do you want to buy":"Voulez vous acheter",
+  "with a tag price of":"au prix de",
+  "APPROVE":"APPROUVER",
+  "CONFIRM":"CONFIRMER",
 };

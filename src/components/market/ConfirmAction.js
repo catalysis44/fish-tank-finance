@@ -7,7 +7,7 @@ import {categorys, categoryIcons} from '../../config';
 import { commafy } from '../../utils';
 import BigNumber from 'bignumber.js';
 import { insertHistory } from '../../utils/db';
-
+import { useLanguage } from '../../hooks/language';
 
 
 export default function ConfirmAction(props) {
@@ -15,7 +15,7 @@ export default function ConfirmAction(props) {
   const closeModal = () => {
     props.setModal(0);
   }
-
+  const t = useLanguage();
   const setTxWaiting = props.setTxWaiting;
   const wallet = useContext(WalletContext);
   const chainId = wallet.networkId;
@@ -79,7 +79,7 @@ export default function ConfirmAction(props) {
               {
                 rare === 5 && <img src="assets/grade/UR.png" />
               }
-              <div>Total supply: {props.itemSupply}</div>
+              <div>{t('Total supply')}: {props.itemSupply}</div>
             </div>
           </div>
 
@@ -90,7 +90,7 @@ export default function ConfirmAction(props) {
             </div>
             <div  className={styles.item_description}>
               <div className={styles.description}>
-                <span>Card #</span>
+                <span>{t('Card')} #</span>
                 {props.tokenId}
               </div>
               <div className={styles.description}>
@@ -107,8 +107,8 @@ export default function ConfirmAction(props) {
 
           <div className={styles.horizontal_line}></div>
           <div className={styles.rule}>
-            <div>BUYING NFT</div>
-            <span>Do you want to buy "<b>{props.name}</b>" with a tag price of</span>
+            <div>{t('BUYING NFT')}</div>
+            <span>{t('Do you want to buy')} "<b>{props.name}</b>" {t('with a tag price of')}</span>
             <div className={styles.price_wrapper}>
               <img src={props.currencyIcon}/>
               <div className={styles.price_currency}>
@@ -129,7 +129,7 @@ export default function ConfirmAction(props) {
                 setTxWaiting(false);
               });
             }}>
-                APPROVE
+                {t('APPROVE')}
             </a>
             <a className={styles.action_btn}  disabled={!approved} onClick={()=>{
               // console.log('on buyOrder')
@@ -144,7 +144,7 @@ export default function ConfirmAction(props) {
                 setTxWaiting(false);
               });
             }}>
-                CONFIRM
+                {t('CONFIRM')}
             </a>
           </div>
         </section>

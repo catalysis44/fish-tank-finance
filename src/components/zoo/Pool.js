@@ -467,7 +467,7 @@ export default function Pool(props) {
                   <div>${commafy(totalDeposited * wslpPrice).split('.')[0]}</div>
                 </div>
                 <div className={styles.liq_row}>
-                  <div><a target="view_window" href={"https://info.wanswap.finance/pair/" + lpToken}>View on info.WanSwap.finance <FontAwesomeIcon icon={faExternalLinkSquareAlt} /></a></div>
+                  <div><a target="view_window" href={"https://info.wanswap.finance/pair/" + lpToken}>{t('View on')} info.WanSwap.finance <FontAwesomeIcon icon={faExternalLinkSquareAlt} /></a></div>
 
                 </div>
               </div>

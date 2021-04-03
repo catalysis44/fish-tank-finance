@@ -451,7 +451,7 @@ export default function () {
                       })
                     }
                     {
-                      txData.length === 0 && <tr><td className={styles.notfound}>{t('Transaciton not found...')}</td></tr>
+                      txData.length === 0 && <tr><td className={styles.notfound}>{t('Transaction not found...')}</td></tr>
                     }
                   </tbody>
                 </table>

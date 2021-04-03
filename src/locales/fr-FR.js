@@ -52,6 +52,8 @@ export default {
   "Time reducer": "Réducteur de durée",
   "Attach": "Attacher",
 
+  "View on": "Voir sur",
+
   //loader.js
   "Waiting TX Confirmation": "En Attente de Confirmation TX",
 
@@ -63,6 +65,7 @@ export default {
   "Staked": "Staked",
   "Active": "Active",
   "Loading...(Please switch network to wanchain)": "Chargement...(Veuillez changer le réseau pour celui de Wanchain)",
+  
 
   //expedition.js
   "GOLD CHEST INSTANT BUY": "COFFRE D'OR - ACHAT IMMÉDIAT",
@@ -89,9 +92,36 @@ export default {
   "THE MIGHTY CAVE": "LA CAVERNE FANTASTIQUE",
   "Days": "Jours",
   "THE SECRET JUNGLE": "LA JUNGLE SECRÈTE",
+  "Left":"Restants",
 
   "ZOO TO BURN": "ZOO À BRÛLER",
   "RULES": "RÈGLES",
   "MORE DETAILS ABOUT THE CHEST": "PLUS DE DÉTAILS À PROPOS DU COFFRE",
   "Buy & Open Chest": "Acheter & Ouvrir un Coffre",
+
+  // Market //
+  "Filter":"Filtre",
+  "Clear Filter":"Réinitialiser le filtre",
+  "Minimum":"Minimum",
+  "Boost Reward":"Boost",
+  "Boost reward":"Boost",
+  "Locktime reducer":"Réducteur de durée",
+  "Level":"Niveau",
+  "Currency":"Devise",
+  "Class":"Classe",
+  "Category":"Catégorie",
+  "Total Supply":"Circulation",
+  "Total supply":"Circulation",
+  "Price":"Prix",
+  "Name":"Nom",
+  "Total Items":"Total des Cartes",
+  "Card":"Carte",
+  "List":"Liste",
+  "View":"Afficher",
+  "Buy for":"Acheter pour",
+  "BUYING NFT":"ACHETER NFT",
+  "Do you want to buy":"Voulez vous acheter",
+  "with a tag price of":"au prix de",
+  "APPROVE":"APPROUVER",
+  "CONFIRM":"CONFIRMER",
 };
