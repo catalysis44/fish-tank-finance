@@ -9,9 +9,10 @@ import { axioGet } from '../../utils/cache';
 import ConfirmActionModal from './ConfirmAction';
 import { currencyList } from '../../config';
 import BigNumber from 'bignumber.js';
-
+import { useLanguage } from '../../hooks/language';
 
 function Row(props) {
+  const t = useLanguage();
   const category = Number(props.attributes[0].value);
   const level = Number(props.attributes[1].value);
   const item = Number(props.attributes[2].value);
@@ -79,10 +80,10 @@ function Row(props) {
       <div className={`${styles.listview_col} ${styles.item_description}`}>
         <div className={styles.listview_subcol}>
           <div className={styles.description}>
-          <span><img src={categoryIcons[category - 1]} /> {categorys[category - 1]}</span>
+          <span><img src={categoryIcons[category - 1]} /> {t(categorys[category - 1])}</span>
           </div>
           <div className={styles.description}>
-            <span>Card #</span>
+            <span>{t('Card')} #</span>
             {props.tokenId}
         </div>
           <div className={styles.description_supply}>
@@ -93,7 +94,7 @@ function Row(props) {
               <div></div>
               <div></div>
             </div>
-            <span>Total Supply</span>
+            <span>{t('Total Supply')}</span>
             {props.itemSupply}
           </div>
         </div>
@@ -124,7 +125,7 @@ function Row(props) {
 
           props.setShowConfirmActionModal(1);
         }}>
-            Buy for {price && decimals && commafy(price / 10 ** decimals)} {symbol}
+            {t('Buy for')} {price && decimals && commafy(price / 10 ** decimals)} {symbol}
           </a>
         </div>
       </div>
@@ -136,7 +137,7 @@ function Row(props) {
 }
 
 export default function ListView(props) {
-
+  const t = useLanguage();
   const storage = useContext(StorageContext);
   const wallet = useContext(WalletContext);
   const chainId = wallet.networkId;
@@ -214,7 +215,7 @@ export default function ListView(props) {
         setTxWaiting={props.setTxWaiting}
       ></ConfirmActionModal>
       <div className={styles.total_items}>
-          Total Items: {commafy(cards.length,null,false)}
+          {t('Total Items')}: {commafy(cards.length,null,false)}
       </div>
       <div className={styles.listview_panel}>
         <div className={styles.listview_table}>

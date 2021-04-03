@@ -1,6 +1,16 @@
 // src/locales/zh-CN.js
 export default {
   WELCOME_TO_UMI_WORLD: "{name}， welcome to umi's world",
+
+  // Categories //
+  "Fruits":"Fruits",
+  "Sweets":"Bonbons",
+  "Spices":"Épices",
+  "Foods":"Nourriture",
+  "Potions":"Potions",
+  "Magic":"Magie",
+
+
   //layout
   "DISCONNECT": "DECONNECTER",
   "CONNECT WALLET": "CONNECTER WALLET",
@@ -74,7 +84,7 @@ export default {
   "Burn your Zoo and have a 10% chance of getting a random NFT collectible. If you get \"nothing\" 9 times in a row, the next purchase will give you a 100% chance to acquire a random NFT collectible.": "Brûle les ZOO utilisés et a 10% de chances d'obtenir un NFT aléatoire non rare. Vous obtenez 100% de chance pour le dixième coffre après neuf coffres vides d'affilée.",
   "THE GOLDEN CHEST": "LE COFFRE D'OR",
   "INSTANT": "IMMÉDIAT",
-  "SPEND ZOO TO ACQUIRE": "DÉPENSEZ DES ZOO POUR OBTENIR",
+  "SPEND ZOO TO ACQUIRE": "DÉPENSER DES ZOO POUR OBTENIR",
   "GOLDEN CHEST": "COFFRE D'OR",
   "BUY GOLDEN CHEST": "ACHETER UN COFFRE D'OR",
   "THE SILVER CHEST": "LE COFFRE D'ARGENT",

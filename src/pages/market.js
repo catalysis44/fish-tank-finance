@@ -285,22 +285,22 @@ export default function () {
             <Checkbox.Group style={{ width: '100%' }} value={Object.keys(filters)} >
               <Row gutter={[5, 10]}>
                 <Col span={12}>
-                  <Checkbox value="Fruits" onClick={() => { onSetFilterCurrency('Fruits') }}><img src="assets/category/fruits.png" /> <span>Fruits</span></Checkbox>
+                  <Checkbox value="Fruits" onClick={() => { onSetFilterCurrency('Fruits') }}><img src="assets/category/fruits.png" /> <span>{t('Fruits')}</span></Checkbox>
                 </Col>
                 <Col span={12}>
-                  <Checkbox value="Foods" onClick={() => { onSetFilterCurrency('Foods') }}><img src="assets/category/dishes.png" /> <span>Foods</span></Checkbox>
+                  <Checkbox value="Foods" onClick={() => { onSetFilterCurrency('Foods') }}><img src="assets/category/dishes.png" /> <span>{t('Foods')}</span></Checkbox>
                 </Col>
                 <Col span={12}>
-                  <Checkbox value="Sweets" onClick={() => { onSetFilterCurrency('Sweets') }}><img src="assets/category/sweets.png" /> <span>Sweets</span></Checkbox>
+                  <Checkbox value="Sweets" onClick={() => { onSetFilterCurrency('Sweets') }}><img src="assets/category/sweets.png" /> <span>{t('Sweets')}</span></Checkbox>
                 </Col>
                 <Col span={12}>
-                  <Checkbox value="Potions" onClick={() => { onSetFilterCurrency('Potions') }}><img src="assets/category/potions.png" /> <span>Potions</span></Checkbox>
+                  <Checkbox value="Potions" onClick={() => { onSetFilterCurrency('Potions') }}><img src="assets/category/potions.png" /> <span>{t('Potions')}</span></Checkbox>
                 </Col>
                 <Col span={12}>
-                  <Checkbox value="Spices" onClick={() => { onSetFilterCurrency('Spices') }}><img src="assets/category/spices.png" /> <span>Spices</span></Checkbox>
+                  <Checkbox value="Spices" onClick={() => { onSetFilterCurrency('Spices') }}><img src="assets/category/spices.png" /> <span>{t('Spices')}</span></Checkbox>
                 </Col>
                 <Col span={12}>
-                  <Checkbox value="Magic" onClick={() => { onSetFilterCurrency('Magic') }}><img src="assets/category/magic.png" /> <span>Magic</span></Checkbox>
+                  <Checkbox value="Magic" onClick={() => { onSetFilterCurrency('Magic') }}><img src="assets/category/magic.png" /> <span>{t('Magic')}</span></Checkbox>
                 </Col>
               </Row>
             </Checkbox.Group>

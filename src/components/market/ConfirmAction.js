@@ -94,7 +94,7 @@ export default function ConfirmAction(props) {
                 {props.tokenId}
               </div>
               <div className={styles.description}>
-                <span><img src={props.categoryIcon}/>{props.categoryName}</span>
+                <span><img src={props.categoryIcon}/>{t(props.categoryName)}</span>
               </div>
               <div className={styles.description} style={{background:'#e1e5da'}}>
                 <span><img src="assets/rocket24x24.png"/> +{(props.boost * 100).toFixed(2)}%</span>

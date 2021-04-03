@@ -63,7 +63,7 @@ function Card(props) {
         </div>
         <div className={styles.footer}>
           <div className={styles.description}>
-            <span><img src={categoryIcons[category - 1]} /> {categorys[category - 1]}</span>
+            <span><img src={categoryIcons[category - 1]} /> {t(categorys[category - 1])}</span>
           </div>
           <div className={styles.description_supply}>
                 <div className={styles.gauge} data-level={getSupplyLevel(props.itemSupply)}> {/*LV 1-5*/ }

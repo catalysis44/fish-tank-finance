@@ -1,6 +1,15 @@
 // src/locales/zh-CN.js
 export default {
   WELCOME_TO_UMI_WORLD: '{name}，欢迎光临umi的世界',
+
+  // Categories //
+  "Fruits":"Fruits",
+  "Sweets":"Sweets",
+  "Spices":"Spices",
+  "Foods":"Foods",
+  "Potions":"Potions",
+  "Magic":"Magie",
+
   //layout
   "DISCONNECT": "断开钱包",
   "CONNECT WALLET": "连接钱包",

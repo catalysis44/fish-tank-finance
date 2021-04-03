@@ -3,6 +3,7 @@ import "../styles/bulma.scss"
 import '../../node_modules/animate.css/animate.min.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircle, faCopy } from '@fortawesome/free-solid-svg-icons'
+
 import Header from '../components/Header';
 import { NavLink, setLocale, getLocale } from 'umi';
 import Wallet, { WalletContext } from '../wallet/Wallet';
