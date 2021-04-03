@@ -82,13 +82,13 @@ export default function (props) {
       }
       {/* For Instant Chest - NFT / Artifact */}
       <ChestboxBuyModal isActived={showGoldenModal} setModal={setShowGoldenModal} title={t('GOLD CHEST INSTANT BUY')} price={goldenPrice}
-        rules={t('Burn your Zoo and has a 100% chance of getting a random NFT collectible.')}
+        rules={t('Burn your Zoo and secure a 100% chance of acquiring a random NFT collectible.')}
         type={'golden'}
         setTxWaiting={setTxWaiting}
         zooBalance={storage.zooBalance}
       ></ChestboxBuyModal>
       <ChestboxBuyModal isActived={showSilverModal} setModal={setShowSilverModal} title={t('SILVER CHEST INSTANT BUY')} price={(new BigNumber(goldenPrice)).div(10)}
-        rules={t('Burn your Zoo and has a 10% chance of getting a non-rare random NFT collectible. If you miss 9 shots in a row, the next time‘s chance is 100%.')}
+        rules={t('Burn your Zoo and have a 10% chance of getting a random NFT collectible. If you get "nothing" 9 times in a row, the next purchase will give you a 100% chance to acquire a random NFT collectible.')}
         type={'silver'}
         setTxWaiting={setTxWaiting}
         zooBalance={storage.zooBalance}
@@ -122,7 +122,7 @@ export default function (props) {
               <div className={styles.amount}>1</div>
             </div>
             <div className={styles.description}>
-              <div>{t("SPEND ZOO AND GET")}</div>
+              <div>{t("SPEND ZOO TO ACQUIRE")}</div>
               <div>1 {t("GOLDEN CHEST")}</div>
             </div>
           </div>
@@ -162,7 +162,7 @@ export default function (props) {
             </div>
             <div className={styles.description}>
 
-              <div>{t("SPEND ZOO AND GET")}</div>
+              <div>{t("SPEND ZOO TO ACQUIRE")}</div>
               <div>1 {t("SILVER CHEST")}</div>
 
             </div>
@@ -219,7 +219,7 @@ export default function (props) {
             </div>
             <div className={styles.description}>
               <div>{t("STAKE AND LOCK")}</div>
-              <div>{t("ZOO AND GET")}</div>
+              <div>{t("ZOO TO RECEIVE")}</div>
               <div>1 {t("GOLDEN CHEST")}</div>
             </div>
           </div>
@@ -327,7 +327,7 @@ export default function (props) {
             </div>
             <div className={styles.description}>
               <div>{t("STAKE AND LOCK")}</div>
-              <div>{t("ZOO AND GET")}</div>
+              <div>{t("ZOO TO RECEIVE")}</div>
               <div>1 {t("GOLDEN CHEST")}</div>
 
             </div>
@@ -436,7 +436,7 @@ export default function (props) {
             </div>
             <div className={styles.description}>
               <div>{t("STAKE AND LOCK")}</div>
-              <div>{t("ZOO AND GET")}</div>
+              <div>{t("ZOO TO RECEIVE")}</div>
               <div>1 {t("GOLDEN CHEST")}</div>
 
             </div>
