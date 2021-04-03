@@ -2,7 +2,7 @@ import styles from './index.less';
 import "../styles/bulma.scss"
 import '../../node_modules/animate.css/animate.min.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCircle } from '@fortawesome/free-solid-svg-icons'
+import { faCircle, faCopy } from '@fortawesome/free-solid-svg-icons'
 import Header from '../components/Header';
 import { NavLink, setLocale, getLocale } from 'umi';
 import Wallet, { WalletContext } from '../wallet/Wallet';
@@ -15,13 +15,20 @@ import { getPrices } from '../hooks/price';
 import { useLanguage } from '../hooks/language';
 import ConfirmResetCache from '../components/resetcache/ConfirmResetCache';
 import { useEventMonitor } from '../utils/events';
+import { message} from 'antd';
 
 function toggleSidebar()
 {
   document.getElementById('wrapper').classList.toggle("toggled");
 }
 
+
+
+
 function BasicLayout(props) {
+
+  
+
   const [wallet, setWallet] = useState({});
   const web3 = wallet.web3;
   const chainId = wallet.networkId && wallet.networkId.toString();
@@ -44,6 +51,13 @@ function BasicLayout(props) {
   const zooPrice = prices['ZOO'];
 
   const [showConfirmResetCacheModal, setConfirmResetCacheModal] = useState(0);
+
+  const copyAddress = (address) =>
+  {
+    navigator.clipboard.writeText(address);
+    message.success('Copied address: '+address);
+  }
+
   return (
     
     <div id="wrapper">
@@ -63,7 +77,7 @@ function BasicLayout(props) {
               wallet.resetApp();
             }
           }}>{connected ? t("DISCONNECT") : t("CONNECT WALLET")}</a> 
-          <div class="address"><img src="assets/wallet32x32.png"/><span>{address ? address.slice(0, 6) + '...' + address.slice(-6) : t('NO WALLET')}</span></div>
+          <div class="address"><img src="assets/wallet32x32.png"/><span>{address ? address.slice(0, 6) + '...' + address.slice(-6) : t('NO WALLET')}</span> <a onClick={() => copyAddress(address)} className="has-tooltip-top  has-tooltip-active"><FontAwesomeIcon icon={faCopy}/></a></div>
           {chainId && chainId.toString() !== '1' && chainId.toString() !== '888' && chainId !== "" && <div class="testnet"><span>!! {t('TESTNET')} !!</span></div>}
           <div class="balance"><img src="assets/zoo32x32.png"/><span>{commafy(storage.zooBalance)}</span></div>
         </div>
