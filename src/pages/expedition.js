@@ -275,7 +275,7 @@ export default function (props) {
                   getNftInfo(ret.events.MintNFT.returnValues.tokenId, web3, chainId).then(obj => {
                     insertHistory('chest', Date.now(), ret.events.MintNFT.returnValues.tokenId, obj.name, obj.image, ret.events.MintNFT.returnValues.level, '0', 'ZOO', ret.transactionHash);
                     // console.debug('nftmeta111', obj);
-                    openNotificationOpenedBox('GOLDEN CHEST HAS BEEN OPENED', obj.name, 'Your boost card has been transfered to your wallet.', obj.image, false, true);
+                    openNotificationOpenedBox(t('GOLDEN CHEST HAS BEEN OPENED'),t('You got'),t('Check your Safe'), obj.name, t('Your boost card has been transfered to your safe.'), obj.image, false, true);
                   }).catch(err => {
                     console.error('getNftInfo error', err);
                   });
@@ -384,7 +384,7 @@ export default function (props) {
                     // console.debug('nftmeta111', obj);
                     insertHistory('chest', Date.now(), ret.events.MintNFT.returnValues.tokenId, obj.name, obj.image, ret.events.MintNFT.returnValues.level, commafy((new BigNumber(ret.events.GoldenBuy.returnValues.price)).div(1e18)), 'ZOO', ret.transactionHash);
 
-                    openNotificationOpenedBox('GOLDEN CHEST HAS BEEN OPENED', obj.name, 'Your boost card has been transfered to your wallet.', obj.image, false, true);
+                    openNotificationOpenedBox(t('GOLDEN CHEST HAS BEEN OPENED'),t('You got'),t('Check your Safe'), obj.name, t('Your boost card has been transfered to your safe.'), obj.image, false, true);
                   }).catch(err => {
                     console.error('getNftInfo error', err);
                   });
@@ -492,7 +492,7 @@ export default function (props) {
                   getNftInfo(ret.events.MintNFT.returnValues.tokenId, web3, chainId).then(obj => {
                     // console.debug('nftmeta111', obj);
                     insertHistory('chest', Date.now(), ret.events.MintNFT.returnValues.tokenId, obj.name, obj.image, ret.events.MintNFT.returnValues.level, commafy((new BigNumber(ret.events.GoldenBuy.returnValues.price)).div(1e18)), 'ZOO', ret.transactionHash);
-                    openNotificationOpenedBox('GOLDEN CHEST HAS BEEN OPENED', obj.name, 'Your boost card has been transfered to your wallet.', obj.image, false, true);
+                    openNotificationOpenedBox(t('GOLDEN CHEST HAS BEEN OPENED'),t('You got'),t('Check your Safe'), obj.name, t('Your boost card has been transfered to your safe.'), obj.image, false, true);
                   }).catch(err => {
                     console.error('getNftInfo error', err);
                   });

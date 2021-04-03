@@ -2,6 +2,7 @@ import { notification } from 'antd';
 import {history} from 'umi';
 import { trade_tokens } from '../config';
 
+
 export function commafy(num, fixed=null, is_decimal=true) {
   if (!num) {
     return '--';
@@ -105,13 +106,14 @@ export const openNotificationExclamation = (title) => {
   notification.open(args);
 };
 
-export const openNotificationOpenedBox = (title, item, description, icon, nothing, golden) => {
+export const openNotificationOpenedBox = (title,prefix,btn_text, item, description, icon, nothing, golden) => {
+  
   const args = {
     // message: 'GOLDEN CHEST HAS BEEN OPENED',
     message: title,
     description:
       <div>
-        {"You got \" "}
+        {prefix} {" \" "}
         <b>{item}</b>
         {"\", "}
         <br />
@@ -120,7 +122,7 @@ export const openNotificationOpenedBox = (title, item, description, icon, nothin
         {
           !nothing && <a onClick={()=>{
             history.push('/safe');
-          }} className="button">Check your Safe</a>
+          }} className="button">{btn_text}</a>
         }
       </div>,
     duration: 0,

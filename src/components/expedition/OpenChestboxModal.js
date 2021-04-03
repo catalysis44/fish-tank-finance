@@ -3,8 +3,10 @@ import styles from './OpenChestboxModal.less';
 import '../../../node_modules/animate.css/animate.min.css';
 import { history } from 'umi';
 import {categorys, categoryIcons} from '../../config';
+import { useLanguage } from '../../hooks/language';
 
 export default function OpenChestboxModal(props) {
+  const t = useLanguage();
   // Open Confirm Modal //
   const closeModal = () => {
     props.setModal(0);
@@ -47,22 +49,25 @@ export default function OpenChestboxModal(props) {
               }
               {
                 rare === 5 && <img src="assets/grade/UR.png" />
-              } <div>total supply: {props.itemSupply}</div>
+              } <div>{t('total supply')}: {props.itemSupply}</div>
             </div>
           </div>
 
           <div className={styles.item_wrapper}>
             <div className={styles.item}>
               <img src={props.icon} className={styles.float_item}/>
-              <img src="assets/openedGoldenBox80x80.png" className={styles.openedBox}/>
+              {
+                props.type === 'silver'?<img src="assets/openedSilverBox80x80.png" className={styles.openedBox}/>:<img src="assets/openedGoldenBox80x80.png" className={styles.openedBox}/>
+              }
+              
             </div>
             <div  className={styles.item_description}>
               <div className={styles.description}>
-                <span>Card #</span>
+                <span>{t('Card')} #</span>
                 {props.tokenId}
               </div>
               <div className={styles.description}>
-                <span><img src={categoryIcons[props.category-1]}/>{categorys[props.category-1]}</span>
+                <span><img src={categoryIcons[props.category-1]}/>{t(categorys[props.category-1])}</span>
               </div>
               <div className={styles.description} style={{background:'#e1e5da'}}>
                 <span><img src="assets/rocket24x24.png"/> +{(props.boost * 100).toFixed(2)}%</span>
@@ -75,17 +80,16 @@ export default function OpenChestboxModal(props) {
 
           <div className={styles.horizontal_line}></div>
           <div className={styles.rule}>
-            <div>{props.type.toUpperCase()} CHEST HAS BEEN OPENED</div>
-            <span>You got "<a>{props.name}</a>",
-          your boost card has been transfered
-          to you wallet</span>
+            <div>{t(props.type.toUpperCase()+' CHEST HAS BEEN OPENED')}</div>
+            <span>{t('You got')} "<a>{props.name}</a>",
+            {t('your boost card has been transfered to you safe')}</span>
           </div>
 
           <div className={styles.action}>
             <a className={styles.action_btn} onClick={()=>{
               history.push('/safe');
             }}>
-              Check your Safe
+              {t('Check your Safe')}
               </a>
           </div>
         </section>

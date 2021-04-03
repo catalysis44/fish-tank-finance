@@ -122,7 +122,7 @@ export default function ChestboxBuyModal(props) {
                 if (ret.events.MintNFT.returnValues.level === '0') {
                   // console.debug('33333', ret);
                   closeModal();
-                  openNotificationOpenedBox(type.toUpperCase() + ' CHEST HAS BEEN OPENED', 'Nothing...', 'Unfortunately, you get nothing, 9 times in a row nothing, the next time 100% got non-rare NFT.', 'assets/sliversmoke.png', true);
+                  openNotificationOpenedBox(t(type.toUpperCase()+' CHEST HAS BEEN OPENED'),t('You got'),t('Check your Safe'), t('Nothing...'), t('Unfortunately you get nothing this time around; after 9 unsuccessful tries you are guaranteed a random NFT upon opening the 10th silver chest in a row.'), 'assets/sliversmoke.png', true);
                 } else {
                   getNftInfo(ret.events.MintNFT.returnValues.tokenId, web3, chainId).then(obj=>{
                     // console.debug('nftmeta111', obj);
@@ -139,7 +139,7 @@ export default function ChestboxBuyModal(props) {
                     setReduce(obj.timeReduce);
                     closeModal();
                     setModal(1);
-                    openNotificationOpenedBox(type.toUpperCase() + ' CHEST HAS BEEN OPENED', obj.name, 'Your boost card has been transfered to your wallet.', obj.image, false, false);
+                    openNotificationOpenedBox(t(type.toUpperCase()+' CHEST HAS BEEN OPENED'),t('You got'),t('Check your Safe'), obj.name, t('Your boost card has been transfered to your safe.'), obj.image, false, false);
                   }).catch(err=>{
                     console.error('getNftInfo error', err);
                   });
@@ -165,7 +165,7 @@ export default function ChestboxBuyModal(props) {
                   setReduce(obj.timeReduce);
                   closeModal();
                   setModal(1);
-                  openNotificationOpenedBox(type.toUpperCase() + ' CHEST HAS BEEN OPENED', obj.name, 'Your boost card has been transfered to your wallet.', obj.image, false, true);
+                  openNotificationOpenedBox(t(type.toUpperCase()+' CHEST HAS BEEN OPENED'),t('You got'),t('Check your Safe'), obj.name, t('Your boost card has been transfered to your safe.'), obj.image, false, true);
                 }).catch(err=>{
                   console.error('getNftInfo error', err);
                 });

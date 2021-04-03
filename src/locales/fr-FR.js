@@ -103,6 +103,14 @@ export default {
   "Days": "Jours",
   "THE SECRET JUNGLE": "LA JUNGLE SECRÈTE",
   "Left":"Restants",
+  "Check your Safe":"Voir mon Coffre-Fort",
+  "You got":"Vous avez reçu",
+  "Your boost card has been transfered to your safe.":"votre carte a été ajoutée au coffre-fort.",
+  "SILVER CHEST HAS BEEN OPENED":"LE COFFRE D'ARGENT A ÉTÉ OUVERT",
+  "GOLDEN CHEST HAS BEEN OPENED":"LE COFFRE D'OR A ÉTÉ OUVERT",
+  "Nothing...":"Rien...",
+  "Unfortunately you get nothing this time around; after 9 unsuccessful tries you are guaranteed a random NFT upon opening the 10th silver chest in a row.":"Malheureusement vous ne recevez rien cette fois ci. Vous obtenez 100% de chance lors de l'ouverture du dixième coffre après neuf coffres vides d'affilée.",
+
 
   "ZOO TO BURN": "ZOO À BRÛLER",
   "RULES": "RÈGLES",

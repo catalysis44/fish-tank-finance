@@ -100,6 +100,13 @@ export default {
   "THE MIGHTY CAVE": "魔法石窟",
   "Days": "天",
   "THE SECRET JUNGLE": "诡秘森林",
+  "Check your Safe":"Check your Safe",
+  "You got":"You got",
+  "your boost card has been transfered to you safe.":"your boost card has been transfered to you safe.",
+  "SILVER CHEST HAS BEEN OPENED":"SILVER CHEST HAS BEEN OPENED",
+  "GOLDEN CHEST HAS BEEN OPENED":"GOLDEN CHEST HAS BEEN OPENED",
+  "Nothing...":"Nothing...",
+  "Unfortunately you get nothing this time around; after 9 unsuccessful tries you are guaranteed a random NFT upon opening the 10th silver chest in a row.":"Unfortunately you get nothing this time around; after 9 unsuccessful tries you are guaranteed a random NFT upon opening the 10th silver chest in a row.",
 
   "ZOO TO BURN": "燃烧ZOO数量:",
   "RULES": "规则",
