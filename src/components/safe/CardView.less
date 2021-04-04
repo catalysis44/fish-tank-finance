@@ -470,7 +470,7 @@
                   height:30px;
                   width:87px;
                   margin-right:5px;
-                  font-size:15px;
+                  font-size:13px;
                   line-height:11px;
                   border:1px solid #e1e5da;
                   border-radius:4px;
@@ -516,3 +516,24 @@
       
     }
   }
+
+  /*Custom for Lang*/
+:global
+{
+  
+  #fr-FR
+  {
+    :local
+      {
+        .flip_card_front .footer .description
+        {
+          font-size:13px;
+        }
+        .flip_card_front .footer .description img
+        {
+          width:20px;
+          margin-right: -2px;
+        }
+      }  
+  }
+}

@@ -9,9 +9,10 @@ import { categorys, categoryIcons } from '../../config';
 import { cancelOrder } from '../../wallet/send';
 import { WalletContext } from '../../wallet/Wallet';
 import { currencyList } from '../../config';
-
+import { useLanguage } from '../../hooks/language';
 
 export default function CardView(props) {
+  const t = useLanguage();
   const category = Number(props.attributes[0].value);
   const rare = Number(props.attributes[2].value);
   const level = Number(props.attributes[1].value);
@@ -90,7 +91,7 @@ export default function CardView(props) {
             </div>
             <div className={styles.footer}>
               <div className={styles.description}>
-                <span><img src={categoryIcons[category - 1]} /> {categorys[category - 1]}</span>
+                <span><img src={categoryIcons[category - 1]} /> {t(categorys[category - 1])}</span>
               </div>
               <div className={styles.description_supply}>
                 <div className={styles.gauge} data-level={getSupplyLevel(props.itemSupply)}> {/*LV 1-5*/ }
@@ -100,7 +101,7 @@ export default function CardView(props) {
                   <div></div>
                   <div></div>
                 </div>
-                <span>Total Supply</span>
+                <span>{t('Total Supply')}</span>
                 {props.itemSupply}
               </div>
             </div>
@@ -108,7 +109,7 @@ export default function CardView(props) {
             {
               isOnSell && <div className={styles.on_sale}>
                 <div className={styles.title}>
-                  On Sale for
+                  {t('On Sale for')}
                   </div>
                 <div>
                   {onSellPrice && onSellDecimals && commafy(onSellPrice / 10 ** onSellDecimals)} {onSellSymbol}
@@ -118,7 +119,7 @@ export default function CardView(props) {
 
             {
               !isOnSell && <a className={styles.sell_btn} >
-                <span>SELL</span>
+                <span>{t('SELL')}</span>
               </a>
             }
 
@@ -128,7 +129,7 @@ export default function CardView(props) {
               <img src={props.icon} />
               <div className={styles.title_card_number}>
                 <span>{props.name}</span>
-                <span className={styles.card_number}>Card #{props.tokenId}</span>
+                <span className={styles.card_number}>{t('Card')} #{props.tokenId}</span>
               </div>
             </div>
             <div className={styles.class}>
@@ -178,7 +179,7 @@ export default function CardView(props) {
                   setTxWaiting(false);
                 });
               }}> {/*Show this one when on sale*/}
-                  WITHDRAW FROM SALE
+                  {t('WITHDRAW FROM SALE')}
               </a>
             }
             {
@@ -216,7 +217,7 @@ export default function CardView(props) {
             }
             {
               !isOnSell && <a className={styles.sell_btn} style={{ display: isOnSell ? 'none' : 'true' }} onClick={() => { setShowConfirmActionModal(1) }}>
-                SELL
+                {t('SELL')}
               </a>
             }
           </div>

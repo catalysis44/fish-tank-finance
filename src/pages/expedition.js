@@ -97,7 +97,7 @@ export default function (props) {
       <div className={styles.row} style={{ paddingBottom: 0 }}>
         <div className={styles.pool} id="golden_pool"> {/*active true for on staking pool */}
           <div className={styles.cover_wrapper} >
-            <img src="dummy/desert.png" className={styles.cover} />
+            <img src="assets/expedition/goldenchest.png" className={styles.cover} />
 
           </div>
           <div className={styles.title}>
@@ -136,7 +136,7 @@ export default function (props) {
 
         <div className={styles.pool} id="silver_pool">
           <div className={styles.cover_wrapper} >
-            <img src="dummy/desert.png" className={styles.cover} />
+            <img src="assets/expedition/silverchest.png" className={styles.cover} />
 
           </div>
           <div className={styles.title}>
@@ -188,7 +188,7 @@ export default function (props) {
       <div className={styles.row} style={{ paddingTop: 0 }}>
         <div className={styles.pool} data-active={expeditions[0] && expeditions[0].startTime === 0 && !stakingZoo ? false : true}> {/*active true for on staking pool */}
           <div className={styles.cover_wrapper} >
-            <img src="dummy/desert.png" className={styles.cover} />
+            <img src="assets/expedition/mightycave.png" className={styles.cover} />
             <div className={styles.tvl}>
               <div className={styles.amount}>
                 {commafy(expeditions[0] && expeditions[0].stakedAmount)}
@@ -197,7 +197,7 @@ export default function (props) {
             </div>
           </div>
           <div className={styles.title}>
-            {t("THE LOST ARK")}
+            {t("Obsidian Mines of Khralia")}
           </div>
           <div className={styles.condition}>
             <div className={styles.minimum}>
@@ -297,7 +297,7 @@ export default function (props) {
 
         <div className={styles.pool} data-active={expeditions[1] && expeditions[1].startTime === 0 && !stakingZoo1?false:true}> {/*active true for on staking pool */}
           <div className={styles.cover_wrapper} >
-            <img src="dummy/cave.png" className={styles.cover} />
+            <img src="assets/expedition/enchantedforest.png" className={styles.cover} />
             <div className={styles.tvl}>
               <div className={styles.amount}>
                 {commafy(expeditions[1] && expeditions[1].stakedAmount)}
@@ -306,7 +306,7 @@ export default function (props) {
             </div>
           </div>
           <div className={styles.title}>
-            {t("THE MIGHTY CAVE")}
+            {t("Drakorian Forests of Loot")}
           </div>
           <div className={styles.condition}>
             <div className={styles.minimum}>
@@ -406,7 +406,7 @@ export default function (props) {
 
         <div className={styles.pool} data-active={expeditions[2] && expeditions[2].startTime === 0 && !stakingZoo2?false:true}> {/*active true for on staking pool */}
           <div className={styles.cover_wrapper} >
-            <img src="dummy/jungle.png" className={styles.cover} />
+            <img src="assets/expedition/island.png" className={styles.cover} />
             <div className={styles.tvl}>
               <div className={styles.amount}>
                 {commafy(expeditions[2] && expeditions[2].stakedAmount)}
@@ -415,7 +415,7 @@ export default function (props) {
           </div>
           </div>
           <div className={styles.title}>
-            {t("THE SECRET JUNGLE")}
+            {t("Lost Island of Brambleson")}
           </div>
           <div className={styles.condition}>
             <div className={styles.minimum}>

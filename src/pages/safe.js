@@ -288,13 +288,13 @@ export default function () {
 
       <div className={styles.connected} style={{ display: !connected && 'none' }}> {/* remove display none after connected */}
         <div id="filterbar_backdrop" onClick={removeToggle}></div>
-        <a id="toggle_filter" className={styles.toggle_filter} onClick={toggleFilter}><span><img src="assets/magnify24x24.png" /> FILTER</span></a>
-        <a id="toggle_tx" className={styles.toggle_tx} onClick={toggleTx}><span><img src="assets/reload24x24.png" /> HISTORY</span></a>
+        <a id="toggle_filter" className={styles.toggle_filter} onClick={toggleFilter}><span><img src="assets/magnify24x24.png" /> {t('FILTER')}</span></a>
+        <a id="toggle_tx" className={styles.toggle_tx} onClick={toggleTx}><span><img src="assets/reload24x24.png" /> {t('HISTORY')}</span></a>
         <div className={styles.content_wrapper}>
           <div className={styles.left_side}>
             <div id="filter1" className={styles.filter_panel}>
               <div className={styles.title}>
-                Filter ({Object.keys(filters).length})
+              {t('Filter')} ({Object.keys(filters).length})
               </div>
               <a className={styles.clear_filter} onClick={() => {
                 setFilters({});
@@ -305,8 +305,8 @@ export default function () {
                 <div className={styles.ability_title}>
                   <img src="assets/rocket24x24.png" />
                   <div>
-                    <span>Minimum</span>
-                    <span>Boost reward</span>
+                    <span>{t('Minimum')}</span>
+                    <span>{t('Boost reward')}</span>
                   </div>
                 </div>
                 <div className={styles.ability_slider}>
@@ -321,8 +321,8 @@ export default function () {
                 <div className={styles.ability_title}>
                   <img src="assets/hourglass24x24.png" />
                   <div>
-                    <span>Minimum</span>
-                    <span>Locktime reducer</span>
+                    <span>{t('Minimum')}</span>
+                    <span>{t('Locktime reducer')}</span>
                   </div>
                 </div>
                 <div className={styles.ability_slider}>
@@ -333,7 +333,7 @@ export default function () {
                 </div>
               </div>
               <div className={styles.title}>
-                Level
+              {t('Level')}
               </div>
               <div className={styles.filter_level}>
                 <a className={filters.level === 1 && styles.is_active} onClick={() => { onSetFilterLevel(1) }}><img src="assets/star18x18.png" /></a>
@@ -342,7 +342,7 @@ export default function () {
                 <a className={filters.level === 4 && styles.is_active} onClick={() => { onSetFilterLevel(4) }}><img src="assets/max.png" /></a>
               </div>
               <div className={styles.title}>
-                Class
+              {t('Class')}
               </div>
               <div className={styles.filter_class}>
                 <Checkbox.Group style={{ width: '100%' }} value={Object.keys(filters)}>
@@ -367,28 +367,28 @@ export default function () {
                 </Checkbox.Group>
               </div>
               <div className={styles.title}>
-                Category
+              {t('Category')}
                     </div>
               <div className={styles.filter_category}>
                 <Checkbox.Group style={{ width: '100%' }} value={Object.keys(filters)} >
                   <Row gutter={[5, 10]}>
                     <Col span={12}>
-                      <Checkbox value="Fruits" onClick={() => { onSetFilterCurrency('Fruits') }}><img src="assets/category/fruits.png" /> <span>Fruits</span></Checkbox>
+                      <Checkbox value="Fruits" onClick={() => { onSetFilterCurrency('Fruits') }}><img src="assets/category/fruits.png" /> <span>{t('Fruits')}</span></Checkbox>
                     </Col>
                     <Col span={12}>
-                      <Checkbox value="Foods" onClick={() => { onSetFilterCurrency('Foods') }}><img src="assets/category/dishes.png" /> <span>Foods</span></Checkbox>
+                      <Checkbox value="Foods" onClick={() => { onSetFilterCurrency('Foods') }}><img src="assets/category/dishes.png" /> <span>{t('Foods')}</span></Checkbox>
                     </Col>
                     <Col span={12}>
-                      <Checkbox value="Sweets" onClick={() => { onSetFilterCurrency('Sweets') }}><img src="assets/category/sweets.png" /> <span>Sweets</span></Checkbox>
+                      <Checkbox value="Sweets" onClick={() => { onSetFilterCurrency('Sweets') }}><img src="assets/category/sweets.png" /> <span>{t('Sweets')}</span></Checkbox>
                     </Col>
                     <Col span={12}>
-                      <Checkbox value="Potions" onClick={() => { onSetFilterCurrency('Potions') }}><img src="assets/category/potions.png" /> <span>Potions</span></Checkbox>
+                      <Checkbox value="Potions" onClick={() => { onSetFilterCurrency('Potions') }}><img src="assets/category/potions.png" /> <span>{t('Potions')}</span></Checkbox>
                     </Col>
                     <Col span={12}>
-                      <Checkbox value="Spices" onClick={() => { onSetFilterCurrency('Spices') }}><img src="assets/category/spices.png" /> <span>Spices</span></Checkbox>
+                      <Checkbox value="Spices" onClick={() => { onSetFilterCurrency('Spices') }}><img src="assets/category/spices.png" /> <span>{t('Spices')}</span></Checkbox>
                     </Col>
                     <Col span={12}>
-                      <Checkbox value="Magic" onClick={() => { onSetFilterCurrency('Magic') }}><img src="assets/category/magic.png" /> <span>Magic</span></Checkbox>
+                      <Checkbox value="Magic" onClick={() => { onSetFilterCurrency('Magic') }}><img src="assets/category/magic.png" /> <span>{t('Magic')}</span></Checkbox>
                     </Col>
                   </Row>
                 </Checkbox.Group>
@@ -398,18 +398,18 @@ export default function () {
 
             <div id="tx_panel" className={styles.tx_panel}>
               <div className={styles.title}>
-                TX history
+                {t('TX History')}
                </div>
               <div className={styles.history_btn}>
                 <a className={txType === 'purchase' && styles.is_active} onClick={() => {
                   setTxType('purchase');
-                }}>Purchase</a>
+                }}>{t('Purchase')}</a>
                 <a className={txType === 'sale' && styles.is_active} onClick={() => {
                   setTxType('sale');
-                }}>Sale</a>
+                }}>{t('Sale')}</a>
                 <a className={txType === 'chest' && styles.is_active} onClick={() => {
                   setTxType('chest');
-                }}>From Chest</a>
+                }}>{t('From Chest')}</a>
               </div>
 
               <div className={styles.table_wrapper}>
@@ -468,7 +468,7 @@ export default function () {
               <div id="filter2" className={styles.box}>
                 <div className={styles.sorting}>
                   <div className={styles.title}>
-                    Sort by
+                    {t('Sort by')}
                                 </div>
                   <div className={styles.sort_btn}>
                     <a className={sortType === 'name' && styles.is_acitve} onClick={() => {
@@ -477,7 +477,7 @@ export default function () {
                       <div className={styles.icon}>
                         <FontAwesomeIcon icon={faSortAlphaDown} />
                       </div>
-                      Name
+                      {t('Name')}
                       </a>
                     <a className={sortType === 'totalSupply' && styles.is_acitve} onClick={() => {
                       setSortType(sortType === 'totalSupply' ? '' : 'totalSupply');
@@ -485,7 +485,7 @@ export default function () {
                       <div className={styles.icon}>
                         <FontAwesomeIcon icon={faSortNumericDown} />
                       </div>
-                      Total supply
+                      {t('Total supply')}
                       </a>
                     <a className={sortType === 'boost' && styles.is_acitve} onClick={() => {
                       setSortType(sortType === 'boost' ? '' : 'boost');
@@ -493,7 +493,7 @@ export default function () {
                       <div className={styles.icon}>
                         <FontAwesomeIcon icon={faSortNumericDown} />
                       </div>
-                        Boost reward
+                      {t('Boost reward')}
                       </a>
                     <a className={sortType === 'reduce' && styles.is_acitve} onClick={() => {
                       setSortType(sortType === 'reduce' ? '' : 'reduce');
@@ -501,21 +501,21 @@ export default function () {
                       <div className={styles.icon}>
                         <FontAwesomeIcon icon={faSortNumericDown} />
                       </div>
-                      Time reducer
+                      {t('Time reducer')}
                     </a>
                   </div>
                 </div>
                 <div className={styles.view_selection}>
                   <div className={styles.title}>
-                    View
+                  {t('View')} 
                                 </div>
                   <div className={styles.view_btn}>
                     <a className={!listView && styles.is_acitve} onClick={() => {
                       setListView(false);
-                    }}>Card</a>
+                    }}>{t('Card')}</a>
                     <a className={listView && styles.is_acitve} onClick={() => {
                       setListView(true);
-                    }}>List</a>
+                    }}>{t('List')} </a>
                   </div>
                 </div>
               </div>
@@ -523,7 +523,7 @@ export default function () {
 
             </div>
             <div className={styles.total_items}>
-              Total Items: {commafy(cards.length, null, false)}
+              {t('Total Items')}: {commafy(cards.length, null, false)}
             </div>
             {
               // loading && <div>Loading...</div>

@@ -7,14 +7,14 @@ import {categorys, categoryIcons} from '../../config';
 import { insertHistory } from '../../utils/db';
 import { commafy } from '../../utils';
 import BigNumber from 'bignumber.js';
-
+import { useLanguage } from '../../hooks/language';
 
 export default function ConfirmAction(props) {
   // Open Confirm Modal //
   const closeModal = () => {
     props.setModal(0);
   }
-
+  const t = useLanguage();
   const setTxWaiting = props.setTxWaiting;
   const wallet = useContext(WalletContext);
   const chainId = wallet.networkId;
@@ -61,7 +61,7 @@ export default function ConfirmAction(props) {
               {
                 rare === 5 && <img src="assets/grade/UR.png" />
               }
-            <div>total supply: {props.itemSupply}</div>
+            <div>{t('Total supply')}: {props.itemSupply}</div>
             </div>
           </div>
 
@@ -72,11 +72,11 @@ export default function ConfirmAction(props) {
             </div>
             <div  className={styles.item_description}>
               <div className={styles.description}>
-                <span>Card #</span>
+                <span>{t('Card')} #</span>
                 {props.tokenId}
               </div>
               <div className={styles.description}>
-                <span><img src={props.categoryIcon}/>{props.categoryName}</span>
+                <span><img src={props.categoryIcon}/>{t(props.categoryName)}</span>
               </div>
               <div className={styles.description} style={{background:'#e1e5da'}}>
                 <span><img src="assets/rocket24x24.png"/> +{(props.boost * 100).toFixed(2)}%</span>
@@ -89,8 +89,8 @@ export default function ConfirmAction(props) {
 
           <div className={styles.horizontal_line}></div>
           <div className={styles.rule}>
-            <div>BUSINESS IS GROWING</div>
-            <span>"<b>{props.name}</b>" will be added to the market with a tag price of</span>
+            <div>{t('BUSINESS IS GROWING')}</div>
+            <span>"<b>{props.name}</b>" {t('will be added to the market with a tag price of')}</span>
             <div className={styles.price_wrapper}>
               <img src={props.currencyIcon}/>
               <div className={styles.price_currency}>
@@ -111,7 +111,7 @@ export default function ConfirmAction(props) {
                 setTxWaiting(false);
               });
             }}>
-                APPROVE
+                {t('APPROVE')}
             </a>
             <a className={styles.action_btn}  disabled={!approved} onClick={()=>{
               setTxWaiting(true);
@@ -126,7 +126,7 @@ export default function ConfirmAction(props) {
                 setTxWaiting(false);
               });
             }}>
-                CONFIRM
+                {t('CONFIRM')}
             </a>
           </div>
         </section>

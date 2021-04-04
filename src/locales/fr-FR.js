@@ -99,7 +99,7 @@ export default {
   "ZOO TO RECEIVE": "DES ZOO POUR OBTENIR",
   "Stake ZOO": "Ajouter des ZOO",
   "Claim 1 Golden Chest": "Obtenir 1 Coffre d'Or",
-  "THE MIGHTY CAVE": "LA CAVERNE FANTASTIQUE",
+ 
   "Days": "Jours",
   "THE SECRET JUNGLE": "LA JUNGLE SECRÈTE",
   "Left":"Restants",
@@ -116,6 +116,10 @@ export default {
   "RULES": "RÈGLES",
   "MORE DETAILS ABOUT THE CHEST": "PLUS DE DÉTAILS À PROPOS DU COFFRE",
   "Buy & Open Chest": "Acheter & Ouvrir un Coffre",
+
+  "Obsidian Mines of Khralia":"Mines d'obsidienne de Khralia",
+  "Drakorian Forests of Loot":"Forêts de butin drakoriennes",
+  "Lost Island of Brambleson":"Île perdue de Brambleson",
 
   // Market //
   "Filter":"Filtre",
@@ -142,4 +146,19 @@ export default {
   "with a tag price of":"au prix de",
   "APPROVE":"APPROUVER",
   "CONFIRM":"CONFIRMER",
+
+  // SAFE //
+  "On Sale for":"En Vente pour",
+  "Transaction not found...":"Transaction introuvable......",
+  "SELL":"VENDRE",
+  "HISTORY":"HISTORIQUE",
+  "TX History":"TX Historique",
+
+  "WITHDRAW FROM SALE":"RETIRER DE LA VENTE",
+  "Purchase":"Achat",
+  "Sale":"Vente",
+  "From Chest":"Coffre-Fort",
+
+  "BUSINESS IS GROWING":"LES AFFAIRES GRANDISSENT",
+  "will be added to the market with a tag price of":"sera ajouté au marché au prix de",
 };

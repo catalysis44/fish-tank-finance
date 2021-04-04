@@ -97,9 +97,9 @@ export default {
   "ZOO TO RECEIVE": "ZOO代币将得到",
   "Stake ZOO": "质押ZOO代币",
   "Claim 1 Golden Chest": "领取1个黄金宝箱",
-  "THE MIGHTY CAVE": "魔法石窟",
+
   "Days": "天",
-  "THE SECRET JUNGLE": "诡秘森林",
+
   "Check your Safe":"Check your Safe",
   "You got":"You got",
   "your boost card has been transfered to you safe.":"your boost card has been transfered to you safe.",
@@ -112,6 +112,7 @@ export default {
   "RULES": "规则",
   "MORE DETAILS ABOUT THE CHEST": "详细宝箱玩法说明",
   "Buy & Open Chest": "购买并开启宝箱",
+
   
   // Market //
   "Filter":"Filtre",
@@ -138,4 +139,19 @@ export default {
   "with a tag price of":"au prix de",
   "APPROVE":"APPROUVER",
   "CONFIRM":"CONFIRMER",
+
+    // SAFE //
+    "On Sale for":"En Vente pour",
+    "Transaction not found...":"Transaction introuvable......",
+    "SELL":"VENDRE",
+    "HISTORY":"HISTORIQUE",
+    "TX History":"TX Historique",
+  
+    "WITHDRAW FROM SALE":"RETIRER DE LA VENTE",
+    "Purchase":"Achat",
+    "Sale":"Vente",
+    "From Chest":"Coffre-Fort",
+  
+    "BUSINESS IS GROWING":"LES AFFAIRES GRANDISSENT",
+    "will be added to the market with a tag price of":"sera ajouté au marché au prix de",
 };
