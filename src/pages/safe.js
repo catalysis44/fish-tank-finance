@@ -279,10 +279,10 @@ export default function () {
       {
         !connected && <div className={styles.connect_or_undercontruction}>
           <div className={styles.title}>
-            My Safe
+            {t('My Safe')}
           </div>
           <img src="assets/safe_connect.png" />
-          <a onClick={() => { wallet.connect() }}>Connect Wallet</a>
+          <a onClick={() => { wallet.connect() }}>{t('Connect Wallet')}</a>
         </div>
       }
 
