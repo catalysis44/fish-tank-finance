@@ -13,7 +13,7 @@ export default {
 
   //layout
   "DISCONNECT": "DECONNECTER",
-  "CONNECT WALLET": "CONNECTER PORTEFEUILLE",
+  "CONNECT WALLET": "CONNECTER UN PORTEFEUILLE",
   "NO WALLET":"AUCUN PORTEFEUILLE",
   "The Zoo":"Le Zoo",
   "The Expedition":"L'Expédition",
@@ -36,7 +36,7 @@ export default {
   "per week":"par semaine",
   "HARVEST":"RÉCOLTER",
   "STAKED":"STAKED",
-  "Connect Wallet":"Connecter le portefeuille",
+  "Connect Wallet":"Connecter un portefeuille",
   "Deposit WSLP Token":"Faire un dépot de token WSLP ",
   "Withdraw":"Retirer",
   "boost":"boost",
