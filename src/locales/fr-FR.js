@@ -59,7 +59,7 @@ export default {
 
   "Sort by": "Trier par",
   "Boost Reward": "Boost de récompense",
-  "Time reducer": "Réducteur de durée",
+  "Time reducer": "Lock réducteur",
   "Attach": "Attacher",
 
   "View on": "Voir sur",
@@ -127,7 +127,7 @@ export default {
   "Minimum":"Minimum",
   "Boost Reward":"Boost",
   "Boost reward":"Boost",
-  "Locktime reducer":"Réducteur de durée",
+  "Locktime reducer":"Lock réducteur",
   "Level":"Niveau",
   "Currency":"Devise",
   "Class":"Classe",
