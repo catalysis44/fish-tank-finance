@@ -174,8 +174,8 @@ function BasicLayout(props) {
               </div>
             </div>
             <div className={styles.ext_link}>
-              <a href="#" target="_blank">{t("FAQ")}</a>
-              <a href="#" target="_blank">{t("Documentation")}</a>
+              
+              <a href="https://docs.zookeeper.finance/" target="_blank">{t("Documentation")}</a>
               <a target="_blank" onClick={() => { setConfirmResetCacheModal(1) }}>{t("Reset Cache")}</a>
               <a onClick={()=>{
                 
