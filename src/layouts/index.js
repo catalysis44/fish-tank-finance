@@ -177,23 +177,21 @@ function BasicLayout(props) {
               
               <a href="https://docs.zookeeper.finance/" target="_blank">{t("Documentation")}</a>
               <a target="_blank" onClick={() => { setConfirmResetCacheModal(1) }}>{t("Reset Cache")}</a>
-              <a onClick={()=>{
-                
-                if (getLocale() === 'zh-CN') {
-                  setLocale('fr-FR', false);
-                }
-                else if(getLocale() === 'en-US')
-                {
-                  setLocale('zh-CN', false);
-                }
-                else
-                {
-                  setLocale('en-US', false);
-                }
-                
-                
-                
-              }}>{t("ENG/中文/FRA")}</a>
+             
+            </div>
+            <div className={styles.lang_switcher} >
+              <a className={styles.lang} onClick={() => {setLocale('en-US', false)}}>
+                <img src="assets/lang/us.png"/>
+                <span>English</span>
+              </a>
+              <a className={styles.lang} onClick={() => {setLocale('zh-CN', false)}}>
+                <img src="assets/lang/cn.png"/>
+                <span>中文</span>
+              </a>
+              <a className={styles.lang} onClick={() => {setLocale('fr-FR', false)}}>
+                <img src="assets/lang/fr.png"/>
+                <span>Français</span> 
+              </a>
             </div>
             <div>
               <div className={styles.social}>
