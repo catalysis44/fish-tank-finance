@@ -149,17 +149,17 @@ function Row(props) {
                   setAmount(e.target.value);
                 }
               }} />
-              <div className={"dropdown is-active"}> {/*add class .is-active to open dropdown*/}
+              <div className={"dropdown is-active"}  tabindex="-1" onBlur={() => setShowDropdown(false)}> {/*add class .is-active to open dropdown*/}
                 <a className={styles.select_currency} aria-haspopup="true" aria-controls="dropdown-menu" onClick={() => {
                   setShowDropdown(!showDropdown);
-                }}>
+                }} >
                   <img src={currencyIcon} />
                   <span className={styles.currency_name}>{currency}</span>
                   <span><FontAwesomeIcon icon={faCaretDown} /></span>
                 </a>
                 {
                   showDropdown && <div class="dropdown-menu" id="dropdown-menu" role="menu">
-                    <div class="dropdown-content">
+                    <div class="dropdown-content"  >
                       {
                         currencyList.map(c => {
                           return <a class="dropdown-item" onClick={() => {

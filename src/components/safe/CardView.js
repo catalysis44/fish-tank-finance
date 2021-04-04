@@ -189,7 +189,7 @@ export default function CardView(props) {
                     setAmount(e.target.value);
                   }
                 }} />
-                <div className="dropdown is-active">
+                <div className="dropdown is-active"   tabindex="-1" onBlur={() => setShowDropdown(false)}>
                   <a className={styles.select_currency} aria-haspopup="true" aria-controls="dropdown-menu" onClick={() => {
                     setShowDropdown(!showDropdown);
                   }}>
