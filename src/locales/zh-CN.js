@@ -71,8 +71,8 @@ export default {
   "Liquidity": "流动性",
   "Multiplier": "奖励倍数",
   "View only": "仅显示",
-  "Staked": "已质押",
-  "Active": "活跃",
+  "Staked Pools": "已质押",
+  "Active Pools": "活跃",
   "Loading...(Please switch network to wanchain)": "正在加载...(请正确选择Wanchain网络)",
 
   //expedition.js
@@ -140,18 +140,19 @@ export default {
   "APPROVE":"APPROUVER",
   "CONFIRM":"CONFIRMER",
 
-    // SAFE //
-    "On Sale for":"En Vente pour",
-    "Transaction not found...":"Transaction introuvable......",
-    "SELL":"VENDRE",
-    "HISTORY":"HISTORIQUE",
-    "TX History":"TX Historique",
-  
-    "WITHDRAW FROM SALE":"RETIRER DE LA VENTE",
-    "Purchase":"Achat",
-    "Sale":"Vente",
-    "From Chest":"Coffre-Fort",
-  
-    "BUSINESS IS GROWING":"LES AFFAIRES GRANDISSENT",
-    "will be added to the market with a tag price of":"sera ajouté au marché au prix de",
+  // SAFE //
+  "On Sale for":"En Vente pour",
+  "Cancel the SALE":"Annuler la vente",
+  "Transaction not found...":"Transaction introuvable......",
+  "SELL":"VENDRE",
+  "HISTORY":"HISTORIQUE",
+  "TX History":"TX Historique",
+
+  "WITHDRAW FROM SALE":"RETIRER DE LA VENTE",
+  "Purchase":"Achat",
+  "Sale":"Vente",
+  "From Chest":"Coffre-Fort",
+
+  "BUSINESS IS GROWING":"LES AFFAIRES GRANDISSENT",
+  "will be added to the market with a tag price of":"sera ajouté au marché au prix de",
 };

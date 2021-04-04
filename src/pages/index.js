@@ -107,8 +107,8 @@ export default function () {
               {t("View only")}
               </div>
             <div className={styles.view_btn}>
-              <a className={ onlyStaked && styles.is_acitve} onClick={()=>{setOnlyStaked(!onlyStaked)}}>{t("Staked")}</a>
-              <a className={ onlyActived && styles.is_acitve} onClick={()=>{setOnlyActived(!onlyActived)}}>{t("Active")}</a>
+              <a className={ onlyStaked && styles.is_acitve} onClick={()=>{setOnlyStaked(!onlyStaked)}}>{t("Staked Pools")}</a>
+              <a className={ onlyActived && styles.is_acitve} onClick={()=>{setOnlyActived(!onlyActived)}}>{t("Active Pools")}</a>
             </div>
           </div>
         </div>

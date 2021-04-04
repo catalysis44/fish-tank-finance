@@ -9,10 +9,10 @@ import { WalletContext } from '../../wallet/Wallet';
 import ConfirmActionModal from './ConfirmAction';
 import { cancelOrder } from '../../wallet/send';
 import { currencyList } from '../../config';
-
+import { useLanguage } from '../../hooks/language';
 
 function Row(props) {
-
+  const t = useLanguage();
   const [currency, setCurrency] = useState('ZOO');
   const [currencyIcon, setCurrencyIcon] = useState('assets/currency/zoo.png');
   const [showDropdown, setShowDropdown] = useState(false);
@@ -90,10 +90,10 @@ function Row(props) {
       <div className={`${styles.listview_col} ${styles.item_description}`}>
         <div className={styles.listview_subcol}>
           <div className={styles.description}>
-            <span><img src={categoryIcons[Number(props.attributes[0].value) - 1]} /> {categorys[Number(props.attributes[0].value) - 1]}</span>
+            <span><img src={categoryIcons[Number(props.attributes[0].value) - 1]} /> {t(categorys[Number(props.attributes[0].value) - 1])}</span>
           </div>
           <div className={styles.description}>
-            <span>Card #</span>
+            <span>{t('Card')} #</span>
             {props.tokenId}
           </div>
           <div className={styles.description_supply}>
@@ -104,7 +104,7 @@ function Row(props) {
               <div></div>
               <div></div>
             </div>
-            <span>Total Supply</span>
+            <span>{t('Total Supply')}</span>
             {props.itemSupply}
           </div>
 
@@ -118,7 +118,7 @@ function Row(props) {
         isOnSell && <div className={`${styles.listview_col} ${styles.onsale_action}`} >
           <div className={styles.listview_subcol}>
             <div className={styles.onsale_price}>
-              <span>On Sale for</span>
+              <span>{t('On Sale for')}</span>
               {commafy(onSellPrice / 10 ** decimals)} {symbol}
             </div>
             <a className={styles.cancel} onClick={() => {
@@ -131,7 +131,7 @@ function Row(props) {
                 setTxWaiting(false);
               });
             }}>
-              Cancel the SALE
+              {t('Cancel the SALE')}
           </a>
           </div>
         </div>
@@ -199,7 +199,7 @@ function Row(props) {
               props.setCurrentOrder(currentOrder);
               props.setShowConfirmActionModal(1);
             }}>
-              SELL
+              {t('SELL')}
           </a>
           </div>
         </div>
@@ -211,7 +211,7 @@ function Row(props) {
 }
 
 export default function ListView(props) {
-
+  const t = useLanguage();
   const cards = props.cards;
   // console.log('cards', cards);
   const [showConfirmActionModal, setShowConfirmActionModal] = useState(0);

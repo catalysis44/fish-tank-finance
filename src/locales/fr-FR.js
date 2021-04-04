@@ -72,8 +72,8 @@ export default {
   "Liquidity": "Liquidité",
   "Multiplier": "Multiplicateur",
   "View only": "Afficher uniquement",
-  "Staked": "Staked",
-  "Active": "Active",
+  "Staked Pools": "Pools stackées",
+  "Active Pools": "Pools actives",
   "Loading...(Please switch network to wanchain)": "Chargement...(Veuillez changer le réseau pour celui de Wanchain)",
   
 
@@ -149,6 +149,7 @@ export default {
 
   // SAFE //
   "On Sale for":"En Vente pour",
+  "Cancel the SALE":"Annuler la vente",
   "Transaction not found...":"Transaction introuvable......",
   "SELL":"VENDRE",
   "HISTORY":"HISTORIQUE",
