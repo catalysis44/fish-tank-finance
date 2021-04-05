@@ -206,6 +206,7 @@ function BasicLayout(props) {
             </div>
             <div>
               <div className={styles.social}>
+                <a href="http://bbs.zookeeper.finance" target="_blank"><img src="assets/social/discord.svg"/></a>
                 <a href="#" target="_blank"><img src="assets/social/twitter.svg"/></a>
                 <a href="#" target="_blank"><img src="assets/social/telegram.svg"/></a>
                 <a href="#" target="_blank"><img src="assets/social/medium.svg"/></a>
