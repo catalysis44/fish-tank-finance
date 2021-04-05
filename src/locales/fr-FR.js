@@ -152,7 +152,7 @@ export default {
   // SAFE //
   "On Sale for":"En Vente pour",
   "Cancel the SALE":"Annuler la vente",
-  "Transaction not found...":"Transaction introuvable......",
+  "Transaction not found...":"Transaction introuvable...",
   "SELL":"VENDRE",
   "HISTORY":"HISTORIQUE",
   "TX History":"TX Historique",

@@ -24,6 +24,8 @@ export default {
   "FAQ": "常见问题",
   "Documentation": "帮助文档",
   "Reset Cache": "重置缓存",
+  "Your sell order":"Your sell order",
+  "has been concluded":"has been concluded",
 
   //Pool
   "REWARD": "收益",
