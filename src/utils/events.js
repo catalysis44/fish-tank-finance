@@ -3,10 +3,12 @@ import { useCallback } from "react";
 import { openNotificationBell } from ".";
 import { NFT_MARKETPLACE_ADDRESS } from "../config";
 import { getPendingSellHistory, updateHistory } from "./db";
+import { useLanguage } from '../hooks/language';
 const marketAbi = require('../assets/abi/market.json');
 
 
 export const useEventMonitor = (web3, chainId) => {
+  const t = useLanguage();
   const checkEvent = useCallback(async () => {
     if (!web3 || !chainId) {
       return;
@@ -32,7 +34,7 @@ export const useEventMonitor = (web3, chainId) => {
     hisotrys.map((v, i) => {
       if (rets[i].length > 0) {
         updateHistory('sale', v.time, 'success');
-        openNotificationBell('Your sell order [#' + v.tokenId + ' ' + v.name + ', ' + v.price + ' ' + v.symbol + '] has been concluded.', v.image);
+        openNotificationBell(t('Your sell order')+' [#' + v.tokenId + ' ' + v.name + ', ' + v.price + ' ' + v.symbol + '] '+t('has been concluded')+'.', v.image);
       }
     });
   }, [web3, chainId]);

@@ -25,7 +25,9 @@ export default {
   "FAQ":"FAQ",
   "Documentation":"Documentation",
   "Reset Cache":"Vider le cache",
-
+  "Your sell order":"VOTRE ORDRE DE VENTE",
+  "has been concluded":"A ÉTÉ CONCLU",
+  
   //Pool
   "REWARD":"RÉCOMPENSE",
   "LOCKTIME":"LOCKTIME",
