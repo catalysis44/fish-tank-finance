@@ -180,7 +180,7 @@ function BasicLayout(props) {
                 <span>{t("Documentation")}</span>
               </a>
               <a target="_blank" onClick={() => { setConfirmResetCacheModal(1) }}>
-                <div></div>
+              <img src="assets/clearcache.png"/>
                 <span>{t("Reset Cache")}</span>
                 
                 </a>
