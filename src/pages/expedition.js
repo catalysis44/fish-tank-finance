@@ -9,7 +9,7 @@ import { OmitProps } from 'antd/lib/transfer/ListBody';
 import Loader from '../components/loader'
 import BigNumber from 'bignumber.js';
 import { useCountDown } from 'ahooks';
-import { approve, checkApprove, stakeClaim, stakeZoo } from '../wallet/send';
+import { approveExpedition, checkApproveExpedition, stakeClaim, stakeZoo } from '../wallet/send';
 import { ZOO_TOKEN_ADDRESS } from '../config';
 import { getNftInfo } from '../hooks/nftInfo';
 import { insertHistory } from '../utils/db';
@@ -67,8 +67,8 @@ export default function (props) {
       return;
     }
     // console.debug('checkApprove begin', updateApprove);
-    checkApprove(ZOO_TOKEN_ADDRESS[chainId], '0x' + (new BigNumber(goldenPrice)).multipliedBy(1e18).toString(16), chainId, web3, address).then(ret => {
-      // console.debug('checkApprove', ret);
+    checkApproveExpedition(ZOO_TOKEN_ADDRESS[chainId], '0x' + (new BigNumber(goldenPrice)).multipliedBy(1e18).toString(16), chainId, web3, address).then(ret => {
+      // console.debug('checkApprove', ret, goldenPrice.toString());
       setApproved(ret);
     }).catch(err => {
       console.error('checkApprove err', err);
@@ -227,7 +227,7 @@ export default function (props) {
             stakingZoo && <div className={styles.action_wrapper}>
               <a className={styles.action_btn} disabled={approved} onClick={() => {
                 setTxWaiting(true);
-                approve(ZOO_TOKEN_ADDRESS[chainId], chainId, web3, address).then(ret => {
+                approveExpedition(ZOO_TOKEN_ADDRESS[chainId], chainId, web3, address).then(ret => {
                   setTxWaiting(false);
                   setUpdateApprove(updateApprove + 1);
                   // console.debug('approve bt ret', ret);
@@ -336,7 +336,7 @@ export default function (props) {
             stakingZoo1 && <div className={styles.action_wrapper}>
               <a className={styles.action_btn} disabled={approved} onClick={() => {
                 setTxWaiting(true);
-                approve(ZOO_TOKEN_ADDRESS[chainId], chainId, web3, address).then(ret => {
+                approveExpedition(ZOO_TOKEN_ADDRESS[chainId], chainId, web3, address).then(ret => {
                   setTxWaiting(false);
                   setUpdateApprove(updateApprove + 1);
                   // console.debug('approve bt ret', ret);
@@ -445,7 +445,7 @@ export default function (props) {
             stakingZoo2 && <div className={styles.action_wrapper}>
               <a className={styles.action_btn} disabled={approved} onClick={() => {
                 setTxWaiting(true);
-                approve(ZOO_TOKEN_ADDRESS[chainId], chainId, web3, address).then(ret => {
+                approveExpedition(ZOO_TOKEN_ADDRESS[chainId], chainId, web3, address).then(ret => {
                   setTxWaiting(false);
                   setUpdateApprove(updateApprove + 1);
                   // console.debug('approve bt ret', ret);
