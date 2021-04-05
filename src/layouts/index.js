@@ -175,8 +175,15 @@ function BasicLayout(props) {
             </div>
             <div className={styles.ext_link}>
               
-              <a href="https://docs.zookeeper.finance/" target="_blank">{t("Documentation")}</a>
-              <a target="_blank" onClick={() => { setConfirmResetCacheModal(1) }}>{t("Reset Cache")}</a>
+              <a href="https://docs.zookeeper.finance/" target="_blank">
+                <img src="assets/docs.png"/>
+                <span>{t("Documentation")}</span>
+              </a>
+              <a target="_blank" onClick={() => { setConfirmResetCacheModal(1) }}>
+                <div></div>
+                <span>{t("Reset Cache")}</span>
+                
+                </a>
              
             </div>
             <div className={styles.lang_switcher} >

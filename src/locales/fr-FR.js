@@ -24,7 +24,7 @@ export default {
   "TOTAL BURNED":"TOTAL BRÛLÉ",
   "FAQ":"FAQ",
   "Documentation":"Documentation",
-  "Reset Cache":"Réinitialiser le cache",
+  "Reset Cache":"Vider le cache",
 
   //Pool
   "REWARD":"RÉCOMPENSE",
