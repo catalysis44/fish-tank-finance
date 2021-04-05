@@ -6,27 +6,29 @@ import { updatePrice } from './price';
 const { aggregate } = require('@makerdao/multicall');
 const DataLoader = require('dataloader');
 
-export const initialState = {
-  zooBalance: new BigNumber(0),
-  address: '',
-  chainId: 999,
-  farmingInfo: {
-    startBlock: 0,
-    allEndBlock: 0,
-    zooPerBlock: 0,
-    poolLength: 0,
-  },
-  poolInfo: [],
-  goldenPrice: 0,
-  expeditions: [],
-  zooBurned: new BigNumber(0),
-  zooTotalSupply: new BigNumber(0),
-  nftBalance: 0,
-  nftCards: [],
-  blockNumber: 0,
-  marketOrderCount: 0,
-  markets: [],
-}
+export const initialState = require('./initState.json');
+
+//  {
+//   zooBalance: new BigNumber(0),
+//   address: '',
+//   chainId: 999,
+//   farmingInfo: {
+//     startBlock: 0,
+//     allEndBlock: 0,
+//     zooPerBlock: 0,
+//     poolLength: 0,
+//   },
+//   poolInfo: [],
+//   goldenPrice: 0,
+//   expeditions: [],
+//   zooBurned: new BigNumber(0),
+//   zooTotalSupply: new BigNumber(0),
+//   nftBalance: 0,
+//   nftCards: [],
+//   blockNumber: 0,
+//   marketOrderCount: 0,
+//   markets: [],
+// }
 
 const differ = (a, b) => {
   if (JSON.stringify(a) === JSON.stringify(b)) {
