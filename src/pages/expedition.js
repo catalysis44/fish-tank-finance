@@ -206,7 +206,7 @@ export default function (props) {
             </div>
             <div className={styles.hour}>
               <img src="assets/hourglass24x24.png" />
-              <span>48 {t("Hours")}</span>
+              <span>2 {t("days")}</span>
 
             </div>
           </div>
