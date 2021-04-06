@@ -88,7 +88,7 @@ export default function ChestboxBuyModal(props) {
           <div className={styles.rule}>
             <div>{t("RULES")}</div>
             <span>{props.rules}</span>
-            <a>{t("MORE DETAILS ABOUT THE CHEST")}</a>
+            <a href="https://docs.zookeeper.finance/manual/expedition#dynamic-pricing-mechanics" target="_blank">{t("MORE DETAILS ABOUT THE CHEST")}</a>
           </div>
           <div className={styles.action}>
             <a className={styles.action_btn} disabled={approved} onClick={()=>{
