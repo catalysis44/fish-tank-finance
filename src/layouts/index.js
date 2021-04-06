@@ -203,6 +203,10 @@ function BasicLayout(props) {
                 <img src="assets/lang/ru.png"/>
                 <span>Pусский</span> 
               </a>
+              <a className={styles.lang} onClick={() => {setLocale('es-ES', false)}}>
+                <img src="assets/lang/es.png"/>
+                <span>Español</span> 
+              </a>
             </div>
             <div>
               <div className={styles.social}>
