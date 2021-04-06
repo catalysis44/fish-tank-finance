@@ -7,8 +7,7 @@ import { useLanguage } from '../hooks/language';
 const marketAbi = require('../assets/abi/market.json');
 
 
-export const useEventMonitor = (web3, chainId) => {
-  const t = useLanguage();
+export const useEventMonitor = (web3, chainId, t) => {
   const checkEvent = useCallback(async () => {
     if (!web3 || !chainId) {
       return;
@@ -37,6 +36,6 @@ export const useEventMonitor = (web3, chainId) => {
         openNotificationBell(t('Your sell order')+' [#' + v.tokenId + ' ' + v.name + ', ' + v.price + ' ' + v.symbol + '] '+t('has been concluded')+'.', v.image);
       }
     });
-  }, [web3, chainId]);
+  }, [web3, chainId, t]);
   useInterval(checkEvent, 20 * 1000, { immediate: true });
 }

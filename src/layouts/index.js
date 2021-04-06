@@ -41,16 +41,16 @@ function BasicLayout(props) {
   const provider = wallet.provider;
   const [loading, setLoading] = useState(false);
   
+  const t = useLanguage();
+
   const [storage, setStorage] = useLocalStorageState('zoo-keeper-' + address + '-' + chainId, initialState);
 
   useDataPump(storage, setStorage, chainId, address, connected);
 
-  useEventMonitor(wallet.web3, chainId);
+  useEventMonitor(wallet.web3, chainId, t);
 
   const prices = getPrices();
   // console.debug('chainId', chainId);
-
-  const t = useLanguage();
 
   const zooPrice = prices['ZOO'];
 
