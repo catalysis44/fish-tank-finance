@@ -300,7 +300,7 @@ export default function () {
                 setFilters({});
                 setBoostSlider(0);
                 setReduceSlider(0);
-              }}>Clear Filter</a>
+              }}>{t('Clear Filter')}</a>
               <div className={styles.filter_ability} style={{ marginTop: 15 }}>
                 <div className={styles.ability_title}>
                   <img src="assets/rocket24x24.png" />
