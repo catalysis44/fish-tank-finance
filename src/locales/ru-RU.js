@@ -69,7 +69,7 @@ export default {
     "View on": "Смотреть на",
   
     //loader.js
-    "Waiting TX Confirmation": "В ОЖИДАНИИ TX",
+    "Waiting for TX Confirmation": "В ОЖИДАНИИ TX",
   
     //index.js
     "FILTER": "ФИЛЬТР",

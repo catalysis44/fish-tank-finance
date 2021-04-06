@@ -67,7 +67,7 @@ export default {
   "View on": "Voir sur",
 
   //loader.js
-  "Waiting TX Confirmation": "En Attente de Confirmation TX",
+  "Waiting for TX Confirmation": "En Attente de Confirmation TX",
 
   //index.js
   "FILTER": "FILTRE",

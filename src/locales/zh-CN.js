@@ -66,7 +66,7 @@ export default {
   "View on": "View on",
 
   //loader.js
-  "Waiting TX Confirmation": "正在等待交易确认",
+  "Waiting for TX Confirmation": "正在等待交易确认",
 
   //index.js
   "FILTER": "FILTER",

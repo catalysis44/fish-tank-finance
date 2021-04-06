@@ -11,7 +11,7 @@ export default function Loader() {
       <div className={styles.loader_wrapper}>
         <img src="assets/zoo_logo.png" class="animate__animated animate__pulse animate__infinite"/>
         <div className={styles.caption} > {/*Change you text here */}
-          {t("Waiting TX Confirmation")}
+          {t("Waiting for TX Confirmation")}
         </div>
         <div className={styles.spinner}>
           <div className={styles.bounce1}>.</div>
