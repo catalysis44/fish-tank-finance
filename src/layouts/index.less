@@ -1,4 +1,4 @@
-@media (min-height: 900px) { // Edit here for expanding menu
+@media (min-height: 840px) { // Edit here for expanding menu
     .footer
     {
         width:100%;
@@ -12,12 +12,16 @@
     width:100%;
     .box
     {
+        &:first-child
+        {
+            padding-top:15px;
+        }
         &:last-child
         {
-            border-bottom:1px solid #f5f5f5;
+            padding-bottom:15px;
         }
-        border-top:1px solid #f5f5f5;
-        padding: 15px 30px;
+       
+        padding: 10px 30px;
         display:flex;
         font-size:13px;
         img
@@ -42,7 +46,9 @@
     }
     .ext_link
     {
-        padding: 15px 30px;
+        padding: 10px 30px;
+        padding-bottom:15px;
+        border-bottom: 1px solid #f5f5f5;
         a:last-child
         {
             margin-bottom:0;
@@ -65,11 +71,65 @@
             align-items: center;
             span
             {
-                margin-left:5px;
+                margin-left:4px;
             }
             margin-bottom:20px;
             //text-align: center;
             //margin-left:57px;
+        }
+    }
+    .lang_social_wrapper
+    {
+        display:flex;
+        
+        justify-content: center;
+        :global
+        {
+            .dropdown:first-child
+                {
+                    border-top-left-radius: 4px;
+                    border-bottom-left-radius: 4px;
+                    border-right:1px solid white;
+                }
+            .dropdown:last-child
+                {
+                    border-top-right-radius: 4px;
+                    border-bottom-right-radius: 4px;
+                    border-left:1px solid white;
+                }
+            .dropdown
+            {
+               .dropdown-item
+               {
+                  color:black; 
+               } 
+               a
+               {
+                color:white;
+                display:flex;
+                align-items: center;
+                span
+                {
+                    text-transform: uppercase;
+                    padding-top:3px;
+                    display:block
+                }
+               }
+               
+                font-size:14px;
+                height: 40px;
+                background: #00a99d;
+                width:100px;
+                display:flex;
+                justify-content: center;
+                align-items: center;
+                img
+                {
+                    margin-right:5px;
+                    width:16px;
+                    height:auto;
+                }
+            }
         }
     }
     .lang_switcher
@@ -142,11 +202,13 @@
     {
         text-align: center;
         padding:5px 20px;
-        font-size:11px;
-        border-top:1px solid #f5f5f5;
+        font-size:12px;
+        text-transform: uppercase;
+        //border-top:1px solid #f5f5f5;
         a
         {
             color:#00a99d;
+            
         }
     }
 }

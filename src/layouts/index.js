@@ -2,7 +2,7 @@ import styles from './index.less';
 import "../styles/bulma.scss"
 import '../../node_modules/animate.css/animate.min.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCircle, faCopy } from '@fortawesome/free-solid-svg-icons'
+import { faCircle, faCopy, faCaretUp } from '@fortawesome/free-solid-svg-icons'
 
 import Header from '../components/Header';
 import { NavLink, setLocale, getLocale } from 'umi';
@@ -31,8 +31,14 @@ function toggleSidebar()
 
 function BasicLayout(props) {
 
-  
+  /* Language Switcher */
+  const [showLangswitcherDropdown, setShowLangswitcherDropdown] = useState(false);
+  const [lang, setLang] = useState('English');
+  const [langIcon, setLangIcon] = useState('assets/lang/us.png');
+  /* Contract Dropdown */
+  const [showContactDropdown, setShowContactDropdown] = useState(false);
 
+  
   const [wallet, setWallet] = useState({});
   const web3 = wallet.web3;
   const chainId = wallet.networkId && wallet.networkId.toString();
@@ -153,9 +159,20 @@ function BasicLayout(props) {
         </div>
 
         <div className={styles.footer}>
+
+            <div className={styles.ext_link}>
+              
+              <a href="https://docs.zookeeper.finance/" target="_blank">
+                <img src="assets/docs.png"/>
+                <span>{t("Documentation")}</span>
+              </a>
+            
+             
+            </div>
+
             <div id="zoo_info_burned">
               <div className={styles.box}>
-                  <img src="assets/zoo32x32.png" class={styles.zoo_icon}/>
+                  <img src="assets/zoo_panel.png" class={styles.zoo_icon}/>
                   <div class={styles.detail}>
                       <div>1 ZOO = <span>${commafy(zooPrice)}</span></div>
                       <div>{t("MC")} <span>${commafy((new BigNumber(storage.zooTotalSupply)).minus(storage.zooBurned).multipliedBy(zooPrice))}</span></div>
@@ -173,51 +190,107 @@ function BasicLayout(props) {
                   </div>
               </div>
             </div>
-            <div className={styles.ext_link}>
-              
-              <a href="https://docs.zookeeper.finance/" target="_blank">
-                <img src="assets/docs.png"/>
-                <span>{t("Documentation")}</span>
-              </a>
-              <a target="_blank" onClick={() => { setConfirmResetCacheModal(1) }}>
-              <img src="assets/clearcache.png"/>
-                <span>{t("Reset Cache")}</span>
-                
+           
+            <div className={styles.lang_social_wrapper} >
+              <div className={"dropdown is-up is-active"}  tabindex="-1" onBlur={() => setShowLangswitcherDropdown(false)}> {/*add class .is-active to open dropdown*/}
+                <a className={styles.select_lang} aria-haspopup="true" aria-controls="dropdown-menu"  onClick={() => {
+                  setShowLangswitcherDropdown(!showLangswitcherDropdown);
+                }}>
+                  <img src={langIcon} />
+                  <span>{lang}</span>
                 </a>
-             
-            </div>
-            <div className={styles.lang_switcher} >
-              <a className={styles.lang} onClick={() => {setLocale('en-US', false)}}>
-                <img src="assets/lang/us.png"/>
-                <span>English</span>
-              </a>
-              <a className={styles.lang} onClick={() => {setLocale('zh-CN', false)}}>
-                <img src="assets/lang/cn.png"/>
-                <span>中文</span>
-              </a>
-              <a className={styles.lang} onClick={() => {setLocale('fr-FR', false)}}>
-                <img src="assets/lang/fr.png"/>
-                <span>Français</span> 
-              </a>
-              <a className={styles.lang} onClick={() => {setLocale('ru-RU', false)}}>
-                <img src="assets/lang/ru.png"/>
-                <span>Pусский</span> 
-              </a>
-              <a className={styles.lang} onClick={() => {setLocale('es-ES', false)}}>
-                <img src="assets/lang/es.png"/>
-                <span>Español</span> 
-              </a>
-            </div>
-            <div>
-              <div className={styles.social}>
-                <a href="http://bbs.zookeeper.finance" target="_blank"><img src="assets/social/discord.svg"/></a>
-                <a href="#" target="_blank"><img src="assets/social/twitter.svg"/></a>
-                <a href="#" target="_blank"><img src="assets/social/telegram.svg"/></a>
-                <a href="#" target="_blank"><img src="assets/social/medium.svg"/></a>
-                <a href="https://github.com/zooFarming/" target="_blank"><img src="assets/social/github.svg"/></a>
+                {
+                  showLangswitcherDropdown && <div class="dropdown-menu" id="dropdown-menu" role="menu">
+                  <div class="dropdown-content"  >
+                      <a class="dropdown-item" onClick={() => {
+                        setLocale('en-US', false);
+                        setShowLangswitcherDropdown(false);
+                        setLangIcon('assets/lang/us.png');
+                        setLang('English');
+                        }}>
+                        <img src="assets/lang/us.png"/>
+                        <span>English</span>
+                      </a>
+
+                      <a class="dropdown-item" onClick={() => {
+                        setLocale('zh-CN', false);
+                        setShowLangswitcherDropdown(false);
+                        setLangIcon('assets/lang/cn.png');
+                        setLang('中文');
+                      }}>
+                        <img src="assets/lang/cn.png"/>
+                        <span>中文</span>
+                      </a>
+
+                      <a class="dropdown-item" onClick={() => {
+                        setLocale('fr-FR', false);
+                        setShowLangswitcherDropdown(false);
+                        setLangIcon('assets/lang/fr.png');
+                        setLang('Français');
+                        }}>
+                        <img src="assets/lang/fr.png"/>
+                        <span>Français</span> 
+                      </a>
+
+                      <a class="dropdown-item" onClick={() => {
+                        setLocale('ru-RU', false);
+                        setShowLangswitcherDropdown(false);
+                        setLangIcon('assets/lang/ru.png');
+                        setLang('Pусский');
+                        }}>
+                        <img src="assets/lang/ru.png"/>
+                        <span>Pусский</span> 
+                      </a>
+
+                      <a class="dropdown-item" onClick={() => {
+                        setLocale('es-ES', false);
+                        setShowLangswitcherDropdown(false);
+                        setLangIcon('assets/lang/es.png');
+                        setLang('Español');
+                        }}>
+                        <img src="assets/lang/es.png"/>
+                        <span>Español</span> 
+                      </a>
+
+                  </div>
+                </div>
+                }
               </div>
+
+              <div className={"dropdown is-up is-active"}  tabindex="-1"  onBlur={() => setShowContactDropdown(false)}> {/*add class .is-active to open dropdown*/}
+                <a className={styles.select_lang} aria-haspopup="true" aria-controls="dropdown-menu"  onClick={() => {
+                  setShowContactDropdown(!showLangswitcherDropdown);
+                }}>
+                  <span>Contact <FontAwesomeIcon icon={faCaretUp}/></span>
+                </a>
+                {
+                   showContactDropdown && <div class="dropdown-menu" id="dropdown-menu" role="menu">
+                    <div class="dropdown-content"  >
+                        <a href="https://t.me/zoofarming" target="_blank" class="dropdown-item" onClick={() => {setShowContactDropdown(false);}}>
+                          <span>Telegram</span>
+                        </a>
+                        <a href="https://bbs.zookeeper.finance" target="_blank" class="dropdown-item" onClick={() => {setShowContactDropdown(false);}}>
+                          <span>BBS</span>
+                        </a>
+                        <a href="#" target="_blank" class="dropdown-item" onClick={() => {setShowContactDropdown(false);}}>
+                          <span>Medium</span>
+                        </a>
+                        <a href="#" target="_blank" class="dropdown-item" onClick={() => {setShowContactDropdown(false);}}>
+                          <span>Twitter</span>
+                        </a>
+                        <a href="https://github.com/zooFarming/" target="_blank" class="dropdown-item" onClick={() => {setShowContactDropdown(false);}}>
+                          <span>Github</span>
+                        </a>
+                      </div>
+                    </div>
+                }
+              </div>
+
+            </div>
+           <div>
+              
               <div className={styles.credit}>
-                Powered by <a href="https://www.wanchain.org" target="_blank">WANCHAIN</a>
+                Powered by <a href="https://www.wanchain.org" target="_blank">WANCHAIN</a> - <a onClick={() => { setConfirmResetCacheModal(1) }}>Reset Cache</a>
               </div>
             </div>
       </div>
