@@ -82,7 +82,7 @@ export default function OpenChestboxModal(props) {
           <div className={styles.rule}>
             <div>{t(props.type.toUpperCase()+' CHEST HAS BEEN OPENED')}</div>
             <span>{t('You got')} "<a>{props.name}</a>",
-            {t('Your boost card has been transfered to you safe')}</span>
+            {t('Your boost card has been transfered to you safe.')}</span>
           </div>
 
           <div className={styles.action}>
