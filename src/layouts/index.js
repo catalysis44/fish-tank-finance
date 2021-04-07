@@ -278,6 +278,9 @@ function BasicLayout(props) {
                         <a href="#" target="_blank" class="dropdown-item" onClick={() => {setShowContactDropdown(false);}}>
                           <span>Twitter</span>
                         </a>
+                        <a href="#" target="_blank" class="dropdown-item" onClick={() => {setShowContactDropdown(false);}}>
+                          <span>Youtube</span>
+                        </a>
                         <a href="https://github.com/zooFarming/" target="_blank" class="dropdown-item" onClick={() => {setShowContactDropdown(false);}}>
                           <span>Github</span>
                         </a>
