@@ -33,7 +33,7 @@ function BasicLayout(props) {
 
   /* Language Switcher */
   const [showLangswitcherDropdown, setShowLangswitcherDropdown] = useState(false);
-  const [lang, setLang] = useState('English');
+  const [lang, setLang] = useLocalStorageState('user-language', 'English');
   const [langIcon, setLangIcon] = useState('assets/lang/us.png');
   /* Contract Dropdown */
   const [showContactDropdown, setShowContactDropdown] = useState(false);
