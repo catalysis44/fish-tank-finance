@@ -266,24 +266,28 @@ function BasicLayout(props) {
                 {
                    showContactDropdown && <div class="dropdown-menu" id="dropdown-menu" role="menu">
                     <div class="dropdown-content"  >
-                        <a href="https://t.me/zoofarming" target="_blank" class="dropdown-item" onClick={() => {setShowContactDropdown(false);}}>
+                        <a href="https://t.me/ZooFarming" target="_blank" class="dropdown-item" onClick={() => {setShowContactDropdown(false);}}>
                           <span>Telegram</span>
                         </a>
-                        <a href="https://bbs.zookeeper.finance" target="_blank" class="dropdown-item" onClick={() => {setShowContactDropdown(false);}}>
-                          <span>BBS</span>
-                        </a>
-                        <a href="#" target="_blank" class="dropdown-item" onClick={() => {setShowContactDropdown(false);}}>
-                          <span>Medium</span>
-                        </a>
-                        <a href="#" target="_blank" class="dropdown-item" onClick={() => {setShowContactDropdown(false);}}>
+                        <a href="https://twitter.com/ZooFarming" target="_blank" class="dropdown-item" onClick={() => {setShowContactDropdown(false);}}>
                           <span>Twitter</span>
                         </a>
-                        <a href="#" target="_blank" class="dropdown-item" onClick={() => {setShowContactDropdown(false);}}>
+                        <a href="https://medium.com/@ZooFarming" target="_blank" class="dropdown-item" onClick={() => {setShowContactDropdown(false);}}>
+                          <span>Medium</span>
+                        </a>  
+                        <a href="https://www.youtube.com/c/ZooFarming" target="_blank" class="dropdown-item" onClick={() => {setShowContactDropdown(false);}}>
                           <span>Youtube</span>
+                        </a>
+                        <a href="https://www.reddit.com/user/ZooFarming" target="_blank" class="dropdown-item" onClick={() => {setShowContactDropdown(false);}}>
+                          <span>Reddit</span>
                         </a>
                         <a href="https://github.com/zooFarming/" target="_blank" class="dropdown-item" onClick={() => {setShowContactDropdown(false);}}>
                           <span>Github</span>
                         </a>
+                        <a href="https://bbs.zookeeper.finance" target="_blank" class="dropdown-item" onClick={() => {setShowContactDropdown(false);}}>
+                          <span>Forum</span>
+                        </a>
+                        
                       </div>
                     </div>
                 }
