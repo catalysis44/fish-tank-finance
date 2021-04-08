@@ -65,6 +65,9 @@ export default {
     "Attach": "adjuntar",
   
     "View on": "Ver en",
+
+    "NEW POOL":"NEW POOL",
+    "TOMORROW":"TOMORROW",
   
     //loader.js
     "Waiting for TX Confirmation": "Esperando la Confirmación de TX",

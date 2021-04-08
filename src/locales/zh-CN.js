@@ -65,6 +65,9 @@ export default {
 
   "View on": "View on",
 
+  "NEW POOL":"NEW POOL",
+  "TOMORROW":"TOMORROW",
+
   //loader.js
   "Waiting for TX Confirmation": "正在等待交易确认",
 

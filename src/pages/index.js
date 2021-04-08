@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSortAlphaDown,faSortAmountUp,faSortNumericDown,faSortNumericUp,faSortNumericDownAlt } from '@fortawesome/free-solid-svg-icons';
 
 import Pool from '../components/zoo/Pool';
+import EmptyPool from '../components/zoo/EmptyPool';
 import Loader from '../components/loader'
 import { StorageContext } from '../hooks';
 import { useLocalStorageState } from 'ahooks';
@@ -133,6 +134,9 @@ export default function () {
             }
             return <Pool poolInfo={v} pid={v.pid} key={v.pid} setTxWaiting={setTxWaiting} farmingInfo={storage.farmingInfo}/>
           })
+        }
+        {
+          storage.poolInfo.length !== 0 && <EmptyPool/>
         }
       </div>
     </React.Fragment>
