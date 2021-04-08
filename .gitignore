@@ -18,3 +18,4 @@
 .umi-production
 
 .DS_Store
+.vercel
