@@ -47,7 +47,7 @@ export default {
     "Top-up":"Recarga",
     "Add Liquidity on WanSwap":"Añadir liquidez en WanSwap",
     "Deposit":"Depósito",
-    "Total Liquidity":"Liquidez Total",
+    "Total Deposit":"Liquidez Total",
     "DEPOSIT WSLP":"DEPÓSITO WSLP",
     "AVAILABLE":"DISPONIBLE",
     "MAX":"MAX",

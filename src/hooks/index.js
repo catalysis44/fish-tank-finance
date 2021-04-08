@@ -579,6 +579,10 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
       getZooPools(loader, chainId, address, farmingInfo.poolLength).then(ret => {
         // console.debug('getZooPools ret', ret);
         let poolInfo = tmpStorage.poolInfo;
+        if (poolInfo.length !== farmingInfo.poolLength) {
+          tmpStorage.poolInfo = [];
+          poolInfo = tmpStorage.poolInfo;
+        }
 
         for (let i = 0; i < farmingInfo.poolLength; i++) {
           poolInfo[i] = {

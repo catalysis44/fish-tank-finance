@@ -470,7 +470,7 @@ export default function Pool(props) {
                   ><FontAwesomeIcon icon={faExternalLinkSquareAlt} /></a></div>
                 </div>
                 <div className={styles.liq_row}>
-                  <div>{t("Total Liquidity")}</div>
+                  <div>{t("Total Deposit")}</div>
                   <div>${commafy(totalDeposited * wslpPrice).split('.')[0]}</div>
                 </div>
                 <div className={styles.liq_row}>
