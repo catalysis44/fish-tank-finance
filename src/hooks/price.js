@@ -3,6 +3,10 @@ import BigNumber from "bignumber.js";
 const prices = {
   'wanUSDT': 1,
   'wanUSDC': 1,
+  'WWAN': 1.82663,
+  'WAN': 1.82663,
+  'WASP': 0.379799,
+  'ZOO': 0,
 };
 
 

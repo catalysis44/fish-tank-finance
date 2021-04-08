@@ -267,6 +267,11 @@
         "internalType": "bool",
         "name": "dualFarmingEnable",
         "type": "bool"
+      },
+      {
+        "internalType": "bool",
+        "name": "emergencyMode",
+        "type": "bool"
       }
     ],
     "stateMutability": "view",
@@ -415,37 +420,6 @@
   {
     "inputs": [
       {
-        "internalType": "address",
-        "name": "_boostingAddr",
-        "type": "address"
-      }
-    ],
-    "name": "setBoostingAddr",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "_wanswapFarming",
-        "type": "address"
-      },
-      {
-        "internalType": "address",
-        "name": "_wasp",
-        "type": "address"
-      }
-    ],
-    "name": "setWaspSC",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
         "internalType": "uint256",
         "name": "_pid",
         "type": "uint256"
@@ -470,7 +444,7 @@
     "inputs": [
       {
         "internalType": "uint256",
-        "name": "_waspPid",
+        "name": "_pid",
         "type": "uint256"
       }
     ],
@@ -558,29 +532,6 @@
       }
     ],
     "name": "set",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "token",
-        "type": "address"
-      },
-      {
-        "internalType": "address",
-        "name": "spender",
-        "type": "address"
-      },
-      {
-        "internalType": "uint256",
-        "name": "amount",
-        "type": "uint256"
-      }
-    ],
-    "name": "approve",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -722,6 +673,32 @@
       }
     ],
     "name": "withdraw",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_pid",
+        "type": "uint256"
+      }
+    ],
+    "name": "emergencyWithdrawEnable",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_pid",
+        "type": "uint256"
+      }
+    ],
+    "name": "emergencyWithdraw",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"

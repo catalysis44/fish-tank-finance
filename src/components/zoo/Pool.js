@@ -16,49 +16,49 @@ import { getPrices } from '../../hooks/price';
 import { useLanguage } from '../../hooks/language';
 
 const poolAnimals = [
-  '/zoo_keeper_pools/BEAR.png',
-  '/zoo_keeper_pools/CROCODILE.png',
-  '/zoo_keeper_pools/ELEPHANT.png',
-  '/zoo_keeper_pools/GIRAFE.png',
-  '/zoo_keeper_pools/HIPPO.png',
-  '/zoo_keeper_pools/KANGAROO.png',
-  '/zoo_keeper_pools/KOALA.png',
-  '/zoo_keeper_pools/LAMA.png',
   '/zoo_keeper_pools/LION.png',
+  '/zoo_keeper_pools/ZEBRA.png',
   '/zoo_keeper_pools/MONKEY.png',
+  '/zoo_keeper_pools/TURTOISE.png',
   '/zoo_keeper_pools/PANDA.png',
+  '/zoo_keeper_pools/GIRAFE.png',
+  '/zoo_keeper_pools/ELEPHANT.png',
+  '/zoo_keeper_pools/WOLF.png',
+  '/zoo_keeper_pools/TIGER.png',
+  '/zoo_keeper_pools/BEAR.png',
+  '/zoo_keeper_pools/WHALE.png',
   '/zoo_keeper_pools/PENGUIN.png',
   '/zoo_keeper_pools/POLAR_BEAR.png',
   '/zoo_keeper_pools/RHINO.png',
-  '/zoo_keeper_pools/TIGER.png',
   '/zoo_keeper_pools/TOUKAN.png',
-  '/zoo_keeper_pools/TURTOISE.png',
-  '/zoo_keeper_pools/WHALE.png',
-  '/zoo_keeper_pools/WOLF.png',
-  '/zoo_keeper_pools/ZEBRA.png',
+  '/zoo_keeper_pools/CROCODILE.png',
+  '/zoo_keeper_pools/KOALA.png',
+  '/zoo_keeper_pools/LAMA.png',
+  '/zoo_keeper_pools/HIPPO.png',
+  '/zoo_keeper_pools/KANGAROO.png',
 ];
 
 const poolTitles = [
-  'EVANDER HONEYFIELD', // BEAR
-  'CARL CROCS', // CROCODILE
-  'ELON TUSK', // ELEPHANT
-  'RAFFERTY G. MONAY', // GIRAFFE
-  'HIP HIPPO RAY', // HIPPO
-  'DAVID HASSELHOP', // KANGAROO
-  'KRIS TREELEAFER', // KOALA
-  'VITALIK SPITERIN', // LLAMA
   'RAGING MANE LEO', // LION
+  'BARCODE BRENDA', // ZEBRA
   'MEL GIBBON', // MONKEY
+  'SHELLEY C. SNAPPER', // TORTOISE 
   'PAULIE BAMBOOZLE', // PANDA
+  'RAFFERTY G. MONAY', // GIRAFFE
+  'ELON TUSK', // ELEPHANT
+  'THE BIG BAG WOLF', // WOLF 
+  'STRIPEY TONAY', // TIGER
+  'EVANDER HONEYFIELD', // BEAR
+  'BLUBBER BOB', // WHALE 
   'EMPEROR SLICKFEET', // PENGUIN
   'PHIL T. ICEBARDGE', // POLAR BEAR
   'IVOR E. HORNDHAM', // RHINO
-  'STRIPEY TONAY', // TIGER
   'TWO-CAN STAN', // TOUKAN
-  'SHELLEY C. SNAPPER', // TORTOISE 
-  'BLUBBER BOB', // WHALE 
-  'THE BIG BAG WOLF', // WOLF 
-  'BARCODE BRENDA', // ZEBRA
+  'CARL CROCS', // CROCODILE
+  'KRIS TREELEAFER', // KOALA
+  'VITALIK SPITERIN', // LLAMA
+  'HIP HIPPO RAY', // HIPPO
+  'DAVID HASSELHOP', // KANGAROO
 ]
 
 
@@ -104,6 +104,8 @@ export default function Pool(props) {
   const reserve0 = poolInfo.reserve0;
   const reserve1 = poolInfo.reserve1;
   const [wslpPrice, setWslpPrice] = useState(0);
+  const startBlock = 14175786;
+  const currentBlock = poolInfo.blockNumber;
 
   const prices = getPrices();
 
@@ -111,8 +113,11 @@ export default function Pool(props) {
   // console.debug('multiplier', multiplier, symbol0, symbol1);
 
   const zooPerWeek = useMemo(()=>{
+    if (currentBlock <= startBlock) {
+      return new BigNumber(0);
+    }
     return lpAmount && (new BigNumber(lpAmount)).gt(0) && (new BigNumber(lpAmount)).multipliedBy(zooPerBlock * multiplier * blockPerWeek * allocPoint).div(totalAllocPoint).div(totalDeposited);
-  }, [totalAllocPoint, allocPoint, zooPerBlock, blockPerWeek, totalDeposited, lpAmount]);
+  }, [totalAllocPoint, allocPoint, zooPerBlock, blockPerWeek, totalDeposited, lpAmount, currentBlock]);
 
   const waspPerWeek = useMemo(()=>{
     if (!dualFarmingEnable) {
@@ -123,7 +128,7 @@ export default function Pool(props) {
   }, [waspAllocPoint, waspTotalAllocPoint, waspTotalLP, blockPerWeek, lpAmount, dualFarmingEnable]);
 
   const apy = useMemo(()=>{
-    if (decimals0 === 0 || decimals1 === 0 || !prices[symbol0] || !prices[symbol1] || !prices['ZOO'] || !prices['WASP']) {
+    if (decimals0 === 0 || decimals1 === 0 || !prices[symbol0] || !prices[symbol1]) {
       return;
     }
 
@@ -137,8 +142,10 @@ export default function Pool(props) {
     const d0 = Number(decimals0);
     const d1 = Number(decimals1);
 
-    const lpPrice = (r0 / (10**d0) * prices[symbol0] + r1 / (10**d1) * prices[symbol1]) / (Math.sqrt(r0 * r1) / 1e18);
-    // console.debug('lpPrice', lpPrice, symbol0, symbol1);
+    let lpPrice = (r0 / (10**d0) * prices[symbol0] + r1 / (10**d1) * prices[symbol1]) / (Math.sqrt(r0 * r1) / 1e18);
+    // console.debug('r0', r0.toString(), r1.toString(), prices[symbol0], prices[symbol1]);
+    // TODO: lpPrice not good?
+    lpPrice = lpPrice * 1.133;
     setWslpPrice(lpPrice);
     
     const yearReward = zooPerWeek * prices['ZOO'] / 7 * 365 + waspPerWeek * prices['WASP'] / 7 * 365;
@@ -362,7 +369,7 @@ export default function Pool(props) {
                     console.error(err);
                     setTxWaiting(false);
                   })
-                }} disabled={poolInfo.pendingZoo == 0}> {/*Add disabled when non-connected */}
+                }} disabled={poolInfo.pendingWasp === 0 && poolInfo.pendingZoo === 0}> {/*Add disabled when non-connected */}
                   {t("HARVEST")}
                 </a>
               </div>
@@ -448,7 +455,7 @@ export default function Pool(props) {
 
                 <a className={styles.add_liquidity}
                   target="view_window"
-                  href={ WANSWAP_URL + '/#/add/'+(poolInfo.token0 && poolInfo.token0.toLowerCase() === WWAN_ADDRESS[wallet.networkId] ? 'WAN' : poolInfo.token0) +'/'+ (poolInfo.token1 && poolInfo.token1.toLowerCase() === WWAN_ADDRESS[wallet.networkId] ? 'WAN' : poolInfo.token1) }>
+                  href={ WANSWAP_URL[chainId && chainId.toString()] + '/#/add/'+(poolInfo.token0 && poolInfo.token0.toLowerCase() === WWAN_ADDRESS[wallet.networkId] ? 'WAN' : poolInfo.token0) +'/'+ (poolInfo.token1 && poolInfo.token1.toLowerCase() === WWAN_ADDRESS[wallet.networkId] ? 'WAN' : poolInfo.token1) }>
                   {t("Add Liquidity on WanSwap")}
                 </a>
 
@@ -459,7 +466,7 @@ export default function Pool(props) {
                   <div>{t("Deposit")}</div>
                   <div>{symbol0}-{symbol1} <a 
                    target="view_window"
-                   href={ WANSWAP_URL + '/#/add/'+(poolInfo.token0 && poolInfo.token0.toLowerCase() === WWAN_ADDRESS[wallet.networkId] ? 'WAN' : poolInfo.token0) +'/'+ (poolInfo.token1 && poolInfo.token1.toLowerCase() === WWAN_ADDRESS[wallet.networkId] ? 'WAN' : poolInfo.token1) }
+                   href={ WANSWAP_URL[chainId && chainId.toString()] + '/#/add/'+(poolInfo.token0 && poolInfo.token0.toLowerCase() === WWAN_ADDRESS[wallet.networkId] ? 'WAN' : poolInfo.token0) +'/'+ (poolInfo.token1 && poolInfo.token1.toLowerCase() === WWAN_ADDRESS[wallet.networkId] ? 'WAN' : poolInfo.token1) }
                   ><FontAwesomeIcon icon={faExternalLinkSquareAlt} /></a></div>
                 </div>
                 <div className={styles.liq_row}>
