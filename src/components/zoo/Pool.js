@@ -103,7 +103,7 @@ export default function Pool(props) {
   const decimals1 = poolInfo.decimals1
   const reserve0 = poolInfo.reserve0;
   const reserve1 = poolInfo.reserve1;
-  const [wslpPrice, setWslpPrice] = useState(0);
+  // const [wslpPrice, setWslpPrice] = useState(0);
   const startBlock = 14175786;
   const currentBlock = poolInfo.blockNumber;
 
@@ -127,6 +127,22 @@ export default function Pool(props) {
     return lpAmount && (new BigNumber(lpAmount)).gt(0) && (new BigNumber(lpAmount)).multipliedBy(waspPerBlock * blockPerWeek * waspAllocPoint).div(waspTotalAllocPoint).div(waspTotalLP);
   }, [waspAllocPoint, waspTotalAllocPoint, waspTotalLP, blockPerWeek, lpAmount, dualFarmingEnable]);
 
+  const wslpPrice = useMemo(()=>{
+    if (decimals0 === 0 || decimals1 === 0 || !prices[symbol0] || !prices[symbol1]) {
+      return 0;
+    }
+    // get wslp price
+    const r0 = Number(reserve0.toString());
+    const r1 = Number(reserve1.toString());
+    const d0 = Number(decimals0);
+    const d1 = Number(decimals1);
+    
+    let lpPrice = (r0 / (10**d0) * prices[symbol0] + r1 / (10**d1) * prices[symbol1]) / (Math.sqrt(r0 * r1) / 1e18);
+    // console.debug('r0', r0.toString(), r1.toString(), prices[symbol0], prices[symbol1]);
+    // TODO: lpPrice not good?
+    return lpPrice * 1.13;
+  }, [reserve0, reserve1, decimals0, decimals1]);
+
   const apy = useMemo(()=>{
     if (decimals0 === 0 || decimals1 === 0 || !prices[symbol0] || !prices[symbol1]) {
       return;
@@ -136,17 +152,7 @@ export default function Pool(props) {
       return 0;
     }
 
-    // get wslp price
-    const r0 = Number(reserve0.toString());
-    const r1 = Number(reserve1.toString());
-    const d0 = Number(decimals0);
-    const d1 = Number(decimals1);
-
-    let lpPrice = (r0 / (10**d0) * prices[symbol0] + r1 / (10**d1) * prices[symbol1]) / (Math.sqrt(r0 * r1) / 1e18);
-    // console.debug('r0', r0.toString(), r1.toString(), prices[symbol0], prices[symbol1]);
-    // TODO: lpPrice not good?
-    lpPrice = lpPrice * 1.133;
-    setWslpPrice(lpPrice);
+    let lpPrice = wslpPrice;
     
     const yearReward = zooPerWeek * prices['ZOO'] / 7 * 365 + waspPerWeek * prices['WASP'] / 7 * 365;
     let apy = Number(lpAmount.toString()) > 0 ? (yearReward / (Number(lpAmount.toString()) * lpPrice)) : 0;
@@ -165,7 +171,7 @@ export default function Pool(props) {
       }
     }
     return apy * 100;
-  }, [symbol0, symbol1, decimals0, decimals1, reserve0, reserve1, lpAmount, prices, waspPerWeek, zooPerWeek, allocPoint, totalAllocPoint, waspAllocPoint, waspTotalAllocPoint, totalDeposited, waspTotalLP]);
+  }, [wslpPrice, symbol0, symbol1, decimals0, decimals1, reserve0, reserve1, lpAmount, prices, waspPerWeek, zooPerWeek, allocPoint, totalAllocPoint, waspAllocPoint, waspTotalAllocPoint, totalDeposited, waspTotalLP]);
 
   
   const [countdown, setTargetDate, formattedRes] = useCountDown({

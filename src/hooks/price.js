@@ -7,6 +7,9 @@ const prices = {
   'WAN': 1.82663,
   'WASP': 0.379799,
   'ZOO': 0,
+  'wanBTC': 0,
+  'wanETH': 0,
+  'FNX': 0,
 };
 
 
@@ -37,4 +40,44 @@ export const updatePrice = (symbol0, symbol1, decimals0, decimals1, reserve0, re
   }
 
   // console.debug('prices', prices);
+}
+
+export const setPrice = (symbol, price) => {
+  prices[symbol] = price;
+}
+
+export function toByte32(str) {
+  return '0x' + paddingRight(toHexString(stringToBytes(str)), 64);
+}
+
+function stringToBytes(str) {
+  var ch, st, re = [];
+  for (var i = 0; i < str.length; i++) {
+    ch = str.charCodeAt(i);  // get char
+    st = [];                 // set up "stack"
+    do {
+      st.push(ch & 0xFF);  // push byte to stack
+      ch = ch >> 8;          // shift value down by 1 byte
+    }
+    while (ch);
+    // add stack contents to result
+    // done because chars have "wrong" endianness
+    re = re.concat(st.reverse());
+  }
+  // return an array of bytes
+  return re;
+}
+
+function toHexString(bytes) {
+  return bytes.map(function(byte) {
+    return (byte & 0xFF).toString(16)
+  }).join('')
+}
+
+function padding4(num, length) {
+  return (Array(length).join("0") + num).slice(-length);
+}
+
+function paddingRight(num, length) {
+  return (num + Array(length).join("0")).slice(0, length);
 }
