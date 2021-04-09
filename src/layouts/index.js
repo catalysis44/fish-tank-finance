@@ -267,34 +267,34 @@ function BasicLayout(props) {
                 }
               </div>
 
-              <div className={"dropdown is-up is-active"}  tabindex="-1"  onBlur={() => setShowContactDropdown(false)}> {/*add class .is-active to open dropdown*/}
+              <div className={"dropdown is-up is-active"} tabindex="-1"   onBlur={() => setShowContactDropdown(false)} > {/*add class .is-active to open dropdown*/}
                 <a className={styles.select_lang} aria-haspopup="true" aria-controls="dropdown-menu"  onClick={() => {
-                  setShowContactDropdown(!showLangswitcherDropdown);
+                  setShowContactDropdown(!showContactDropdown);
                 }}>
                   <span>Contact <FontAwesomeIcon icon={faCaretUp}/></span>
                 </a>
                 {
                    showContactDropdown && <div class="dropdown-menu" id="dropdown-menu" role="menu">
                     <div class="dropdown-content"  >
-                        <a href="https://t.me/ZooFarming" target="_blank" class="dropdown-item" onClick={() => {setShowContactDropdown(false);}}>
+                        <a class="dropdown-item" onClick={() => {window.open('https://t.me/ZooFarming', "_blank")}}>
                           <span>Telegram</span>
                         </a>
-                        <a href="https://twitter.com/ZooFarming" target="_blank" class="dropdown-item" onClick={() => {setShowContactDropdown(false);}}>
+                        <a class="dropdown-item" onClick={() => {window.open('https://twitter.com/ZooFarming', "_blank")}}>
                           <span>Twitter</span>
                         </a>
-                        <a href="https://medium.com/@ZooFarming" target="_blank" class="dropdown-item" onClick={() => {setShowContactDropdown(false);}}>
+                        <a class="dropdown-item" onClick={() => {window.open('https://medium.com/@ZooFarming', "_blank")}}>
                           <span>Medium</span>
                         </a>  
-                        <a href="https://www.youtube.com/c/ZooFarming" target="_blank" class="dropdown-item" onClick={() => {setShowContactDropdown(false);}}>
+                        <a class="dropdown-item" onClick={() => {window.open('https://www.youtube.com/c/ZooFarming', "_blank")}}>
                           <span>Youtube</span>
                         </a>
-                        <a href="https://www.reddit.com/user/ZooFarming" target="_blank" class="dropdown-item" onClick={() => {setShowContactDropdown(false);}}>
+                        <a class="dropdown-item" onClick={() => {window.open('https://www.reddit.com/user/ZooFarming', "_blank")}}>
                           <span>Reddit</span>
                         </a>
-                        <a href="https://github.com/zooFarming/" target="_blank" class="dropdown-item" onClick={() => {setShowContactDropdown(false);}}>
+                        <a class="dropdown-item" onClick={() => {window.open('https://github.com/zooFarming/', "_blank")}}>
                           <span>Github</span>
                         </a>
-                        <a href="https://bbs.zookeeper.finance" target="_blank" class="dropdown-item" onClick={() => {setShowContactDropdown(false);}}>
+                        <a class="dropdown-item" onClick={() => {window.open('https://bbs.zookeeper.finance', "_blank")}}>
                           <span>Forum</span>
                         </a>
                         
