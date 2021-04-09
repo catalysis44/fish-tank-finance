@@ -156,6 +156,8 @@ export default {
     "APPROVE":"ОДОБРИТЬ",
     "CONFIRM":"ПОДТВЕРДИТЬ",
 
+    "NFT MARKET":"РЫНОК NFT",
+    "LOADING SOON":"СКОРО ЗАГРУЗКА",
   
     // SAFE //
     "On Sale for": "В Продаже для",

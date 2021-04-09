@@ -234,9 +234,17 @@ export default function ListView(props) {
               />
             })
           }
+          {
+            cards.length === 0 && <div className={styles.nolist_alert}>
+              <img src="/assets/diskette.png"/>
+              <div>NFT MARKET</div>
+              <div>LOADING SOON.</div>
+            </div>
+          }
 
         </div>
       </div>
+      
     </React.Fragment>
   )
 }

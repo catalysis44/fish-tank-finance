@@ -148,6 +148,9 @@ export default {
   "APPROVE":"授权",
   "CONFIRM":"确认",
 
+  "NFT MARKET":"NFT交易市场",
+  "LOADING SOON":"正在加载中",
+
   // SAFE //
   "On Sale for":"售卖中",
   "Cancel the SALE":"取消售卖",

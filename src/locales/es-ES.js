@@ -151,6 +151,9 @@ export default {
     "with a tag price of":"con un precio de etiqueta de",
     "APPROVE":"APROBAR",
     "CONFIRM":"CONFIRMAR",
+
+    "NFT MARKET":"MERCADO NFT",
+    "LOADING SOON":"CARGANDO PRONTO",
   
     // SAFE //
     "On Sale for":"A la venta por",

@@ -252,6 +252,16 @@ function BasicLayout(props) {
                         <span>Español</span> 
                       </a>
 
+                      <a class="dropdown-item" onClick={() => {
+                        setLocale('tr-TR', false);
+                        setShowLangswitcherDropdown(false);
+                        setLangIcon('assets/lang/tr.png');
+                        setLang('Türkçe');
+                        }}>
+                        <img src="assets/lang/tr.png"/>
+                        <span>Türkçe</span> 
+                      </a>
+
                   </div>
                 </div>
                 }

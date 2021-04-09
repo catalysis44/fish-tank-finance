@@ -152,6 +152,9 @@ export default {
   "APPROVE":"APPROUVER",
   "CONFIRM":"CONFIRMER",
 
+  "NFT MARKET":"NFT MARKET",
+  "LOADING SOON":"CHARGEMENT PROCHAINEMENT",
+
   // SAFE //
   "On Sale for":"En Vente pour",
   "Cancel the SALE":"Annuler la vente",
