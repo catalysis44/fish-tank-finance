@@ -18,6 +18,8 @@ import ConfirmResetCache from '../components/resetcache/ConfirmResetCache';
 import { useEventMonitor } from '../utils/events';
 import { message} from 'antd';
 
+import AdsModal from '../components/ads/AdsModal';
+
 function toggleSidebar()
 {
   if (window.matchMedia('screen and (max-width: 768px)').matches) {
@@ -37,7 +39,7 @@ function BasicLayout(props) {
   const [langIcon, setLangIcon] = useLocalStorageState('user-language-icon', 'assets/lang/us.png');
   /* Contract Dropdown */
   const [showContactDropdown, setShowContactDropdown] = useState(false);
-
+  const [showAdsModal, setShowAdsModal] = useState(1);
   
   const [wallet, setWallet] = useState({});
   const web3 = wallet.web3;
@@ -117,6 +119,10 @@ function BasicLayout(props) {
   return (
     
     <div id="wrapper">
+
+    <AdsModal isActived={showAdsModal} setModal={setShowAdsModal}
+      ></AdsModal>
+
       <ConfirmResetCache  isActived={showConfirmResetCacheModal} setModal={setConfirmResetCacheModal} />
       <Wallet wallet={wallet} setWallet={setWallet} />
       <div id="sidebar_backdrop" onClick={toggleSidebar}></div>
