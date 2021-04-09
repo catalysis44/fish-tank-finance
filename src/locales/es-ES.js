@@ -66,8 +66,8 @@ export default {
   
     "View on": "Ver en",
 
-    "NEW POOL":"NEW POOL",
-    "TOMORROW":"TOMORROW",
+    "NEW POOL":"NUEVA POOL",
+    "TOMORROW":"MAÑANA",
   
     //loader.js
     "Waiting for TX Confirmation": "Esperando la Confirmación de TX",

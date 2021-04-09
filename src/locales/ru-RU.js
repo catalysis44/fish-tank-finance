@@ -68,8 +68,8 @@ export default {
   
     "View on": "Смотреть на",
 
-    "NEW POOL":"NEW POOL",
-    "TOMORROW":"TOMORROW",
+    "NEW POOL":"НОВЫЙ ПУЛ",
+    "TOMORROW":"ЗАВТРА",
   
     //loader.js
     "Waiting for TX Confirmation": "В ОЖИДАНИИ TX",
