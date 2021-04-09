@@ -103,7 +103,7 @@ export default function Pool(props) {
   const decimals1 = poolInfo.decimals1
   const reserve0 = poolInfo.reserve0;
   const reserve1 = poolInfo.reserve1;
-  const [wslpPrice, setWslpPrice] = useState(0);
+  // const [wslpPrice, setWslpPrice] = useState(0);
   const startBlock = 14175786;
   const currentBlock = poolInfo.blockNumber;
 
@@ -127,6 +127,22 @@ export default function Pool(props) {
     return lpAmount && (new BigNumber(lpAmount)).gt(0) && (new BigNumber(lpAmount)).multipliedBy(waspPerBlock * blockPerWeek * waspAllocPoint).div(waspTotalAllocPoint).div(waspTotalLP);
   }, [waspAllocPoint, waspTotalAllocPoint, waspTotalLP, blockPerWeek, lpAmount, dualFarmingEnable]);
 
+  const wslpPrice = useMemo(()=>{
+    if (decimals0 === 0 || decimals1 === 0 || !prices[symbol0] || !prices[symbol1]) {
+      return 0;
+    }
+    // get wslp price
+    const r0 = Number(reserve0.toString());
+    const r1 = Number(reserve1.toString());
+    const d0 = Number(decimals0);
+    const d1 = Number(decimals1);
+    
+    let lpPrice = (r0 / (10**d0) * prices[symbol0] + r1 / (10**d1) * prices[symbol1]) / (Math.sqrt(r0 * r1) / 1e18);
+    // console.debug('r0', r0.toString(), r1.toString(), prices[symbol0], prices[symbol1]);
+    // TODO: lpPrice not good?
+    return lpPrice * 1.13;
+  }, [reserve0, reserve1, decimals0, decimals1]);
+
   const apy = useMemo(()=>{
     if (decimals0 === 0 || decimals1 === 0 || !prices[symbol0] || !prices[symbol1]) {
       return;
@@ -136,17 +152,7 @@ export default function Pool(props) {
       return 0;
     }
 
-    // get wslp price
-    const r0 = Number(reserve0.toString());
-    const r1 = Number(reserve1.toString());
-    const d0 = Number(decimals0);
-    const d1 = Number(decimals1);
-
-    let lpPrice = (r0 / (10**d0) * prices[symbol0] + r1 / (10**d1) * prices[symbol1]) / (Math.sqrt(r0 * r1) / 1e18);
-    // console.debug('r0', r0.toString(), r1.toString(), prices[symbol0], prices[symbol1]);
-    // TODO: lpPrice not good?
-    lpPrice = lpPrice * 1.133;
-    setWslpPrice(lpPrice);
+    let lpPrice = wslpPrice;
     
     const yearReward = zooPerWeek * prices['ZOO'] / 7 * 365 + waspPerWeek * prices['WASP'] / 7 * 365;
     let apy = Number(lpAmount.toString()) > 0 ? (yearReward / (Number(lpAmount.toString()) * lpPrice)) : 0;
@@ -165,7 +171,7 @@ export default function Pool(props) {
       }
     }
     return apy * 100;
-  }, [symbol0, symbol1, decimals0, decimals1, reserve0, reserve1, lpAmount, prices, waspPerWeek, zooPerWeek, allocPoint, totalAllocPoint, waspAllocPoint, waspTotalAllocPoint, totalDeposited, waspTotalLP]);
+  }, [wslpPrice, symbol0, symbol1, decimals0, decimals1, reserve0, reserve1, lpAmount, prices, waspPerWeek, zooPerWeek, allocPoint, totalAllocPoint, waspAllocPoint, waspTotalAllocPoint, totalDeposited, waspTotalLP]);
 
   
   const [countdown, setTargetDate, formattedRes] = useCountDown({
@@ -237,6 +243,8 @@ export default function Pool(props) {
 
   // console.debug('pooInfo', pid, symbol0, symbol1, JSON.stringify(poolInfo, null, 2));
   // console.debug('currentInfo', icon, nftId, boost, reduce);
+  // console.debug('harvest', connected, deposited, poolInfo.pendingWasp, poolInfo.pendingZoo, (connected && deposited));
+  // console.debug('total', totalDeposited * wslpPrice, totalDeposited.toString(), wslpPrice);
   return (
     <React.Fragment >
       <BoosterSelectionModal isActived={modal} setModal={setModal} 
@@ -369,7 +377,7 @@ export default function Pool(props) {
                     console.error(err);
                     setTxWaiting(false);
                   })
-                }} disabled={poolInfo.pendingWasp === 0 && poolInfo.pendingZoo === 0}> {/*Add disabled when non-connected */}
+                }} disabled={!(connected && deposited && ((poolInfo.pendingWasp && (new BigNumber(poolInfo.pendingWasp)).gt(0)) || (poolInfo.pendingZoo && (new BigNumber(poolInfo.pendingZoo)).gt(0))))}> {/*Add disabled when non-connected */}
                   {t("HARVEST")}
                 </a>
               </div>
@@ -377,7 +385,7 @@ export default function Pool(props) {
 
             <div className={styles.staked}>
               <div className={styles.title}>
-                WSLP {t("STAKED")}: ${commafy(poolInfo.lpAmount * wslpPrice)}
+                WSLP {t("STAKED")}: {poolInfo.lpAmount * wslpPrice ? ('$'+commafy(poolInfo.lpAmount * wslpPrice)) : (commafy(poolInfo.lpAmount) + ' WSLP')}
               </div>
               <div className={styles.action_wrapper}>
                 {
@@ -471,7 +479,7 @@ export default function Pool(props) {
                 </div>
                 <div className={styles.liq_row}>
                   <div>{t("Total Deposit")}</div>
-                  <div>${commafy(totalDeposited * wslpPrice).split('.')[0]}</div>
+                  <div>{(wslpPrice && totalDeposited && totalDeposited * wslpPrice) ? ('$' + commafy(totalDeposited * wslpPrice).split('.')[0]) : (commafy(totalDeposited) + ' WSLP')}</div>
                 </div>
                 <div className={styles.liq_row}>
                   <div><a target="view_window" href={"https://info.wanswap.finance/pair/" + lpToken}>{t('View on')} info.WanSwap.finance <FontAwesomeIcon icon={faExternalLinkSquareAlt} /></a></div>

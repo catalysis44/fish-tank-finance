@@ -113,7 +113,7 @@ function BasicLayout(props) {
     window.Clipboard.copy(address);
     message.success('Copied address: '+address);
   }
-
+  // console.log('chainId', chainId);
   return (
     
     <div id="wrapper">

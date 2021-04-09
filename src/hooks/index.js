@@ -1,8 +1,8 @@
 import BigNumber from 'bignumber.js';
 import { useInterval, useLockFn, useReactive } from 'ahooks';
-import { MULTICALL_ADDRESS, RPC_URL, ZOO_TOKEN_ADDRESS, ZOO_FARMING_ADDRESS, ZOO_BOOSTING_ADDRESS, NFT_FACTORY_ADDRESS, ZOO_NFT_ADDRESS, WASP_FARMING_ADDRESS, NFT_MARKETPLACE_ADDRESS } from '../config';
+import { MULTICALL_ADDRESS, RPC_URL, ZOO_TOKEN_ADDRESS, ZOO_FARMING_ADDRESS, ZOO_BOOSTING_ADDRESS, NFT_FACTORY_ADDRESS, ZOO_NFT_ADDRESS, WASP_FARMING_ADDRESS, NFT_MARKETPLACE_ADDRESS, currencyList } from '../config';
 import React, { useCallback, useMemo } from 'react';
-import { updatePrice } from './price';
+import { getPrices, setPrice, toByte32, updatePrice } from './price';
 const { aggregate } = require('@makerdao/multicall');
 const DataLoader = require('dataloader');
 
@@ -461,14 +461,30 @@ const getMarketOrders = (orderIds, loader, chainId) => {
   return loader.loadMany(calls);
 }
 
+const getPriceFromOracle = (loader, prices) => {
+  const oracleProxy = '0xa2b6CFAE041371A30bED5f2092393f03D6dCDEEc';
+  let calls = Object.keys(prices).map(v => {
+    return {
+      target: oracleProxy,
+      call: ['getValue(bytes32)(uint256)', toByte32(v)],
+      returns: [
+        ['price', val => val / 1e18],
+      ]
+    }
+  });
+
+  return loader.loadMany(calls);
+}
+
 export const useDataPump = (storage, setStorage, chainId, address, connected) => {
   const loader = useLoader(chainId);
   const blockNumber = storage.blockNumber;
   const updateStorage = (newStorage) => {
-    if (!newStorage.blockNumber || newStorage.blockNumber >= blockNumber) {
+    if (!newStorage.blockNumber || newStorage.blockNumber >= blockNumber || newStorage.chainId.toString() !== chainId.toString()) {
       setStorage(newStorage);
     } else {
-      console.debug('data from old blockNumber', blockNumber, newStorage.blockNumber);
+
+      console.debug('data from old blockNumber', blockNumber, newStorage.blockNumber, newStorage.chainId, chainId);
     }
   }
 
@@ -668,19 +684,19 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
 
         getMarketOrders(goodOrderIds, loader, chainId).then(ret => {
           // console.debug('getMarketOrders', ret);
-          tmpStorage.markets = ret.map(v=>{
+          tmpStorage.markets = ret.map(v => {
             return {
               ...v.returnValue
             };
           });
 
-          let tokenIds = tmpStorage.markets.map(v=>{
+          let tokenIds = tmpStorage.markets.map(v => {
             return v.tokenId;
           })
 
           getNftBaseInfo(loader, chainId, tokenIds).then(ret => {
             // console.debug('getNftBaseInfo ret', ret);
-            
+
             for (let i = 0; i < tmpStorage.markets.length; i++) {
               // console.log('goodOrderIds', goodOrderIds[i]);
               tmpStorage.markets[i] = {
@@ -689,11 +705,11 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
                 uri: ret[i] && ret[i].returnValue.uri,
                 boost: ret[i] && ret[i + tokenIds.length].returnValue.boost,
                 reduce: ret[i] && ret[i + tokenIds.length * 2].returnValue.reduce,
-                tokenInfo: ret[i] && { ...ret[i + tokenIds.length * 3].returnValue},
+                tokenInfo: ret[i] && { ...ret[i + tokenIds.length * 3].returnValue },
               };
             }
 
-            tmpStorage.markets = tmpStorage.markets.filter(v=>{
+            tmpStorage.markets = tmpStorage.markets.filter(v => {
               return v.tokenInfo && v.uri;
             });
 
@@ -720,7 +736,17 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
       })
     }).catch(err => {
       console.error('err getMarketCount', err);
-    })
+    });
+
+    if (Number(chainId) === 1 || Number(chainId) === 888) {
+      const prices = getPrices();
+      getPriceFromOracle(loader, prices).then(ret => {
+        Object.keys(prices).map((v, i) => {
+          setPrice(v, ret[i].returnValue.price);
+        });
+      })
+    }
+
   }, [chainId, address, storage, connected]);
 
 
