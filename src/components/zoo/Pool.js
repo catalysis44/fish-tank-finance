@@ -237,6 +237,8 @@ export default function Pool(props) {
 
   // console.debug('pooInfo', pid, symbol0, symbol1, JSON.stringify(poolInfo, null, 2));
   // console.debug('currentInfo', icon, nftId, boost, reduce);
+  // console.debug('harvest', connected, deposited, poolInfo.pendingWasp, poolInfo.pendingZoo, (connected && deposited));
+  // console.debug('total', totalDeposited * wslpPrice, totalDeposited, wslpPrice);
   return (
     <React.Fragment >
       <BoosterSelectionModal isActived={modal} setModal={setModal} 
@@ -369,7 +371,7 @@ export default function Pool(props) {
                     console.error(err);
                     setTxWaiting(false);
                   })
-                }} disabled={poolInfo.pendingWasp === 0 && poolInfo.pendingZoo === 0}> {/*Add disabled when non-connected */}
+                }} disabled={!(connected && deposited && ((poolInfo.pendingWasp && (new BigNumber(poolInfo.pendingWasp)).gt(0)) || (poolInfo.pendingZoo && (new BigNumber(poolInfo.pendingZoo)).gt(0))))}> {/*Add disabled when non-connected */}
                   {t("HARVEST")}
                 </a>
               </div>
@@ -377,7 +379,7 @@ export default function Pool(props) {
 
             <div className={styles.staked}>
               <div className={styles.title}>
-                WSLP {t("STAKED")}: ${commafy(poolInfo.lpAmount * wslpPrice)}
+                WSLP {t("STAKED")}: {poolInfo.lpAmount * wslpPrice ? ('$'+commafy(poolInfo.lpAmount * wslpPrice)) : (commafy(poolInfo.lpAmount) + ' WSLP')}
               </div>
               <div className={styles.action_wrapper}>
                 {
@@ -471,7 +473,7 @@ export default function Pool(props) {
                 </div>
                 <div className={styles.liq_row}>
                   <div>{t("Total Deposit")}</div>
-                  <div>${commafy(totalDeposited * wslpPrice).split('.')[0]}</div>
+                  <div>{(wslpPrice && totalDeposited && totalDeposited * wslpPrice) ? ('$' + commafy(totalDeposited * wslpPrice).split('.')[0]) : (commafy(totalDeposited) + ' WSLP')}</div>
                 </div>
                 <div className={styles.liq_row}>
                   <div><a target="view_window" href={"https://info.wanswap.finance/pair/" + lpToken}>{t('View on')} info.WanSwap.finance <FontAwesomeIcon icon={faExternalLinkSquareAlt} /></a></div>
