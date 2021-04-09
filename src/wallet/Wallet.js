@@ -9,7 +9,7 @@ const INITIAL_STATE = {
   web3: null,
   provider: null,
   connected: false,
-  networkId: 999,
+  networkId: 1, // TODO: CHANGE TO 888 AFTER JUPITER FORK
   chainType: "wan"
 };
 

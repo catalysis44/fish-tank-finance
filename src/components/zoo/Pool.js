@@ -238,7 +238,7 @@ export default function Pool(props) {
   // console.debug('pooInfo', pid, symbol0, symbol1, JSON.stringify(poolInfo, null, 2));
   // console.debug('currentInfo', icon, nftId, boost, reduce);
   // console.debug('harvest', connected, deposited, poolInfo.pendingWasp, poolInfo.pendingZoo, (connected && deposited));
-  // console.debug('total', totalDeposited * wslpPrice, totalDeposited, wslpPrice);
+  // console.debug('total', totalDeposited * wslpPrice, totalDeposited.toString(), wslpPrice);
   return (
     <React.Fragment >
       <BoosterSelectionModal isActived={modal} setModal={setModal} 

@@ -465,10 +465,11 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
   const loader = useLoader(chainId);
   const blockNumber = storage.blockNumber;
   const updateStorage = (newStorage) => {
-    if (!newStorage.blockNumber || newStorage.blockNumber >= blockNumber) {
+    if (!newStorage.blockNumber || newStorage.blockNumber >= blockNumber || newStorage.chainId.toString() !== chainId.toString()) {
       setStorage(newStorage);
     } else {
-      console.debug('data from old blockNumber', blockNumber, newStorage.blockNumber);
+
+      console.debug('data from old blockNumber', blockNumber, newStorage.blockNumber, newStorage.chainId, chainId);
     }
   }
 
