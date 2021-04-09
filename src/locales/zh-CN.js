@@ -163,4 +163,7 @@ export default {
 
   "BUSINESS IS GROWING":"出售以获益",
   "will be added to the market with a tag price of":"将会被出售于价格",
+
+  "NEW POOL": "新挖矿池",
+  "TOMORROW": "明日上线",
 };
