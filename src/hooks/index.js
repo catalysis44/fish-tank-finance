@@ -36,9 +36,9 @@ const useLoader = (chainId) => {
           })
           return v;
         })
-        // console.debug('calls', newCalls.length, newCalls, conf);
+        console.debug('calls', newCalls.length, newCalls, conf);
         let ret = await aggregate(newCalls, conf);
-        // console.debug('aggregate ret', ret);;
+        console.debug('aggregate ret', ret);;
         Object.keys(ret.results.transformed).map(v => {
           let str = v.split('#');
           if (!newCalls[str[1]].returnValue) {
@@ -61,7 +61,7 @@ const useLoader = (chainId) => {
       }
     }
 
-    const chainDataLoader = new DataLoader(keys => getBatchData(keys), { cache: false, maxBatchSize: 100 });
+    const chainDataLoader = new DataLoader(keys => getBatchData(keys), { cache: false, maxBatchSize: 50 });
     return chainDataLoader;
   }, [chainId]);
   return loader;
@@ -522,14 +522,14 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
       console.error('err 1.1', err);
     });
 
-    getZooBurned(loader, chainId).then(ret => {
-      // console.debug('getZooBurned ret', ret, ret.returnValue.totalSupply);
-      tmpStorage.zooBurned = ret.returnValue.zooBurned;
-      tmpStorage.blockNumber = ret.returnValue.blockNumber;
-      updateStorage(tmpStorage);
-    }).catch(err => {
-      console.error('err 1.2', err);
-    });
+    // getZooBurned(loader, chainId).then(ret => {
+    //   // console.debug('getZooBurned ret', ret, ret.returnValue.totalSupply);
+    //   tmpStorage.zooBurned = ret.returnValue.zooBurned;
+    //   tmpStorage.blockNumber = ret.returnValue.blockNumber;
+    //   updateStorage(tmpStorage);
+    // }).catch(err => {
+    //   console.error('err 1.2', err);
+    // });
 
     getUserNftBalance(loader, chainId, address).then(ret => {
       // console.debug('getUserNftBalance ret', ret);
@@ -654,95 +654,99 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
       console.error('err 2', err);
     });
 
-    getNFTFactoryInfo(loader, chainId, address).then(ret => {
-      // console.debug('getNFTFactoryInfo ret', ret, tmpStorage);
-      tmpStorage.goldenPrice = ret[0].returnValue.goldenPrice;
-      if (!tmpStorage.expeditions) {
-        tmpStorage.expeditions = [];
-      }
-      tmpStorage.expeditions[0] = { ...ret[1].returnValue, ...ret[4].returnValue };
-      tmpStorage.expeditions[1] = { ...ret[2].returnValue, ...ret[5].returnValue };
-      tmpStorage.expeditions[2] = { ...ret[3].returnValue, ...ret[6].returnValue };
+    // getNFTFactoryInfo(loader, chainId, address).then(ret => {
+    //   // console.debug('getNFTFactoryInfo ret', ret, tmpStorage);
+    //   tmpStorage.goldenPrice = ret[0].returnValue.goldenPrice;
+    //   if (!tmpStorage.expeditions) {
+    //     tmpStorage.expeditions = [];
+    //   }
+    //   tmpStorage.expeditions[0] = { ...ret[1].returnValue, ...ret[4].returnValue };
+    //   tmpStorage.expeditions[1] = { ...ret[2].returnValue, ...ret[5].returnValue };
+    //   tmpStorage.expeditions[2] = { ...ret[3].returnValue, ...ret[6].returnValue };
 
-      updateStorage(tmpStorage);
-    }).catch(err => {
-      console.error('err 30', err);
-    });
+    //   updateStorage(tmpStorage);
+    // }).catch(err => {
+    //   console.error('err 30', err);
+    // });
 
-    getMarketCount(loader, chainId).then(ret => {
-      // console.debug('getMarketCount', ret);
-      tmpStorage.marketOrderCount = ret.returnValue.orderCount;
-      getMarketOrderIds(ret.returnValue.orderCount, loader, chainId).then(ret => {
-        // console.debug('getMarketOrderIds', ret);
-        let goodOrders = ret.filter(v => {
-          return v.returnValue.isValid;
-        });
-        let goodOrderIds = goodOrders.map(v => {
-          return v.returnValue.id;
-        })
-        // console.debug('goodOrderIds', goodOrderIds);
+    // getMarketCount(loader, chainId).then(ret => {
+    //   // console.debug('getMarketCount', ret);
+    //   tmpStorage.marketOrderCount = ret.returnValue.orderCount;
+    //   getMarketOrderIds(ret.returnValue.orderCount, loader, chainId).then(ret => {
+    //     // console.debug('getMarketOrderIds', ret);
+    //     let goodOrders = ret.filter(v => {
+    //       return v.returnValue.isValid;
+    //     });
+    //     let goodOrderIds = goodOrders.map(v => {
+    //       return v.returnValue.id;
+    //     })
+    //     // console.debug('goodOrderIds', goodOrderIds);
 
-        getMarketOrders(goodOrderIds, loader, chainId).then(ret => {
-          // console.debug('getMarketOrders', ret);
-          tmpStorage.markets = ret.map(v => {
-            return {
-              ...v.returnValue
-            };
-          });
+    //     getMarketOrders(goodOrderIds, loader, chainId).then(ret => {
+    //       // console.debug('getMarketOrders', ret);
+    //       tmpStorage.markets = ret.map(v => {
+    //         return {
+    //           ...v.returnValue
+    //         };
+    //       });
 
-          let tokenIds = tmpStorage.markets.map(v => {
-            return v.tokenId;
-          })
+    //       let tokenIds = tmpStorage.markets.map(v => {
+    //         return v.tokenId;
+    //       })
 
-          getNftBaseInfo(loader, chainId, tokenIds).then(ret => {
-            // console.debug('getNftBaseInfo ret', ret);
+    //       getNftBaseInfo(loader, chainId, tokenIds).then(ret => {
+    //         // console.debug('getNftBaseInfo ret', ret);
 
-            for (let i = 0; i < tmpStorage.markets.length; i++) {
-              // console.log('goodOrderIds', goodOrderIds[i]);
-              tmpStorage.markets[i] = {
-                ...tmpStorage.markets[i],
-                orderId: goodOrderIds[i],
-                uri: ret[i] && ret[i].returnValue.uri,
-                boost: ret[i] && ret[i + tokenIds.length].returnValue.boost,
-                reduce: ret[i] && ret[i + tokenIds.length * 2].returnValue.reduce,
-                tokenInfo: ret[i] && { ...ret[i + tokenIds.length * 3].returnValue },
-              };
-            }
+    //         for (let i = 0; i < tmpStorage.markets.length; i++) {
+    //           // console.log('goodOrderIds', goodOrderIds[i]);
+    //           tmpStorage.markets[i] = {
+    //             ...tmpStorage.markets[i],
+    //             orderId: goodOrderIds[i],
+    //             uri: ret[i] && ret[i].returnValue.uri,
+    //             boost: ret[i] && ret[i + tokenIds.length].returnValue.boost,
+    //             reduce: ret[i] && ret[i + tokenIds.length * 2].returnValue.reduce,
+    //             tokenInfo: ret[i] && { ...ret[i + tokenIds.length * 3].returnValue },
+    //           };
+    //         }
 
-            tmpStorage.markets = tmpStorage.markets.filter(v => {
-              return v.tokenInfo && v.uri;
-            });
+    //         tmpStorage.markets = tmpStorage.markets.filter(v => {
+    //           return v.tokenInfo && v.uri;
+    //         });
 
-            Promise.all(tmpStorage.markets.map(v => {
-              return getNftItemSupply(loader, chainId, v.tokenInfo.level, v.tokenInfo.category, v.tokenInfo.item);
-            })).then(ret => {
-              // console.debug('getNftItemSupply ret', ret);
-              tmpStorage.markets = tmpStorage.markets.map((v, i) => {
-                v.itemSupply = ret[i].returnValue.itemSupply;
-                return v;
-              });
+    //         Promise.all(tmpStorage.markets.map(v => {
+    //           return getNftItemSupply(loader, chainId, v.tokenInfo.level, v.tokenInfo.category, v.tokenInfo.item);
+    //         })).then(ret => {
+    //           // console.debug('getNftItemSupply ret', ret);
+    //           tmpStorage.markets = tmpStorage.markets.map((v, i) => {
+    //             v.itemSupply = ret[i].returnValue.itemSupply;
+    //             return v;
+    //           });
 
-              // console.debug('tmpStorage.markets:', tmpStorage.markets);
-              updateStorage(tmpStorage);
-            }).catch(err => {
-              console.error('err 1.2.1.1', err);
-            })
-          });
-        }).catch(err => {
-          console.error('err getMarketOrders', err);
-        })
-      }).catch(err => {
-        console.error('err getMarketOrderIds', err);
-      })
-    }).catch(err => {
-      console.error('err getMarketCount', err);
-    });
+    //           // console.debug('tmpStorage.markets:', tmpStorage.markets);
+    //           updateStorage(tmpStorage);
+    //         }).catch(err => {
+    //           console.error('err 1.2.1.1', err);
+    //         })
+    //       });
+    //     }).catch(err => {
+    //       console.error('err getMarketOrders', err);
+    //     })
+    //   }).catch(err => {
+    //     console.error('err getMarketOrderIds', err);
+    //   })
+    // }).catch(err => {
+    //   console.error('err getMarketCount', err);
+    // });
 
     if (Number(chainId) === 1 || Number(chainId) === 888) {
       const prices = getPrices();
+      console.log('prices', prices);
       getPriceFromOracle(loader, prices).then(ret => {
+        console.log('getPriceFromOracle', ret);
         Object.keys(prices).map((v, i) => {
-          setPrice(v, ret[i].returnValue.price);
+          if (ret[i] && ret[i].returnValue && ret[i].returnValue.price > 0) {
+            setPrice(v, ret[i].returnValue.price);
+          }
         });
       })
     }
