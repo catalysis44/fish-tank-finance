@@ -7,7 +7,7 @@ import { faCircle, faCopy, faCaretUp } from '@fortawesome/free-solid-svg-icons'
 import Header from '../components/Header';
 import { NavLink, setLocale, getLocale } from 'umi';
 import Wallet, { WalletContext } from '../wallet/Wallet';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDataPump, initialState, StorageContext } from '../hooks';
 import { commafy } from '../utils';
 import { useLocalStorageState } from 'ahooks';
@@ -116,6 +116,25 @@ function BasicLayout(props) {
     message.success('Copied address: '+address);
   }
   // console.log('chainId', chainId);
+
+  // For testnet //
+  const [showTestnetMessage, setShowTestnetMessage] = useState(false);
+  if (chainId && chainId.toString() !== '1' && chainId.toString() !== '888' && !showTestnetMessage)
+  {
+    setShowTestnetMessage(true);
+    message.warning({
+      content: 'THIS IS TESTNET, ALL CONTENTS ARE NOT RELATED TO THE MAINNET, THIS IS ONLY FOR TESTING PURPOSE.',
+      duration: '10',
+      icon: <img src="assets/!.png" style={{width:22, marginRight:10,marginTop:-3}}/>,
+      style: {
+        marginTop: '15vh',
+        fontSize:22
+      },
+    });
+  }
+ 
+
+
   return (
     
     <div id="wrapper">
