@@ -24,7 +24,7 @@ export const updatePrice = (symbol0, symbol1, decimals0, decimals1, reserve0, re
   // console.debug('updatePrice', symbol0, symbol1, decimals0, decimals1, reserve0, reserve1)
   let d0 = Number(decimals0);
   let d1 = Number(decimals1);
-  if (d0 === 0 || d1 === 0) {
+  if (d0 === 0 || d1 === 0 || !reserve0 || !reserve1) {
     return;
   }
   let r0 = new BigNumber(reserve0.toString());

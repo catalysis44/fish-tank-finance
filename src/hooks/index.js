@@ -503,6 +503,8 @@ const getWanReserve = (loader) => {
   })
 }
 
+let loadTimes = 0;
+
 export const useDataPump = (storage, setStorage, chainId, address, connected) => {
   const loader = useLoader(chainId);
   const blockNumber = storage.blockNumber;
@@ -517,6 +519,8 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
 
   const updater = useCallback(() => {
     // console.debug('timer ~', JSON.stringify(storage, null, 2));
+    loadTimes++;
+    // console.log('loadTime', loadTimes);
     if (!loader) {
       return;
     }
@@ -792,7 +796,7 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
   }, [chainId, address, storage, connected]);
 
 
-  useInterval(updater, 2000, { immediate: true });
+  useInterval(updater, loadTimes < 10 ? 2000 : 5000, { immediate: true });
 }
 
 
