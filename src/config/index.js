@@ -60,8 +60,8 @@ export const WWAN_ADDRESS = {
 }
 
 export const RPC_URL = {
-  '1': "https://gwan-ssl.wandevs.org:56891",
-  '888': "https://gwan-ssl.wandevs.org:56891",
+  '1': "https://rpc.zookeeper.finance",
+  '888': "https://rpc.zookeeper.finance",
   '999': "https://gwan-ssl.wandevs.org:46891"
 }
 

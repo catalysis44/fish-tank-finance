@@ -792,7 +792,7 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
   }, [chainId, address, storage, connected]);
 
 
-  useInterval(updater, 5000, { immediate: true });
+  useInterval(updater, 2000, { immediate: true });
 }
 
 

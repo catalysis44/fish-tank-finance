@@ -173,10 +173,10 @@ export default function Pool(props) {
       let apyWasp = waspPerYear * prices['WASP'] / (waspTotalLP * lpPrice);
       // console.log('waspPerWeek', symbol1, waspPerYear/365*7, waspTotalLP.toString(), apyWasp);
 
-      if (totalDeposited.toString() !== '0') {
+      if (totalDeposited && totalDeposited.toString() !== '0') {
         apy = Number(apy) + Number(apyZoo);
       }
-      if (waspTotalLP.toString() !== '0') {
+      if (waspTotalLP && waspTotalLP.toString() !== '0') {
         apy = Number(apy) + Number(apyWasp);
       }
     }
