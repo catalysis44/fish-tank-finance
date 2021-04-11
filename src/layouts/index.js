@@ -337,7 +337,7 @@ function BasicLayout(props) {
            <div>
               
               <div className={styles.credit}>
-                Build on <a href="https://www.wanchain.org" target="_blank">WANCHAIN</a> - <a onClick={() => { setConfirmResetCacheModal(1) }}>Reset Cache</a>
+                Built on <a href="https://www.wanchain.org" target="_blank">WANCHAIN</a> - <a onClick={() => { setConfirmResetCacheModal(1) }}>Reset Cache</a>
               </div>
             </div>
       </div>
