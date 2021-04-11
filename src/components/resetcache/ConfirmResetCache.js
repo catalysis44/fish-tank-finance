@@ -31,7 +31,7 @@ export default function ConfirmResetCache(props) {
                 window.localStorage.clear();
                 window.location.reload();
               }}>
-              CONFIRM
+              {t('CONFIRM')}
             </a>
  
           </div>

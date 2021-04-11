@@ -2,8 +2,8 @@ import styles from './index.less';
 import "../styles/bulma.scss"
 import '../../node_modules/animate.css/animate.min.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCircle, faCopy, faCaretUp } from '@fortawesome/free-solid-svg-icons'
-
+import { faCircle, faCopy, faCaretUp, faExternalLinkSquareAlt } from '@fortawesome/free-solid-svg-icons'
+import { ZOO_TOKEN_ADDRESS } from '../config';
 import Header from '../components/Header';
 import { NavLink, setLocale, getLocale } from 'umi';
 import Wallet, { WalletContext } from '../wallet/Wallet';
@@ -201,7 +201,7 @@ function BasicLayout(props) {
                   <div class={styles.detail}>
                       <div>1 ZOO = <span>${commafy(zooPrice)}</span></div>
                       <div>{t("MC")} <span>${commafy((new BigNumber(storage.zooTotalSupply)).minus(storage.zooBurned).multipliedBy(zooPrice))}</span></div>
-                      <div>{t("Current supply")}</div>
+                      <div>{t("Current supply")} <a target="_blank" href={"https://www.wanscan.org/token/"+ZOO_TOKEN_ADDRESS[chainId]}><FontAwesomeIcon icon={faExternalLinkSquareAlt}/></a></div>
                       <div><span>{commafy(storage.zooTotalSupply)} ZOO</span></div>
                   </div>
                 
