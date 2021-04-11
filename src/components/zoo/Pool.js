@@ -400,7 +400,7 @@ export default function Pool(props) {
                     // dualFarmingEnable && <div>{commafy(poolInfo.pendingWasp)} WASP</div>
                     dualFarmingEnable && <CountUp
                       className="account-balance"
-                      end={Number(poolInfo.pendingWasp.toString()) * 10}
+                      end={Number(poolInfo.pendingWasp.toString())}
                       duration={4}
                       separator=","
                       decimals={Number(poolInfo.pendingWasp.toString()) < 999 ? 4 : 1}
