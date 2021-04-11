@@ -2,7 +2,7 @@ import { useState, useEffect, useContext, useRef, useMemo } from 'react';
 import styles from './Pool.less';
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheckSquare, faExternalLinkSquareAlt,faChevronLeft } from '@fortawesome/free-solid-svg-icons';
+import { faCheckSquare, faExternalLinkSquareAlt, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { Slider } from 'antd';
 import BoosterSelectionModal from './BoosterSelectionModal';
 import { commafy, checkNumber, calcLockTimeBoost } from '../../utils';
@@ -14,6 +14,7 @@ import { WANSWAP_URL, WWAN_ADDRESS, ZOO_FARMING_ADDRESS } from '../../config';
 import { getNftInfo } from '../../hooks/nftInfo';
 import { getPrices } from '../../hooks/price';
 import { useLanguage } from '../../hooks/language';
+import CountUp from 'react-countup';
 
 const poolAnimals = [
   '/zoo_keeper_pools/LION.png',
@@ -76,7 +77,7 @@ export default function Pool(props) {
   const [nftName, setNftName] = useState('');
   const t = useLanguage();
 
-  
+
   const setTxWaiting = props.setTxWaiting;
   const poolInfo = props.poolInfo;
   const pid = props.pid;
@@ -86,7 +87,7 @@ export default function Pool(props) {
   const deposited = lpAmount && (new BigNumber(lpAmount)).gt(0);
   const expirated = poolInfo.expirationTime * 1000 < Date.now();
   const baseAllocPoint = 100;
-  const currentTokenId = poolInfo.tokenId; 
+  const currentTokenId = poolInfo.tokenId;
   const dualFarmingEnable = poolInfo.dualFarmingEnable;
   const farmingInfo = props.farmingInfo;
   const totalAllocPoint = farmingInfo.totalAllocPoint;
@@ -112,14 +113,14 @@ export default function Pool(props) {
   const multiplier = poolInfo.getMultiplier;
   // console.debug('multiplier', multiplier, symbol0, symbol1);
 
-  const zooPerWeek = useMemo(()=>{
+  const zooPerWeek = useMemo(() => {
     if (currentBlock <= startBlock) {
       return new BigNumber(0);
     }
     return lpAmount && (new BigNumber(lpAmount)).gt(0) && (new BigNumber(lpAmount)).multipliedBy(zooPerBlock * multiplier * blockPerWeek * allocPoint).div(totalAllocPoint).div(totalDeposited);
   }, [totalAllocPoint, allocPoint, zooPerBlock, blockPerWeek, totalDeposited, lpAmount, currentBlock]);
 
-  const waspPerWeek = useMemo(()=>{
+  const waspPerWeek = useMemo(() => {
     if (!dualFarmingEnable) {
       return 0;
     }
@@ -128,7 +129,7 @@ export default function Pool(props) {
   }, [waspAllocPoint, waspTotalAllocPoint, waspTotalLP, blockPerWeek, lpAmount, dualFarmingEnable]);
   // console.log('waspPerWeek', symbol0, waspPerWeek.toString());
 
-  const wslpPrice = useMemo(()=>{
+  const wslpPrice = useMemo(() => {
     if (decimals0 === 0 || decimals1 === 0 || !prices[symbol0] || !prices[symbol1]) {
       return 0;
     }
@@ -140,9 +141,9 @@ export default function Pool(props) {
 
     // console.log(symbol0, symbol1, prices[symbol0], prices[symbol1], r0/10**d0, r1/10**d1, poolInfo.r0/10**d0, poolInfo.r1/10**d1, poolInfo.totalSupply/1e18);
     // console.log('symbol0, symbol1', symbol0, symbol1, r0.div(10**d0).multipliedBy(prices[symbol0]).plus(r1.div(10**d1).multipliedBy(prices[symbol1])).div(Math.sqrt(r0 * r1) / 1e18).toString());
-    
+
     // let lpPrice = r0.div(10**d0).multipliedBy(prices[symbol0]).plus(r1.div(10**d1).multipliedBy(prices[symbol1])).div(waspTotalLP);
-    let lpPrice = (r0 / (10**d0) * prices[symbol0] + r1 / (10**d1) * prices[symbol1]) / (poolInfo.totalSupply/1e18);
+    let lpPrice = (r0 / (10 ** d0) * prices[symbol0] + r1 / (10 ** d1) * prices[symbol1]) / (poolInfo.totalSupply / 1e18);
     // console.log('lpPrice', symbol0, lpPrice, Math.sqrt(prices[symbol0] * prices[symbol1]));
     // console.debug('r0', r0.toString(), r1.toString(), prices[symbol0], prices[symbol1]);
     // TODO: lpPrice not good?
@@ -150,7 +151,7 @@ export default function Pool(props) {
     // return 2.3216658979449445;
   }, [reserve0, reserve1, decimals0, decimals1, symbol0, symbol1, prices, poolInfo]);
 
-  const apy = useMemo(()=>{
+  const apy = useMemo(() => {
     if (decimals0 === 0 || decimals1 === 0 || !prices[symbol0] || !prices[symbol1]) {
       return;
     }
@@ -160,14 +161,14 @@ export default function Pool(props) {
     }
 
     let lpPrice = wslpPrice;
-    
+
     const yearReward = zooPerWeek * prices['ZOO'] / 7 * 365 + waspPerWeek * prices['WASP'] / 7 * 365;
     let apy = Number(lpAmount.toString()) > 0 ? (yearReward / (Number(lpAmount.toString()) * lpPrice)) : 0;
     // console.log('apy', apy, yearReward, prices['WASP'], lpAmount.toString(), lpPrice.toString());
     if (apy === 0) {
-      const zooPerYear = zooPerBlock * (3600/5*24*365) * allocPoint / totalAllocPoint;
+      const zooPerYear = zooPerBlock * (3600 / 5 * 24 * 365) * allocPoint / totalAllocPoint;
       const waspPerBlock = 12;
-      const waspPerYear = waspPerBlock * (3600/5*24*365) * waspAllocPoint / waspTotalAllocPoint;
+      const waspPerYear = waspPerBlock * (3600 / 5 * 24 * 365) * waspAllocPoint / waspTotalAllocPoint;
       let apyZoo = zooPerYear * prices['ZOO'] / (totalDeposited * lpPrice);
       let apyWasp = waspPerYear * prices['WASP'] / (waspTotalLP * lpPrice);
       // console.log('waspPerWeek', symbol1, waspPerYear/365*7, waspTotalLP.toString(), apyWasp);
@@ -182,17 +183,17 @@ export default function Pool(props) {
     return apy * 100;
   }, [wslpPrice, symbol0, symbol1, decimals0, decimals1, reserve0, reserve1, lpAmount, prices, waspPerWeek, zooPerWeek, allocPoint, totalAllocPoint, waspAllocPoint, waspTotalAllocPoint, totalDeposited, waspTotalLP]);
 
-  
+
   const [countdown, setTargetDate, formattedRes] = useCountDown({
     targetDate: new Date(poolInfo.expirationTime * 1000),
   });
 
   const expirationTime = poolInfo.expirationTime;
-  useEffect(()=>{
+  useEffect(() => {
     setTargetDate(new Date(poolInfo.expirationTime * 1000));
   }, [expirationTime]);
 
-  const [lockDays, setLockDays] = useState(parseInt(countdown/1000/3600/24));
+  const [lockDays, setLockDays] = useState(parseInt(countdown / 1000 / 3600 / 24));
 
   const { days, hours, minutes, seconds } = formattedRes;
 
@@ -203,15 +204,15 @@ export default function Pool(props) {
   const web3 = wallet.web3;
   const lpToken = poolInfo.lpToken;
 
-  useEffect(()=>{
+  useEffect(() => {
     if (!chainId || !address || !connected || !web3) {
       return;
     }
     // console.debug('checkApprove begin', updateApprove);
-    checkApprove(lpToken, '0x'+(new BigNumber(depositAmount)).multipliedBy(1e18).toString(16), chainId, web3, address).then(ret=>{
+    checkApprove(lpToken, '0x' + (new BigNumber(depositAmount)).multipliedBy(1e18).toString(16), chainId, web3, address).then(ret => {
       // console.debug('checkApprove', ret);
       setApproved(ret);
-    }).catch(err=>{
+    }).catch(err => {
       console.error('checkApprove err', err);
     });
   }, [chainId, address, connected, lpToken, depositAmount, web3, updateApprove]);
@@ -228,7 +229,7 @@ export default function Pool(props) {
       setReduce(ret.timeReduce);
       setNftId(ret.tokenId);
       setNftName(ret.name);
-    }).catch(err=>{
+    }).catch(err => {
       console.error('getNftInfo 2', err);
     })
 
@@ -256,21 +257,21 @@ export default function Pool(props) {
   // console.debug('total', totalDeposited * wslpPrice, totalDeposited.toString(), wslpPrice);
   return (
     <React.Fragment >
-      <BoosterSelectionModal isActived={modal} setModal={setModal} 
+      <BoosterSelectionModal isActived={modal} setModal={setModal}
         setNftId={setNftId}
         setIcon={setIcon}
         setBoost={setBoost}
         setReduce={setReduce}
-        ></BoosterSelectionModal>
-      <div id={'pool_'+pid} className={styles.pool} data-active={poolInfo.lpAmount.toString() > 0}> {/*active true for on staking pool */}
-        <div className={styles.bubble} data-equipped-nft={currentTokenId !== 0 ? "true" : "false"} style={{display: !deposited && !dualFarmingEnable?'none':'flex'}}> {/*true if equipped an NFT*/}
+      ></BoosterSelectionModal>
+      <div id={'pool_' + pid} className={styles.pool} data-active={poolInfo.lpAmount.toString() > 0}> {/*active true for on staking pool */}
+        <div className={styles.bubble} data-equipped-nft={currentTokenId !== 0 ? "true" : "false"} style={{ display: !deposited && !dualFarmingEnable ? 'none' : 'flex' }}> {/*true if equipped an NFT*/}
           {
-            currentTokenId !== 0 && <a onClick={()=>{
+            currentTokenId !== 0 && <a onClick={() => {
               setModal(1);
               setShowDeposit(true);
             }} className={styles.reload}><img src="assets/reload24x24.png" /></a>
           }
-          
+
           {
             currentTokenId !== 0 && icon && <img src={icon} />
           }
@@ -280,16 +281,16 @@ export default function Pool(props) {
           {
             !deposited && dualFarmingEnable && <img src="/assets/dualfarm28x28.png" />
           }
-          
+
           <div className={styles.bubble_text}>
             {
               currentTokenId !== 0 && <div className={styles.name}>{nftName}</div>
             }
             {
-              currentTokenId !== 0 && <div className={styles.boost_amount}>{t("REWARD")} +{(boost*100).toFixed(2)}%</div>
+              currentTokenId !== 0 && <div className={styles.boost_amount}>{t("REWARD")} +{(boost * 100).toFixed(2)}%</div>
             }
             {
-              currentTokenId !== 0 && <div className={styles.boost_amount}>{t("LOCKTIME")} -{(reduce*100).toFixed(2)}%</div>
+              currentTokenId !== 0 && <div className={styles.boost_amount}>{t("LOCKTIME")} -{(reduce * 100).toFixed(2)}%</div>
             }
             {
               deposited && currentTokenId === 0 && <div className={styles.boost_amount}>{t("ATTACH A BOOST CARD TO OPTIMIZE YOUR FARMING")}</div>
@@ -318,7 +319,7 @@ export default function Pool(props) {
         <div className={styles.avatar}>
           <img src={poolAnimals[pid % poolAnimals.length]} className={styles.lv1} />
           {
-          poolInfo.lpAmount.toString() > 0 && <img src="assets/sunglass.png" className={styles.lv2} />
+            poolInfo.lpAmount.toString() > 0 && <img src="assets/sunglass.png" className={styles.lv2} />
           }
         </div>
         <div className={styles.mul_apy}>
@@ -341,14 +342,14 @@ export default function Pool(props) {
                   dualFarmingEnable && ("ZOO+WASP " + t("EARNED"))
                 }
                 {
-                  !dualFarmingEnable && ("ZOO "+ t("EARNED"))
+                  !dualFarmingEnable && ("ZOO " + t("EARNED"))
                 }
-                
+
                 <span className={styles.tipbox_btn}>
                   ?
                   <div className={styles.tipbox}>
                     <div className={styles.per_week}>
-                      <img src="assets/currency/zoo.png"/>
+                      <img src="assets/currency/zoo.png" />
                       <div>
                         {commafy(zooPerWeek)}
                         <span>{t("per week")}</span>
@@ -357,32 +358,75 @@ export default function Pool(props) {
 
                     {
                       dualFarmingEnable && <div className={styles.per_week}> {/*display:none if not dualfarm*/}
-                        <img src="assets/currency/wasp.png"/>
+                        <img src="assets/currency/wasp.png" />
                         <div>
                           {commafy(waspPerWeek)}
                           <span>{t("per week")}</span>
                         </div>
                       </div>
                     }
-                    
+
                   </div>
                 </span>
               </div>
               <div className={styles.harvest_wrapper}>
-                <div className={styles.earned_amount} data-double-farming={dualFarmingEnable ?true: false}> {/*Add "disabled" when non-connected  and data-double-farming="true" when duofarming */}
-                  <div>{commafy(poolInfo.pendingZoo)} ZOO</div>
+                <div className={styles.earned_amount} data-double-farming={dualFarmingEnable ? true : false}> {/*Add "disabled" when non-connected  and data-double-farming="true" when duofarming */}
+                  <div>
+                    {/* {commafy(poolInfo.pendingZoo)} ZOO */}
+                    {
+                      // dualFarmingEnable && <div>{commafy(poolInfo.pendingWasp)} WASP</div>
+                      dualFarmingEnable && <CountUp
+                        className="account-balance"
+                        end={Number(poolInfo.pendingZoo.toString()) * 10}
+                        duration={4}
+                        separator=","
+                        decimals={Number(poolInfo.pendingZoo.toString()) < 999 ? 4 : 1}
+                        decimal="."
+                        prefix=""
+                        suffix=" ZOO"
+                        redraw={true}
+                        preserveValue={true}
+                        startOnMount={true}
+                      >
+                        {({ countUpRef }) => (
+                          <div>
+                            <span ref={countUpRef} />
+                          </div>
+                        )}
+                      </CountUp>
+                    }
+                  </div>
                   {
-                    dualFarmingEnable && <div>{commafy(poolInfo.pendingWasp)} WASP</div>
+                    // dualFarmingEnable && <div>{commafy(poolInfo.pendingWasp)} WASP</div>
+                    dualFarmingEnable && <CountUp
+                      className="account-balance"
+                      end={Number(poolInfo.pendingWasp.toString()) * 10}
+                      duration={4}
+                      separator=","
+                      decimals={Number(poolInfo.pendingWasp.toString()) < 999 ? 4 : 1}
+                      decimal="."
+                      prefix=""
+                      suffix=" WASP"
+                      redraw={true}
+                      preserveValue={true}
+                      startOnMount={true}
+                    >
+                      {({ countUpRef }) => (
+                        <div>
+                          <span ref={countUpRef} />
+                        </div>
+                      )}
+                    </CountUp>
                   }
                 </div>
-                <a className={styles.harvest} onClick={()=>{
+                <a className={styles.harvest} onClick={() => {
                   if (!wallet.connected) {
                     return;
                   }
                   setTxWaiting(true);
-                  withdraw(pid, 0, wallet.networkId, wallet.web3, wallet.address).then(ret=>{
+                  withdraw(pid, 0, wallet.networkId, wallet.web3, wallet.address).then(ret => {
                     setTxWaiting(false);
-                  }).catch(err=>{
+                  }).catch(err => {
                     console.error(err);
                     setTxWaiting(false);
                   })
@@ -394,33 +438,33 @@ export default function Pool(props) {
 
             <div className={styles.staked}>
               <div className={styles.title}>
-                WSLP {t("STAKED")}: {poolInfo.lpAmount * wslpPrice ? ('$'+commafy(poolInfo.lpAmount * wslpPrice)) : (commafy(poolInfo.lpAmount) + ' WSLP')}
+                WSLP {t("STAKED")}: {poolInfo.lpAmount * wslpPrice ? ('$' + commafy(poolInfo.lpAmount * wslpPrice)) : (commafy(poolInfo.lpAmount) + ' WSLP')}
               </div>
               <div className={styles.action_wrapper}>
                 {
-                  !connected && <a className={styles.connect_wallet} onClick={()=>{
+                  !connected && <a className={styles.connect_wallet} onClick={() => {
                     wallet.connect();
                   }}>
                     {t("Connect Wallet")}
                   </a>
                 }
                 {
-                  connected && !deposited && <a className={styles.deposit_lp} onClick={()=>{
+                  connected && !deposited && <a className={styles.deposit_lp} onClick={() => {
                     setDepositAmount(0);
                     setNftId(0);
                     setShowDeposit(true)
-                    }}>
-                    
+                  }}>
+
                     {t("Deposit WSLP Token")}
                   </a>
                 }
                 {
-                  connected && deposited && expirated && <a className={styles.withdraw_lp} onClick={()=>{
+                  connected && deposited && expirated && <a className={styles.withdraw_lp} onClick={() => {
                     setTxWaiting(true);
-                    withdraw(pid, '0x' + (new BigNumber(poolInfo.lpAmount.toString())).multipliedBy(1e18).toString(16), chainId, web3, address).then(ret=>{
+                    withdraw(pid, '0x' + (new BigNumber(poolInfo.lpAmount.toString())).multipliedBy(1e18).toString(16), chainId, web3, address).then(ret => {
                       setTxWaiting(false);
                       // console.debug('withdraw bt ret', ret);
-                    }).catch(err=>{
+                    }).catch(err => {
                       setTxWaiting(false);
                       console.error('withdraw failed', err);
                     });
@@ -434,15 +478,15 @@ export default function Pool(props) {
                       ?
                       <div className={styles.tipbox}>
                         <div className={styles.boosting}>
-                          <img src="assets/hourglass24x24.png"/>
+                          <img src="assets/hourglass24x24.png" />
                           <div>
-                            +{commafy(calcLockTimeBoost(poolInfo.lockTime / (3600 * 24))*100,2) + '%'}
+                            +{commafy(calcLockTimeBoost(poolInfo.lockTime / (3600 * 24)) * 100, 2) + '%'}
                             <span>{t("boost")}</span>
                           </div>
                         </div>
                         <div className={styles.horizontal_line}></div>
                         <div className={styles.locktime}>
-                          {((poolInfo.expirationTime - Date.now()/1000) / (3600 * 24)).toFixed(0)} Days
+                          {((poolInfo.expirationTime - Date.now() / 1000) / (3600 * 24)).toFixed(0)} Days
                           <span>{t("lock time")}</span>
                         </div>
                       </div>
@@ -452,11 +496,11 @@ export default function Pool(props) {
                   </a>
                 }
                 {
-                  connected && deposited && <a className={styles.topup_lp} onClick={()=>{setShowDeposit(true)}}>
+                  connected && deposited && <a className={styles.topup_lp} onClick={() => { setShowDeposit(true) }}>
                     {t("Top-up")}
                   </a>
                 }
-                
+
               </div>
             </div>
 
@@ -466,13 +510,13 @@ export default function Pool(props) {
               <div className={styles.coin_info}>
 
                 <div className={styles.coins}>
-                  {symbol0 && <img src={'https://token-icons.vercel.app/icon/wanswap/'+symbol0+'.png'} />}
-                  {symbol1 && <img src={'https://token-icons.vercel.app/icon/wanswap/'+symbol1+'.png'} />}
+                  {symbol0 && <img src={'https://token-icons.vercel.app/icon/wanswap/' + symbol0 + '.png'} />}
+                  {symbol1 && <img src={'https://token-icons.vercel.app/icon/wanswap/' + symbol1 + '.png'} />}
                 </div>
 
                 <a className={styles.add_liquidity}
                   target="view_window"
-                  href={ WANSWAP_URL[chainId && chainId.toString()] + '/#/add/'+(poolInfo.token0 && poolInfo.token0.toLowerCase() === WWAN_ADDRESS[wallet.networkId] ? 'WAN' : poolInfo.token0) +'/'+ (poolInfo.token1 && poolInfo.token1.toLowerCase() === WWAN_ADDRESS[wallet.networkId] ? 'WAN' : poolInfo.token1) }>
+                  href={WANSWAP_URL[chainId && chainId.toString()] + '/#/add/' + (poolInfo.token0 && poolInfo.token0.toLowerCase() === WWAN_ADDRESS[wallet.networkId] ? 'WAN' : poolInfo.token0) + '/' + (poolInfo.token1 && poolInfo.token1.toLowerCase() === WWAN_ADDRESS[wallet.networkId] ? 'WAN' : poolInfo.token1)}>
                   {t("Add Liquidity on WanSwap")}
                 </a>
 
@@ -481,9 +525,9 @@ export default function Pool(props) {
               <div className={styles.liq_detail}>
                 <div className={styles.liq_row}>
                   <div>{t("Deposit")}</div>
-                  <div>{symbol0}-{symbol1} <a 
-                   target="view_window"
-                   href={ WANSWAP_URL[chainId && chainId.toString()] + '/#/add/'+(poolInfo.token0 && poolInfo.token0.toLowerCase() === WWAN_ADDRESS[wallet.networkId] ? 'WAN' : poolInfo.token0) +'/'+ (poolInfo.token1 && poolInfo.token1.toLowerCase() === WWAN_ADDRESS[wallet.networkId] ? 'WAN' : poolInfo.token1) }
+                  <div>{symbol0}-{symbol1} <a
+                    target="view_window"
+                    href={WANSWAP_URL[chainId && chainId.toString()] + '/#/add/' + (poolInfo.token0 && poolInfo.token0.toLowerCase() === WWAN_ADDRESS[wallet.networkId] ? 'WAN' : poolInfo.token0) + '/' + (poolInfo.token1 && poolInfo.token1.toLowerCase() === WWAN_ADDRESS[wallet.networkId] ? 'WAN' : poolInfo.token1)}
                   ><FontAwesomeIcon icon={faExternalLinkSquareAlt} /></a></div>
                 </div>
                 <div className={styles.liq_row}>
@@ -507,21 +551,21 @@ export default function Pool(props) {
               </div>
               <div className={styles.deposit_wrapper}>
 
-                <input value={depositAmount} className={styles.deposit_amount} onChange={(e)=>{
+                <input value={depositAmount} className={styles.deposit_amount} onChange={(e) => {
                   if (checkNumber(e)) {
                     setDepositAmount(e.target.value);
                   }
-                }}/>
+                }} />
 
                 <div class={styles.coin_wrapper}>
-                  <a className={styles.max} onClick={()=>{
+                  <a className={styles.max} onClick={() => {
                     setDepositAmount(poolInfo.lpBalance && poolInfo.lpBalance.toString());
                   }} disabled={!connected}> {/*Add disabled when non-connected */}
                     {t("MAX")}
                   </a>
                   <div className={styles.coins}>
-                    {symbol0 && <img src={'https://token-icons.vercel.app/icon/wanswap/'+symbol0+'.png'} />}
-                    {symbol1 && <img src={'https://token-icons.vercel.app/icon/wanswap/'+symbol1+'.png'} />}
+                    {symbol0 && <img src={'https://token-icons.vercel.app/icon/wanswap/' + symbol0 + '.png'} />}
+                    {symbol1 && <img src={'https://token-icons.vercel.app/icon/wanswap/' + symbol1 + '.png'} />}
                   </div>
                 </div>
               </div>
@@ -530,7 +574,7 @@ export default function Pool(props) {
             <div className={styles.locking}>
               <div className={styles.title}>
                 <span>{t("LOCK PERIOD")}</span>
-                <span className={styles.boost}>{t("BOOST")} +{commafy(calcLockTimeBoost(lockDays)*100) + '%'}</span>
+                <span className={styles.boost}>{t("BOOST")} +{commafy(calcLockTimeBoost(lockDays) * 100) + '%'}</span>
               </div>
               <div className={styles.lock_wrapper}>
 
@@ -538,7 +582,7 @@ export default function Pool(props) {
                   {lockDays} {t("days")}
                 </div>
                 <div className={styles.lock_action}>
-                  <Slider value={lockDays} min={parseInt(countdown/1000/3600/24)} max={180} tooltipVisible={false} onChange={(e)=>{
+                  <Slider value={lockDays} min={parseInt(countdown / 1000 / 3600 / 24)} max={180} tooltipVisible={false} onChange={(e) => {
                     setLockDays(e);
                   }} />
                 </div>
@@ -562,14 +606,14 @@ export default function Pool(props) {
                     <img src={icon} />
                     <div className={styles.booster}>
                       <img src="assets/rocket24x24.png" />
-                      +{(boost*100).toFixed(2)}%
+                      +{(boost * 100).toFixed(2)}%
                       </div>
                     <div className={styles.locked_time}>
                       <img src="assets/hourglass24x24.png" />
-                      -{(reduce*100).toFixed(2)}%
+                      -{(reduce * 100).toFixed(2)}%
                     </div>
                     {
-                      currentTokenId === 0 && <a className={styles.remove} onClick={()=>{ setNftId(0) }}><img src="assets/remove16x16.png" /></a>
+                      currentTokenId === 0 && <a className={styles.remove} onClick={() => { setNftId(0) }}><img src="assets/remove16x16.png" /></a>
                     }
                     {
                       currentTokenId !== 0 && <a className={styles.reload} onClick={() => { setModal(1) }}><img src="assets/reload24x24.png" /></a>
@@ -579,39 +623,39 @@ export default function Pool(props) {
 
                 <div className={styles.lp_management}>
 
-                <a className={styles.back} onClick={()=>{setShowDeposit(false)}}>
-                        <FontAwesomeIcon icon={faChevronLeft} />
-                    </a>
+                  <a className={styles.back} onClick={() => { setShowDeposit(false) }}>
+                    <FontAwesomeIcon icon={faChevronLeft} />
+                  </a>
 
-                  <a className={styles.approve} disabled={approved} onClick={()=>{
+                  <a className={styles.approve} disabled={approved} onClick={() => {
                     setTxWaiting(true);
-                    approve(poolInfo.lpToken, chainId, web3, address).then(ret=>{
+                    approve(poolInfo.lpToken, chainId, web3, address).then(ret => {
                       setTxWaiting(false);
                       setUpdateApprove(updateApprove + 1);
                       // console.debug('approve bt ret', ret);
-                    }).catch(err=>{
+                    }).catch(err => {
                       setTxWaiting(false);
                       console.error('approve failed', err);
                     });
                   }}>
                     {t("Approve")}
-                    </a>
+                  </a>
 
-                  <a className={styles.validate} disabled={!approved} onClick={()=>{
+                  <a className={styles.validate} disabled={!approved} onClick={() => {
                     setTxWaiting(true);
-                    deposit(pid, '0x' + (new BigNumber(depositAmount)).multipliedBy(1e18).toString(16), lockDays*3600*24, nftId, chainId, web3, address).then(ret=>{
+                    deposit(pid, '0x' + (new BigNumber(depositAmount)).multipliedBy(1e18).toString(16), lockDays * 3600 * 24, nftId, chainId, web3, address).then(ret => {
                       setTxWaiting(false);
                       // console.debug('deposit bt ret', ret);
                       setShowDeposit(false)
-                    }).catch(err=>{
+                    }).catch(err => {
                       setTxWaiting(false);
                       console.error('deposit failed', err);
                     });
                   }}>
                     {t("Validate")}
-                    </a>
+                  </a>
 
-                    
+
                 </div>
               </div>
 

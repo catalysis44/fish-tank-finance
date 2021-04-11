@@ -28,6 +28,7 @@
     "lowdb": "^1.0.0",
     "node-sass": "^5.0.0",
     "react": "^16.8.6",
+    "react-countup": "^4.3.3",
     "react-dom": "^16.8.6",
     "sass-loader": "^11.0.1",
     "umi": "^3.3.7"
