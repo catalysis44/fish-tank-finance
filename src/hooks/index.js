@@ -476,6 +476,18 @@ const getPriceFromOracle = (loader, prices) => {
   return loader.loadMany(calls);
 }
 
+const getWanReserve = (loader) => {
+  return loader.load({
+    target: '0x0a886dc4d584d55e9a1fa7eb0821762296b4ec0e',
+    call: ['getReserves()(uint112,uint112,uint32)'],
+    returns: [
+      ['wan_reserve0', val => val / 1e6],
+      ['wan_reserve1', val => val / 1e18],
+      ['wan_time', val => val],
+    ]
+  })
+}
+
 export const useDataPump = (storage, setStorage, chainId, address, connected) => {
   const loader = useLoader(chainId);
   const blockNumber = storage.blockNumber;
@@ -739,15 +751,23 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
     });
 
     if (Number(chainId) === 1 || Number(chainId) === 888) {
-      const prices = getPrices();
+      // const prices = {'WAN':2.32};
       // console.log('prices', prices);
-      getPriceFromOracle(loader, prices).then(ret => {
-        // console.log('getPriceFromOracle', ret);
-        Object.keys(prices).map((v, i) => {
-          if (ret[i] && ret[i].returnValue && ret[i].returnValue.price > 0) {
-            setPrice(v, ret[i].returnValue.price);
-          }
-        });
+      // getPriceFromOracle(loader, prices).then(ret => {
+      //   console.log('getPriceFromOracle', ret);
+      //   Object.keys(prices).map((v, i) => {
+      //     if (ret[i] && ret[i].returnValue && ret[i].returnValue.price > 0) {
+      //       setPrice(v, ret[i].returnValue.price);
+      //     }
+      //   });
+      // })
+
+      getWanReserve(loader).then(ret=>{
+        // console.log('getWanReserve', ret, ret.returnValue.wan_reserve0 / ret.returnValue.wan_reserve1);
+        let wanPrice = ret.returnValue.wan_reserve0 / ret.returnValue.wan_reserve1;
+        setPrice('WAN', wanPrice);
+      }).catch(err=>{
+        console.error('getWanReserve', err);
       })
     }
 

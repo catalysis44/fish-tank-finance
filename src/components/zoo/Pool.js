@@ -126,22 +126,28 @@ export default function Pool(props) {
     const waspPerBlock = 12;
     return lpAmount && (new BigNumber(lpAmount)).gt(0) && (new BigNumber(lpAmount)).multipliedBy(waspPerBlock * blockPerWeek * waspAllocPoint).div(waspTotalAllocPoint).div(waspTotalLP);
   }, [waspAllocPoint, waspTotalAllocPoint, waspTotalLP, blockPerWeek, lpAmount, dualFarmingEnable]);
+  // console.log('waspPerWeek', symbol0, waspPerWeek.toString());
 
   const wslpPrice = useMemo(()=>{
     if (decimals0 === 0 || decimals1 === 0 || !prices[symbol0] || !prices[symbol1]) {
       return 0;
     }
     // get wslp price
-    const r0 = Number(reserve0.toString());
-    const r1 = Number(reserve1.toString());
-    const d0 = Number(decimals0);
-    const d1 = Number(decimals1);
-    
+    const r0 = new BigNumber(reserve0.toString());
+    const r1 = new BigNumber(reserve1.toString());
+    const d0 = new BigNumber(decimals0);
+    const d1 = new BigNumber(decimals1);
+
+    // console.log('symbol0, symbol1', symbol0, symbol1, prices[symbol0], prices[symbol1], prices);
+    // console.log('symbol0, symbol1', symbol0, symbol1, r0.div(10**d0).multipliedBy(prices[symbol0]).plus(r1.div(10**d1).multipliedBy(prices[symbol1])).div(Math.sqrt(r0 * r1) / 1e18).toString());
+
+    // let lpPrice = r0.div(10**d0).multipliedBy(prices[symbol0]).plus(r1.div(10**d1).multipliedBy(prices[symbol1])).div(waspTotalLP);
     let lpPrice = (r0 / (10**d0) * prices[symbol0] + r1 / (10**d1) * prices[symbol1]) / (Math.sqrt(r0 * r1) / 1e18);
+    // console.log('lpPrice', lpPrice);
     // console.debug('r0', r0.toString(), r1.toString(), prices[symbol0], prices[symbol1]);
     // TODO: lpPrice not good?
-    return lpPrice * 1.13;
-  }, [reserve0, reserve1, decimals0, decimals1]);
+    return lpPrice * 1.0;
+  }, [reserve0, reserve1, decimals0, decimals1, symbol0, symbol1, prices]);
 
   const apy = useMemo(()=>{
     if (decimals0 === 0 || decimals1 === 0 || !prices[symbol0] || !prices[symbol1]) {
@@ -156,13 +162,15 @@ export default function Pool(props) {
     
     const yearReward = zooPerWeek * prices['ZOO'] / 7 * 365 + waspPerWeek * prices['WASP'] / 7 * 365;
     let apy = Number(lpAmount.toString()) > 0 ? (yearReward / (Number(lpAmount.toString()) * lpPrice)) : 0;
-
+    // console.log('apy', apy, yearReward, prices['WASP'], lpAmount.toString(), lpPrice.toString());
     if (apy === 0) {
       const zooPerYear = zooPerBlock * (3600/5*24*365) * allocPoint / totalAllocPoint;
       const waspPerBlock = 12;
       const waspPerYear = waspPerBlock * (3600/5*24*365) * waspAllocPoint / waspTotalAllocPoint;
       let apyZoo = zooPerYear * prices['ZOO'] / (totalDeposited * lpPrice);
       let apyWasp = waspPerYear * prices['WASP'] / (waspTotalLP * lpPrice);
+      // console.log('waspPerWeek', symbol1, waspPerYear/365*7, waspTotalLP.toString(), apyWasp);
+
       if (totalDeposited.toString() !== '0') {
         apy = Number(apy) + Number(apyZoo);
       }
