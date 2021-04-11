@@ -309,10 +309,15 @@ const getLpInfo = (loader, lpToken, chainId, address, waspPid) => {
         ['reserveTime', val => val],
       ]
     },
+    {
+      target: lpToken,
+      call: ['totalSupply()(uint256)'],
+      returns: [['totalSupply', val => val]]
+    },
   ]);
 }
 
-const getTokenSymbols = (loader, token0, token1) => {
+const getTokenSymbols = (loader, token0, token1, lpToken) => {
   return loader.loadMany([
     {
       target: token0,
@@ -333,6 +338,16 @@ const getTokenSymbols = (loader, token0, token1) => {
       target: token1,
       call: ['decimals()(uint8)'],
       returns: [['decimals1', val => val]]
+    },
+    {
+      target: token0,
+      call: ['balanceOf(address)(uint256)', lpToken],
+      returns: [['r0', val => val]]
+    },
+    {
+      target: token1,
+      call: ['balanceOf(address)(uint256)', lpToken],
+      returns: [['r1', val => val]]
     },
   ]);
 }
@@ -640,14 +655,17 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
             poolInfo[i].reserve0 = ret[7].returnValue.reserve0;
             poolInfo[i].reserve1 = ret[7].returnValue.reserve1;
             poolInfo[i].reserveTime = ret[7].returnValue.reserveTime;
+            poolInfo[i].totalSupply = ret[8].returnValue.totalSupply;
 
 
-            getTokenSymbols(loader, poolInfo[i].token0, poolInfo[i].token1).then(ret => {
+            getTokenSymbols(loader, poolInfo[i].token0, poolInfo[i].token1, poolInfo[i].lpToken).then(ret => {
               // console.debug('getTokenSymbols', i, ret);
               poolInfo[i].symbol0 = ret[0].returnValue.symbol0;
               poolInfo[i].symbol1 = ret[1].returnValue.symbol1;
               poolInfo[i].decimals0 = ret[2].returnValue.decimals0;
               poolInfo[i].decimals1 = ret[3].returnValue.decimals1;
+              poolInfo[i].r0 = ret[4].returnValue.r0;
+              poolInfo[i].r1 = ret[5].returnValue.r1;
 
               updatePrice(poolInfo[i].symbol0, poolInfo[i].symbol1, poolInfo[i].decimals0, poolInfo[i].decimals1, poolInfo[i].reserve0, poolInfo[i].reserve1);
 

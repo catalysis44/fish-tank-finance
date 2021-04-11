@@ -133,21 +133,22 @@ export default function Pool(props) {
       return 0;
     }
     // get wslp price
-    const r0 = new BigNumber(reserve0.toString());
-    const r1 = new BigNumber(reserve1.toString());
+    const r0 = poolInfo.r0;
+    const r1 = poolInfo.r1;
     const d0 = new BigNumber(decimals0);
     const d1 = new BigNumber(decimals1);
 
-    // console.log('symbol0, symbol1', symbol0, symbol1, prices[symbol0], prices[symbol1], prices);
+    // console.log(symbol0, symbol1, prices[symbol0], prices[symbol1], r0/10**d0, r1/10**d1, poolInfo.r0/10**d0, poolInfo.r1/10**d1, poolInfo.totalSupply/1e18);
     // console.log('symbol0, symbol1', symbol0, symbol1, r0.div(10**d0).multipliedBy(prices[symbol0]).plus(r1.div(10**d1).multipliedBy(prices[symbol1])).div(Math.sqrt(r0 * r1) / 1e18).toString());
-
+    
     // let lpPrice = r0.div(10**d0).multipliedBy(prices[symbol0]).plus(r1.div(10**d1).multipliedBy(prices[symbol1])).div(waspTotalLP);
-    let lpPrice = (r0 / (10**d0) * prices[symbol0] + r1 / (10**d1) * prices[symbol1]) / (Math.sqrt(r0 * r1) / 1e18);
-    // console.log('lpPrice', lpPrice);
+    let lpPrice = (r0 / (10**d0) * prices[symbol0] + r1 / (10**d1) * prices[symbol1]) / (poolInfo.totalSupply/1e18);
+    // console.log('lpPrice', symbol0, lpPrice, Math.sqrt(prices[symbol0] * prices[symbol1]));
     // console.debug('r0', r0.toString(), r1.toString(), prices[symbol0], prices[symbol1]);
     // TODO: lpPrice not good?
-    return lpPrice * 1.0;
-  }, [reserve0, reserve1, decimals0, decimals1, symbol0, symbol1, prices]);
+    return lpPrice;
+    // return 2.3216658979449445;
+  }, [reserve0, reserve1, decimals0, decimals1, symbol0, symbol1, prices, poolInfo]);
 
   const apy = useMemo(()=>{
     if (decimals0 === 0 || decimals1 === 0 || !prices[symbol0] || !prices[symbol1]) {
