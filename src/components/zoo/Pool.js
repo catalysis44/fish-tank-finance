@@ -375,7 +375,7 @@ export default function Pool(props) {
                     {/* {commafy(poolInfo.pendingZoo)} ZOO */}
                     {
                       // dualFarmingEnable && <div>{commafy(poolInfo.pendingWasp)} WASP</div>
-                      dualFarmingEnable && <CountUp
+                      <CountUp
                         className="account-balance"
                         end={Number(poolInfo.pendingZoo.toString())}
                         duration={10}
