@@ -1,6 +1,6 @@
 import BigNumber from 'bignumber.js';
 import { useInterval, useLockFn, useReactive } from 'ahooks';
-import { MULTICALL_ADDRESS, RPC_URL, ZOO_TOKEN_ADDRESS, ZOO_FARMING_ADDRESS, ZOO_BOOSTING_ADDRESS, NFT_FACTORY_ADDRESS, ZOO_NFT_ADDRESS, WASP_FARMING_ADDRESS, NFT_MARKETPLACE_ADDRESS, currencyList } from '../config';
+import { MULTICALL_ADDRESS, RPC_URL, ZOO_TOKEN_ADDRESS, ZOO_FARMING_ADDRESS, ZOO_BOOSTING_ADDRESS, NFT_FACTORY_ADDRESS, ZOO_NFT_ADDRESS, WASP_FARMING_ADDRESS, NFT_MARKETPLACE_ADDRESS, currencyList, WASP_TOKEN_ADDRESS } from '../config';
 import React, { useCallback, useMemo } from 'react';
 import { getPrices, setPrice, toByte32, updatePrice } from './price';
 const { aggregate } = require('@makerdao/multicall');
@@ -72,6 +72,14 @@ const getZooBalance = (loader, chainId, address) => {
     target: ZOO_TOKEN_ADDRESS[chainId],
     call: ['balanceOf(address)(uint256)', address],
     returns: [['zooBalance', val => (new BigNumber(val.toString())).div(1e18)]]
+  });
+}
+
+const getWaspBalance = (loader, chainId, address) => {
+  return loader.load({
+    target: WASP_TOKEN_ADDRESS[chainId],
+    call: ['balanceOf(address)(uint256)', address],
+    returns: [['waspBalance', val => (new BigNumber(val.toString())).div(1e18)]]
   });
 }
 
@@ -538,6 +546,15 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
     getZooBalance(loader, chainId, address).then(ret => {
       // console.debug('getZooBalance ret', ret, ret.returnValue.zooBalance);
       tmpStorage.zooBalance = ret.returnValue.zooBalance;
+      tmpStorage.blockNumber = ret.returnValue.blockNumber;
+      updateStorage(tmpStorage);
+    }).catch(err => {
+      console.error('err 1', err);
+    });
+
+    getWaspBalance(loader, chainId, address).then(ret => {
+      // console.debug('getZooBalance ret', ret, ret.returnValue.zooBalance);
+      tmpStorage.waspBalance = ret.returnValue.waspBalance;
       tmpStorage.blockNumber = ret.returnValue.blockNumber;
       updateStorage(tmpStorage);
     }).catch(err => {
