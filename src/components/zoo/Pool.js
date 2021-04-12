@@ -378,7 +378,7 @@ export default function Pool(props) {
                       dualFarmingEnable && <CountUp
                         className="account-balance"
                         end={Number(poolInfo.pendingZoo.toString())}
-                        duration={4.5}
+                        duration={10}
                         separator=","
                         decimals={Number(poolInfo.pendingZoo.toString()) < 999 ? 4 : 1}
                         decimal="."
@@ -401,7 +401,7 @@ export default function Pool(props) {
                     dualFarmingEnable && <CountUp
                       className="account-balance"
                       end={Number(poolInfo.pendingWasp.toString())}
-                      duration={4.5}
+                      duration={10}
                       separator=","
                       decimals={Number(poolInfo.pendingWasp.toString()) < 999 ? 4 : 1}
                       decimal="."
