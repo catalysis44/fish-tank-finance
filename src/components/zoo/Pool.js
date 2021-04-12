@@ -450,7 +450,7 @@ export default function Pool(props) {
                 }
                 {
                   connected && !deposited && <a className={styles.deposit_lp} onClick={() => {
-                    setDepositAmount(0);
+                    setDepositAmount(poolInfo.lpBalance && poolInfo.lpBalance.toString());
                     setNftId(0);
                     setShowDeposit(true)
                   }}>
@@ -496,7 +496,10 @@ export default function Pool(props) {
                   </a>
                 }
                 {
-                  connected && deposited && <a className={styles.topup_lp} onClick={() => { setShowDeposit(true) }}>
+                  connected && deposited && <a className={styles.topup_lp} onClick={() => { 
+                    setDepositAmount(poolInfo.lpBalance && poolInfo.lpBalance.toString());
+                    setShowDeposit(true) 
+                    }}>
                     {t("Top-up")}
                   </a>
                 }
