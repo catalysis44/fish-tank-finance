@@ -53,6 +53,7 @@ export default {
     "MAX":"MAX",
     "LOCK PERIOD":"PERÍODO DE BLOQUEO",
     "BOOST":"IMPULSAR",
+    "ZOO BOOST":"IMPULSO ZOO",
     "days":"días",
     "EXTRA BOOST":"IMPULSO ADICIONAL",
     "Approve":"Aprobar",
