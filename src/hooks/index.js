@@ -650,6 +650,7 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
 
         for (let i = 0; i < farmingInfo.poolLength; i++) {
           poolInfo[i] = {
+            ...poolInfo[i],
             pid: i,
             ...ret[i].returnValue,    // PoolInfo
             ...ret[farmingInfo.poolLength + i].returnValue, // UserInfo

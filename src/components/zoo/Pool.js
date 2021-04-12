@@ -255,6 +255,7 @@ export default function Pool(props) {
   // console.debug('currentInfo', icon, nftId, boost, reduce);
   // console.debug('harvest', connected, deposited, poolInfo.pendingWasp, poolInfo.pendingZoo, (connected && deposited));
   // console.debug('total', totalDeposited * wslpPrice, totalDeposited.toString(), wslpPrice);
+  // console.log('symbol', symbol0, symbol1);
   return (
     <React.Fragment >
       <BoosterSelectionModal isActived={modal} setModal={setModal}
