@@ -54,6 +54,7 @@ export default {
     "MAX":"MAKS",
     "LOCK PERIOD":"KİLİT DÖNEMİ",
     "BOOST":"YÜKSELT",
+    "ZOO BOOST":"YÜKSELT ZOO",
     "days":"gün",
     "EXTRA BOOST":"EKSTRA YÜKSELT",
     "Approve":"Onayla",

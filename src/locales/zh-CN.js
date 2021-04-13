@@ -52,6 +52,7 @@ export default {
   "MAX": "最大",
   "LOCK PERIOD": "锁定时长",
   "BOOST": "加速",
+  "ZOO BOOST":"ZOO加速",
   "days": "天",
   "EXTRA BOOST": "额外加速",
   "Approve": "授权",

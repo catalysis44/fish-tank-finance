@@ -53,6 +53,7 @@ export default {
     "MAX":"МАКС",
     "LOCK PERIOD":"ПЕРИОД БЛОКИРОВКИ",
     "BOOST":"УВЕЛИЧИТЬ",
+    "ZOO BOOST":"УВЕЛИЧИТЬ ZOO",
     "days":"дни",
     "EXTRA BOOST":"ДОПОЛНИТЕЛЬНЫЙ РОСТ",
     "Approve":"Утвердить",

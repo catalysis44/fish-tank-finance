@@ -53,6 +53,7 @@ export default {
   "MAX":"MAX",
   "LOCK PERIOD":"DURÉE DE VERROUILLAGE",
   "BOOST":"BOOST",
+  "ZOO BOOST":"BOOST ZOO",
   "days":"jours",
   "EXTRA BOOST":"BOOST SUPPLÉMENTAIRE",
   "Approve":"Approuver",

@@ -578,7 +578,7 @@ export default function Pool(props) {
             <div className={styles.locking}>
               <div className={styles.title}>
                 <span>{t("LOCK PERIOD")}</span>
-                <span className={styles.boost}>{t("BOOST")} +{commafy(calcLockTimeBoost(lockDays) * 100) + '%'}</span>
+                <span className={styles.boost}>{t("ZOO BOOST")} +{commafy(calcLockTimeBoost(lockDays) * 100) + '%'}</span>
               </div>
               <div className={styles.lock_wrapper}>
 
