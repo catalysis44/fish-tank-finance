@@ -439,7 +439,7 @@ export default function Pool(props) {
 
             <div className={styles.staked}>
               <div className={styles.title}>
-                WSLP {t("STAKED")}: {poolInfo.lpAmount * wslpPrice ? ('$' + commafy(poolInfo.lpAmount * wslpPrice)) : (commafy(poolInfo.lpAmount) + ' WSLP')}
+                WSLP {t("STAKED")}: {poolInfo.lpAmount * wslpPrice ? ('$' + commafy(poolInfo.lpAmount * wslpPrice).split('.')[0]) : (commafy(poolInfo.lpAmount) + ' WSLP')}
               </div>
               <div className={styles.action_wrapper}>
                 {
