@@ -20,7 +20,7 @@ const poolAnimals = [
   '/zoo_keeper_pools/LION.png',
   '/zoo_keeper_pools/ZEBRA.png',
   '/zoo_keeper_pools/MONKEY.png',
-  '/zoo_keeper_pools/TURTOISE.png',
+  '/zoo_keeper_pools/CROCODILE.png',
   '/zoo_keeper_pools/PANDA.png',
   '/zoo_keeper_pools/GIRAFE.png',
   '/zoo_keeper_pools/ELEPHANT.png',
@@ -32,7 +32,7 @@ const poolAnimals = [
   '/zoo_keeper_pools/POLAR_BEAR.png',
   '/zoo_keeper_pools/RHINO.png',
   '/zoo_keeper_pools/TOUKAN.png',
-  '/zoo_keeper_pools/CROCODILE.png',
+  '/zoo_keeper_pools/TURTOISE.png',
   '/zoo_keeper_pools/KOALA.png',
   '/zoo_keeper_pools/LAMA.png',
   '/zoo_keeper_pools/HIPPO.png',
@@ -43,7 +43,7 @@ const poolTitles = [
   'RAGING MANE LEO', // LION
   'BARCODE BRENDA', // ZEBRA
   'MEL GIBBON', // MONKEY
-  'SHELLEY C. SNAPPER', // TORTOISE 
+  'CARL CROCS', // CROCODILE
   'PAULIE BAMBOOZLE', // PANDA
   'RAFFERTY G. MONAY', // GIRAFFE
   'ELON TUSK', // ELEPHANT
@@ -55,7 +55,7 @@ const poolTitles = [
   'PHIL T. ICEBARDGE', // POLAR BEAR
   'IVOR E. HORNDHAM', // RHINO
   'TWO-CAN STAN', // TOUKAN
-  'CARL CROCS', // CROCODILE
+  'SHELLEY C. SNAPPER', // TORTOISE 
   'KRIS TREELEAFER', // KOALA
   'VITALIK SPITERIN', // LLAMA
   'HIP HIPPO RAY', // HIPPO
