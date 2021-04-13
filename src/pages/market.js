@@ -187,7 +187,7 @@ export default function () {
               <img src="assets/rocket24x24.png" />
               <div>
                 <span>{t('Minimum')}</span>
-                <span>{t('Boost Reward')}</span>
+                <span>{t('Boost reward')}</span>
               </div>
             </div>
             <div className={styles.ability_slider}>
