@@ -512,3 +512,67 @@
 
    
 }
+
+
+// Darkmode //
+:global
+{
+    html[data-scheme="dark"]
+    {
+        body
+        {
+            background:#1f1f1f;
+        }
+        #sidebar_wrapper
+        {
+            background:#101010;
+        }
+        #sidebar_wrapper .horizontal_line
+        {
+            background:#1e1a25;
+        }
+        #sidebar_wrapper .list_group li a
+        {
+            color:white;
+        }
+        #sidebar_wrapper .address span
+        {
+            color:white;
+        }
+        #sidebar_wrapper .balance
+        {
+            background:#1e1a25;
+            color:white;
+        }
+        #zoo_info_burned
+        {
+            :local
+            .detail
+            {
+                color:white;
+            }
+        }
+        #sidebar_wrapper .dropdown:first-child
+        {
+            border-right:1px solid #101010;
+        }
+        #sidebar_wrapper .dropdown:last-child
+        {
+            border-left:1px solid #101010;
+        }
+        :local
+        {
+            .ext_link
+            {
+                border-bottom:1px solid #1e1a25 !important;
+            }
+            .ext_link a
+            {
+                color:white !important;
+                
+            }
+            
+        }
+    }
+    
+}

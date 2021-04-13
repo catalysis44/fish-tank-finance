@@ -1182,6 +1182,7 @@
 
 }
 
+
   /*Custom for Lang*/
   :global
   {
@@ -1236,3 +1237,76 @@
         }  
     }
   }
+
+
+// Darkmode //
+:global
+{
+    html[data-scheme="dark"]
+    {
+        :local
+        {
+
+          .pool
+          {
+            .multiplier
+            {
+              background:black;
+              color:white;
+            }
+            a[disabled]
+            {
+              background:#1e1a25 !important;
+              border-color:#1e1a25 !important;
+              color:#555 !important;
+            }
+            background:#101010;
+            .bubble
+            {
+              &:before
+              {
+                border-left-color:white;
+              }
+              &:after
+              {
+                border-left-color:#1f1f1f;
+              }
+              background:#1f1f1f;
+              box-shadow: none;
+              border:1px solid white;
+              .bubble_text
+              {
+                color:white !important;
+              }
+            }
+            .horizontal_line
+            {
+              background:#1f1f1f;
+            }
+            .title
+            {
+              color:white;
+            }
+            .earned_amount
+            {
+              color:white !important;
+            }
+            .liq_detail
+            {
+              color:white !important;
+            }
+            .deposit_wrapper .deposit_amount
+            {
+              background:#101010;
+              color:white;
+            }
+            .lock_wrapper .lock_period
+            {
+              color:white;
+            }
+          }
+        }
+        
+    }
+    
+}
