@@ -178,3 +178,35 @@
 
     
 }
+
+//Darkmode//
+:global
+{
+    html[data-scheme="dark"]
+    {
+        :local
+        {
+            .header,.supply,.rule,.rule span,.rule div
+            {
+              color:white;
+            }
+            .item_wrapper .description
+            {
+              color:white;
+              border-color:white;
+            }
+            .item_wrapper .boost_timereduce
+            {
+              background: #1f1f1f;
+              border: #1f1f1f
+            }
+            .action .action_btn[disabled]
+            {
+              background-color:#1f1f1f !important;
+              border-color:#1f1f1f !important;
+              color:#555 !important;
+            }
+            
+        }
+    }
+}

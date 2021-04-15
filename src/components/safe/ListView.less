@@ -385,3 +385,60 @@
       }  
   }
 }
+
+// Darkmode //
+:global
+{
+    html[data-scheme="dark"]
+    {
+     
+        :local
+        {
+
+          .nolist_alert, .total_items
+          {
+            color:white !important;
+          }
+          .stat
+          {
+            background: #1f1f1f !important;
+            border-color: #1f1f1f !important;
+          }
+          .description
+          {
+            background-color:transparent !important;
+          }
+          .listview_panel
+          {
+            background:#101010;
+            .listview_col
+            {
+              color:white;
+            }
+          }
+          .sell_action
+          {
+            background-color: #1f1f1f !important;
+            color:white !important;
+            input
+            {
+              color:white !important;
+            }
+            
+            
+          }
+          .onsale_price
+            {
+              color: black;
+              border: 2px solid #ffff00 !important;
+            }
+          .listview_panel .listview_row .listview_col.market_action .sell_action .select_currency .currency_name
+          {
+            color:white !important;
+          }
+        }
+        
+        
+    }
+    
+}
