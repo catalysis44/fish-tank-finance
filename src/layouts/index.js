@@ -322,7 +322,7 @@ function BasicLayout(props) {
                 <a className={styles.select_lang} aria-haspopup="true" aria-controls="dropdown-menu"  onClick={() => {
                   setShowContactDropdown(!showContactDropdown);
                 }}>
-                  <span>Contact <FontAwesomeIcon icon={faCaretUp}/></span>
+                  <span>{t('info')} <FontAwesomeIcon icon={faCaretUp}/></span>
                 </a>
                 {
                    showContactDropdown && <div class="dropdown-menu" id="dropdown-menu" role="menu">

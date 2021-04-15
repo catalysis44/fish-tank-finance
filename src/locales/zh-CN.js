@@ -26,6 +26,7 @@ export default {
   "Reset Cache": "重置缓存",
   "Your sell order":"你的出售订单",
   "has been concluded":"已经成交",
+  "info":"信息",
 
   //Pool
   "REWARD": "收益",

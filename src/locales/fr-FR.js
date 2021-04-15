@@ -27,6 +27,7 @@ export default {
   "Reset Cache":"Vider le cache",
   "Your sell order":"VOTRE ORDRE DE VENTE",
   "has been concluded":"A ÉTÉ CONCLU",
+  "info":"info",
   
   //Pool
   "REWARD":"RÉCOMPENSE",

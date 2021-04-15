@@ -453,3 +453,50 @@
       }  
   }
 }
+
+// Darkmode //
+:global
+{
+    html[data-scheme="dark"]
+    {
+     
+        :local
+        {
+          .nolist_alert
+          {
+            color:white;
+          }
+          .flip_card_front
+          {
+            background-color:#101010;
+            
+            .title,.description,.description_supply,.price span
+            {
+              color:white !important;
+            }
+            .item_description .description
+            {
+              background-color:#1f1f1f;
+              border-color:#1f1f1f;
+            }
+            
+          }
+          .flip_card_front[data-is-max="true"]
+          {
+            background-color:transparent;
+            .title,.description,.description_supply,.price span
+            {
+              color:black !important;
+            }
+            .item_description .description
+            {
+              background-color:transparent;
+              border-color:black;
+            }
+          }
+        }
+        
+        
+    }
+    
+}

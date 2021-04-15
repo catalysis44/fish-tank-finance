@@ -72,7 +72,10 @@
             padding-top:3px;
 
         }
-        
+        .boost_timereduce
+        {
+          background:#e1e5da;
+        }
     }
 }
 .rule
@@ -177,4 +180,30 @@
     }
 
     
+}
+
+//Darkmode//
+:global
+{
+    html[data-scheme="dark"]
+    {
+        :local
+        {
+            .header,.supply,.rule,.rule span,.rule div
+            {
+              color:white;
+            }
+            .item_wrapper .description
+            {
+              color:white;
+              border-color:white;
+            }
+            .item_wrapper .boost_timereduce
+            {
+              background: #1f1f1f;
+              border: #1f1f1f
+            }
+            
+        }
+    }
 }

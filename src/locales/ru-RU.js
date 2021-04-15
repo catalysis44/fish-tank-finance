@@ -27,7 +27,8 @@ export default {
     "Reset Cache":"Сбросить кэш",
     "Your sell order":"Ваш запрос на продажу",
     "has been concluded":"Был заключён",
-  
+    "info":"Информация",
+
     //Pool
     "REWARD":"НАГРАДА",
     "LOCKTIME":"ВРЕМЯ БЛОКИРОВКИ",
