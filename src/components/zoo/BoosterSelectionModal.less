@@ -118,7 +118,7 @@
           
           img
           {
-            width:18px;
+           
             height:18px;
             min-width:18px;
           }
@@ -244,4 +244,43 @@
       }
     }
   }
+}
+
+
+
+// Darkmode //
+:global
+{
+    html[data-scheme="dark"]
+    {
+        :local
+        {
+          .search input
+          {
+            background:#1f1f1f;
+            border-color:#101010;
+            color:white;
+          }
+          .title
+          {
+            color:white;
+          }
+          .booster_panel
+          {
+            .booster_col
+            {
+              color:white;
+            }
+            .stat
+            {
+              background:black  !important;
+              border-color:black  !important;
+            }
+           
+          }
+         
+        }
+        
+    }
+    
 }
