@@ -2,7 +2,7 @@
   "zooBalance": "0",
   "waspBalance": "0",
   "address": "",
-  "chainId": 1,
+  "chainId": 888,
   "farmingInfo": {
     "startBlock": 14175786,
     "allEndBlock": 26790186,
