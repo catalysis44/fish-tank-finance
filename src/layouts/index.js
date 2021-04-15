@@ -358,7 +358,7 @@ function BasicLayout(props) {
            <div>
               
               <div className={styles.credit}>
-                Built on <a href="https://www.wanchain.org" target="_blank">WANCHAIN</a> - <a onClick={() => { setConfirmResetCacheModal(1) }}>Reset Cache</a> - <a onClick={()=>{
+                <a onClick={() => { setConfirmResetCacheModal(1) }}>Reset Cache</a> - Built on <a href="https://www.wanchain.org" target="_blank">WANCHAIN</a> - <a onClick={()=>{
           ToggleScheme(!darkmode);
         }}>{darkmode?<FontAwesomeIcon icon={faMoon}/>:<FontAwesomeIcon icon={faSun}/>}</a>
               </div>
