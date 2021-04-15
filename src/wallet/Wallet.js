@@ -142,7 +142,7 @@ class Wallet extends React.Component {
       },
       wanwallet: {
         package: new WanWalletConnector({
-          chainId: 1,
+          chainId: 888,
           url: 'https://rpc.zookeeper.finance',
           pollingInterval: 15000,
           requestTimeoutMs: 300000
