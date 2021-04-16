@@ -210,7 +210,7 @@
     {
       animation-name:bounce;
     }
-    .avatar img.lv2
+    .avatar .lv2
     {
       animation-name:bounce;
       
@@ -231,13 +231,16 @@
       {
         position:absolute;
       }
-      img.lv2
+      .lv2
       {
         position:absolute;
         animation-duration: 1s;
         animation-fill-mode: both;
         animation-timing-function: ease-out;
         animation-iteration-count: 2;
+        background: url('/assets/sunglass.png') no-repeat;
+        width:128px;
+        height:128px;
       }
     }
   
@@ -1277,6 +1280,10 @@
 
           .pool
           {
+            .lv2
+            {
+              background:url('/assets/neonglass.png');
+            }
             .select_booster
             {
               background:#1e1a25 !important;
