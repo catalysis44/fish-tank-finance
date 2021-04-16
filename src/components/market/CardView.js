@@ -257,13 +257,7 @@ export default function CardView(props) {
           />
         })
       }
-      {
-        cards.length === 0 && <div className={styles.nolist_alert}>
-          <img src="/assets/diskette.png"/>
-          <div>{t('NFT MARKET')}</div>
-          <div>{t('LOADING SOON')}</div>
-        </div>
-      }
+     
     </React.Fragment>
   )
 }

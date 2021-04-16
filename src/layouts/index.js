@@ -138,10 +138,10 @@ function BasicLayout(props) {
   return (
     
     <div id="wrapper">
-
-    <AdsModal isActived={showAdsModal} setModal={setShowAdsModal}
+      {
+    false & <AdsModal isActived={showAdsModal} setModal={setShowAdsModal}
       ></AdsModal>
-
+    }
       <ConfirmResetCache  isActived={showConfirmResetCacheModal} setModal={setConfirmResetCacheModal} />
       <Wallet wallet={wallet} setWallet={setWallet} />
       <div id="sidebar_backdrop" onClick={toggleSidebar}></div>
