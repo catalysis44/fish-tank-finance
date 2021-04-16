@@ -814,7 +814,7 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
   }, [chainId, address, storage, connected]);
 
 
-  useInterval(updater, loadTimes < 10 ? 2000 : 5000, { immediate: true });
+  useInterval(updater, loadTimes < 10 ? 5000 : 15000, { immediate: true });
 }
 
 
