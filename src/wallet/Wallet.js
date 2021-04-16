@@ -109,7 +109,7 @@ class Wallet extends React.Component {
   };
 
   subscribeProvider = async (provider) => {
-    if (!provider.on) {
+    if (!provider || !provider.on) {
       return;
     }
     provider.on("close", () => this.resetApp());
