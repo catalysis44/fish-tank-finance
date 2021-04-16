@@ -14,6 +14,7 @@
     "@makerdao/multicall": "^0.12.0",
     "@umijs/plugin-sass": "^1.1.1",
     "@umijs/preset-react": "^1.7.13",
+    "@walletconnect/web3-provider": "^1.4.1",
     "@wandevs/web3modal": "^1.10.4",
     "@web3-react-wan/wanwallet-connector": "^6.1.17",
     "ahooks": "^2.9.6",
