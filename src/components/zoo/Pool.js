@@ -105,7 +105,7 @@ export default function Pool(props) {
   const reserve0 = poolInfo.reserve0;
   const reserve1 = poolInfo.reserve1;
   // const [wslpPrice, setWslpPrice] = useState(0);
-  const startBlock = 14175786;
+  const startBlock = 14174848;
   const currentBlock = poolInfo.blockNumber;
 
   const prices = getPrices();
