@@ -2,7 +2,7 @@ import styles from './index.less';
 import "../styles/bulma.scss"
 import '../../node_modules/animate.css/animate.min.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCircle, faCopy, faCaretUp, faExternalLinkSquareAlt } from '@fortawesome/free-solid-svg-icons'
+import { faCircle, faCopy, faCaretUp, faExternalLinkSquareAlt, faMoon, faSun } from '@fortawesome/free-solid-svg-icons'
 import { ZOO_TOKEN_ADDRESS } from '../config';
 import Header from '../components/Header';
 import { NavLink, setLocale, getLocale } from 'umi';
@@ -132,6 +132,26 @@ function BasicLayout(props) {
       },
     });
   }
+
+  // Toggle DarkMode //
+  const [darkmode, sestDarkmode] = useLocalStorageState('darkmode', 0);
+  const ToggleScheme = (toToggle) =>
+  {
+    
+    var html = document.getElementsByTagName( 'html' )[0];
+    if (toToggle == 1)
+    {
+      html.setAttribute( 'data-scheme', 'dark' );
+    }
+    else{
+      html.setAttribute( 'data-scheme', 'light' );
+    }
+
+    sestDarkmode(toToggle);
+  }
+  useEffect(() => {
+    ToggleScheme(darkmode);
+  }, [])
  
 
 
@@ -191,6 +211,10 @@ function BasicLayout(props) {
               <a href="https://docs.zookeeper.finance/" target="_blank">
                 <img src="assets/docs.png"/>
                 <span>{t("Documentation")}</span>
+              </a>
+              <a href="https://vote.wandevs.org/#/zookeeper" target="_blank">
+                <img src="assets/vote.png"/>
+                <span>{t("Vote")}</span>
               </a>
             
              
@@ -302,7 +326,7 @@ function BasicLayout(props) {
                 <a className={styles.select_lang} aria-haspopup="true" aria-controls="dropdown-menu"  onClick={() => {
                   setShowContactDropdown(!showContactDropdown);
                 }}>
-                  <span>Contact <FontAwesomeIcon icon={faCaretUp}/></span>
+                  <span>{t('info')} <FontAwesomeIcon icon={faCaretUp}/></span>
                 </a>
                 {
                    showContactDropdown && <div class="dropdown-menu" id="dropdown-menu" role="menu">
@@ -338,7 +362,9 @@ function BasicLayout(props) {
            <div>
               
               <div className={styles.credit}>
-                Built on <a href="https://www.wanchain.org" target="_blank">WANCHAIN</a> - <a onClick={() => { setConfirmResetCacheModal(1) }}>Reset Cache</a>
+                <a onClick={() => { setConfirmResetCacheModal(1) }}>Reset Cache</a> - Built on <a href="https://www.wanchain.org" target="_blank">WANCHAIN</a> - <a onClick={()=>{
+          ToggleScheme(!darkmode);
+        }}>{darkmode?<FontAwesomeIcon icon={faMoon}/>:<FontAwesomeIcon icon={faSun}/>}</a>
               </div>
             </div>
       </div>

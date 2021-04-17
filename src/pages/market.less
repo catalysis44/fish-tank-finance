@@ -576,3 +576,62 @@
       }
   }
 }
+
+
+// Darkmode //
+:global
+{
+    html[data-scheme="dark"]
+    {
+      .ant-checkbox-wrapper
+      {
+        color:white !important;
+      }
+      .ant-checkbox-inner
+      {
+        background-color: #555 !important;
+        border-color:#555 !important;
+      }
+        :local
+        {
+          .filter_panel
+          {
+            .filter_ability
+            {
+              background-color: #555;
+              color:white;
+            }
+            background:#101010;
+            .title
+            {
+              color:white;
+            }
+            .filter_level a
+            {
+              background-color: #555;
+            }
+            .filter_level a:hover,.filter_level a.is_acitve
+            {
+              background-color: #00a99d;
+            }
+          }
+          .filter_row .box
+          {
+              background:#101010 !important;
+              .title
+              {
+                color:white;
+              }
+              .view_btn, .sort_btn
+              {
+                background:#101010;
+              }
+             
+             
+          }
+        }
+        
+        
+    }
+    
+}

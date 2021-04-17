@@ -80,3 +80,30 @@
     
 }
 
+//Darkmode//
+:global
+{
+    html[data-scheme="dark"]
+    {
+        :local
+        {
+            .action .action_btn[disabled]
+            {
+                background:#1e1a25 !important;
+                border-color:#1e1a25 !important;
+                color:#555 !important;
+            }
+            .description div
+            {
+                color:white;
+            }
+            .rule
+            {
+                div,span
+                {
+                    color:white;
+                }
+            }
+        }
+    }
+}

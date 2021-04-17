@@ -286,3 +286,37 @@
     max-width:1400px;
 }
 
+// Darkmode //
+:global
+{
+    html[data-scheme="dark"]
+    {
+        #toggle_filter
+        {
+          background:#101010;
+        }
+        #filterbar_backdrop
+        {
+          background:black !important;
+        }
+        :local
+        {
+          .filter_row .box
+          {
+              background:#101010 !important;
+              .title
+              {
+                color:white;
+              }
+              .view_btn
+              {
+                background:#101010;
+              }
+             
+          }
+        }
+        
+        
+    }
+    
+}

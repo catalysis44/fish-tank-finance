@@ -27,6 +27,8 @@ export default {
   "Reset Cache":"Önbelleği Sıfırla",
   "Your sell order":"Satış emriniz",
   "has been concluded":"sonuçlandırıldı",
+  "info":"bilgi",
+  "Vote":"Oylama",
 
   
     //Pool
