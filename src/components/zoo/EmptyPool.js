@@ -13,7 +13,7 @@ export default function Pool(props) {
             </div>
             <div className={styles.caption}>
               <div>{t("NEW POOL")}</div>
-              <div>{t("TOMORROW")}</div>
+              <div>ZOON!</div>
             </div>
 
       </div>
