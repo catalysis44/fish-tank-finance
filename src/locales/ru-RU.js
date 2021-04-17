@@ -28,7 +28,7 @@ export default {
     "Your sell order":"Ваш запрос на продажу",
     "has been concluded":"Был заключён",
     "info":"Информация",
-    "Vote":"голоса",
+    "Vote":"голосование",
 
     //Pool
     "REWARD":"НАГРАДА",
