@@ -75,38 +75,45 @@ class Wallet extends React.Component {
   }
 
   onConnect = async () => {
-    let provider;
-    
     try {
-      if (window.injectWeb3) {
-        provider = await this.web3Modal.connectTo('wanwallet');
-      } else {
-        provider = await this.web3Modal.connect();
+
+
+      let provider;
+
+      try {
+        if (window.injectWeb3) {
+          provider = await this.web3Modal.connectTo('wanwallet');
+        } else {
+          provider = await this.web3Modal.connect();
+        }
+      } catch (error) {
+        console.error(error);
       }
+
+      await this.subscribeProvider(provider);
+
+      const web3 = initWeb3(provider);
+
+      const accounts = await web3.eth.getAccounts();
+
+      const address = accounts[0];
+
+      const networkId = await web3.eth.net.getId();
+
+      await this.setWallet({
+        web3,
+        provider,
+        connected: true,
+        address,
+        networkId,
+        chainType: this.web3Modal.cachedProvider === 'wanmask' || this.web3Modal.cachedProvider === 'wanwallet' ? 'wan' : 'eth',
+        resetApp: this.resetApp,
+        connect: this.onConnect
+      });
+
     } catch (error) {
       console.error(error);
     }
-
-    await this.subscribeProvider(provider);
-
-    const web3 = initWeb3(provider);
-
-    const accounts = await web3.eth.getAccounts();
-
-    const address = accounts[0];
-
-    const networkId = await web3.eth.net.getId();
-
-    await this.setWallet({
-      web3,
-      provider,
-      connected: true,
-      address,
-      networkId,
-      chainType: this.web3Modal.cachedProvider === 'wanmask' || this.web3Modal.cachedProvider === 'wanwallet' ? 'wan' : 'eth',
-      resetApp: this.resetApp,
-      connect: this.onConnect
-    });
   };
 
   subscribeProvider = async (provider) => {
@@ -172,7 +179,8 @@ class Wallet extends React.Component {
       await web3.currentProvider.close();
     }
     await this.web3Modal.clearCachedProvider();
-    this.setWallet({ ...INITIAL_STATE, 
+    this.setWallet({
+      ...INITIAL_STATE,
       resetApp: this.resetApp,
       connect: this.onConnect
     });
