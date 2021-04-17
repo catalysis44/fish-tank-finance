@@ -499,6 +499,18 @@ const getPriceFromOracle = (loader, prices) => {
   return loader.loadMany(calls);
 }
 
+const getZooReserve = (loader) => {
+  return loader.load({
+    target: '0xa6cbea6c72c002daa535b4a614e7246c2ae25e16',
+    call: ['getReserves()(uint112,uint112,uint32)'],
+    returns: [
+      ['zoo_reserve0', val => val / 1e18],
+      ['zoo_reserve1', val => val / 1e18],
+      ['zoo_time', val => val],
+    ]
+  })
+}
+
 const getWanReserve = (loader) => {
   return loader.load({
     target: '0x0a886dc4d584d55e9a1fa7eb0821762296b4ec0e',
@@ -807,6 +819,10 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
         // console.log('getWanReserve', ret, ret.returnValue.wan_reserve0 / ret.returnValue.wan_reserve1);
         let wanPrice = ret.returnValue.wan_reserve0 / ret.returnValue.wan_reserve1;
         setPrice('WAN', wanPrice);
+        getZooReserve(loader).then(ret=>{
+          let zooPriceOfWan = ret.returnValue.zoo_reserve1 / ret.returnValue.zoo_reserve0;
+          setPrice('ZOO', zooPriceOfWan * wanPrice);
+        });
       }).catch(err=>{
         console.error('getWanReserve', err);
       })
