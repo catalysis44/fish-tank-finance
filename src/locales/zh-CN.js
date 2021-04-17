@@ -27,6 +27,7 @@ export default {
   "Your sell order":"你的出售订单",
   "has been concluded":"已经成交",
   "info":"信息",
+  "Vote":"投票",
 
   //Pool
   "REWARD": "收益",

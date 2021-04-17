@@ -28,6 +28,7 @@ export default {
   "Your sell order":"Satış emriniz",
   "has been concluded":"sonuçlandırıldı",
   "info":"bilgi",
+  "Vote":"Oylama",
 
   
     //Pool

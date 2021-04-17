@@ -212,6 +212,10 @@ function BasicLayout(props) {
                 <img src="assets/docs.png"/>
                 <span>{t("Documentation")}</span>
               </a>
+              <a href="https://vote.wandevs.org/#/zookeeper" target="_blank">
+                <img src="assets/vote.png"/>
+                <span>{t("Vote")}</span>
+              </a>
             
              
             </div>

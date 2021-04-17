@@ -28,6 +28,7 @@ export default {
   "Your sell order":"VOTRE ORDRE DE VENTE",
   "has been concluded":"A ÉTÉ CONCLU",
   "info":"info",
+  "Vote":"Vote",
   
   //Pool
   "REWARD":"RÉCOMPENSE",
