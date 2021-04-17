@@ -203,7 +203,7 @@ function BasicLayout(props) {
                       <div>1 ZOO = <span>${commafy(zooPrice)}</span></div>
                       <div>{t("MC")} <span>${commafy((new BigNumber(storage.zooTotalSupply)).minus(storage.zooBurned).multipliedBy(zooPrice))}</span></div>
                       <div>{t("Current supply")} <a target="_blank" href={"https://www.wanscan.org/token/"+ZOO_TOKEN_ADDRESS[chainId]}><FontAwesomeIcon icon={faExternalLinkSquareAlt}/></a></div>
-                      <div><span>{commafy(storage.zooTotalSupply)} ZOO</span></div>
+                      <div><span>{commafy((new BigNumber(storage.zooTotalSupply)).minus(storage.zooBurned))} ZOO</span></div>
                   </div>
                 
               </div>
