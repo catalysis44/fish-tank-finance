@@ -386,3 +386,54 @@
       
   }
 }
+
+
+// Darkmode //
+:global
+{
+    html[data-scheme="dark"]
+    {
+        :local
+        {
+          .pool_empty
+          {
+            .symbol,.caption
+            {
+              color:white;
+            }
+          }
+          .pool
+          {
+            .action_btn[disabled]
+            {
+              background:#1e1a25 !important;
+              border-color:#1e1a25 !important;
+              color:#555 !important;
+            }
+            background:#101010;
+            .title
+            {
+              color:white;
+            }
+            .reward
+            {
+              .x,.amount,.description
+              {
+                color:white;
+              }
+            }
+            .condition
+            {
+              .minimum,.hour
+              {
+                background:black;
+                color:white;
+              }
+            }
+          }
+        }
+        
+        
+    }
+    
+}

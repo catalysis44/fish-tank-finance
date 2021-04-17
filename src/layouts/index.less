@@ -220,6 +220,18 @@
 
 
 :global {
+    
+    #toggle_scheme
+    {
+        position:absolute;
+        right:15px;
+        top:15px;
+        font-size:22px;
+        a
+        {
+            color:#00a99d;
+        }
+    }
     #blockCount
     {
         font-size:13px;
@@ -511,4 +523,129 @@
     }
 
    
+}
+
+
+// Darkmode //
+:global
+{
+    html[data-scheme="dark"]
+    {
+        /*Web3wallet*/
+        .web3modal-modal-lightbox
+        {
+            background:rgba(0,0,0,0.8) !important;
+        }
+        .web3modal-modal-card
+        {
+            background:#1f1f1f !important;
+            color:white !important;
+        }
+        .web3modal-provider-container
+        {
+            background:#1f1f1f !important;
+            color:white !important;
+            border:0;
+        }
+        .web3modal-provider-container:hover
+        {
+            background:black !important;
+        }
+        .web3modal-provider-wrapper
+        {
+            border:0;
+        }
+        .web3modal-provider-name
+        {
+            color:white !important;
+        }
+        /*Notification*/
+        .ant-notification-notice
+        {
+            background:#101010;
+            color:white;
+        }
+        .ant-notification-notice-message
+        {
+            color:white;
+        }
+        .ant-notification-notice .button
+        {
+            border:0;
+        }
+
+
+        #sidebar_backdrop
+        {
+            background:black !important;
+        }
+        #menu_toggle
+        {
+            background:#101010;
+        }
+        .modal-background
+        {
+            background:rgba(0,0,0,0.8) !important;
+        }
+        .modal-card-body
+        {
+            background-color: #101010;
+        }
+        body
+        {
+            background:#1f1f1f;
+            color:white;
+        }
+        #sidebar_wrapper
+        {
+            background:#101010;
+        }
+        #sidebar_wrapper .horizontal_line
+        {
+            background:#1e1a25;
+        }
+        #sidebar_wrapper .list_group li a
+        {
+            color:white;
+        }
+        #sidebar_wrapper .address span
+        {
+            color:white;
+        }
+        #sidebar_wrapper .balance
+        {
+            background:black;
+            color:white;
+        }
+        #zoo_info_burned
+        {
+            :local
+            .detail
+            {
+                color:white;
+            }
+        }
+        #sidebar_wrapper .dropdown:first-child
+        {
+            border-right:1px solid #101010;
+        }
+        #sidebar_wrapper .dropdown:last-child
+        {
+            border-left:1px solid #101010;
+        }
+        :local
+        {
+            .ext_link
+            {
+                border-bottom:1px solid #1e1a25 !important;
+            }
+            .ext_link a
+            {
+                color:white !important;
+                
+            }
+            
+        }
+    }
+    
 }

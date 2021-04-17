@@ -78,10 +78,10 @@ export default function ConfirmAction(props) {
               <div className={styles.description}>
                 <span><img src={props.categoryIcon}/>{t(props.categoryName)}</span>
               </div>
-              <div className={styles.description} style={{background:'#e1e5da'}}>
+              <div  className={`${styles.description} ${styles.boost_timereduce}`}>
                 <span><img src="assets/rocket24x24.png"/> +{(props.boost * 100).toFixed(2)}%</span>
               </div>
-              <div className={styles.description} style={{background:'#e1e5da'}}>
+              <div  className={`${styles.description} ${styles.boost_timereduce}`}>
                 <span><img src="assets/hourglass24x24.png" style={{height:20}}/> -{(props.reduce * 100).toFixed(2)}%</span>
               </div>
             </div>

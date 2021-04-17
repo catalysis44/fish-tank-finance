@@ -37,3 +37,25 @@
     text-align: center;
   }
 }
+
+// Darkmode //
+:global
+{
+    html[data-scheme="dark"]
+    {
+        :local
+        {
+          .pool_empty
+          {
+            border:3px solid white;
+            .symbol, .caption
+            {
+              color:white !important;
+            }
+          }
+ 
+        }
+        
+    }
+    
+}

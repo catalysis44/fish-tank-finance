@@ -14,6 +14,7 @@ import { WANSWAP_URL, WWAN_ADDRESS, ZOO_FARMING_ADDRESS } from '../../config';
 import { getNftInfo } from '../../hooks/nftInfo';
 import { getPrices } from '../../hooks/price';
 import { useLanguage } from '../../hooks/language';
+import { useLocalStorageState } from 'ahooks';
 import CountUp from 'react-countup';
 
 const poolAnimals = [
@@ -76,6 +77,7 @@ export default function Pool(props) {
   const [reduce, setReduce] = useState(0);
   const [nftName, setNftName] = useState('');
   const t = useLanguage();
+
 
 
   const setTxWaiting = props.setTxWaiting;
@@ -320,7 +322,7 @@ export default function Pool(props) {
         <div className={styles.avatar}>
           <img src={poolAnimals[pid % poolAnimals.length]} className={styles.lv1} />
           {
-            poolInfo.lpAmount.toString() > 0 && <img src="assets/sunglass.png" className={styles.lv2} />
+            poolInfo.lpAmount.toString() > 0 && <div className={styles.lv2}></div>
           }
         </div>
         <div className={styles.mul_apy}>

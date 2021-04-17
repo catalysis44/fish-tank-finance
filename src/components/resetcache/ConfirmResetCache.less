@@ -20,31 +20,7 @@
       }
   }
 }
-.rule
-{
-    margin-top:10px;
-    div
-    {
-        font-size:16px;
-        color:black;
-        line-height:18px;
-    }
-    span
-    {
-        display:block;
-        font-size:14px;
-        line-height:14px;
-        color:black;
 
-    }
-    a
-    {
-        font-size:11px;
-        display:block;
-        text-transform: uppercase;
-        color:#00a99d
-    }
-}
 .action
 {
 
@@ -78,3 +54,16 @@
     
 }
 
+:global
+{
+    html[data-scheme="dark"]
+    {
+      :local
+      {
+        .description div
+        {
+            color:white;
+        }
+      }
+    }
+}

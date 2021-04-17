@@ -50,3 +50,17 @@
     visibility: visible;
   }
 }
+
+:global
+{
+    html[data-scheme="dark"]
+    {
+      :local
+      {
+        .loader_wrapper
+        {
+          background-color: rgba(0,0,0,0.8) !important;
+        }
+      }
+    }
+}

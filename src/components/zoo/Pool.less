@@ -210,7 +210,7 @@
     {
       animation-name:bounce;
     }
-    .avatar img.lv2
+    .avatar .lv2
     {
       animation-name:bounce;
       
@@ -231,13 +231,16 @@
       {
         position:absolute;
       }
-      img.lv2
+      .lv2
       {
         position:absolute;
         animation-duration: 1s;
         animation-fill-mode: both;
         animation-timing-function: ease-out;
         animation-iteration-count: 2;
+        background: url('/assets/sunglass.png') no-repeat;
+        width:128px;
+        height:128px;
       }
     }
   
@@ -1182,84 +1185,183 @@
 
 }
 
-  /*Custom for Lang*/
-  :global
+
+/*Custom for Lang*/
+:global
+{
+  #es-ES
   {
-    #es-ES
+    :local
     {
-      :local
-      {
-        .pool .locking .title
-          {
-            white-space: nowrap;
-          }
-          .pool .locking .title .boost
-          {
-            font-size:14px;
-          }
-      }
-    }
-    #fr-FR
-    {
-      :local
-      {
-        .pool .locking .title
-          {
-            white-space: nowrap;
-          }
-          .pool .locking .title .boost
-          {
-            font-size:14px;
-          }
-      }
-    }
-    #ru-RU
-    {
-      :local
+      .pool .locking .title
         {
-          .lp_management .approve , .lp_management .validate
-          {
-            font-size:15px;
-          }
-          .action_wrapper .withdraw_lp
-          {
-            line-height:15px;
-          }
-          .pool .locking .title
-          {
-            white-space: nowrap;
-          }
-          .pool .locking .title .boost
-          {
-            font-size:13px;
-          }
-        }  
-    }
-    #tr-TR,#ru-RU
-    {
-        :local
+          white-space: nowrap;
+        }
+        .pool .locking .title .boost
         {
-          .tipbox_btn:hover
-          {
-            
-              .tipbox
-              {
-                left: -4px;
-                top: 24px;
-              }
-              .tipbox:before {
-                transform: rotate(90deg);
-                margin-top: -27px !important;
-                margin-left: 6px !important;
-              }
-              .tipbox:after
-              {
-                transform: rotate(90deg);
-                margin-top: -23px !important;
-                margin-left: 7px !important;
-              }
-            
-          }
+          font-size:14px;
         }
     }
   }
+  #fr-FR
+  {
+    :local
+    {
+      .pool .locking .title
+        {
+          white-space: nowrap;
+        }
+        .pool .locking .title .boost
+        {
+          font-size:14px;
+        }
+    }
+  }
+  #ru-RU
+  {
+    :local
+      {
+        .lp_management .approve , .lp_management .validate
+        {
+          font-size:15px;
+        }
+        .action_wrapper .withdraw_lp
+        {
+          line-height:15px;
+        }
+        .pool .locking .title
+        {
+          white-space: nowrap;
+        }
+        .pool .locking .title .boost
+        {
+          font-size:13px;
+        }
+      }  
+  }
+
+  #tr-TR,#ru-RU
+  {
+      :local
+      {
+        .tipbox_btn:hover
+        {
+          
+            .tipbox
+            {
+              left: -4px;
+              top: 24px;
+            }
+            .tipbox:before {
+              transform: rotate(90deg);
+              margin-top: -27px !important;
+              margin-left: 6px !important;
+            }
+            .tipbox:after
+            {
+              transform: rotate(90deg);
+              margin-top: -23px !important;
+              margin-left: 7px !important;
+            }
+          
+        }
+      }
+  }
+}
+
+
+// Darkmode //
+:global
+{
+    html[data-scheme="dark"]
+    {
+        :local
+        {
+
+          .pool
+          {
+            .lv2
+            {
+              background:url('/assets/neonglass.png');
+            }
+            .select_booster
+            {
+              background:#1e1a25 !important;
+            }
+            .selected_booster
+            {
+              .booster, .locked_time
+              {
+                background:black !important;
+                color:white !important;
+              }
+             
+            }
+            .locked_lp
+            {
+              color:white !important;
+              background:black !important;
+              border:black !important
+            }
+            .multiplier
+            {
+              background:black;
+              color:white;
+            }
+            a[disabled]
+            {
+              background:#1e1a25 !important;
+              border-color:#1e1a25 !important;
+              color:#555 !important;
+            }
+            background:#101010;
+            .bubble
+            {
+              &:before
+              {
+                border-left-color:white;
+              }
+              &:after
+              {
+                border-left-color:#1f1f1f;
+              }
+              background:#1f1f1f;
+              box-shadow: none;
+              border:1px solid white;
+              .bubble_text
+              {
+                color:white !important;
+              }
+            }
+            .horizontal_line
+            {
+              background:#1f1f1f;
+            }
+            .title
+            {
+              color:white;
+            }
+            .earned_amount
+            {
+              color:white !important;
+            }
+            .liq_detail
+            {
+              color:white !important;
+            }
+            .deposit_wrapper .deposit_amount
+            {
+              background:#101010;
+              color:white;
+            }
+            .lock_wrapper .lock_period
+            {
+              color:white;
+            }
+          }
+        }
+        
+    }
+    
+}
+
