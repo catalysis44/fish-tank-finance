@@ -349,7 +349,7 @@ function BasicLayout(props) {
                         <a href="https://github.com/zooFarming/" target="_blank" class="dropdown-item">
                           <span>Github</span>
                         </a>
-                        <a href="https://bbs.zookeeper.finance" target="_blank" class="dropdown-item">
+                        <a href="http://bbs.zookeeper.finance" target="_blank" class="dropdown-item">
                           <span>Forum</span>
                         </a>
                         
