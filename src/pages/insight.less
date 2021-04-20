@@ -29,7 +29,7 @@
 .panel_full
 {
   width:100%;
-  
+ 
   background:white;
   border-radius: 4px;
   box-shadow:4px 4px 0 rgba(0,0,0,0.04);
@@ -68,9 +68,23 @@
           }
       }
   }
-
+  .item_list_wrapper
+  {
+    height:400px;
+    max-height:400px;
+    overflow-y: auto;
+    margin-right:-20px;
+    margin-left:-20px;
+    
+  }
+  .item_list:last-child
+  {
+    margin-bottom:-40px;
+  }
   .item_list
   {
+    margin-left:20px;
+    margin-right:20px;
       .grade
       {
           img
@@ -88,7 +102,9 @@
         width:100%;
         border-collapse: collapse;
         margin-top:10px;
+        margin-bottom:40px;
       }
+      
 
         .listview_row
         {
