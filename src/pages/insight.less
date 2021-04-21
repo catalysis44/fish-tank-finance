@@ -5,7 +5,7 @@
     justify-content: center;
     margin:0 auto;
     padding: 0px 10px;
-    max-width:660px;
+    max-width:680px;
 }
 .row:first-child
 {
@@ -16,28 +16,208 @@
 
 .panel
 {
-  width:280px;
-  height:140px;
+  width:300px;
+  height:180px;
   background:white;
   border-radius: 4px;
   box-shadow:4px 4px 0 rgba(0,0,0,0.04);
-  margin:40px 20px;
+  margin:20px 10px;
   margin-top:0;
   padding:20px;
   position:relative;
+
+    // TVL BOX //
+    .tvl_header
+    {
+        img
+        {
+            max-height:34px;
+            margin-right:10px;
+        }
+        display:flex;
+        .tvl_value
+        {
+            color:#00a99d;
+            display:flex;
+            flex-direction: column;
+            justify-content: center;
+            font-size:22px;
+            line-height:18px;
+            padding-top:3px;
+            div
+            {
+                font-size:14px;
+                color:black;
+            }
+        }
+    }
+    .tvl_table
+    {
+        margin-top:8px;
+        color:black;
+        width:100%;
+        font-size:14px;
+        td:last-child
+        {
+            text-align: right;
+            color:#00a99d;
+        }
+    }
+
+    // Chest //
+    .chest_opened
+    {
+        img
+        {
+            max-height:34px;
+            margin-right:10px;
+        }
+        display:flex;
+        margin-bottom:5px;
+        .chest_opened_value
+        {
+            color:#00a99d;
+            display:flex;
+            flex-direction: column;
+            justify-content: center;
+            font-size:22px;
+            line-height:18px;
+            padding-top:3px;
+            div
+            {
+                font-size:14px;
+                color:black;
+            }
+        }
+        .silver_daily
+        {
+            font-size:22px;
+            
+            text-align: center;
+            line-height:18px;
+            color:#00a99d;
+            padding-top:3px;
+           
+            margin-left:20px;
+            padding-left:20px;
+            border-left:1px solid #eee;
+            div
+            {
+                color:black;
+                font-size:13px;
+            }
+        }
+        
+    }
+    .price_title
+    {
+
+        text-align: center;
+        color:black;
+    }
+    .chest_price_wrapper
+    {
+        display:flex;
+        margin-top:0px;
+    }
+   
+    .chest_price
+    {
+        flex:1;
+        font-size:16px;
+        margin:0 5px;
+        text-align: center;
+        line-height:14px;
+        color:#00a99d;
+        padding-top:5px;
+        background:#eee;
+        border-radius: 4px;
+        div
+        {
+            color:black;
+            font-size:13px;
+        }
+    }
+
+    // ZOO //
+    &.zoo_stat
+    {
+        display:flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    .title
+    {
+        line-height: 20px;
+        color:black;
+        margin-top:3px;
+    }
+    .estimated_supply
+    {
+        font-size:22px;
+        color:#00a99d;
+        span
+        {
+            font-size:11px;
+            color:black;
+        }
+    }
+
+
+    // Booster //
+    .booster
+    {
+        img
+        {
+            max-height:34px;
+            margin-right:10px;
+        }
+        display:flex;
+        margin-bottom:5px;
+        .booster_value
+        {
+            color:#00a99d;
+            display:flex;
+            flex-direction: column;
+            justify-content: center;
+            font-size:22px;
+            line-height:18px;
+            padding-top:3px;
+            div
+            {
+                font-size:14px;
+                color:black;
+            }
+        }
+    }
+    .booster_sub_wrapper
+    {
+        display:flex;
+        justify-content: space-around;
+        margin-top:10px;
+        .booster_sub
+        {
+            color:black;
+            text-align: center;
+            div
+            {
+                color:#00a99d;
+            }
+        }
+    }
 }
 .panel_full
 {
   width:100%;
- 
+
   background:white;
   border-radius: 4px;
   box-shadow:4px 4px 0 rgba(0,0,0,0.04);
   margin:60px 20px;
-  margin-top:0;
+
   padding:20px;
   position:relative;
-  margin-top:20px;
+  margin-top:40px;
   .item_category_tab
   {
       display:flex;
@@ -128,9 +308,15 @@
                 vertical-align: middle;
                 
                 color:black;
-                &.item_image img
+                &.item_image
                 {
-                    width:32px;
+                    color:black;
+                    text-align: center;
+                    font-size:22px;
+                    img
+                    {
+                        width:32px;
+                    }
                 }
                 &.item_name
                 {
@@ -162,3 +348,20 @@
   }
 }
 
+
+:global
+{
+    #burning_bar .ant-progress-bg
+    {
+        background:#c1272d !important;
+    }
+    .ant-progress-show-info .ant-progress-outer {
+        margin-right: calc(-2em - 25px);
+        padding-right: calc(2em + 25px);
+    }
+    .ant-progress
+    {
+        top:-3px;
+    }
+
+}
