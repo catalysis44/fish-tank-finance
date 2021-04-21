@@ -602,6 +602,14 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
             return v.returnValue.tokenId;
           });
 
+          // fix to hide cheaters NFT
+          tokenIds = tokenIds.filter(v => {
+            if (Number(v) >= 20 && Number(v) <=47 ) {
+              return false;
+            }
+            return true;
+          });
+
           getNftBaseInfo(loader, chainId, tokenIds).then(ret => {
             // console.debug('getNftBaseInfo ret', ret);
             let cards = [];
