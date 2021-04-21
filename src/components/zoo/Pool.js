@@ -63,7 +63,6 @@ const poolTitles = [
   'DAVID HASSELHOP', // KANGAROO
 ]
 
-
 export default function Pool(props) {
   const [modal, setModal] = useState(0);
 
@@ -251,6 +250,14 @@ export default function Pool(props) {
 
   if (poolInfo.symbol1 === 'WWAN') {
     symbol1 = 'WAN';
+  }
+
+  if (!window.tvl) {
+    window.tvl = []
+  }
+
+  if (wslpPrice && totalDeposited && totalDeposited * wslpPrice) {
+    window.tvl[poolInfo.pid] = totalDeposited * wslpPrice;
   }
 
   // console.debug('pooInfo', pid, symbol0, symbol1, JSON.stringify(poolInfo, null, 2));

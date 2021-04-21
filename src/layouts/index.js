@@ -216,8 +216,6 @@ function BasicLayout(props) {
                 <img src="assets/vote.png"/>
                 <span>{t("Vote")}</span>
               </a>
-            
-             
             </div>
 
             <div id="zoo_info_burned">
