@@ -60,7 +60,7 @@ export default function Blackhole(props) {
                 After burned these items. Please contact us directly on Telegram:<br/>
                     <a href="https://t.me/genshimaro">@genshimaro</a><br/>
                     <a href="https://t.me/cryptofennec">@cryptofennec</a><br/>
-                    <a href="https://t.me/molin000">@molin000</a><br/>
+                    
                 </div>
             </div>
 
