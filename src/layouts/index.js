@@ -211,7 +211,6 @@ function BasicLayout(props) {
         <div className={styles.footer}>
 
           <div className={styles.ext_link}>
-
             <a href="https://docs.zookeeper.finance/" target="_blank">
               <img src="assets/docs.png" />
               <span>{t("Documentation")}</span>
@@ -220,22 +219,18 @@ function BasicLayout(props) {
               <img src="assets/vote.png" />
               <span>{t("Vote")}</span>
             </a>
-
-
           </div>
 
           <div id="zoo_info_burned">
             <div className={styles.box}>
-              <img src="assets/zoo_panel.png" class={styles.zoo_icon} />
+              <img src="assets/zoo_panel.png" class={styles.zoo_icon}/>
               <div class={styles.detail}>
                 <div>1 ZOO = <a target="_blank" href="https://info.wanswap.finance/token/0x6e11655d6ab3781c6613db8cb1bc3dee9a7e111f" >${commafy(zooPrice)}</a></div>
-                <div>{t("MC")} <span>${commafy((new BigNumber(storage.zooTotalSupply)).minus(storage.zooBurned).multipliedBy(zooPrice)).split('.')[0]}</span></div>
-                <div>{t("Current supply")} <a target="_blank" href={"https://www.wanscan.org/token/" + ZOO_TOKEN_ADDRESS[chainId]}><FontAwesomeIcon icon={faExternalLinkSquareAlt} /></a></div>
-                <div><span>{commafy((new BigNumber(storage.zooTotalSupply)).minus(storage.zooBurned)).split('.')[0]} ZOO</span></div>
+                <div>{t("MC")} <span>${commafy((new BigNumber(storage.zooTotalSupply)).multipliedBy(zooPrice)).split('.')[0]}</span></div>
+                <div>{t("Current supply")} <a target="_blank" href={"https://www.wanscan.org/token/"+ZOO_TOKEN_ADDRESS[chainId]}><FontAwesomeIcon icon={faExternalLinkSquareAlt}/></a></div>
+                <div><span>{commafy(new BigNumber(storage.zooTotalSupply)).split('.')[0]} ZOO</span></div>
               </div>
-
             </div>
-
             <div className={styles.box}>
               <img src="assets/burn.png" class={styles.burn_icon} />
               <div class={styles.detail}>
@@ -386,7 +381,7 @@ function BasicLayout(props) {
           </div>
         </WalletContext.Provider>
       </StorageContext.Provider>
-    </div>
+    </div >
   );
 }
 
