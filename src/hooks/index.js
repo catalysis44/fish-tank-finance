@@ -1,6 +1,6 @@
 import BigNumber from 'bignumber.js';
 import { useInterval, useLockFn, useReactive } from 'ahooks';
-import { MULTICALL_ADDRESS, RPC_URL, ZOO_TOKEN_ADDRESS, ZOO_FARMING_ADDRESS, ZOO_BOOSTING_ADDRESS, NFT_FACTORY_ADDRESS, ZOO_NFT_ADDRESS, WASP_FARMING_ADDRESS, NFT_MARKETPLACE_ADDRESS, currencyList, WASP_TOKEN_ADDRESS } from '../config';
+import { MULTICALL_ADDRESS, RPC_URL, ZOO_TOKEN_ADDRESS, ZOO_FARMING_ADDRESS, ZOO_BOOSTING_ADDRESS, NFT_FACTORY_ADDRESS, ZOO_NFT_ADDRESS, WASP_FARMING_ADDRESS, NFT_MARKETPLACE_ADDRESS, currencyList, WASP_TOKEN_ADDRESS, invalidNFT } from '../config';
 import React, { useCallback, useMemo } from 'react';
 import { getPrices, setPrice, toByte32, updatePrice } from './price';
 const { aggregate } = require('@makerdao/multicall');
@@ -602,13 +602,7 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
             return v.returnValue.tokenId;
           });
 
-          // fix to hide cheaters NFT
-          tokenIds = tokenIds.filter(v => {
-            if (Number(v) >= 20 && Number(v) <=47 ) {
-              return false;
-            }
-            return true;
-          });
+
 
           getNftBaseInfo(loader, chainId, tokenIds).then(ret => {
             // console.debug('getNftBaseInfo ret', ret);
@@ -632,8 +626,22 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
                 return v;
               });
 
+              // fix to hide cheaters NFT
+              tmpStorage.nftCards = cards.filter(v => {
+                if (invalidNFT.includes(Number(v.tokenId))) {
+                  return false;
+                }
+                return true;
+              });
+
+              tmpStorage.invalidNftCards = cards.filter(v => {
+                if (invalidNFT.includes(Number(v.tokenId))) {
+                  return true;
+                }
+                return false;
+              });
+
               // console.debug('cards:', cards);
-              tmpStorage.nftCards = cards;
               updateStorage(tmpStorage);
             }).catch(err => {
               console.error('err 1.2.1.1', err);
@@ -823,15 +831,15 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
       //   });
       // })
 
-      getWanReserve(loader).then(ret=>{
+      getWanReserve(loader).then(ret => {
         // console.log('getWanReserve', ret, ret.returnValue.wan_reserve0 / ret.returnValue.wan_reserve1);
         let wanPrice = ret.returnValue.wan_reserve0 / ret.returnValue.wan_reserve1;
         setPrice('WAN', wanPrice);
-        getZooReserve(loader).then(ret=>{
+        getZooReserve(loader).then(ret => {
           let zooPriceOfWan = ret.returnValue.zoo_reserve1 / ret.returnValue.zoo_reserve0;
           setPrice('ZOO', zooPriceOfWan * wanPrice);
         });
-      }).catch(err=>{
+      }).catch(err => {
         console.error('getWanReserve', err);
       })
     }
