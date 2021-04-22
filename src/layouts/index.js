@@ -16,7 +16,7 @@ import { getPrices } from '../hooks/price';
 import { useLanguage } from '../hooks/language';
 import ConfirmResetCache from '../components/resetcache/ConfirmResetCache';
 import { useEventMonitor } from '../utils/events';
-import { message} from 'antd';
+import { Modal,message} from 'antd';
 
 import AdsModal from '../components/ads/AdsModal';
 
@@ -133,6 +133,25 @@ function BasicLayout(props) {
     });
   }
 
+  // For Cheaters! //
+  const cheater_config = {
+    title: 'FRAUDULENT FOUND!',
+    content: (
+      <>
+        Your address has been listed as a a FRAUDULENT account<br/>
+        Please contact us asap or your account will be blacklisted and your liquidity locked.<br/><br/>
+        Please contact us directly on Telegram :<br/>
+        <a href="https://t.me/genshimaro">@genshimaro</a><br/>
+        <a href="https://t.me/cryptofennec">@cryptofennec</a><br/>
+        <a href="https://t.me/molin000">@molin000</a><br/>
+      </>
+    ),
+  };
+  const [modal, contextHolder] = Modal.useModal();
+  useEffect(() => {
+    modal.error(cheater_config);
+  },[]);
+
   // Toggle DarkMode //
   const [darkmode, sestDarkmode] = useLocalStorageState('darkmode', 0);
   const ToggleScheme = (toToggle) =>
@@ -156,8 +175,9 @@ function BasicLayout(props) {
 
 
   return (
-    
+   
     <div id="wrapper">
+       {contextHolder}
       {
         false && <AdsModal isActived={showAdsModal} setModal={setShowAdsModal}
           ></AdsModal>
