@@ -47,11 +47,13 @@
         flex:1;
         display:flex;
         align-items: center;
+       
         img
         {
             width:32px;
             height:32px;
             margin-right:20px;
+            margin-left:30px;
         }
         .amount
         {
@@ -377,7 +379,7 @@
                 }
                 &.item_name
                 {
-                    
+                    color:black;
                 }
                 &.item_stars img
                 {
@@ -405,6 +407,17 @@
   }
 }
 
+/*Responsive*/
+@media screen and (max-width: 940px)
+{
+    .panel,.panel_full
+    {
+        width:100% !important;
+        margin-left:20px !important;
+        margin-right:20px !important;
+    }
+}
+
 
 :global
 {
@@ -421,4 +434,61 @@
         top:-3px;
     }
 
+}
+
+
+// Darkmode //
+:global
+{
+    html[data-scheme="dark"]
+    {
+        .ant-progress-text
+        {
+            color:white !important;
+        }
+        :local
+        {
+            .panel_full, .panel
+            {
+                background:#101010;
+            }
+            
+            .item_category_tab .category
+            {
+                background:#101010 !important;
+                color:white !important;
+            }
+            .item_list .grade,.listview_col.header
+            {
+                color:white !important;
+            }
+            .listview_col.item_name, .listview_col.item_abilities
+            {
+                color:white !important;
+            }
+            .silver_daily
+            {
+                border-left:1px solid #555 !important;
+            }
+            .listview_row
+            {
+                border-bottom: 1px solid #555 !important;
+            }
+            .title, td, .tvl_value div, .chest_opened_value div,.silver_daily div,.price_title,.estimated_supply span,.booster_value div,.booster_sub
+            {
+                color:white !important;
+            }
+            .chest_price
+            {
+                background:#000 !important;
+                color:#00a99d !important;
+                div
+                {
+                    color:white !important;
+                }
+            }
+        }
+        
+    }
+    
 }
