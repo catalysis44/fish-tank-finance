@@ -183,4 +183,6 @@ export default {
   "CATTEGORY":"物品名称",
   "Burn":"销毁",
   "After burned these items. Please contact us directly on Telegram":"在销毁完成后，请在telegram中联系下面的人来解除你的账户异常状态",
+  "Market Cap":"当前市值",
+  // "Fully Diluted MC":"预估挖矿结束后的总市值"
 };

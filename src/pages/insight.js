@@ -7,6 +7,7 @@ import { commafy } from '../utils';
 import { getPrices } from '../hooks/price';
 import BigNumber from 'bignumber.js';
 import { useLanguage } from '../hooks/language';
+import axios from 'axios';
 
 export default function (props) {
   const t = useLanguage();
@@ -32,6 +33,14 @@ export default function (props) {
     return Number(pre) + Number(v);
   }) : 0;
 
+  useEffect(()=>{
+    if (Number(expTvl) > 0 && Number(zooTvl) > 0 && Number(zooPrice) > 0) {
+      axios.get('https://rpc.zookeeper.finance/api/v1/setTvl?tvl=' + (Number(expTvl) + Number(zooTvl))).then(ret=>{
+        // console.debug(ret);
+      }).catch(console.error);
+    }
+  }, [expTvl, zooTvl, zooPrice])
+
   return (
     <React.Fragment>
       <div className={styles.row}>
@@ -47,7 +56,7 @@ export default function (props) {
                   ${commafy(zooPrice)}
                 </div>
                 <div className={styles.title}>
-                  {t("Curculating supply")}: <span>{commafy(storage.zooTotalSupply)} ZOO</span>
+                  {t("Curculating supply")}: <span>{commafy(storage.zooTotalSupply).split('.')[0]} ZOO</span>
                 </div>
               </div>
             </div>
@@ -55,13 +64,13 @@ export default function (props) {
               <img src="assets/MC.png" />
               <div className={styles.details}>
                 <div className={styles.title}>
-                  Market Cap
-                                </div>
+                  {t("Market Cap")}
+                </div>
                 <div className={styles.amount}>
-                  $829,471
-                                </div>
+                  ${commafy(storage && storage.zooTotalSupply * zooPrice).split('.')[0]}
+                </div>
                 <div className={styles.title}>
-                  Fully Diluted MC: <span>$555,873,894.21</span>
+                  {t("Fully Diluted MC")}: <span>${commafy(storage.zooTotalSupply / startDays * 365 * 2 * zooPrice).split('.')[0]}</span>
                 </div>
               </div>
             </div>
@@ -86,18 +95,18 @@ export default function (props) {
               <td>The Expedition</td>
               <td>${commafy(expTvl).split('.')[0]}</td>
             </tr>
-            {/* <tr>
+            <tr>
               <td>The Safari</td>
-              <td>$100,000,000.00</td>
+              <td>${commafy()}</td>
             </tr>
             <tr>
               <td>The ZooRena</td>
-              <td>$100,000,000.00</td>
+              <td>${commafy()}</td>
             </tr>
             <tr>
               <td>NFT Value</td>
-              <td>$100,000,000.00</td>
-            </tr> */}
+              <td>${commafy()}</td>
+            </tr>
           </table>
         </div>
         <div className={`${styles.panel} ${styles.zoo_stat}`}>
@@ -113,7 +122,7 @@ export default function (props) {
               Zoo Burning Rate
             </div>
             <div id="burning_bar">
-              <Progress percent={(storage.zooBurned * 100 / storage.zooTotalSupply).toFixed(1)} />
+              <Progress percent={(storage.zooBurned * 100 / (Number(storage.zooTotalSupply) + Number(storage.zooBurned))).toFixed(1)} />
             </div>
           </div>
 
@@ -123,7 +132,7 @@ export default function (props) {
             </div>
 
             <div className={styles.estimated_supply}>
-              {commafy((storage.zooTotalSupply - storage.zooBurned) / startDays * 365 * 2).split('.')[0]} <span>~{commafy((storage.zooTotalSupply - storage.zooBurned) / startDays / 1000).split('.')[0]}K per days</span>
+              {commafy(storage.zooTotalSupply / startDays * 365 * 2).split('.')[0]} <span>~{commafy(storage.zooTotalSupply / startDays / 1000).split('.')[0]}K per days</span>
             </div>
           </div>
         </div>
@@ -134,7 +143,7 @@ export default function (props) {
             <img src="assets/goldenbox42x42.png" />
             <div className={styles.chest_opened_value}>
               15,522
-                            <div>Golden Chest opened</div>
+            <div>Golden Chest opened</div>
             </div>
           </div>
           <div className={styles.chest_opened}>
