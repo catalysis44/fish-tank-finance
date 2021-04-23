@@ -27,7 +27,7 @@ export default {
   "Your sell order":"你的出售订单",
   "has been concluded":"已经成交",
   "info":"信息",
-  "Vote":"投票",
+  "Vote":"去投票",
 
   //Pool
   "REWARD": "收益",
@@ -172,4 +172,9 @@ export default {
 
   "NEW POOL": "新挖矿池",
   "TOMORROW": "明日上线",
+
+  "Insight": "汇总板",
+
+  "ZOO Price": "ZOO价格",
+  "Curculating supply": "流通量",
 };
