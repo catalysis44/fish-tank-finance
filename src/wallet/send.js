@@ -200,3 +200,11 @@ export const approveForMarketBuy = async (token, chainId, web3, address) => {
   return ret.status;
 }
 
+export const sendNft = async (tokenId, chainId, web3, address, toAddress) => {
+  const erc721 = new web3.eth.Contract(erc721Abi, ZOO_NFT_ADDRESS[chainId]);
+  let ret = await erc721.methods.safeTransferFrom(address, toAddress, tokenId).send({ gasPrice: '0x3b9aca00', from: address });
+  if(!ret || !ret.status) {
+    throw new Error("send failed");
+  }
+  return ret.status;
+}

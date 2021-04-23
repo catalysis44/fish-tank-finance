@@ -177,4 +177,10 @@ export default {
 
   "ZOO Price": "ZOO价格",
   "Curculating supply": "流通量",
+  "Those items has been marked as FRAUDULENT and cannot be placed to the marketplace. To keep your Wallet clean, please burn those NFT with our Burn Machine, Thank you": "这些商品已被标记为欺诈物品，不可继续使用，也不能放在市场上交易。为了保持您的钱包干净，请用点击下方的销毁按钮来销毁它们，谢谢",
+  "ITEM NAME":"物品名称",
+  "ABILITIES":"属性",
+  "CATTEGORY":"物品名称",
+  "Burn":"销毁",
+  "After burned these items. Please contact us directly on Telegram":"在销毁完成后，请在telegram中联系下面的人来解除你的账户异常状态",
 };
