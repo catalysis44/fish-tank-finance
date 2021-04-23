@@ -195,6 +195,7 @@ function BasicLayout(props) {
             <ul class="menu-list">
               <li><NavLink onClick={toggleSidebar}  to="/" activeClassName="is_active"  exact={true}><img src="assets/sidebar/zoo.png"/> <div>{t("The Zoo")}</div></NavLink></li>
               <li><NavLink onClick={toggleSidebar}  to="/expedition" activeClassName="is_active"><img src="assets/sidebar/expedition.png"/> <div>{t("The Expedition")}</div></NavLink></li>
+              <li><NavLink onClick={toggleSidebar}  to="/safari" activeClassName="is_active"><img src="assets/sidebar/safari.png"/> <div>{t("The Safari")}</div></NavLink></li>
               <li><NavLink onClick={toggleSidebar}  to="/market" activeClassName="is_active"><img src="assets/sidebar/market.png"/> <div>{t("The Market")}</div></NavLink></li>
               <li><NavLink onClick={toggleSidebar} to="/safe" activeClassName="is_active"><img src="assets/sidebar/safe.png"/> <div>{t("My Safe")}</div></NavLink></li>
               <li style={{display:'none'}}><a><img src="assets/sidebar/stake.png"/> <div>{t("Stake Zoo")}</div></a></li>
