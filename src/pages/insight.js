@@ -41,7 +41,7 @@ export default function (props) {
 
   useEffect(()=>{
     console.log('chainId', chainId);
-    if (Number(expTvl) > 0 && Number(zooTvl) > 0 && Number(zooPrice) > 0 && Number(chainId) === 888) {
+    if (Number(expTvl) > 0 && Number(zooTvl) > 0 && Number(zooPrice) > 0 && Number(chainId) !== 999) {
       axios.get('https://rpc.zookeeper.finance/api/v1/setTvl?tvl=' + (Number(expTvl) + Number(zooTvl))).then(ret=>{
         // console.debug(ret);
       }).catch(console.error);
@@ -49,6 +49,9 @@ export default function (props) {
       history.push('/');
     }
   }, [expTvl, zooTvl, zooPrice, chainId])
+
+  const [goldenCount, setGoldenCount] = useState(0);
+  const [silverCount, setSilverCount] = useState(0);
 
   return (
     <React.Fragment>
