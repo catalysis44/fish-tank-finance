@@ -11,4 +11,5 @@ export default {
     baseNavigator: true,
     baseSeparator: '-',
   },
+  history: { type: 'hash' },
 }

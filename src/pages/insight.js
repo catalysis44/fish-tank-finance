@@ -8,6 +8,9 @@ import { getPrices } from '../hooks/price';
 import BigNumber from 'bignumber.js';
 import { useLanguage } from '../hooks/language';
 import axios from 'axios';
+import { WalletContext } from '../wallet/Wallet';
+import { history } from 'umi';
+
 
 export default function (props) {
   const t = useLanguage();
@@ -18,9 +21,11 @@ export default function (props) {
   const blockNumber = storage.blockNumber;
   const endBlockNumber = 14174838 + 3600 / 5 * 24 * 365 * 2;
   const startBlockNumber = 14174838;
-  const chainId = storage.chainId;
   let leftDays = endBlockNumber > blockNumber ? (endBlockNumber - blockNumber) * 5 / 3600 / 24 : 0;
   let startDays = (blockNumber - startBlockNumber) * 5 / 3600 / 24;
+
+  const wallet = useContext(WalletContext);
+  const chainId = wallet.networkId;
 
   const expTvl = useMemo(() => {
     if (!zooPrice || !expeditions || expeditions.length === 0) {
@@ -35,10 +40,13 @@ export default function (props) {
   }) : 0;
 
   useEffect(()=>{
+    console.log('chainId', chainId);
     if (Number(expTvl) > 0 && Number(zooTvl) > 0 && Number(zooPrice) > 0 && Number(chainId) === 888) {
       axios.get('https://rpc.zookeeper.finance/api/v1/setTvl?tvl=' + (Number(expTvl) + Number(zooTvl))).then(ret=>{
         // console.debug(ret);
       }).catch(console.error);
+    } else {
+      history.push('/');
     }
   }, [expTvl, zooTvl, zooPrice, chainId])
 
