@@ -375,6 +375,7 @@
                     font-size:22px;
                     img
                     {
+                        min-width:24px;
                         width:32px;
                     }
                 }
@@ -416,6 +417,86 @@
         width:100% !important;
         margin-left:20px !important;
         margin-right:20px !important;
+    }
+}
+@media screen and (max-width: 870px)
+{
+    .item_category_tab
+    {
+        top:-45px !important;
+    }
+    .panel_full
+    {
+        margin-top:60px;
+    }
+    .item_category_tab .category
+    {
+        display:flex !important;
+        flex-direction: column !important;
+        align-items: center;
+        margin-right: 3px !important;
+        padding: 2px 10px !important;
+        font-size:12px;
+        img
+        {
+            width:24px !important;
+            text-align: center;
+            margin-right:0 !important;
+        }
+    }
+    .header:nth-child(5)
+    {
+        display:none !important;
+    }
+    .item_abilities
+    {
+        display:none !important;
+    }
+}
+@media screen and (max-width: 650px)
+{
+    .listview_col,.header
+    {
+        font-size:13px !important;
+    }
+}
+@media screen and (max-width: 425px)
+{
+    .panel_full
+    {
+        margin-top:40px;
+    }
+    .item_category_tab
+    {
+        top:-32px !important;
+    }
+    .item_category_tab .category
+    {
+        padding-top:5px !important;
+        padding-bottom:5px !important;
+        
+    }
+    .item_category_tab .category span
+    {
+        display:none !important;
+    }
+    .price_mc_wrapper
+    {
+        flex-direction: column;
+    }
+    .price_mc_wrapper .mc_wrapper
+    {
+        margin-top:20px;
+    }
+    .price_mc_wrapper .mc_wrapper img
+    {
+        margin-left:0;
+    }
+    .panel,.panel_full
+    {
+        width:100% !important;
+        margin-left: 0px !important;
+        margin-right: 0px !important;
     }
 }
 
