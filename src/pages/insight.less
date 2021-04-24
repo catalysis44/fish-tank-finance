@@ -309,9 +309,10 @@
   }
   .item_list_wrapper
   {
-    height:400px;
-    max-height:400px;
-    overflow-y: auto;
+    // Removed Scroll bar (I hate you Maro!)
+    //height:400px;
+    //max-height:400px;
+    //overflow-y: auto;
     margin-right:-20px;
     margin-left:-20px;
     
@@ -329,7 +330,7 @@
           img
           {
               margin-right:5px;
-              width:25px;
+              height:28px;
           }
           color:black;
           font-size:22px;
@@ -445,6 +446,10 @@
         .ant-progress-text
         {
             color:white !important;
+        }
+        .ant-progress-inner
+        {
+            background-color: #555 !important;
         }
         :local
         {
