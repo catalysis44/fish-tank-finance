@@ -36,10 +36,30 @@
   height: 40px;
   background: #00a99d;
   border: #00a99d;
-  color: white;
+  color: white !important;
   text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.1s ease-in-out;
+}
+
+
+//Darkmode//
+:global
+{
+    html[data-scheme="dark"]
+    {
+        :local
+        {
+            .blackhole
+            {
+              background-color: #101010 !important;
+            }
+            .blackhole th, .blackhole td
+            {
+              color:white !important
+            }
+        }
+    }
 }
