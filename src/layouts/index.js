@@ -201,7 +201,7 @@ function BasicLayout(props) {
               <li><NavLink onClick={toggleSidebar}  to="/expedition" activeClassName="is_active"><img src="assets/sidebar/expedition.png"/> <div>{t("The Expedition")}</div></NavLink></li>
               <li><NavLink onClick={toggleSidebar}  to="/market" activeClassName="is_active"><img src="assets/sidebar/market.png"/> <div>{t("The Market")}</div></NavLink></li>
               <li><NavLink onClick={toggleSidebar} to="/safe" activeClassName="is_active"><img src="assets/sidebar/safe.png"/> <div>{t("My Safe")}</div></NavLink></li>
-              <li><NavLink onClick={toggleSidebar} to="/insight" activeClassName="is_active"><img src="assets/sidebar/insight.png"/> <div>{t("Insight")}</div></NavLink></li>
+              
               <li style={{ display: 'none' }}><a><img src="assets/sidebar/stake.png" /> <div>{t("Stake Zoo")}</div></a></li>
               <li style={{ display: 'none' }}><a><img src="assets/sidebar/lotto.png" /> <div>{t("Lotto")}</div></a></li>
             </ul>
@@ -212,7 +212,10 @@ function BasicLayout(props) {
         <div className={styles.footer}>
 
             <div className={styles.ext_link}>
-              
+            <NavLink onClick={toggleSidebar} to="/insight" activeClassName="is_active">
+                <img src="assets/sidebar/insight.png"/>
+                <span>{t("Insight")}</span>
+              </NavLink>
               <a href="https://docs.zookeeper.finance/" target="_blank">
                 <img src="assets/docs.png"/>
                 <span>{t("Documentation")}</span>
