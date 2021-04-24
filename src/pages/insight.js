@@ -40,7 +40,6 @@ export default function (props) {
   }) : 0;
 
   useEffect(()=>{
-    console.log('chainId', chainId);
     if (Number(expTvl) > 0 && Number(zooTvl) > 0 && Number(zooPrice) > 0 && Number(chainId) !== 999) {
       axios.get('https://rpc.zookeeper.finance/api/v1/setTvl?tvl=' + (Number(expTvl) + Number(zooTvl))).then(ret=>{
         // console.debug(ret);
@@ -50,8 +49,34 @@ export default function (props) {
     }
   }, [expTvl, zooTvl, zooPrice, chainId])
 
-  const [goldenCount, setGoldenCount] = useState(0);
-  const [silverCount, setSilverCount] = useState(0);
+  const [golden, setGolden] = useState([]);
+  const [silver, setSilver] = useState([]);
+  const [silverRate, setSilverRate] = useState(0);
+
+  useEffect(()=>{
+    axios.get('https://rpc.zookeeper.finance/api/v1/chest').then(ret=>{
+      let silver = ret.data.filter(v=>{
+        return v.type === 'SilverBuy';
+      });
+
+      let golden = ret.data.filter(v=>{
+        return v.type !== 'SilverBuy';
+      })
+
+      setSilver(silver);
+      setGolden(golden);
+
+      let silver24h = silver.filter(v=>{
+        return (Date.now() - (new Date(v.time))) / 3600000 < 24
+      })
+      let silverGood = silver24h.filter(v=>{
+        return v.level > 0;
+      });
+
+      setSilverRate(silverGood.length * 100 / silver24h.length);
+      
+    }).catch(console.error);
+  }, []);
 
   return (
     <React.Fragment>
@@ -154,19 +179,19 @@ export default function (props) {
           <div className={styles.chest_opened}>
             <img src="assets/goldenbox42x42.png" />
             <div className={styles.chest_opened_value}>
-              15,522
+              {golden.length}
             <div>Golden Chest opened</div>
             </div>
           </div>
           <div className={styles.chest_opened}>
             <img src="assets/silverbox42x42.png" />
             <div className={styles.chest_opened_value}>
-              152,522
-                            <div>Silver Chest opened</div>
+              {silver.length}
+            <div>Silver Chest opened</div>
             </div>
             <div className={styles.silver_daily}>
-              24.5%
-                            <div>24 hrs Rate</div>
+              {commafy(silverRate).split('.')[0]}%
+            <div>24 hrs Rate</div>
             </div>
           </div>
           <div className={styles.price_title}>
