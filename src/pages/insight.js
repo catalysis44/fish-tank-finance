@@ -18,6 +18,7 @@ export default function (props) {
   const blockNumber = storage.blockNumber;
   const endBlockNumber = 14174838 + 3600 / 5 * 24 * 365 * 2;
   const startBlockNumber = 14174838;
+  const chainId = storage.chainId;
   let leftDays = endBlockNumber > blockNumber ? (endBlockNumber - blockNumber) * 5 / 3600 / 24 : 0;
   let startDays = (blockNumber - startBlockNumber) * 5 / 3600 / 24;
 
@@ -34,12 +35,12 @@ export default function (props) {
   }) : 0;
 
   useEffect(()=>{
-    if (Number(expTvl) > 0 && Number(zooTvl) > 0 && Number(zooPrice) > 0) {
+    if (Number(expTvl) > 0 && Number(zooTvl) > 0 && Number(zooPrice) > 0 && Number(chainId) === 888) {
       axios.get('https://rpc.zookeeper.finance/api/v1/setTvl?tvl=' + (Number(expTvl) + Number(zooTvl))).then(ret=>{
         // console.debug(ret);
       }).catch(console.error);
     }
-  }, [expTvl, zooTvl, zooPrice])
+  }, [expTvl, zooTvl, zooPrice, chainId])
 
   return (
     <React.Fragment>
