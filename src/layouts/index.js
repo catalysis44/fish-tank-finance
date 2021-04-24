@@ -212,10 +212,7 @@ function BasicLayout(props) {
         <div className={styles.footer}>
 
             <div className={styles.ext_link}>
-            <NavLink onClick={toggleSidebar} to="/insight" activeClassName="is_active">
-                <img src="assets/sidebar/insight.png"/>
-                <span>{t("Insight")}</span>
-              </NavLink>
+              
               <a href="https://docs.zookeeper.finance/" target="_blank">
                 <img src="assets/docs.png"/>
                 <span>{t("Documentation")}</span>
@@ -224,6 +221,11 @@ function BasicLayout(props) {
                 <img src="assets/vote.png"/>
                 <span>{t("Vote")}</span>
               </a>
+
+              <NavLink onClick={toggleSidebar} to="/insight" activeClassName="is_active">
+                <img src="assets/sidebar/insight.png"/>
+                <span>{t("Insight")}</span>
+              </NavLink>
             </div>
 
           <div id="zoo_info_burned">
