@@ -5,7 +5,7 @@
     justify-content: center;
     margin:0 auto;
     padding: 0px 10px;
-    max-width:680px;
+    max-width:880px;
 }
 .row:first-child
 {
@@ -75,7 +75,7 @@
 
 .panel
 {
-  width:300px;
+  width:400px;
   height:180px;
   background:white;
   border-radius: 4px;
@@ -410,6 +410,17 @@
 }
 
 /*Responsive*/
+@media screen and (max-width: 1159px)
+{
+    .row
+    {
+        max-width:680px !important;
+    }
+    .panel
+    {
+        width:300px !important;
+    }
+}
 @media screen and (max-width: 940px)
 {
     .panel,.panel_full
