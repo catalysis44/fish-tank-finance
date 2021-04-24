@@ -30,7 +30,7 @@ export default function (props) {
     return expeditionAmount.multipliedBy(zooPrice);
   }, [zooPrice, expeditions]);
 
-  const zooTvl = window.tvl ? window.tvl.reduce((pre, v, i) => {
+  const zooTvl = window.tvl && window.tvl.length > 0 ? window.tvl.reduce((pre, v, i) => {
     return Number(pre) + Number(v);
   }) : 0;
 
