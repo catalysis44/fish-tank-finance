@@ -81,7 +81,7 @@ export default function (props) {
   return (
     <React.Fragment>
       <div className={styles.row}>
-        <div className={styles.panel_full} style={{ marginBottom: 20, padding: '10px 20px', marginTop: 0 }}>
+        <div className={styles.panel_full} style={{ marginBottom: 30, padding: '10px 20px', marginTop: 0 }}>
           <div className={styles.price_mc_wrapper}>
             <div className={styles.price_wrapper}>
               <img src="assets/zoo_panel.png" />
@@ -243,27 +243,27 @@ export default function (props) {
           <div className={styles.item_category_tab}>
             <a className={`${styles.category} ${styles.is_active}`}>
               <img src="assets/category/fruits.png" />
-                                Fruits
+              <span>{t('Fruits')}</span>
                             </a>
             <a className={styles.category}>
               <img src="assets/category/dishes.png" />
-                                Foods
+                  <span>{t('Foods')}</span>
                             </a>
             <a className={styles.category}>
               <img src="assets/category/sweets.png" />
-                                Sweets
+              <span>{t('Sweets')}</span>
                             </a>
             <a className={styles.category}>
               <img src="assets/category/potions.png" />
-                                Potions
+              <span>{t('Potions')}</span>
                             </a>
             <a className={styles.category}>
               <img src="assets/category/spices.png" />
-                                Spices
+              <span>{t('Spices')}</span>
                             </a>
             <a className={styles.category}>
               <img src="assets/category/magic.png" />
-                                Magic
+              <span>{t('Magic')}</span>
                             </a>
           </div>
 
