@@ -179,4 +179,12 @@ export default {
   "CATTEGORY":"物品名称",
   "Burn":"销毁",
   "After burned these items. Please contact us directly on Telegram":"在销毁完成后，请在telegram中联系下面的人来解除你的账户异常状态",
+  "RAGING MANE LEO": "狂怒 狮子王",
+  'BARCODE BRENDA': "扫我条形码 斑马",
+  'MEL GIBBON': "梅尔 吉布森猴", // MONKEY    
+  'CARL CROCS': "卡尔 马鳄斯", // CROCODILE  
+  'PAULIE BAMBOOZLE': "宝利 功夫熊猫", // PANDA   
+  'RAFFERTY G. MONAY': "混沌 莫奈鹿", // GIRAFFE   
+  'ELON TUSK': "翼龙 马斯克", // ELEPHANT   
+
 };
