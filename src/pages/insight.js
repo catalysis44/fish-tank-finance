@@ -78,6 +78,20 @@ export default function (props) {
     }).catch(console.error);
   }, []);
 
+  const [priceChange24h, setPriceChange24h] = useState();
+  const [priceChangeWeek, setPriceChangeWeek] = useState();
+
+  useEffect(()=>{
+    axios.get('https://rpc.zookeeper.finance/api/v1/goldenPrice').then(ret=>{
+      let priceArray = ret.data;
+      let p24s = priceArray.length > 24 ? priceArray.slice(-24) : priceArray;
+      setPriceChange24h((p24s[p24s.length-1].price - p24s[0].price)*100/p24s[0].price);
+      let pWeeks = priceArray.length > 24*7 ? priceArray.slice(-24*7) : priceArray;
+      setPriceChangeWeek((pWeeks[pWeeks.length-1].price - pWeeks[0].price)*100/pWeeks[0].price);
+    })
+  }, []);
+
+
   return (
     <React.Fragment>
       <div className={styles.row}>
@@ -199,12 +213,12 @@ export default function (props) {
                     </div>
           <div className={styles.chest_price_wrapper}>
             <div className={styles.chest_price}>
-              +10.5%
-                            <div>24 hrs</div>
+              {priceChange24h && (priceChange24h > 0 ? ('+' + priceChange24h.toFixed(1)): priceChange24h.toFixed(1))}%
+            <div>24 hrs</div>
             </div>
             <div className={styles.chest_price}>
-              -5.5%
-                            <div>1 Week</div>
+            {priceChangeWeek && (priceChangeWeek > 0 ? ('+' + priceChangeWeek.toFixed(1)): priceChangeWeek.toFixed(1))}%
+            <div>1 Week</div>
             </div>
 
           </div>
