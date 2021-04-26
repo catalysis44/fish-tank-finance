@@ -187,7 +187,7 @@
       background:#e1e5da;
       color:#274652;
       border-radius:4px;
-      font-size:22px;
+      font-size:18px;
       width: 100px;
       flex:1;
       padding:0 5px;
@@ -200,12 +200,22 @@
         left:5px;
         top:4px;
       }
+      .deposited
+      {
+        display: flex;
+        flex-direction:column;
+        line-height:15px;
+        span
+        {
+          font-size:13px;
+        }
+      }
     }
     .hour
     {
       display:flex;
       align-items: center;
-      justify-content: flex-end;
+      justify-content: center;
       position:relative;
       background:#e1e5da;
       color:#274652;
@@ -214,7 +224,7 @@
       font-size:22px;
       flex:1;
       padding:0 5px;
-      padding-top:3px;
+     
       height:40px;
       margin-left:5px;
       img
@@ -223,50 +233,65 @@
         left:5px;
         top:8px;
       }
+      div
+      {
+        text-align: center;
+        margin-left:15px;
+        display:flex;
+        flex-direction: column;
+        justify-content: center;
+        font-size:11px;
+        line-height:15px;
+        span
+        {
+          font-size:18px;
+        }
+      }
     }
   }
   .reward
   {
+    transition: margin 0.3s ease-in-out;
+    height:60px;
     display:flex;
-    margin-bottom:10px;
     justify-content: space-between;
     .type
     {
       display:flex;
       align-items: center;
-      justify-content: center;
+      justify-content: space-between;
       position:relative;
       font-size:22px;
       color:black;
       
       flex:1;
-      padding:0 5px;
-      padding-left:10px;
-      padding-right:10px;
+     
       border-right:1px solid #eee;
       height:60px;
-      .x
-      {
-          font-size:30px;
-          margin-top:6px;
-          margin-left:10px;
-      }
+      min-width: 126px;
       .amount
       {
-        font-size:44px;
-        margin-top:5px;
-        margin-left:3px;
+        font-size: 34px;
+        margin-top: 15px;
+        margin-left: 3px;
+        line-height: 16px;
+        margin-right:8px;
+        .per_week
+        {
+          font-size:13px;
+          text-align: right;
+        }
       }
       img
       {
-       width:48px;
-       height:48px;
+       width:34px;
+       height:34px;
+       margin-right:10px;
       }
     }
     .description
     {
       display:flex;
-      align-items: left;
       justify-content: center;
       flex-direction: column;
       position:relative;
@@ -278,11 +303,103 @@
       padding-left:16px;
       height:60px;
       color: black;
+      text-align: center;
+      .topup_btn
+      {
+        flex: 1 1;
+        width: 100%;
+        border-radius: 4px;
+        font-size: 20px;
+        padding-top: 4px;
+        height: 40px;
+        max-height:40px;
+        background: #00a99d;
+        border: #00a99d;
+        color: white;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.1s ease-in-out;
+      }
       img
       {
         position:absolute;
         left:5px;
         top:8px;
+      }
+    }
+  }
+
+
+  .topup_wrapper[data-show-topup="true"] .reward
+  {
+    margin-top:-60px;
+  }
+  .topup_wrapper
+  {
+    max-height:60px;
+    overflow: hidden;
+    margin-bottom:10px;
+  }
+  .topup
+  {
+    height:60px;
+    display:flex;
+    justify-content: space-between;
+    .deposit_wrapper
+    {
+      width:115px;
+      .title
+      {
+        font-size:13px;
+        justify-content: left;
+        height:20px;
+      }
+      .deposit_amount
+      {
+        font-size: 24px;
+        text-align: left;
+        width: 115px;
+        height: 40px;
+        padding-top: 4px;
+        color: #000000;
+        border: 0px;
+        outline-width: 0;
+      }
+    }
+    .avaliable_wrapper
+    {
+      width:120px;
+      display:flex;
+      flex-direction: column;
+      justify-content: right;
+      align-items:flex-end;
+      .title
+      {
+        font-size:13px;
+        justify-content: right;
+        height:20px;
+      }
+      .max
+      {
+       
+        
+        width: 56px;
+        border-radius: 4px;
+        font-size: 20px;
+        padding-top: 4px;
+        padding-left: 2px;
+        height: 26px;
+        background: #00a99d;
+        border: #00a99d;
+        color: white;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+        margin-top: 5px;
       }
     }
   }

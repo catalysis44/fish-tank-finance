@@ -5,76 +5,298 @@ import { useLanguage } from '../hooks/language';
 
 export default function (props) {
   const t = useLanguage();
+  const [topup, setTopup] = useState(0);
   return (
     <React.Fragment>
       {
         //txWaiting && <Loader />
       }
-     
+
       <div className={styles.row}>
-        <div className={styles.pool} data-active={true}> {/*active true for on staking pool */}
+        <div className={styles.pool} data-active={false}> {/*active true for on staking pool */}
           <div className={styles.cover_wrapper} >
-            <img src="assets/expedition/mightycave.png" className={styles.cover} />
+            <img src="dummy/desertxbtc.png" className={styles.cover} />
             <div className={styles.tvl}>
               <div className={styles.amount}>
                 555,555
               </div>
-                {t("ZOO LOCKED")}
+              {t("ZOO LOCKED")}
             </div>
           </div>
           <div className={styles.title}>
-            We're Satoshi
+            HUNTING THE BTC (Season01)
           </div>
           <div className={styles.condition}>
             <div className={styles.minimum}>
               <img src="assets/zoo32x32.png" />
-              {t("unlimited")}
+              <div className={styles.deposited}>
+                {t("unlimited")}
+                <span style={{display:'none'}}>Deposited</span>
+              </div>
             </div>
             <div className={styles.hour}>
               <img src="assets/hourglass24x24.png" />
-              <span>2 {t("Days")}</span>
+              <div>
+                {t("End in")}
+                <span>18:54:12</span>
+              </div>
 
             </div>
           </div>
 
-          <div className={styles.reward}>
-            <div className={styles.type}>
-              <img src="assets/goldenbox48x48.png" />
-              <div className={styles.x}>×</div>
-              <div className={styles.amount}>1</div>
+          <div className={styles.topup_wrapper} data-show-topup={false}> {/* Show topup panel when Stake Zoo or Topup */}
+            <div className={styles.reward}>
+              <div className={styles.type}>
+                <img src="assets/currency/wanBTC.png" />
+                <div className={styles.amount}>0.25<div className={styles.per_week}>{t('per week')}</div></div>
+
+              </div>
+              <div className={styles.description}>
+                <div className={styles.caption}>
+                  <div>{t("STAKE ZOO AND")}</div>
+                  <div>{t("GET")} wanSUSHI</div>
+                </div>
+                <a className={styles.topup_btn}  style={{display:'none'}}>{t('Top-up')}</a>
+              </div>
             </div>
-            <div className={styles.description}>
-              <div>{t("STAKE AND LOCK")}</div>
-              <div>{t("ZOO TO RECEIVE")}</div>
-              <div>1 {t("GOLDEN CHEST")}</div>
+
+            <div className={styles.topup}>
+              <div className={styles.deposit_wrapper}>
+                <div className={styles.title}>
+                  {t('DEPOSIT ZOO')}
+                </div>
+                <input className={styles.deposit_amount} value="0" />
+              </div>
+              <div className={styles.avaliable_wrapper}>
+                <div className={styles.title}>
+                  154,540.55 {t('AVAILABLE')}
+                </div>
+                <a className={styles.max}>
+                  MAX
+              </a>
+              </div>
             </div>
           </div>
-          
-          <div className={styles.action_wrapper}>
-            <a className={styles.action_btn} disabled={false}>
+
+
+          <div className={styles.action_wrapper} style={{ display: 'none' }}>
+            <a className={styles.action_btn} disabled={false} >
               {t("Approve")}
             </a>
             <a className={styles.action_btn} disabled={false}>
               {t("Validate")}
             </a>
           </div>
-          
+
 
           <div className={styles.action_wrapper}>
-           <a className={styles.action_btn}>
-                {t("Stake ZOO")}
-            </a>
             <a className={styles.action_btn}>
-                {t("Claim 1 Golden Chest")}
+              {t("Stake ZOO")}
+            </a>
+          </div>
+
+          <div className={styles.action_wrapper} style={{display:'none'}}>
+          
+            <a className={styles.action_btn}>
+                {t("Withdraw")}
               </a>
            
-            <a className={styles.action_btn} disabled>
-                {t("Left")}
+            <a className={styles.action_btn}>
+                {t("Claim")}
               </a>
             
           </div>
         </div>
 
+        <div className={styles.pool} data-active={false}> {/*active true for on staking pool */}
+          <div className={styles.cover_wrapper} >
+            <img src="dummy/desertxbtc.png" className={styles.cover} />
+            <div className={styles.tvl}>
+              <div className={styles.amount}>
+                555,555
+              </div>
+              {t("ZOO LOCKED")}
+            </div>
+          </div>
+          <div className={styles.title}>
+            HUNTING THE BTC (Season01)
+          </div>
+          <div className={styles.condition}>
+            <div className={styles.minimum}>
+              <img src="assets/zoo32x32.png" />
+              <div className={styles.deposited}>
+                {t("unlimited")}
+                <span style={{display:'none'}}>Deposited</span>
+              </div>
+            </div>
+            <div className={styles.hour}>
+              <img src="assets/hourglass24x24.png" />
+              <div>
+                {t("End in")}
+                <span>18:54:12</span>
+              </div>
+
+            </div>
+          </div>
+
+          <div className={styles.topup_wrapper} data-show-topup={true}> {/* Show topup panel when Stake Zoo or Topup */}
+            <div className={styles.reward}>
+              <div className={styles.type}>
+                <img src="assets/currency/wanBTC.png" />
+                <div className={styles.amount}>0.25<div className={styles.per_week}>{t('per week')}</div></div>
+
+              </div>
+              <div className={styles.description}>
+                <div className={styles.caption}>
+                  <div>{t("STAKE ZOO AND")}</div>
+                  <div>{t("GET")} wanSUSHI</div>
+                </div>
+                <a className={styles.topup_btn}  style={{display:'none'}}>{t('Top-up')}</a>
+              </div>
+            </div>
+
+            <div className={styles.topup}>
+              <div className={styles.deposit_wrapper}>
+                <div className={styles.title}>
+                  {t('DEPOSIT ZOO')}
+                </div>
+                <input className={styles.deposit_amount} value="0" />
+              </div>
+              <div className={styles.avaliable_wrapper}>
+                <div className={styles.title}>
+                  154,540.55 {t('AVAILABLE')}
+                </div>
+                <a className={styles.max}>
+                  MAX
+              </a>
+              </div>
+            </div>
+          </div>
+
+
+          <div className={styles.action_wrapper}>
+            <a className={styles.action_btn} disabled={false} >
+              {t("Approve")}
+            </a>
+            <a className={styles.action_btn} disabled={false}>
+              {t("Validate")}
+            </a>
+          </div>
+
+
+          <div className={styles.action_wrapper} style={{display:'none'}}>
+            <a className={styles.action_btn}>
+              {t("Stake ZOO")}
+            </a>
+          </div>
+
+          <div className={styles.action_wrapper} style={{display:'none'}}>
+          
+            <a className={styles.action_btn}>
+                {t("Withdraw")}
+              </a>
+           
+            <a className={styles.action_btn}>
+                {t("Claim")}
+              </a>
+            
+          </div>
+        </div>
+
+        <div className={styles.pool} data-active={true}> {/*active true for on staking pool */}
+          <div className={styles.cover_wrapper} >
+            <img src="dummy/desertxbtc.png" className={styles.cover} />
+            <div className={styles.tvl}>
+              <div className={styles.amount}>
+                555,555
+              </div>
+              {t("ZOO LOCKED")}
+            </div>
+          </div>
+          <div className={styles.title}>
+            HUNTING THE BTC (Season01)
+          </div>
+          <div className={styles.condition}>
+            <div className={styles.minimum}>
+              <img src="assets/zoo32x32.png" />
+              <div className={styles.deposited}>
+                152,652.5
+                <span>Deposited</span>
+              </div>
+            </div>
+            <div className={styles.hour}>
+              <img src="assets/hourglass24x24.png" />
+              <div>
+                {t("End in")}
+                <span>18:54:12</span>
+              </div>
+
+            </div>
+          </div>
+
+          <div className={styles.topup_wrapper} data-show-topup={false}> {/* Show topup panel when Stake Zoo or Topup */}
+            <div className={styles.reward}>
+              <div className={styles.type}>
+                <img src="assets/currency/wanBTC.png" />
+                <div className={styles.amount}>.002<div className={styles.per_week}>{t('per week')}</div></div>
+
+              </div>
+              <div className={styles.description}>
+                <div className={styles.caption}  style={{display:'none'}}>
+                  <div>{t("STAKE ZOO AND")}</div>
+                  <div>{t("GET")} wanSUSHI</div>
+                </div>
+                <a className={styles.topup_btn}>{t('Top-up')}</a>
+              </div>
+            </div>
+
+            <div className={styles.topup}>
+              <div className={styles.deposit_wrapper}>
+                <div className={styles.title}>
+                  {t('DEPOSIT ZOO')}
+                </div>
+                <input className={styles.deposit_amount} value="0" />
+              </div>
+              <div className={styles.avaliable_wrapper}>
+                <div className={styles.title}>
+                  154,540.55 {t('AVAILABLE')}
+                </div>
+                <a className={styles.max}>
+                  MAX
+              </a>
+              </div>
+            </div>
+          </div>
+
+
+          <div className={styles.action_wrapper} style={{ display: 'none' }}>
+            <a className={styles.action_btn} disabled={false} >
+              {t("Approve")}
+            </a>
+            <a className={styles.action_btn} disabled={false}>
+              {t("Validate")}
+            </a>
+          </div>
+
+
+          <div className={styles.action_wrapper} style={{display:'none'}}>
+            <a className={styles.action_btn}>
+              {t("Stake ZOO")}
+            </a>
+          </div>
+
+          <div className={styles.action_wrapper}>
+          
+            <a className={styles.action_btn}>
+                {t("Withdraw")}
+              </a>
+           
+            <a className={styles.action_btn}>
+                {t("Claim")}
+              </a>
+            
+          </div>
+        </div>
 
       </div>
 
