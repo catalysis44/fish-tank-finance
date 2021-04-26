@@ -11,6 +11,201 @@ import axios from 'axios';
 import { WalletContext } from '../wallet/Wallet';
 import { history } from 'umi';
 
+// category->item->level
+const initNftList = {
+  1: {
+    1: {
+      1: {},
+      2: {},
+      3: {},
+      4: {},
+    },
+    2: {
+      1: {},
+      2: {},
+      3: {},
+      4: {},
+    },
+    3: {
+      1: {},
+      2: {},
+      3: {},
+      4: {},
+    },
+    4: {
+      1: {},
+      2: {},
+      3: {},
+      4: {},
+    },
+    5: {
+      1: {},
+      2: {},
+      3: {},
+      4: {},
+    },
+  },
+  2: {
+    1: {
+      1: {},
+      2: {},
+      3: {},
+      4: {},
+    },
+    2: {
+      1: {},
+      2: {},
+      3: {},
+      4: {},
+    },
+    3: {
+      1: {},
+      2: {},
+      3: {},
+      4: {},
+    },
+    4: {
+      1: {},
+      2: {},
+      3: {},
+      4: {},
+    },
+    5: {
+      1: {},
+      2: {},
+      3: {},
+      4: {},
+    },
+  },
+  3: {
+    1: {
+      1: {},
+      2: {},
+      3: {},
+      4: {},
+    },
+    2: {
+      1: {},
+      2: {},
+      3: {},
+      4: {},
+    },
+    3: {
+      1: {},
+      2: {},
+      3: {},
+      4: {},
+    },
+    4: {
+      1: {},
+      2: {},
+      3: {},
+      4: {},
+    },
+    5: {
+      1: {},
+      2: {},
+      3: {},
+      4: {},
+    },
+  },
+  4: {
+    1: {
+      1: {},
+      2: {},
+      3: {},
+      4: {},
+    },
+    2: {
+      1: {},
+      2: {},
+      3: {},
+      4: {},
+    },
+    3: {
+      1: {},
+      2: {},
+      3: {},
+      4: {},
+    },
+    4: {
+      1: {},
+      2: {},
+      3: {},
+      4: {},
+    },
+    5: {
+      1: {},
+      2: {},
+      3: {},
+      4: {},
+    },
+  },
+  5: {
+    1: {
+      1: {},
+      2: {},
+      3: {},
+      4: {},
+    },
+    2: {
+      1: {},
+      2: {},
+      3: {},
+      4: {},
+    },
+    3: {
+      1: {},
+      2: {},
+      3: {},
+      4: {},
+    },
+    4: {
+      1: {},
+      2: {},
+      3: {},
+      4: {},
+    },
+    5: {
+      1: {},
+      2: {},
+      3: {},
+      4: {},
+    },
+  },
+  6: {
+    1: {
+      1: {},
+      2: {},
+      3: {},
+      4: {},
+    },
+    2: {
+      1: {},
+      2: {},
+      3: {},
+      4: {},
+    },
+    3: {
+      1: {},
+      2: {},
+      3: {},
+      4: {},
+    },
+    4: {
+      1: {},
+      2: {},
+      3: {},
+      4: {},
+    },
+    5: {
+      1: {},
+      2: {},
+      3: {},
+      4: {},
+    },
+  },
+}
 
 export default function (props) {
   const t = useLanguage();
@@ -93,13 +288,20 @@ export default function (props) {
 
   const [totalNft, setTotalNft] = useState();
   const [totalHolder, setTotalHolder] = useState();
+  const [averageBoost, setAverageBoost] = useState();
+  const [averageReduce, setAverageReduce] = useState();
   useEffect(()=>{
     axios.get('https://rpc.zookeeper.finance/api/v1/nftInfo').then(ret=>{
       let info = ret.data;
       setTotalNft(info.totalNFT);
       setTotalHolder(info.totalHolder);
+      setAverageBoost(info.averageBoosting);
+      setAverageReduce(info.averageReduce);
     })
   }, []);
+
+  const [nftList, setNftList] = useState(initNftList);
+  const [nftTab, setNftTab] = useState(1);
 
 
   return (
@@ -238,15 +440,15 @@ export default function (props) {
           <div className={styles.booster}>
             <img src="assets/rocket.png" />
             <div className={styles.booster_value}>
-              +30.55%
-                            <div>Avarage Boosting Attached</div>
+              +{averageBoost && (averageBoost*100).toFixed(1)}%
+              <div>Avarage Boosting Attached</div>
             </div>
           </div>
           <div className={styles.booster}>
             <img src="assets/glasshour.png" />
             <div className={styles.booster_value}>
-              -23.55%
-                            <div>Avarage Time Reducing Attached</div>
+              -{averageReduce && (averageReduce*100).toFixed(1)}%
+              <div>Avarage Time Reducing Attached</div>
             </div>
           </div>
           <div className={styles.booster_sub_wrapper}>
@@ -265,664 +467,127 @@ export default function (props) {
       <div className={styles.row}>
         <div className={styles.panel_full}>
           <div className={styles.item_category_tab}>
-            <a className={`${styles.category} ${styles.is_active}`}>
+            <a className={`${styles.category} ${nftTab === 1 ? styles.is_active : ''}`} onClick={()=>setNftTab(1)}>
               <img src="assets/category/fruits.png" />
               <span>{t('Fruits')}</span>
-                            </a>
-            <a className={styles.category}>
+            </a>
+            <a className={`${styles.category} ${nftTab === 2 ? styles.is_active : ''}`} onClick={()=>setNftTab(2)}>
               <img src="assets/category/dishes.png" />
-                  <span>{t('Foods')}</span>
-                            </a>
-            <a className={styles.category}>
+              <span>{t('Foods')}</span>
+            </a>
+            <a className={`${styles.category} ${nftTab === 3 ? styles.is_active : ''}`} onClick={()=>setNftTab(3)}>
               <img src="assets/category/sweets.png" />
               <span>{t('Sweets')}</span>
-                            </a>
-            <a className={styles.category}>
+            </a>
+            <a className={`${styles.category} ${nftTab === 4 ? styles.is_active : ''}`} onClick={()=>setNftTab(4)}>
               <img src="assets/category/potions.png" />
               <span>{t('Potions')}</span>
-                            </a>
-            <a className={styles.category}>
+            </a>
+            <a className={`${styles.category} ${nftTab === 5 ? styles.is_active : ''}`} onClick={()=>setNftTab(5)}>
               <img src="assets/category/spices.png" />
               <span>{t('Spices')}</span>
-                            </a>
-            <a className={styles.category}>
+            </a>
+            <a className={`${styles.category} ${nftTab === 6 ? styles.is_active : ''}`} onClick={()=>setNftTab(6)}>
               <img src="assets/category/magic.png" />
               <span>{t('Magic')}</span>
-                            </a>
+            </a>
           </div>
 
           {/* Each Class of Item*/}
           <div className={styles.item_list_wrapper}>
-            <div className={styles.item_list}>
-              <div className={styles.grade}>
-                <img src="assets/grade/N.png" /> NORMAL CLASS
-                                </div>
-              <div className={styles.listview_table}>
-                <div className={styles.listview_row}>
-                  <div className={`${styles.listview_col} ${styles.header}`}>
-
-                  </div>
-                  <div className={`${styles.listview_col} ${styles.header}`}>
-                    BOOSTER NAME
-                                    </div>
-                  <div className={`${styles.listview_col} ${styles.header}`}>
-                    LEVEL
-                                    </div>
-                  <div className={`${styles.listview_col} ${styles.header}`}>
-                    SUPPLY
-                                    </div>
-                  <div className={`${styles.listview_col} ${styles.header}`}>
-                    INIT. ABILITIES
-                                    </div>
-                  <div className={`${styles.listview_col} ${styles.header}  ${styles.centered}`}>
-                    LASTEST SOLD
-                                    </div>
+          {
+            Object.keys(nftList[nftTab]).map(item=>{
+              return (
+                <div className={styles.item_list} key={item}>
+                <div className={styles.grade}>
+                  {
+                    Number(item) === 1 && <><img src="assets/grade/N.png" /> NORMAL CLASS</>
+                  }
+                  {
+                    Number(item) === 2 && <><img src="assets/grade/R.png" /> RARE CLASS</>
+                  }
+                  {
+                    Number(item) === 3 && <><img src="assets/grade/SR.png" /> SUPER RARE CLASS</>
+                  }
+                  {
+                    Number(item) === 4 && <><img src="assets/grade/SSR.png" /> SUPPER SUPPER RARE CLASS</>
+                  }
+                  {
+                    Number(item) === 5 && <><img src="assets/grade/UR.png" /> ULTRA RARE CLASS</>
+                  }
+                  
                 </div>
-                <div className={styles.listview_row}>
-                  <div className={`${styles.listview_col} ${styles.item_image}`}>
-                    <img src="zoo_keeper_icons_v1/Ancient_Apple_of_Lore.png" />
+                <div className={styles.listview_table}>
+                  <div className={styles.listview_row}>
+                    <div className={`${styles.listview_col} ${styles.header}`}>
+                    </div>
+                    <div className={`${styles.listview_col} ${styles.header}`}>
+                      BOOSTER NAME
+                    </div>
+                    <div className={`${styles.listview_col} ${styles.header}`}>
+                      LEVEL
+                    </div>
+                    <div className={`${styles.listview_col} ${styles.header}`}>
+                      SUPPLY
+                    </div>
+                    <div className={`${styles.listview_col} ${styles.header}`}>
+                      INIT. ABILITIES
+                    </div>
+                    <div className={`${styles.listview_col} ${styles.header}  ${styles.centered}`}>
+                      LASTEST SOLD
+                    </div>
                   </div>
-
-                  <div className={`${styles.listview_col} ${styles.item_name}`}>
-                    Ancient Apple of Lore
-                                    </div>
-
-                  <div className={`${styles.listview_col} ${styles.item_stars}`}>
-                    <img src="assets/star18x18.png" />
-                  </div>
-
-                  <div className={`${styles.listview_col} ${styles.item_supply}`}>
-                    5,555
-                                    </div>
-                  <div className={`${styles.listview_col} ${styles.item_abilities}`}>
-                    <div><img src="assets/rocket24x24.png" /> +55.55%</div>
-                    <div><img src="assets/hourglass24x24.png" /> -5.55%</div>
-                  </div>
-                  <div className={`${styles.listview_col} ${styles.item_price} ${styles.centered}`}>
-                    5,555.55$
-                                    </div>
+                  {
+                    Object.keys(nftList[nftTab][item]).map(level=>{
+                      return <div className={styles.listview_row} key={level}>
+                      <div className={`${styles.listview_col} ${styles.item_image}`}>
+                        {
+                          nftList[nftTab][item][level].icon ? <img src={nftList[nftTab][item][level].icon} /> : <img src="assets/locked.png" />
+                        }
+                      </div>
+                      <div className={`${styles.listview_col} ${styles.item_name}`}>
+                        {
+                          nftList[nftTab][item][level].name ? nftList[nftTab][item][level].name : 'Unidentified Object'
+                        }
+                      </div>
+                      <div className={`${styles.listview_col} ${styles.item_stars}`}>
+                        {
+                          Number(level) < 4 ? Array.from({length: level}).map((v,i)=>{
+                            return <img src="assets/star18x18.png" key={i} />
+                          }) : <img src="assets/max.png" />
+                        }
+                      </div>
+                      <div className={`${styles.listview_col} ${styles.item_supply}`}>
+                        {
+                          nftList[nftTab][item][level].supply ? nftList[nftTab][item][level].supply : '--'
+                        }
+                      </div>
+                      <div className={`${styles.listview_col} ${styles.item_abilities}`}>
+                        <div><img src="assets/rocket24x24.png" /> 
+                        {
+                          nftList[nftTab][item][level].boost ? nftList[nftTab][item][level].boost : '--'
+                        }%
+                        </div>
+                        <div><img src="assets/hourglass24x24.png" /> 
+                        {
+                          nftList[nftTab][item][level].reduce ? nftList[nftTab][item][level].reduce : '--'
+                        }%
+                        </div>
+                      </div>
+                      <div className={`${styles.listview_col} ${styles.item_price}  ${styles.centered}`}>
+                        {
+                          nftList[nftTab][item][level].price ? nftList[nftTab][item][level].price : '--'
+                        }
+                        $
+                      </div>
+                    </div>
+                    })
+                  }
                 </div>
-                <div className={styles.listview_row}>
-                  <div className={`${styles.listview_col} ${styles.item_image}`}>
-                    <img src="assets/locked.png" />
-                  </div>
-
-                  <div className={`${styles.listview_col} ${styles.item_name}`}>
-                    Unidentified Object
-                                    </div>
-
-                  <div className={`${styles.listview_col} ${styles.item_stars}`}>
-                    <img src="assets/star18x18.png" /><img src="assets/star18x18.png" />
-                  </div>
-
-                  <div className={`${styles.listview_col} ${styles.item_supply}`}>
-                    --
-                                    </div>
-                  <div className={`${styles.listview_col} ${styles.item_abilities}`}>
-                    <div><img src="assets/rocket24x24.png" /> --%</div>
-                    <div><img src="assets/hourglass24x24.png" /> --%</div>
-                  </div>
-                  <div className={`${styles.listview_col} ${styles.item_price}  ${styles.centered}`}>
-                    --$
-                                    </div>
-                </div>
-                <div className={styles.listview_row}>
-                  <div className={`${styles.listview_col} ${styles.item_image}`}>
-                    <img src="zoo_keeper_icons_v1/Honeysuckle_Apple_Sauce.png" />
-                  </div>
-
-                  <div className={`${styles.listview_col} ${styles.item_name}`}>
-                    Honeysuckle Apple Sauce
-                                    </div>
-
-                  <div className={`${styles.listview_col} ${styles.item_stars}`}>
-                    <img src="assets/star18x18.png" /><img src="assets/star18x18.png" /><img src="assets/star18x18.png" />
-                  </div>
-
-                  <div className={`${styles.listview_col} ${styles.item_supply}`}>
-                    5,555
-                                    </div>
-                  <div className={`${styles.listview_col} ${styles.item_abilities}`}>
-                    <div><img src="assets/rocket24x24.png" /> +55.55%</div>
-                    <div><img src="assets/hourglass24x24.png" /> -5.55%</div>
-                  </div>
-                  <div className={`${styles.listview_col} ${styles.item_price}  ${styles.centered}`}>
-                    5,555.55$
-                                    </div>
-                </div>
-                <div className={styles.listview_row}>
-                  <div className={`${styles.listview_col} ${styles.item_image}`}>
-                    <img src="zoo_keeper_icons_v1/Golden_Apple_of_Destiny.png" />
-                  </div>
-
-                  <div className={`${styles.listview_col} ${styles.item_name}`}>
-                    Golden Apple of Destiny
-                                    </div>
-
-                  <div className={`${styles.listview_col} ${styles.item_stars}`}>
-                    <img src="assets/max.png" />
-                  </div>
-
-                  <div className={`${styles.listview_col} ${styles.item_supply}`}>
-                    5,555
-                                    </div>
-                  <div className={`${styles.listview_col} ${styles.item_abilities}`}>
-                    <div><img src="assets/rocket24x24.png" /> +55.55%</div>
-                    <div><img src="assets/hourglass24x24.png" /> -5.55%</div>
-                  </div>
-                  <div className={`${styles.listview_col} ${styles.item_price}  ${styles.centered}`}>
-                    5,555.55$
-                                    </div>
-                </div>
-
               </div>
-            </div>
-
-            {/* Each Class of Item*/}
-            <div className={styles.item_list}>
-              <div className={styles.grade}>
-                <img src="assets/grade/R.png" /> RARE CLASS
-                            </div>
-              <div className={styles.listview_table}>
-                <div className={styles.listview_row}>
-                  <div className={`${styles.listview_col} ${styles.header}`}>
-
-                  </div>
-                  <div className={`${styles.listview_col} ${styles.header}`}>
-                    BOOSTER NAME
-                                </div>
-                  <div className={`${styles.listview_col} ${styles.header}`}>
-                    LEVEL
-                                </div>
-                  <div className={`${styles.listview_col} ${styles.header}`}>
-                    SUPPLY
-                                </div>
-                  <div className={`${styles.listview_col} ${styles.header}`}>
-                    INIT. ABILITIES
-                                </div>
-                  <div className={`${styles.listview_col} ${styles.header}  ${styles.centered}`}>
-                    LASTEST SOLD
-                                </div>
-                </div>
-                <div className={styles.listview_row}>
-                  <div className={`${styles.listview_col} ${styles.item_image}`}>
-                    <img src="zoo_keeper_icons_v1/Ancient_Apple_of_Lore.png" />
-                  </div>
-
-                  <div className={`${styles.listview_col} ${styles.item_name}`}>
-                    Ancient Apple of Lore
-                                </div>
-
-                  <div className={`${styles.listview_col} ${styles.item_stars}`}>
-                    <img src="assets/star18x18.png" />
-                  </div>
-
-                  <div className={`${styles.listview_col} ${styles.item_supply}`}>
-                    5,555
-                                </div>
-                  <div className={`${styles.listview_col} ${styles.item_abilities}`}>
-                    <div><img src="assets/rocket24x24.png" /> +55.55%</div>
-                    <div><img src="assets/hourglass24x24.png" /> -5.55%</div>
-                  </div>
-                  <div className={`${styles.listview_col} ${styles.item_price} ${styles.centered}`}>
-                    5,555.55$
-                                </div>
-                </div>
-                <div className={styles.listview_row}>
-                  <div className={`${styles.listview_col} ${styles.item_image}`}>
-                    <img src="zoo_keeper_icons_v1/Tea-Smoked_Apple_Juice.png" />
-                  </div>
-
-                  <div className={`${styles.listview_col} ${styles.item_name}`}>
-                    Tea-Smoked Apple Juice
-                                </div>
-
-                  <div className={`${styles.listview_col} ${styles.item_stars}`}>
-                    <img src="assets/star18x18.png" /><img src="assets/star18x18.png" />
-                  </div>
-
-                  <div className={`${styles.listview_col} ${styles.item_supply}`}>
-                    5,555
-                                </div>
-                  <div className={`${styles.listview_col} ${styles.item_abilities}`}>
-                    <div><img src="assets/rocket24x24.png" /> +55.55%</div>
-                    <div><img src="assets/hourglass24x24.png" /> -5.55%</div>
-                  </div>
-                  <div className={`${styles.listview_col} ${styles.item_price}  ${styles.centered}`}>
-                    5,555.55$
-                                </div>
-                </div>
-                <div className={styles.listview_row}>
-                  <div className={`${styles.listview_col} ${styles.item_image}`}>
-                    <img src="zoo_keeper_icons_v1/Honeysuckle_Apple_Sauce.png" />
-                  </div>
-
-                  <div className={`${styles.listview_col} ${styles.item_name}`}>
-                    Honeysuckle Apple Sauce
-                                </div>
-
-                  <div className={`${styles.listview_col} ${styles.item_stars}`}>
-                    <img src="assets/star18x18.png" /><img src="assets/star18x18.png" /><img src="assets/star18x18.png" />
-                  </div>
-
-                  <div className={`${styles.listview_col} ${styles.item_supply}`}>
-                    5,555
-                                </div>
-                  <div className={`${styles.listview_col} ${styles.item_abilities}`}>
-                    <div><img src="assets/rocket24x24.png" /> +55.55%</div>
-                    <div><img src="assets/hourglass24x24.png" /> -5.55%</div>
-                  </div>
-                  <div className={`${styles.listview_col} ${styles.item_price}  ${styles.centered}`}>
-                    5,555.55$
-                                </div>
-                </div>
-                <div className={styles.listview_row}>
-                  <div className={`${styles.listview_col} ${styles.item_image}`}>
-                    <img src="zoo_keeper_icons_v1/Golden_Apple_of_Destiny.png" />
-                  </div>
-
-                  <div className={`${styles.listview_col} ${styles.item_name}`}>
-                    Golden Apple of Destiny
-                                </div>
-
-                  <div className={`${styles.listview_col} ${styles.item_stars}`}>
-                    <img src="assets/max.png" />
-                  </div>
-
-                  <div className={`${styles.listview_col} ${styles.item_supply}`}>
-                    5,555
-                                </div>
-                  <div className={`${styles.listview_col} ${styles.item_abilities}`}>
-                    <div><img src="assets/rocket24x24.png" /> +55.55%</div>
-                    <div><img src="assets/hourglass24x24.png" /> -5.55%</div>
-                  </div>
-                  <div className={`${styles.listview_col} ${styles.item_price}  ${styles.centered}`}>
-                    5,555.55$
-                                </div>
-                </div>
-
-              </div>
-            </div>
-          
-               {/* Each Class of Item*/}
-               <div className={styles.item_list}>
-              <div className={styles.grade}>
-                <img src="assets/grade/SR.png" /> SUPER RARE CLASS
-                            </div>
-              <div className={styles.listview_table}>
-                <div className={styles.listview_row}>
-                  <div className={`${styles.listview_col} ${styles.header}`}>
-
-                  </div>
-                  <div className={`${styles.listview_col} ${styles.header}`}>
-                    BOOSTER NAME
-                                </div>
-                  <div className={`${styles.listview_col} ${styles.header}`}>
-                    LEVEL
-                                </div>
-                  <div className={`${styles.listview_col} ${styles.header}`}>
-                    SUPPLY
-                                </div>
-                  <div className={`${styles.listview_col} ${styles.header}`}>
-                    INIT. ABILITIES
-                                </div>
-                  <div className={`${styles.listview_col} ${styles.header}  ${styles.centered}`}>
-                    LASTEST SOLD
-                                </div>
-                </div>
-                <div className={styles.listview_row}>
-                  <div className={`${styles.listview_col} ${styles.item_image}`}>
-                    <img src="zoo_keeper_icons_v1/Ancient_Apple_of_Lore.png" />
-                  </div>
-
-                  <div className={`${styles.listview_col} ${styles.item_name}`}>
-                    Ancient Apple of Lore
-                                </div>
-
-                  <div className={`${styles.listview_col} ${styles.item_stars}`}>
-                    <img src="assets/star18x18.png" />
-                  </div>
-
-                  <div className={`${styles.listview_col} ${styles.item_supply}`}>
-                    5,555
-                                </div>
-                  <div className={`${styles.listview_col} ${styles.item_abilities}`}>
-                    <div><img src="assets/rocket24x24.png" /> +55.55%</div>
-                    <div><img src="assets/hourglass24x24.png" /> -5.55%</div>
-                  </div>
-                  <div className={`${styles.listview_col} ${styles.item_price} ${styles.centered}`}>
-                    5,555.55$
-                                </div>
-                </div>
-                <div className={styles.listview_row}>
-                  <div className={`${styles.listview_col} ${styles.item_image}`}>
-                    <img src="zoo_keeper_icons_v1/Tea-Smoked_Apple_Juice.png" />
-                  </div>
-
-                  <div className={`${styles.listview_col} ${styles.item_name}`}>
-                    Tea-Smoked Apple Juice
-                                </div>
-
-                  <div className={`${styles.listview_col} ${styles.item_stars}`}>
-                    <img src="assets/star18x18.png" /><img src="assets/star18x18.png" />
-                  </div>
-
-                  <div className={`${styles.listview_col} ${styles.item_supply}`}>
-                    5,555
-                                </div>
-                  <div className={`${styles.listview_col} ${styles.item_abilities}`}>
-                    <div><img src="assets/rocket24x24.png" /> +55.55%</div>
-                    <div><img src="assets/hourglass24x24.png" /> -5.55%</div>
-                  </div>
-                  <div className={`${styles.listview_col} ${styles.item_price}  ${styles.centered}`}>
-                    5,555.55$
-                                </div>
-                </div>
-                <div className={styles.listview_row}>
-                  <div className={`${styles.listview_col} ${styles.item_image}`}>
-                    <img src="zoo_keeper_icons_v1/Honeysuckle_Apple_Sauce.png" />
-                  </div>
-
-                  <div className={`${styles.listview_col} ${styles.item_name}`}>
-                    Honeysuckle Apple Sauce
-                                </div>
-
-                  <div className={`${styles.listview_col} ${styles.item_stars}`}>
-                    <img src="assets/star18x18.png" /><img src="assets/star18x18.png" /><img src="assets/star18x18.png" />
-                  </div>
-
-                  <div className={`${styles.listview_col} ${styles.item_supply}`}>
-                    5,555
-                                </div>
-                  <div className={`${styles.listview_col} ${styles.item_abilities}`}>
-                    <div><img src="assets/rocket24x24.png" /> +55.55%</div>
-                    <div><img src="assets/hourglass24x24.png" /> -5.55%</div>
-                  </div>
-                  <div className={`${styles.listview_col} ${styles.item_price}  ${styles.centered}`}>
-                    5,555.55$
-                                </div>
-                </div>
-                <div className={styles.listview_row}>
-                  <div className={`${styles.listview_col} ${styles.item_image}`}>
-                    <img src="zoo_keeper_icons_v1/Golden_Apple_of_Destiny.png" />
-                  </div>
-
-                  <div className={`${styles.listview_col} ${styles.item_name}`}>
-                    Golden Apple of Destiny
-                                </div>
-
-                  <div className={`${styles.listview_col} ${styles.item_stars}`}>
-                    <img src="assets/max.png" />
-                  </div>
-
-                  <div className={`${styles.listview_col} ${styles.item_supply}`}>
-                    5,555
-                                </div>
-                  <div className={`${styles.listview_col} ${styles.item_abilities}`}>
-                    <div><img src="assets/rocket24x24.png" /> +55.55%</div>
-                    <div><img src="assets/hourglass24x24.png" /> -5.55%</div>
-                  </div>
-                  <div className={`${styles.listview_col} ${styles.item_price}  ${styles.centered}`}>
-                    5,555.55$
-                                </div>
-                </div>
-
-              </div>
-            </div>
-
-             {/* Each Class of Item*/}
-             <div className={styles.item_list}>
-              <div className={styles.grade}>
-                <img src="assets/grade/SSR.png" /> SUPER SUPER RARE CLASS
-                            </div>
-              <div className={styles.listview_table}>
-                <div className={styles.listview_row}>
-                  <div className={`${styles.listview_col} ${styles.header}`}>
-
-                  </div>
-                  <div className={`${styles.listview_col} ${styles.header}`}>
-                    BOOSTER NAME
-                                </div>
-                  <div className={`${styles.listview_col} ${styles.header}`}>
-                    LEVEL
-                                </div>
-                  <div className={`${styles.listview_col} ${styles.header}`}>
-                    SUPPLY
-                                </div>
-                  <div className={`${styles.listview_col} ${styles.header}`}>
-                    INIT. ABILITIES
-                                </div>
-                  <div className={`${styles.listview_col} ${styles.header}  ${styles.centered}`}>
-                    LASTEST SOLD
-                                </div>
-                </div>
-                <div className={styles.listview_row}>
-                  <div className={`${styles.listview_col} ${styles.item_image}`}>
-                    <img src="zoo_keeper_icons_v1/Ancient_Apple_of_Lore.png" />
-                  </div>
-
-                  <div className={`${styles.listview_col} ${styles.item_name}`}>
-                    Ancient Apple of Lore
-                                </div>
-
-                  <div className={`${styles.listview_col} ${styles.item_stars}`}>
-                    <img src="assets/star18x18.png" />
-                  </div>
-
-                  <div className={`${styles.listview_col} ${styles.item_supply}`}>
-                    5,555
-                                </div>
-                  <div className={`${styles.listview_col} ${styles.item_abilities}`}>
-                    <div><img src="assets/rocket24x24.png" /> +55.55%</div>
-                    <div><img src="assets/hourglass24x24.png" /> -5.55%</div>
-                  </div>
-                  <div className={`${styles.listview_col} ${styles.item_price} ${styles.centered}`}>
-                    5,555.55$
-                                </div>
-                </div>
-                <div className={styles.listview_row}>
-                  <div className={`${styles.listview_col} ${styles.item_image}`}>
-                    <img src="zoo_keeper_icons_v1/Tea-Smoked_Apple_Juice.png" />
-                  </div>
-
-                  <div className={`${styles.listview_col} ${styles.item_name}`}>
-                    Tea-Smoked Apple Juice
-                                </div>
-
-                  <div className={`${styles.listview_col} ${styles.item_stars}`}>
-                    <img src="assets/star18x18.png" /><img src="assets/star18x18.png" />
-                  </div>
-
-                  <div className={`${styles.listview_col} ${styles.item_supply}`}>
-                    5,555
-                                </div>
-                  <div className={`${styles.listview_col} ${styles.item_abilities}`}>
-                    <div><img src="assets/rocket24x24.png" /> +55.55%</div>
-                    <div><img src="assets/hourglass24x24.png" /> -5.55%</div>
-                  </div>
-                  <div className={`${styles.listview_col} ${styles.item_price}  ${styles.centered}`}>
-                    5,555.55$
-                                </div>
-                </div>
-                <div className={styles.listview_row}>
-                  <div className={`${styles.listview_col} ${styles.item_image}`}>
-                    <img src="zoo_keeper_icons_v1/Honeysuckle_Apple_Sauce.png" />
-                  </div>
-
-                  <div className={`${styles.listview_col} ${styles.item_name}`}>
-                    Honeysuckle Apple Sauce
-                                </div>
-
-                  <div className={`${styles.listview_col} ${styles.item_stars}`}>
-                    <img src="assets/star18x18.png" /><img src="assets/star18x18.png" /><img src="assets/star18x18.png" />
-                  </div>
-
-                  <div className={`${styles.listview_col} ${styles.item_supply}`}>
-                    5,555
-                                </div>
-                  <div className={`${styles.listview_col} ${styles.item_abilities}`}>
-                    <div><img src="assets/rocket24x24.png" /> +55.55%</div>
-                    <div><img src="assets/hourglass24x24.png" /> -5.55%</div>
-                  </div>
-                  <div className={`${styles.listview_col} ${styles.item_price}  ${styles.centered}`}>
-                    5,555.55$
-                                </div>
-                </div>
-                <div className={styles.listview_row}>
-                  <div className={`${styles.listview_col} ${styles.item_image}`}>
-                    <img src="zoo_keeper_icons_v1/Golden_Apple_of_Destiny.png" />
-                  </div>
-
-                  <div className={`${styles.listview_col} ${styles.item_name}`}>
-                    Golden Apple of Destiny
-                                </div>
-
-                  <div className={`${styles.listview_col} ${styles.item_stars}`}>
-                    <img src="assets/max.png" />
-                  </div>
-
-                  <div className={`${styles.listview_col} ${styles.item_supply}`}>
-                    5,555
-                                </div>
-                  <div className={`${styles.listview_col} ${styles.item_abilities}`}>
-                    <div><img src="assets/rocket24x24.png" /> +55.55%</div>
-                    <div><img src="assets/hourglass24x24.png" /> -5.55%</div>
-                  </div>
-                  <div className={`${styles.listview_col} ${styles.item_price}  ${styles.centered}`}>
-                    5,555.55$
-                                </div>
-                </div>
-
-              </div>
-            </div>
-         
-
-            {/* Each Class of Item*/}
-            <div className={styles.item_list}>
-              <div className={styles.grade}>
-                <img src="assets/grade/UR.png" /> ULTRA RARE CLASS
-                            </div>
-              <div className={styles.listview_table}>
-                <div className={styles.listview_row}>
-                  <div className={`${styles.listview_col} ${styles.header}`}>
-
-                  </div>
-                  <div className={`${styles.listview_col} ${styles.header}`}>
-                    BOOSTER NAME
-                                </div>
-                  <div className={`${styles.listview_col} ${styles.header}`}>
-                    LEVEL
-                                </div>
-                  <div className={`${styles.listview_col} ${styles.header}`}>
-                    SUPPLY
-                                </div>
-                  <div className={`${styles.listview_col} ${styles.header}`}>
-                    INIT. ABILITIES
-                                </div>
-                  <div className={`${styles.listview_col} ${styles.header}  ${styles.centered}`}>
-                    LASTEST SOLD
-                                </div>
-                </div>
-                <div className={styles.listview_row}>
-                  <div className={`${styles.listview_col} ${styles.item_image}`}>
-                    <img src="zoo_keeper_icons_v1/Ancient_Apple_of_Lore.png" />
-                  </div>
-
-                  <div className={`${styles.listview_col} ${styles.item_name}`}>
-                    Ancient Apple of Lore
-                                </div>
-
-                  <div className={`${styles.listview_col} ${styles.item_stars}`}>
-                    <img src="assets/star18x18.png" />
-                  </div>
-
-                  <div className={`${styles.listview_col} ${styles.item_supply}`}>
-                    5,555
-                                </div>
-                  <div className={`${styles.listview_col} ${styles.item_abilities}`}>
-                    <div><img src="assets/rocket24x24.png" /> +55.55%</div>
-                    <div><img src="assets/hourglass24x24.png" /> -5.55%</div>
-                  </div>
-                  <div className={`${styles.listview_col} ${styles.item_price} ${styles.centered}`}>
-                    5,555.55$
-                                </div>
-                </div>
-                <div className={styles.listview_row}>
-                  <div className={`${styles.listview_col} ${styles.item_image}`}>
-                    <img src="zoo_keeper_icons_v1/Tea-Smoked_Apple_Juice.png" />
-                  </div>
-
-                  <div className={`${styles.listview_col} ${styles.item_name}`}>
-                    Tea-Smoked Apple Juice
-                                </div>
-
-                  <div className={`${styles.listview_col} ${styles.item_stars}`}>
-                    <img src="assets/star18x18.png" /><img src="assets/star18x18.png" />
-                  </div>
-
-                  <div className={`${styles.listview_col} ${styles.item_supply}`}>
-                    5,555
-                                </div>
-                  <div className={`${styles.listview_col} ${styles.item_abilities}`}>
-                    <div><img src="assets/rocket24x24.png" /> +55.55%</div>
-                    <div><img src="assets/hourglass24x24.png" /> -5.55%</div>
-                  </div>
-                  <div className={`${styles.listview_col} ${styles.item_price}  ${styles.centered}`}>
-                    5,555.55$
-                                </div>
-                </div>
-                <div className={styles.listview_row}>
-                  <div className={`${styles.listview_col} ${styles.item_image}`}>
-                    <img src="zoo_keeper_icons_v1/Honeysuckle_Apple_Sauce.png" />
-                  </div>
-
-                  <div className={`${styles.listview_col} ${styles.item_name}`}>
-                    Honeysuckle Apple Sauce
-                                </div>
-
-                  <div className={`${styles.listview_col} ${styles.item_stars}`}>
-                    <img src="assets/star18x18.png" /><img src="assets/star18x18.png" /><img src="assets/star18x18.png" />
-                  </div>
-
-                  <div className={`${styles.listview_col} ${styles.item_supply}`}>
-                    5,555
-                                </div>
-                  <div className={`${styles.listview_col} ${styles.item_abilities}`}>
-                    <div><img src="assets/rocket24x24.png" /> +55.55%</div>
-                    <div><img src="assets/hourglass24x24.png" /> -5.55%</div>
-                  </div>
-                  <div className={`${styles.listview_col} ${styles.item_price}  ${styles.centered}`}>
-                    5,555.55$
-                                </div>
-                </div>
-                <div className={styles.listview_row}>
-                  <div className={`${styles.listview_col} ${styles.item_image}`}>
-                    <img src="zoo_keeper_icons_v1/Golden_Apple_of_Destiny.png" />
-                  </div>
-
-                  <div className={`${styles.listview_col} ${styles.item_name}`}>
-                    Golden Apple of Destiny
-                                </div>
-
-                  <div className={`${styles.listview_col} ${styles.item_stars}`}>
-                    <img src="assets/max.png" />
-                  </div>
-
-                  <div className={`${styles.listview_col} ${styles.item_supply}`}>
-                    5,555
-                                </div>
-                  <div className={`${styles.listview_col} ${styles.item_abilities}`}>
-                    <div><img src="assets/rocket24x24.png" /> +55.55%</div>
-                    <div><img src="assets/hourglass24x24.png" /> -5.55%</div>
-                  </div>
-                  <div className={`${styles.listview_col} ${styles.item_price}  ${styles.centered}`}>
-                    5,555.55$
-                                </div>
-                </div>
-
-              </div>
-            </div>
-         
+              )
+            })
+          }
           </div>
         </div>
       </div>
