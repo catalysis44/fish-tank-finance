@@ -315,7 +315,7 @@ export default function Pool(props) {
         </div>
         <div className={styles.header}>
           <div className={styles.title}>
-            {poolTitles[pid]}
+            {t(poolTitles[pid])}
           </div>
           {/*is-success for KEEPER CHOICE and is-dark for COMMUNITY CHOICE*/}
           <div className="choice button is-success is-outlined">

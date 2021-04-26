@@ -197,11 +197,11 @@ function BasicLayout(props) {
           <aside class="menu">
 
             <ul class="menu-list">
-              <li><NavLink onClick={toggleSidebar}  to="/" activeClassName="is_active"  exact={true}><img src="assets/sidebar/zoo.png"/> <div>{t("The Zoo")}</div></NavLink></li>
-              <li><NavLink onClick={toggleSidebar}  to="/expedition" activeClassName="is_active"><img src="assets/sidebar/expedition.png"/> <div>{t("The Expedition")}</div></NavLink></li>
-              <li><NavLink onClick={toggleSidebar}  to="/market" activeClassName="is_active"><img src="assets/sidebar/market.png"/> <div>{t("The Market")}</div></NavLink></li>
-              <li><NavLink onClick={toggleSidebar} to="/safe" activeClassName="is_active"><img src="assets/sidebar/safe.png"/> <div>{t("My Safe")}</div></NavLink></li>
-              
+              <li><NavLink onClick={toggleSidebar} to="/" activeClassName="is_active" exact={true}><img src="assets/sidebar/zoo.png" /> <div>{t("The Zoo")}</div></NavLink></li>
+              <li><NavLink onClick={toggleSidebar} to="/expedition" activeClassName="is_active"><img src="assets/sidebar/expedition.png" /> <div>{t("The Expedition")}</div></NavLink></li>
+              <li  style={{ display: 'none' }}><a><img src="assets/sidebar/market.png"/> <div  style={{flexDirection:'column',alignItems:'flex-start'}}><div style={{alignItems:'flex-start',lineHeight:'10px'}}>{t("The Market")}</div><div style={{alignItems:'flex-start',fontSize:11}}>(Maintenance)</div></div></a></li>
+              <li><NavLink onClick={toggleSidebar} to="/market" activeClassName="is_active"><img src="assets/sidebar/market.png" /> <div>{t("The Market")}</div></NavLink></li>
+              <li><NavLink onClick={toggleSidebar} to="/safe" activeClassName="is_active"><img src="assets/sidebar/safe.png" /> <div>{t("My Safe")}</div></NavLink></li>
               <li style={{ display: 'none' }}><a><img src="assets/sidebar/stake.png" /> <div>{t("Stake Zoo")}</div></a></li>
               <li style={{ display: 'none' }}><a><img src="assets/sidebar/lotto.png" /> <div>{t("Lotto")}</div></a></li>
             </ul>
