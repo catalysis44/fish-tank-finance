@@ -91,6 +91,16 @@ export default function (props) {
     })
   }, []);
 
+  const [totalNft, setTotalNft] = useState();
+  const [totalHolder, setTotalHolder] = useState();
+  useEffect(()=>{
+    axios.get('https://rpc.zookeeper.finance/api/v1/nftInfo').then(ret=>{
+      let info = ret.data;
+      setTotalNft(info.totalNFT);
+      setTotalHolder(info.totalHolder);
+    })
+  }, []);
+
 
   return (
     <React.Fragment>
@@ -242,11 +252,11 @@ export default function (props) {
           <div className={styles.booster_sub_wrapper}>
             <div className={styles.booster_sub}>
               Total Booster
-                            <div>222,555</div>
+            <div>{totalNft}</div>
             </div>
             <div className={styles.booster_sub}>
               Booster Holders
-                            <div>2,555</div>
+            <div>{totalHolder}</div>
             </div>
           </div>
 
