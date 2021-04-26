@@ -130,6 +130,7 @@
     border: 2px solid rgba(0,0,0,0.04);
     border-radius: 14px;
   }
+  filter: grayscale(100%);
   width:288px;
   min-width:288px;
   height:411px;
@@ -157,7 +158,8 @@
   }
   .cover
   {
-    opacity:0.6;
+    opacity:0.4;
+    filter: grayscale(100%);
   }
   .title
   {
@@ -586,13 +588,22 @@
     {
         :local
         {
-          .amount
+          .pool.in_active_pool
+          {
+            background:transparent;
+            border:2px solid #555;
+          }
+          .pool.in_active_pool .amount
           {
             color:white;
           }
-          .distributed
+          .pool.in_active_pool .distributed
           {
             color:white;
+          }
+          .pool.in_active_pool .tvl
+          {
+            background:#1f1f1f;
           }
           .pool .topup .deposit_wrapper .deposit_amount
           {
