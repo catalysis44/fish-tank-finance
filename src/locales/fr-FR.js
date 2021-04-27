@@ -173,4 +173,33 @@ export default {
 
   "BUSINESS IS GROWING":"LES AFFAIRES GRANDISSENT",
   "will be added to the market with a tag price of":"sera ajouté au marché au prix de",
+
+  // Insight Page //
+  "Insight": "Aperçu",
+  "ZOO Price": "Prix ZOO",
+  "Circulating supply": "Fonds actuels",
+  "Market Cap":"Market Cap",
+  "Fully Diluted MC":"MC totalement dilué",
+  "Total value locked":"Valeur totale verrouillée",
+  "NFT Value":"Valeur NFT",
+  "Zoo Distribution Ends In":"Distribution de Zoo terminée dans",
+  "Zoo Burning Rate":"Taux de Zoo brûlés",
+  "Estimated Zoo Supply":"Estimation des fonds de Zoo",
+  "per days":"par jour",
+  "Golden Chest opened":"Coffres d’or ouverts",
+  "Silver Chest opened":"Coffres d’argent ouverts",
+  "24 hrs Rate":"Taux sur 24 heures",
+  "Golden Chest Price":"Prix coffre d’or",
+  "24 hrs":"24 heures",
+  "1 Week":"1 semaine",
+  "Average Boosting Attached":"Moyenne de boost attachés",
+  "Average Time Reducing Attached":"Moyenne de réducteur de temps attachés",
+  "Total Booster":"Total boost",
+  "Booster Holders":"Titulaires de boost",
+  "BOOSTER NAME":"NOM DU BOOST",
+  "LEVEL":"NIVEAU",
+  "SUPPLY":"NOMBRE",
+  "INIT. ABILITIES":"CAPACITES INIT.",
+  "LATEST SOLD":"DERNIER VENDU",
+  "None Unlocked (yet)":"Aucun déverrouillé"
 };

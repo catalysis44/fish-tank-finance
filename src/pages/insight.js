@@ -339,7 +339,7 @@ export default function (props) {
                   ${commafy(zooPrice)}
                 </div>
                 <div className={styles.title}>
-                  {t("Curculating supply")}: <span>{commafy(storage.zooTotalSupply).split('.')[0]} ZOO</span>
+                  {t("Circulating supply")}: <span>{commafy(storage.zooTotalSupply).split('.')[0]} ZOO</span>
                 </div>
               </div>
             </div>
@@ -395,7 +395,7 @@ export default function (props) {
         <div className={`${styles.panel} ${styles.zoo_stat}`}>
           <div>
             <div className={styles.title} >
-            {t('Zoo Distribution End-in')}
+            {t('Zoo Distribution Ends In')}
             </div>
             <Progress status="active" percent={((365 * 2 - leftDays) * 100 / (365 * 2))} format={percent => `${leftDays.toFixed(0)} `+t('Days')} />
           </div>
@@ -461,14 +461,14 @@ export default function (props) {
             <img src="assets/rocket.png" />
             <div className={styles.booster_value}>
               +{averageBoost && (averageBoost*100).toFixed(1)}%
-              <div>{t('Avarage Boosting Attached')}</div>
+              <div>{t('Average Boosting Attached')}</div>
             </div>
           </div>
           <div className={styles.booster}>
             <img src="assets/glasshour.png" />
             <div className={styles.booster_value}>
               -{averageReduce && (averageReduce*100).toFixed(1)}%
-              <div>{t('Avarage Time Reducing Attached')}</div>
+              <div>{t('Average Time Reducing Attached')}</div>
             </div>
           </div>
           <div className={styles.booster_sub_wrapper}>
@@ -554,7 +554,7 @@ export default function (props) {
                     {t('INIT. ABILITIES')}
                     </div>
                     <div className={`${styles.listview_col} ${styles.header}  ${styles.centered}`}>
-                    {t('LASTEST SOLD')}
+                    {t('LATEST SOLD')}
                     </div>
                   </div>
                   {
@@ -567,7 +567,7 @@ export default function (props) {
                       </div>
                       <div className={`${styles.listview_col} ${styles.item_name}`}>
                         {
-                          nftList[nftTab][item][level].name ? nftList[nftTab][item][level].name : t('Unidentified Object')
+                          nftList[nftTab][item][level].name ? nftList[nftTab][item][level].name : t('None Unlocked (yet)')
                         }
                       </div>
                       <div className={`${styles.listview_col} ${styles.item_stars}`}>
