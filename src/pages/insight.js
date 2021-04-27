@@ -10,6 +10,7 @@ import { useLanguage } from '../hooks/language';
 import axios from 'axios';
 import { WalletContext } from '../wallet/Wallet';
 import { history } from 'umi';
+import { invalidNFT } from '../config';
 
 // category->item->level
 const initNftList = {
@@ -283,7 +284,7 @@ export default function (props) {
       setPriceChange24h((p24s[p24s.length-1].price - p24s[0].price)*100/p24s[0].price);
       let pWeeks = priceArray.length > 24*7 ? priceArray.slice(-24*7) : priceArray;
       setPriceChangeWeek((pWeeks[pWeeks.length-1].price - pWeeks[0].price)*100/pWeeks[0].price);
-    })
+    }).catch(console.error);
   }, []);
 
   const [totalNft, setTotalNft] = useState();
@@ -297,11 +298,30 @@ export default function (props) {
       setTotalHolder(info.totalHolder);
       setAverageBoost(info.averageBoosting);
       setAverageReduce(info.averageReduce);
-    })
+    }).catch(console.error);
   }, []);
 
   const [nftList, setNftList] = useState(initNftList);
   const [nftTab, setNftTab] = useState(1);
+
+  useEffect(()=>{
+    axios.get('https://rpc.zookeeper.finance/api/v1/nft').then(ret=>{
+      let list = ret.data;
+      list = list.filter(v=>{
+        if (invalidNFT.includes(Number(v.tokenId))) {
+          return false;
+        }
+        return true;
+      });
+
+      let newNftList = initNftList;
+      list.map(v=>{
+        newNftList[v.category][v.item][v.level] = v;
+      })
+
+      setNftList(newNftList);
+    }).catch(console.error);
+  }, []);
 
 
   return (
@@ -542,7 +562,7 @@ export default function (props) {
                       return <div className={styles.listview_row} key={level}>
                       <div className={`${styles.listview_col} ${styles.item_image}`}>
                         {
-                          nftList[nftTab][item][level].icon ? <img src={nftList[nftTab][item][level].icon} /> : <img src="assets/locked.png" />
+                          nftList[nftTab][item][level].image ? <img src={nftList[nftTab][item][level].image} /> : <img src="assets/locked.png" />
                         }
                       </div>
                       <div className={`${styles.listview_col} ${styles.item_name}`}>
@@ -559,26 +579,25 @@ export default function (props) {
                       </div>
                       <div className={`${styles.listview_col} ${styles.item_supply}`}>
                         {
-                          nftList[nftTab][item][level].supply ? nftList[nftTab][item][level].supply : '--'
+                          nftList[nftTab][item][level].itemSupply ? nftList[nftTab][item][level].itemSupply : '--'
                         }
                       </div>
                       <div className={`${styles.listview_col} ${styles.item_abilities}`}>
                         <div><img src="assets/rocket24x24.png" /> 
-                        {
-                          nftList[nftTab][item][level].boost ? nftList[nftTab][item][level].boost : '--'
+                        +{
+                          nftList[nftTab][item][level].boosting ? (nftList[nftTab][item][level].boosting / 1e10 - 100).toFixed(1) : '--'
                         }%
                         </div>
                         <div><img src="assets/hourglass24x24.png" /> 
-                        {
-                          nftList[nftTab][item][level].reduce ? nftList[nftTab][item][level].reduce : '--'
+                        -{
+                          nftList[nftTab][item][level].reduce ? (100 - nftList[nftTab][item][level].reduce/1e10 ).toFixed(1): '--'
                         }%
                         </div>
                       </div>
                       <div className={`${styles.listview_col} ${styles.item_price}  ${styles.centered}`}>
                         {
-                          nftList[nftTab][item][level].price ? nftList[nftTab][item][level].price : '--'
+                          nftList[nftTab][item][level].price ? (nftList[nftTab][item][level].price + ' ' + nftList[nftTab][item][level].symbol) : '--'
                         }
-                        $
                       </div>
                     </div>
                     })
