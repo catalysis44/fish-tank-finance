@@ -341,7 +341,7 @@ export default function (props) {
   useEffect(() => {
     axios.get('https://rpc.zookeeper.finance/api/v1/nftInfo').then(ret => {
       let info = ret.data;
-      setTotalNft(info.totalNFT);
+      setTotalNft(info.totalNFT - invalidNFT.length);
       setTotalHolder(info.totalHolder);
       setAverageBoost(info.averageBoosting);
       setAverageReduce(info.averageReduce);
