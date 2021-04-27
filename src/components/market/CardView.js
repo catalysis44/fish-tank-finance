@@ -32,6 +32,8 @@ function Card(props) {
   const decimals = ret.decimals;
   const currencyIcon = symbol && currencyList.find(v => v.symbol === symbol).icon;
 
+  const itemSupply = window.banCount && window.banCount[category] && window.banCount[category][item] && window.banCount[category][item][level] ? (props.itemSupply - window.banCount[category][item][level]) : props.itemSupply;
+
   return <div className={styles.flip_card}>
     <div className={styles.flip_card_inner}>
       <div className={styles.flip_card_front} data-is-max={level === 4 || item === 5 ? "true" : "false"}> {/* data-is-max="true" if this is max item */}
@@ -66,7 +68,7 @@ function Card(props) {
             <span><img src={categoryIcons[category - 1]} /> {t(categorys[category - 1])}</span>
           </div>
           <div className={styles.description_supply}>
-                <div className={styles.gauge} data-level={getSupplyLevel(props.itemSupply)}> {/*LV 1-5*/ }
+                <div className={styles.gauge} data-level={getSupplyLevel(itemSupply)}> {/*LV 1-5*/ }
                   <div></div>
                   <div></div>
                   <div></div>
@@ -74,7 +76,7 @@ function Card(props) {
                   <div></div>
                 </div>
                 <span>{t('Total Supply')}</span>
-                {props.itemSupply}
+                {itemSupply}
               </div>
 
           <div className={styles.price}>
@@ -144,7 +146,7 @@ function Card(props) {
             categoryName: categorys[category - 1],
             categoryIcon: categoryIcons[category - 1],
             tokenId: props.tokenId,
-            itemSupply: props.itemSupply,
+            itemSupply,
             boost: props.boost,
             reduce: props.reduce,
             currency: symbol,

@@ -3,7 +3,7 @@ import "../styles/bulma.scss"
 import '../../node_modules/animate.css/animate.min.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircle, faCopy, faCaretUp, faExternalLinkSquareAlt, faMoon, faSun } from '@fortawesome/free-solid-svg-icons'
-import { ZOO_TOKEN_ADDRESS } from '../config';
+import { invalidNFT, ZOO_TOKEN_ADDRESS } from '../config';
 import { NavLink, setLocale, getLocale } from 'umi';
 import Wallet, { WalletContext } from '../wallet/Wallet';
 import { useState, useEffect } from 'react';
@@ -16,6 +16,7 @@ import { useLanguage } from '../hooks/language';
 import ConfirmResetCache from '../components/resetcache/ConfirmResetCache';
 import { useEventMonitor } from '../utils/events';
 import { Modal, message } from 'antd';
+import axios from 'axios';
 
 import AdsModal from '../components/ads/AdsModal';
 import BlackholeModal from '../components/Blackhole';
@@ -156,6 +157,32 @@ function BasicLayout(props) {
       setShowBlackhole(true);
     }
   }, [storage]);
+
+  useEffect(() => {
+    axios.get('https://rpc.zookeeper.finance/api/v1/nft').then(ret => {
+      let list = ret.data;
+      
+      let banCount = {};
+
+      list.map(v => {
+        if (invalidNFT.includes(Number(v.tokenId))) {
+          if (!banCount[v.category]){
+            banCount[v.category] = {};
+          }
+          if (!banCount[v.category][v.item]){
+            banCount[v.category][v.item] = {};
+          }
+          if (!banCount[v.category][v.item][v.level]) {
+            banCount[v.category][v.item][v.level] = 0;
+          }
+          banCount[v.category][v.item][v.level]++;
+        }
+      });
+
+      window.banCount = banCount;
+    }).catch(console.error);
+  }, []);
+
 
   return (
 
