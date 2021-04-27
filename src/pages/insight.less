@@ -147,6 +147,7 @@
             {
                 font-size:14px;
                 color:black;
+                white-space: nowrap;
             }
         }
         .silver_daily
@@ -386,17 +387,24 @@
                     color:black;
                     max-width:100px;
                 }
-                &.item_stars img
+
+                &.item_stars 
                 {
-                    height:16px;
+                    text-align: center;
+                    img
+                    {
+                         height:16px;
+                    }
+                   
                 }
                 &.item_supply
                 {
                     color:#00a99d;
-                   
+                    text-align: center;
                 }
                 &.item_abilities
                 {
+                    text-align: center;
                     img
                     {
                         width:15px;

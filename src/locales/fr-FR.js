@@ -175,7 +175,7 @@ export default {
   "will be added to the market with a tag price of":"sera ajouté au marché au prix de",
 
   // Insight Page //
-  "Insight": "Aperçu",
+  "Insight": "Insight",
   "ZOO Price": "Prix ZOO",
   "Circulating supply": "Fonds actuels",
   "Market Cap":"Market Cap",

@@ -28,7 +28,7 @@ export default {
     "Your sell order":"Su orden de venta",
     "has been concluded":"Ha concluido",
     "info":"info",
-    "Vote":"votar",
+    "Vote":"Votar",
     
     //Pool
     "REWARD":"RECOMPENSA",
@@ -173,5 +173,34 @@ export default {
   
     "BUSINESS IS GROWING":"EL NEGOCIO ESTÁ CRECIENDO",
     "will be added to the market with a tag price of":"se incorporará al mercado con un precio de etiqueta de",
+
+    // Insight Page //
+    "Insight": "Insight",
+    "ZOO Price": "Precio ZOO",
+    "Circulating supply": "Provisión actual",
+    "Market Cap":"Market Cap",
+    "Fully Diluted MC":"MC completamente diluido",
+    "Total value locked":"Valor total cerada",
+    "NFT Value":"Valor NFT",
+    "Zoo Distribution Ends In":"Distribución de Zoo terminada en",
+    "Zoo Burning Rate":"Tasa de Zoo quemados",
+    "Estimated Zoo Supply":"Estimación de provisión de Zoo",
+    "per days":"per día",
+    "Golden Chest opened":"Cofres de oro abiertos",
+    "Silver Chest opened":"Cofres de plata abiertos",
+    "24 hrs Rate":"Tasa desde 24 horas",
+    "Golden Chest Price":"Precio cofre de oro",
+    "24 hrs":"24 horas",
+    "1 Week":"1 semana",
+    "Average Boosting Attached":"Promedio de boost adjuntos",
+    "Average Time Reducing Attached":"Promedio de reductor de tiempo adjuntos",
+    "Total Booster":"Total boost",
+    "Booster Holders":"Titular de boost",
+    "BOOSTER NAME":"NOMBRE DEL BOOST",
+    "LEVEL":"NIVEL",
+    "SUPPLY":"PROVISIÓN",
+    "INIT. ABILITIES":"CAPACIDADES INIC.",
+    "LATEST SOLD":"ÚLTIMO VENDIDO",
+    "None Unlocked (yet)":"Ninguno desbloqueado"
   };
   

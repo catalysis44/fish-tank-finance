@@ -544,13 +544,13 @@ export default function (props) {
                     <div className={`${styles.listview_col} ${styles.header}`}>
                     {t('BOOSTER NAME')}
                     </div>
-                    <div className={`${styles.listview_col} ${styles.header}`}>
+                    <div className={`${styles.listview_col} ${styles.header} ${styles.centered}`}>
                     {t('LEVEL')}
                     </div>
-                    <div className={`${styles.listview_col} ${styles.header}`}>
+                    <div className={`${styles.listview_col} ${styles.header} ${styles.centered}`} >
                     {t('SUPPLY')}
                     </div>
-                    <div className={`${styles.listview_col} ${styles.header}`}>
+                    <div className={`${styles.listview_col} ${styles.header} ${styles.centered}`}>
                     {t('INIT. ABILITIES')}
                     </div>
                     <div className={`${styles.listview_col} ${styles.header}  ${styles.centered}`}>
