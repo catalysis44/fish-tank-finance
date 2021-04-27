@@ -220,7 +220,7 @@ export default {
   "LATEST SOLD":"最近成交价格",
   "None Unlocked (yet)":"未解锁",
 
-  "LATEST 30 NFT TRANSACTIONS":"最近50条NFT事件",
+  "LATEST 30 NFT TRANSACTIONS":"最近30条NFT事件",
   "Silver Chest opened and received ":"一个白银宝箱被打开，并得到了 ",
   "Gold Chest opened and received ":"一个黄金宝箱被打开，并得到了 ",
   "Purchased":"购买了",
