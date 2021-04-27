@@ -975,6 +975,18 @@
         display:flex;
         border:0px;
         outline-width: 0;
+        .lock_period_amount
+        {
+          margin-top:-2px;
+          font-size: 24px;
+          text-align: left;
+          width: 45px;
+          height: 40px;
+          padding-top: 4px;
+          color: #000000;
+          border: 0px;
+          outline-width: 0;
+        }
       }
       .lock_action
       {
@@ -1349,10 +1361,10 @@
             {
               color:white !important;
             }
-            .deposit_wrapper .deposit_amount
+            .deposit_wrapper .deposit_amount, .lock_period .lock_period_amount
             {
               background:#101010;
-              color:white;
+              color:white !important;
             }
             .lock_wrapper .lock_period
             {
