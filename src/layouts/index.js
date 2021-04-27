@@ -4,7 +4,6 @@ import '../../node_modules/animate.css/animate.min.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircle, faCopy, faCaretUp, faExternalLinkSquareAlt, faMoon, faSun } from '@fortawesome/free-solid-svg-icons'
 import { ZOO_TOKEN_ADDRESS } from '../config';
-import Header from '../components/Header';
 import { NavLink, setLocale, getLocale } from 'umi';
 import Wallet, { WalletContext } from '../wallet/Wallet';
 import { useState, useEffect } from 'react';

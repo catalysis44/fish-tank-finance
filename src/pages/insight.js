@@ -426,7 +426,7 @@ export default function (props) {
             <img src="assets/goldenbox42x42.png" />
             <div className={styles.chest_opened_value}>
               {golden.length}
-              <div>{t('Golden Chest opened')}</div>
+              <div>{t('Gold Chest opened')}</div>
             </div>
           </div>
           <div className={styles.chest_opened}>
@@ -441,7 +441,7 @@ export default function (props) {
             </div>
           </div>
           <div className={styles.price_title}>
-            {t('Golden Chest Price')}
+            {t('Gold Chest Price')}
           </div>
           <div className={styles.chest_price_wrapper}>
             <div className={styles.chest_price}>
