@@ -8,7 +8,7 @@ export default {
   "Spices":"Spices",
   "Foods":"Foods",
   "Potions":"Potions",
-  "Magic":"Magie",
+  "Magic":"Magic",
 
   //layout
   "DISCONNECT": "断开钱包",
@@ -173,18 +173,15 @@ export default {
   "NEW POOL": "新挖矿池",
   "TOMORROW": "明日上线",
 
-  "Insight": "汇总板",
-
-  "ZOO Price": "ZOO价格",
-  "Curculating supply": "流通量",
+  
   "Those items has been marked as FRAUDULENT and cannot be placed to the marketplace. To keep your Wallet clean, please burn those NFT with our Burn Machine, Thank you": "这些商品已被标记为欺诈物品，不可继续使用，也不能放在市场上交易。为了保持您的钱包干净，请用点击下方的销毁按钮来销毁它们，谢谢",
   "ITEM NAME":"物品名称",
   "ABILITIES":"属性",
   "CATTEGORY":"物品名称",
   "Burn":"销毁",
   "After burned these items. Please contact us directly on Telegram":"在销毁完成后，请在telegram中联系下面的人来解除你的账户异常状态",
-  "Market Cap":"当前市值",
-  // "Fully Diluted MC":"预估挖矿结束后的总市值"
+  
+  
   "RAGING MANE LEO": "狂怒 狮子王",
   'BARCODE BRENDA': "扫我条形码 斑马",
   'MEL GIBBON': "梅尔 吉布森猴", // MONKEY    
@@ -193,4 +190,33 @@ export default {
   'RAFFERTY G. MONAY': "混沌 莫奈鹿", // GIRAFFE   
   'ELON TUSK': "翼龙 马斯克", // ELEPHANT   
 
+
+  // Insight Page //
+  "Insight": "汇总板",
+  "ZOO Price": "ZOO价格",
+  "Curculating supply": "流通量",
+  "Market Cap":"当前市值",
+ "Fully Diluted MC":"预估挖矿结束后的总市值",
+  "Total value locked":"Total value locked",
+  "NFT Value":"NFT Value",
+  "Zoo Distribution End-in":"Zoo Distribution End-in",
+  "Zoo Burning Rate":"Zoo Burning Rate",
+  "Estimated Zoo Supply":"Estimated Zoo Supply",
+  "per days":"per days",
+  "Golden Chest opened":"Golden Chest opened",
+  "Silver Chest opened":"Silver Chest opened",
+  "24 hrs Rate":"24 hrs Rate",
+  "Golden Chest Price":"Golden Chest Price",
+  "24 hrs":"24 hrs",
+  "1 Week":"1 Week",
+  "Avarage Boosting Attached":"Avarage Boosting Attached",
+  "Avarage Time Reducing Attached":"Avarage Time Reducing Attached",
+  "Total Booster":"Total Booster",
+  "Booster Holders":"Booster Holders",
+  "BOOSTER NAME":"BOOSTER NAME",
+  "LEVEL":"LEVEL",
+  "SUPPLY":"SUPPLY",
+  "INIT. ABILITIES":"INIT. ABILITIES",
+  "LASTEST SOLD":"LASTEST SOLD",
+  "Unidentified Object":"Unidentified Object",
 };

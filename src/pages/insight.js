@@ -366,16 +366,16 @@ export default function (props) {
             <img src="assets/tvl.png" />
             <div className={styles.tvl_value}>
               ${commafy(Number(zooTvl) + Number(expTvl)).split('.')[0]}
-              <div>Total value locked</div>
+              <div>{t('Total value locked')}</div>
             </div>
           </div>
           <table className={styles.tvl_table}>
             <tr>
-              <td>The Zoo</td>
+              <td>{t('The Zoo')}</td>
               <td>${commafy(zooTvl).split('.')[0]}</td>
             </tr>
             <tr>
-              <td>The Expedition</td>
+              <td>{t('The Expedition')}</td>
               <td>${commafy(expTvl).split('.')[0]}</td>
             </tr>
             {/* <tr>
@@ -387,7 +387,7 @@ export default function (props) {
               <td>${commafy()}</td>
             </tr> */}
             <tr>
-              <td>NFT Value</td>
+              <td>{t('NFT Value')}</td>
               <td>${commafy()}</td>
             </tr>
           </table>
@@ -395,14 +395,14 @@ export default function (props) {
         <div className={`${styles.panel} ${styles.zoo_stat}`}>
           <div>
             <div className={styles.title} >
-              Zoo Distribution End-in
+            {t('Zoo Distribution End-in')}
             </div>
-            <Progress status="active" percent={((365 * 2 - leftDays) * 100 / (365 * 2))} format={percent => `${leftDays.toFixed(0)} Days`} />
+            <Progress status="active" percent={((365 * 2 - leftDays) * 100 / (365 * 2))} format={percent => `${leftDays.toFixed(0)} `+t('Days')} />
           </div>
 
           <div>
             <div className={styles.title}>
-              Zoo Burning Rate
+            {t('Zoo Burning Rate')}
             </div>
             <div id="burning_bar">
               <Progress percent={(storage.zooBurned * 100 / (Number(storage.zooTotalSupply) + Number(storage.zooBurned))).toFixed(1)} />
@@ -411,11 +411,11 @@ export default function (props) {
 
           <div>
             <div className={styles.title}>
-              Estimated Zoo Supply
+            {t('Estimated Zoo Supply')}
             </div>
 
             <div className={styles.estimated_supply}>
-              {commafy(storage.zooTotalSupply / startDays * 365 * 2).split('.')[0]} <span>~{commafy(storage.zooTotalSupply / startDays / 1000).split('.')[0]}K per days</span>
+              {commafy(storage.zooTotalSupply / startDays * 365 * 2).split('.')[0]} <span>~{commafy(storage.zooTotalSupply / startDays / 1000).split('.')[0]}K {t('per days')}</span>
             </div>
           </div>
         </div>
@@ -426,31 +426,31 @@ export default function (props) {
             <img src="assets/goldenbox42x42.png" />
             <div className={styles.chest_opened_value}>
               {golden.length}
-            <div>Golden Chest opened</div>
+            <div>{t('Golden Chest opened')}</div>
             </div>
           </div>
           <div className={styles.chest_opened}>
             <img src="assets/silverbox42x42.png" />
             <div className={styles.chest_opened_value}>
               {silver.length}
-            <div>Silver Chest opened</div>
+            <div>{t('Silver Chest opened')}</div>
             </div>
             <div className={styles.silver_daily}>
               {commafy(silverRate).split('.')[0]}%
-            <div>24 hrs Rate</div>
+            <div>{t('24 hrs Rate')}</div>
             </div>
           </div>
           <div className={styles.price_title}>
-            Golden Chest Price
+          {t('Golden Chest Price')}
                     </div>
           <div className={styles.chest_price_wrapper}>
             <div className={styles.chest_price}>
               {priceChange24h && (priceChange24h > 0 ? ('+' + priceChange24h.toFixed(1)): priceChange24h.toFixed(1))}%
-            <div>24 hrs</div>
+            <div>{t('24 hrs')}</div>
             </div>
             <div className={styles.chest_price}>
             {priceChangeWeek && (priceChangeWeek > 0 ? ('+' + priceChangeWeek.toFixed(1)): priceChangeWeek.toFixed(1))}%
-            <div>1 Week</div>
+            <div>{t('1 Week')}</div>
             </div>
 
           </div>
@@ -461,23 +461,23 @@ export default function (props) {
             <img src="assets/rocket.png" />
             <div className={styles.booster_value}>
               +{averageBoost && (averageBoost*100).toFixed(1)}%
-              <div>Avarage Boosting Attached</div>
+              <div>{t('Avarage Boosting Attached')}</div>
             </div>
           </div>
           <div className={styles.booster}>
             <img src="assets/glasshour.png" />
             <div className={styles.booster_value}>
               -{averageReduce && (averageReduce*100).toFixed(1)}%
-              <div>Avarage Time Reducing Attached</div>
+              <div>{t('Avarage Time Reducing Attached')}</div>
             </div>
           </div>
           <div className={styles.booster_sub_wrapper}>
             <div className={styles.booster_sub}>
-              Total Booster
+            {t('Total Booster')}
             <div>{totalNft}</div>
             </div>
             <div className={styles.booster_sub}>
-              Booster Holders
+            {t('Booster Holders')}
             <div>{totalHolder}</div>
             </div>
           </div>
@@ -530,7 +530,7 @@ export default function (props) {
                     Number(item) === 3 && <><img src="assets/grade/SR.png" /> SUPER RARE CLASS</>
                   }
                   {
-                    Number(item) === 4 && <><img src="assets/grade/SSR.png" /> SUPPER SUPPER RARE CLASS</>
+                    Number(item) === 4 && <><img src="assets/grade/SSR.png" /> SUPER SUPER RARE CLASS</>
                   }
                   {
                     Number(item) === 5 && <><img src="assets/grade/UR.png" /> ULTRA RARE CLASS</>
@@ -542,19 +542,19 @@ export default function (props) {
                     <div className={`${styles.listview_col} ${styles.header}`}>
                     </div>
                     <div className={`${styles.listview_col} ${styles.header}`}>
-                      BOOSTER NAME
+                    {t('BOOSTER NAME')}
                     </div>
                     <div className={`${styles.listview_col} ${styles.header}`}>
-                      LEVEL
+                    {t('LEVEL')}
                     </div>
                     <div className={`${styles.listview_col} ${styles.header}`}>
-                      SUPPLY
+                    {t('SUPPLY')}
                     </div>
                     <div className={`${styles.listview_col} ${styles.header}`}>
-                      INIT. ABILITIES
+                    {t('INIT. ABILITIES')}
                     </div>
                     <div className={`${styles.listview_col} ${styles.header}  ${styles.centered}`}>
-                      LASTEST SOLD
+                    {t('LASTEST SOLD')}
                     </div>
                   </div>
                   {
@@ -567,7 +567,7 @@ export default function (props) {
                       </div>
                       <div className={`${styles.listview_col} ${styles.item_name}`}>
                         {
-                          nftList[nftTab][item][level].name ? nftList[nftTab][item][level].name : 'Unidentified Object'
+                          nftList[nftTab][item][level].name ? nftList[nftTab][item][level].name : t('Unidentified Object')
                         }
                       </div>
                       <div className={`${styles.listview_col} ${styles.item_stars}`}>
