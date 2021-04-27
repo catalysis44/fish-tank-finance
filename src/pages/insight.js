@@ -208,6 +208,35 @@ const initNftList = {
   },
 }
 
+function getTimeStr(time) {
+  
+  if (parseInt(time / (3600*24)) === 1) {
+    return parseInt(time / (3600*24)) + ' day ago...';
+  } 
+  
+  if (parseInt(time / (3600*24)) >= 2) {
+    return parseInt(time / (3600*24)) + ' days ago...';
+  }
+  
+  if (parseInt(time / (3600)) === 1) {
+    return parseInt(time / (3600)) + ' hour ago...';
+  }
+
+  if (parseInt(time / (3600)) >= 2) {
+    return parseInt(time / (3600)) + ' hours ago...';
+  }
+
+  if (parseInt(time / (60)) === 1) {
+    return parseInt(time / (60)) + ' minute ago...';
+  }
+
+  if (parseInt(time / (60)) >= 2) {
+    return parseInt(time / (60)) + ' minutes ago...';
+  }
+
+  return 'long ago...';
+}
+
 export default function (props) {
   const t = useLanguage();
   const storage = useContext(StorageContext);
@@ -248,9 +277,11 @@ export default function (props) {
   const [golden, setGolden] = useState([]);
   const [silver, setSilver] = useState([]);
   const [silverRate, setSilverRate] = useState(0);
+  const [lastTx, setLastTx] = useState([]);
 
   useEffect(() => {
     axios.get('https://rpc.zookeeper.finance/api/v1/chest').then(ret => {
+      let allChest = ret.data;
       let silver = ret.data.filter(v => {
         return v.type === 'SilverBuy';
       });
@@ -270,6 +301,19 @@ export default function (props) {
       });
 
       setSilverRate(silverGood.length * 100 / silver24h.length);
+
+      axios.get('https://rpc.zookeeper.finance/api/v1/market').then(ret => {
+        let allMarket = ret.data;
+        let allTx = allChest.concat(allMarket);
+
+        allTx.sort((a, b)=>{
+          if ((new Date(a.time)) > (new Date(b.time))) {
+            return 1;
+          }
+          return -1;
+        });
+        setLastTx(allTx.slice(-50).reverse());
+      }).catch(console.error);
 
     }).catch(console.error);
   }, []);
@@ -307,16 +351,23 @@ export default function (props) {
   useEffect(() => {
     axios.get('https://rpc.zookeeper.finance/api/v1/nft').then(ret => {
       let list = ret.data;
+      let newNftList = initNftList;
+
       list = list.filter(v => {
         if (invalidNFT.includes(Number(v.tokenId))) {
+          if (!newNftList[v.category][v.item][v.level].bannedSupply) {
+            newNftList[v.category][v.item][v.level].bannedSupply = 0;
+          }
+          newNftList[v.category][v.item][v.level].bannedSupply++;
           return false;
         }
         return true;
       });
 
-      let newNftList = initNftList;
       list.map(v => {
+        let bannedSupply = newNftList[v.category][v.item][v.level].bannedSupply;
         newNftList[v.category][v.item][v.level] = v;
+        newNftList[v.category][v.item][v.level].bannedSupply = bannedSupply;
       })
 
       setNftList(newNftList);
@@ -579,7 +630,7 @@ export default function (props) {
                             </div>
                             <div className={`${styles.listview_col} ${styles.item_supply}`}>
                               {
-                                nftList[nftTab][item][level].itemSupply ? nftList[nftTab][item][level].itemSupply : '--'
+                                nftList[nftTab][item][level].itemSupply ? (nftList[nftTab][item][level].bannedSupply > 0 ? (nftList[nftTab][item][level].itemSupply - nftList[nftTab][item][level].bannedSupply) : nftList[nftTab][item][level].itemSupply) : '--'
                               }
                             </div>
                             <div className={`${styles.listview_col} ${styles.item_abilities}`}>
@@ -615,68 +666,57 @@ export default function (props) {
       <div className={styles.row} style={{ marginTop: -40 }}>
         <div className={styles.panel_full}>
           <div className={styles.log_title}>
-            <img src="assets/sidebar/insight.png" /> <span>LATEST 50 TRANSACTIONS</span>
+            <img src="assets/sidebar/insight.png" /> <span>{t("LATEST 50 NFT TRANSACTIONS")}</span>
           </div>
           <div className={styles.item_list_wrapper}>
             <div className={styles.item_list}>
               <div className={styles.listview_table}>
-                <div className={styles.listview_row}>
-                  <div className={`${styles.listview_col} ${styles.log_icon}`}>
-                    <img src="assets/goldenbox42x42.png" />
-                  </div>
-                  <div className={`${styles.listview_col} ${styles.log_message}`}>
-                    <div>24 minutes ago..</div>
-                    Golden Chest opened and received <span>Fragrant Fergana Peach</span>
-                  </div>
-                </div>
+                {
+                  lastTx.map(v=>{
+                    let time = (Date.now() - (new Date(v.time))) / 1000;
+                    let timeStr = getTimeStr(time);
+                    return <div className={styles.listview_row}>
+                      <div className={`${styles.listview_col} ${styles.log_icon}`}>
+                        {
+                          v.type==='GoldenBuy' && <img src="assets/goldenbox42x42.png" />
+                        }
+                        {
+                          v.type==='ZooClaim' && <img src="assets/goldenbox42x42.png" />
+                        }
+                        {
+                          v.type==='SilverBuy' && <img src="assets/silverbox42x42.png" />
+                        }
+                        {
+                          !v.type && <img src="assets/sidebar/market.png" />
+                        }
+                      </div>
+                      <div className={`${styles.listview_col} ${styles.log_message}`}>
+                        <div>{timeStr}</div>
+                        {
+                          v.type==='SilverBuy' && 'Silver Chest opened and received '
+                        }
+                        {
+                          v.type==='SilverBuy' && <span>{Number(v.level) === 0 ? 'Nothing...' : nftList[v.category][v.item][v.level].name}</span>
+                        }
 
-                <div className={styles.listview_row}>
-                  <div className={`${styles.listview_col} ${styles.log_icon}`}>
-                    <img src="assets/silverbox42x42.png" />
-                  </div>
-                  <div className={`${styles.listview_col} ${styles.log_message}`}>
-                    <div>45 minutes ago..</div>
-                    Silver Chest opened and received <span>Nothing...</span>
-                  </div>
-                </div>
+                        {
+                          (v.type==='GoldenBuy' || v.type==='ZooClaim') && 'Golden Chest opened and received '
+                        }
+                        {
+                          (v.type==='GoldenBuy' || v.type==='ZooClaim') && <span>{nftList[v.category][v.item][v.level].name}</span>
+                        }
 
-                <div className={styles.listview_row}>
-                  <div className={`${styles.listview_col} ${styles.log_icon}`}>
-                    <img src="assets/silverbox42x42.png" />
-                  </div>
-                  <div className={`${styles.listview_col} ${styles.log_message}`}>
-                    <div>1 hour ago..</div>
-                    Silver Chest opened and received <span>Lemon of Bunburry</span>
-                  </div>
-                </div>
-
-                <div className={styles.listview_row}>
-                  <div className={`${styles.listview_col} ${styles.log_icon}`}>
-                    <img src="assets/sidebar/market.png" />
-                  </div>
-                  <div className={`${styles.listview_col} ${styles.log_message}`}>
-                    <div>2 hours ago..</div>
-                    Purchased <span>Lemon of Bunburry</span> for <span>10,000 ZOO</span>
-                  </div>
-                </div>
-                <div className={styles.listview_row}>
-                  <div className={`${styles.listview_col} ${styles.log_icon}`}>
-                    <img src="assets/sidebar/market.png" />
-                  </div>
-                  <div className={`${styles.listview_col} ${styles.log_message}`}>
-                    <div>1 day ago..</div>
-                    Purchased <span>Exotic Peach Juice</span> for <span>50,000 ZOO</span>
-                  </div>
-                </div>
-                <div className={styles.listview_row}>
-                  <div className={`${styles.listview_col} ${styles.log_icon}`}>
-                    <img src="assets/silverbox42x42.png" />
-                  </div>
-                  <div className={`${styles.listview_col} ${styles.log_message}`}>
-                    <div>2 days ago..</div>
-                    Silver Chest opened and received <span>Nothing...</span>
-                  </div>
-                </div>
+                        {
+                          !v.type && <>Purchased <span>{nftList[v.category][v.item][v.level].name}</span> for <span>{Number(v.price.toFixed(8)) + ' ' + v.symbol}</span></>
+                        }
+                      </div>
+                    </div>
+                  })
+                }
+                {
+                  lastTx.length === 0 && 'Loading...'
+                }
+                
               </div>
             </div>
           </div>

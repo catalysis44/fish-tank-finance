@@ -198,7 +198,7 @@ export default {
   "Market Cap":"当前市值",
   "Fully Diluted MC":"预估挖矿结束后的总市值",
   "Total value locked":"总锁定金额",
-  "NFT Value":"NFT金额",
+  "NFT Value":"锁定NFT",
   "Zoo Distribution Ends In":"Zoo挖矿结束倒计时",
   "Zoo Burning Rate":"Zoo销毁率",
   "Estimated Zoo Supply":"预估Zoo总发行量",
@@ -218,5 +218,6 @@ export default {
   "SUPPLY":"供应量",
   "INIT. ABILITIES":"初始属性",
   "LATEST SOLD":"最近成交价格",
-  "None Unlocked (yet)":"未锁定(当前)",
+  "None Unlocked (yet)":"未解锁",
+  "LATEST 50 NFT TRANSACTIONS":"最近50条NFT事件",
 };
