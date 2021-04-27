@@ -270,6 +270,17 @@
 }
 .panel_full
 {
+  .log_title
+  {
+      color:black;
+      font-size:20px;
+      margin-bottom:10px;
+      img
+      {
+          width:28px;
+          margin-right:5px;
+      }
+  }
   width:100%;
 
   background:white;
@@ -414,6 +425,38 @@
                 &.item_price
                 {
                     color:#00a99d;
+                }
+
+                /// For LOG ///
+                &.log_icon
+                {
+                    
+                    max-width: 40px;
+                    padding-top:10px;
+                    padding-bottom:10px;
+                    text-align: center;
+                    vertical-align: top;
+                    img
+                    {
+                        width:40px;
+                      
+                    }
+                }
+                &.log_message
+                {
+                    line-height:20px;
+                    padding-top:10px;
+                    padding-bottom:10px;
+                    padding-left:10px;
+                    div
+                    {
+                        font-size:16px;
+                    }
+                    font-size:20px;
+                    span
+                    {
+                        color:#00a99d;
+                    }
                 }
             }
         }
@@ -583,6 +626,10 @@
                 border-bottom: 1px solid #555 !important;
             }
             .title, td, .tvl_value div, .chest_opened_value div,.silver_daily div,.price_title,.estimated_supply span,.booster_value div,.booster_sub
+            {
+                color:white !important;
+            }
+            .log_message,.log_title
             {
                 color:white !important;
             }

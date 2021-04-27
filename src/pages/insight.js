@@ -235,9 +235,9 @@ export default function (props) {
     return Number(pre) + Number(v);
   }) : 0;
 
-  useEffect(()=>{
+  useEffect(() => {
     if (Number(expTvl) > 0 && Number(zooTvl) > 0 && Number(zooPrice) > 0 && Number(chainId) !== 999) {
-      axios.get('https://rpc.zookeeper.finance/api/v1/setTvl?tvl=' + (Number(expTvl) + Number(zooTvl))).then(ret=>{
+      axios.get('https://rpc.zookeeper.finance/api/v1/setTvl?tvl=' + (Number(expTvl) + Number(zooTvl))).then(ret => {
         // console.debug(ret);
       }).catch(console.error);
     } else {
@@ -249,41 +249,41 @@ export default function (props) {
   const [silver, setSilver] = useState([]);
   const [silverRate, setSilverRate] = useState(0);
 
-  useEffect(()=>{
-    axios.get('https://rpc.zookeeper.finance/api/v1/chest').then(ret=>{
-      let silver = ret.data.filter(v=>{
+  useEffect(() => {
+    axios.get('https://rpc.zookeeper.finance/api/v1/chest').then(ret => {
+      let silver = ret.data.filter(v => {
         return v.type === 'SilverBuy';
       });
 
-      let golden = ret.data.filter(v=>{
+      let golden = ret.data.filter(v => {
         return v.type !== 'SilverBuy';
       })
 
       setSilver(silver);
       setGolden(golden);
 
-      let silver24h = silver.filter(v=>{
+      let silver24h = silver.filter(v => {
         return (Date.now() - (new Date(v.time))) / 3600000 < 24
       })
-      let silverGood = silver24h.filter(v=>{
+      let silverGood = silver24h.filter(v => {
         return v.level > 0;
       });
 
       setSilverRate(silverGood.length * 100 / silver24h.length);
-      
+
     }).catch(console.error);
   }, []);
 
   const [priceChange24h, setPriceChange24h] = useState();
   const [priceChangeWeek, setPriceChangeWeek] = useState();
 
-  useEffect(()=>{
-    axios.get('https://rpc.zookeeper.finance/api/v1/goldenPrice').then(ret=>{
+  useEffect(() => {
+    axios.get('https://rpc.zookeeper.finance/api/v1/goldenPrice').then(ret => {
       let priceArray = ret.data;
       let p24s = priceArray.length > 24 ? priceArray.slice(-24) : priceArray;
-      setPriceChange24h((p24s[p24s.length-1].price - p24s[0].price)*100/p24s[0].price);
-      let pWeeks = priceArray.length > 24*7 ? priceArray.slice(-24*7) : priceArray;
-      setPriceChangeWeek((pWeeks[pWeeks.length-1].price - pWeeks[0].price)*100/pWeeks[0].price);
+      setPriceChange24h((p24s[p24s.length - 1].price - p24s[0].price) * 100 / p24s[0].price);
+      let pWeeks = priceArray.length > 24 * 7 ? priceArray.slice(-24 * 7) : priceArray;
+      setPriceChangeWeek((pWeeks[pWeeks.length - 1].price - pWeeks[0].price) * 100 / pWeeks[0].price);
     }).catch(console.error);
   }, []);
 
@@ -291,8 +291,8 @@ export default function (props) {
   const [totalHolder, setTotalHolder] = useState();
   const [averageBoost, setAverageBoost] = useState();
   const [averageReduce, setAverageReduce] = useState();
-  useEffect(()=>{
-    axios.get('https://rpc.zookeeper.finance/api/v1/nftInfo').then(ret=>{
+  useEffect(() => {
+    axios.get('https://rpc.zookeeper.finance/api/v1/nftInfo').then(ret => {
       let info = ret.data;
       setTotalNft(info.totalNFT);
       setTotalHolder(info.totalHolder);
@@ -304,10 +304,10 @@ export default function (props) {
   const [nftList, setNftList] = useState(initNftList);
   const [nftTab, setNftTab] = useState(1);
 
-  useEffect(()=>{
-    axios.get('https://rpc.zookeeper.finance/api/v1/nft').then(ret=>{
+  useEffect(() => {
+    axios.get('https://rpc.zookeeper.finance/api/v1/nft').then(ret => {
       let list = ret.data;
-      list = list.filter(v=>{
+      list = list.filter(v => {
         if (invalidNFT.includes(Number(v.tokenId))) {
           return false;
         }
@@ -315,7 +315,7 @@ export default function (props) {
       });
 
       let newNftList = initNftList;
-      list.map(v=>{
+      list.map(v => {
         newNftList[v.category][v.item][v.level] = v;
       })
 
@@ -395,14 +395,14 @@ export default function (props) {
         <div className={`${styles.panel} ${styles.zoo_stat}`}>
           <div>
             <div className={styles.title} >
-            {t('Zoo Distribution Ends In')}
+              {t('Zoo Distribution Ends In')}
             </div>
-            <Progress status="active" percent={((365 * 2 - leftDays) * 100 / (365 * 2))} format={percent => `${leftDays.toFixed(0)} `+t('Days')} />
+            <Progress status="active" percent={((365 * 2 - leftDays) * 100 / (365 * 2))} format={percent => `${leftDays.toFixed(0)} ` + t('Days')} />
           </div>
 
           <div>
             <div className={styles.title}>
-            {t('Zoo Burning Rate')}
+              {t('Zoo Burning Rate')}
             </div>
             <div id="burning_bar">
               <Progress percent={(storage.zooBurned * 100 / (Number(storage.zooTotalSupply) + Number(storage.zooBurned))).toFixed(1)} />
@@ -411,7 +411,7 @@ export default function (props) {
 
           <div>
             <div className={styles.title}>
-            {t('Estimated Zoo Supply')}
+              {t('Estimated Zoo Supply')}
             </div>
 
             <div className={styles.estimated_supply}>
@@ -426,14 +426,14 @@ export default function (props) {
             <img src="assets/goldenbox42x42.png" />
             <div className={styles.chest_opened_value}>
               {golden.length}
-            <div>{t('Golden Chest opened')}</div>
+              <div>{t('Golden Chest opened')}</div>
             </div>
           </div>
           <div className={styles.chest_opened}>
             <img src="assets/silverbox42x42.png" />
             <div className={styles.chest_opened_value}>
               {silver.length}
-            <div>{t('Silver Chest opened')}</div>
+              <div>{t('Silver Chest opened')}</div>
             </div>
             <div className={styles.silver_daily}>
               {commafy(silverRate).split('.')[0]}%
@@ -441,15 +441,15 @@ export default function (props) {
             </div>
           </div>
           <div className={styles.price_title}>
-          {t('Golden Chest Price')}
-                    </div>
+            {t('Golden Chest Price')}
+          </div>
           <div className={styles.chest_price_wrapper}>
             <div className={styles.chest_price}>
-              {priceChange24h && (priceChange24h > 0 ? ('+' + priceChange24h.toFixed(1)): priceChange24h.toFixed(1))}%
+              {priceChange24h && (priceChange24h > 0 ? ('+' + priceChange24h.toFixed(1)) : priceChange24h.toFixed(1))}%
             <div>{t('24 hrs')}</div>
             </div>
             <div className={styles.chest_price}>
-            {priceChangeWeek && (priceChangeWeek > 0 ? ('+' + priceChangeWeek.toFixed(1)): priceChangeWeek.toFixed(1))}%
+              {priceChangeWeek && (priceChangeWeek > 0 ? ('+' + priceChangeWeek.toFixed(1)) : priceChangeWeek.toFixed(1))}%
             <div>{t('1 Week')}</div>
             </div>
 
@@ -460,25 +460,25 @@ export default function (props) {
           <div className={styles.booster}>
             <img src="assets/rocket.png" />
             <div className={styles.booster_value}>
-              +{averageBoost && (averageBoost*100).toFixed(1)}%
+              +{averageBoost && (averageBoost * 100).toFixed(1)}%
               <div>{t('Average Boosting Attached')}</div>
             </div>
           </div>
           <div className={styles.booster}>
             <img src="assets/glasshour.png" />
             <div className={styles.booster_value}>
-              -{averageReduce && (averageReduce*100).toFixed(1)}%
+              -{averageReduce && (averageReduce * 100).toFixed(1)}%
               <div>{t('Average Time Reducing Attached')}</div>
             </div>
           </div>
           <div className={styles.booster_sub_wrapper}>
             <div className={styles.booster_sub}>
-            {t('Total Booster')}
-            <div>{totalNft}</div>
+              {t('Total Booster')}
+              <div>{totalNft}</div>
             </div>
             <div className={styles.booster_sub}>
-            {t('Booster Holders')}
-            <div>{totalHolder}</div>
+              {t('Booster Holders')}
+              <div>{totalHolder}</div>
             </div>
           </div>
 
@@ -487,27 +487,27 @@ export default function (props) {
       <div className={styles.row}>
         <div className={styles.panel_full}>
           <div className={styles.item_category_tab}>
-            <a className={`${styles.category} ${nftTab === 1 ? styles.is_active : ''}`} onClick={()=>setNftTab(1)}>
+            <a className={`${styles.category} ${nftTab === 1 ? styles.is_active : ''}`} onClick={() => setNftTab(1)}>
               <img src="assets/category/fruits.png" />
               <span>{t('Fruits')}</span>
             </a>
-            <a className={`${styles.category} ${nftTab === 2 ? styles.is_active : ''}`} onClick={()=>setNftTab(2)}>
+            <a className={`${styles.category} ${nftTab === 2 ? styles.is_active : ''}`} onClick={() => setNftTab(2)}>
               <img src="assets/category/dishes.png" />
               <span>{t('Foods')}</span>
             </a>
-            <a className={`${styles.category} ${nftTab === 3 ? styles.is_active : ''}`} onClick={()=>setNftTab(3)}>
+            <a className={`${styles.category} ${nftTab === 3 ? styles.is_active : ''}`} onClick={() => setNftTab(3)}>
               <img src="assets/category/sweets.png" />
               <span>{t('Sweets')}</span>
             </a>
-            <a className={`${styles.category} ${nftTab === 4 ? styles.is_active : ''}`} onClick={()=>setNftTab(4)}>
+            <a className={`${styles.category} ${nftTab === 4 ? styles.is_active : ''}`} onClick={() => setNftTab(4)}>
               <img src="assets/category/potions.png" />
               <span>{t('Potions')}</span>
             </a>
-            <a className={`${styles.category} ${nftTab === 5 ? styles.is_active : ''}`} onClick={()=>setNftTab(5)}>
+            <a className={`${styles.category} ${nftTab === 5 ? styles.is_active : ''}`} onClick={() => setNftTab(5)}>
               <img src="assets/category/spices.png" />
               <span>{t('Spices')}</span>
             </a>
-            <a className={`${styles.category} ${nftTab === 6 ? styles.is_active : ''}`} onClick={()=>setNftTab(6)}>
+            <a className={`${styles.category} ${nftTab === 6 ? styles.is_active : ''}`} onClick={() => setNftTab(6)}>
               <img src="assets/category/magic.png" />
               <span>{t('Magic')}</span>
             </a>
@@ -515,101 +515,174 @@ export default function (props) {
 
           {/* Each Class of Item*/}
           <div className={styles.item_list_wrapper}>
-          {
-            Object.keys(nftList[nftTab]).map(item=>{
-              return (
-                <div className={styles.item_list} key={item}>
-                <div className={styles.grade}>
-                  {
-                    Number(item) === 1 && <><img src="assets/grade/N.png" /> NORMAL CLASS</>
-                  }
-                  {
-                    Number(item) === 2 && <><img src="assets/grade/R.png" /> RARE CLASS</>
-                  }
-                  {
-                    Number(item) === 3 && <><img src="assets/grade/SR.png" /> SUPER RARE CLASS</>
-                  }
-                  {
-                    Number(item) === 4 && <><img src="assets/grade/SSR.png" /> SUPER SUPER RARE CLASS</>
-                  }
-                  {
-                    Number(item) === 5 && <><img src="assets/grade/UR.png" /> ULTRA RARE CLASS</>
-                  }
-                  
-                </div>
-                <div className={styles.listview_table}>
-                  <div className={styles.listview_row}>
-                    <div className={`${styles.listview_col} ${styles.header}`}>
+            {
+              Object.keys(nftList[nftTab]).map(item => {
+                return (
+                  <div className={styles.item_list} key={item}>
+                    <div className={styles.grade}>
+                      {
+                        Number(item) === 1 && <><img src="assets/grade/N.png" /> NORMAL CLASS</>
+                      }
+                      {
+                        Number(item) === 2 && <><img src="assets/grade/R.png" /> RARE CLASS</>
+                      }
+                      {
+                        Number(item) === 3 && <><img src="assets/grade/SR.png" /> SUPER RARE CLASS</>
+                      }
+                      {
+                        Number(item) === 4 && <><img src="assets/grade/SSR.png" /> SUPER SUPER RARE CLASS</>
+                      }
+                      {
+                        Number(item) === 5 && <><img src="assets/grade/UR.png" /> ULTRA RARE CLASS</>
+                      }
+
                     </div>
-                    <div className={`${styles.listview_col} ${styles.header}`}>
-                    {t('BOOSTER NAME')}
-                    </div>
-                    <div className={`${styles.listview_col} ${styles.header} ${styles.centered}`}>
-                    {t('LEVEL')}
-                    </div>
-                    <div className={`${styles.listview_col} ${styles.header} ${styles.centered}`} >
-                    {t('SUPPLY')}
-                    </div>
-                    <div className={`${styles.listview_col} ${styles.header} ${styles.centered}`}>
-                    {t('INIT. ABILITIES')}
-                    </div>
-                    <div className={`${styles.listview_col} ${styles.header}  ${styles.centered}`}>
-                    {t('LATEST SOLD')}
+                    <div className={styles.listview_table}>
+                      <div className={styles.listview_row}>
+                        <div className={`${styles.listview_col} ${styles.header}`}>
+                        </div>
+                        <div className={`${styles.listview_col} ${styles.header}`}>
+                          {t('BOOSTER NAME')}
+                        </div>
+                        <div className={`${styles.listview_col} ${styles.header} ${styles.centered}`}>
+                          {t('LEVEL')}
+                        </div>
+                        <div className={`${styles.listview_col} ${styles.header} ${styles.centered}`} >
+                          {t('SUPPLY')}
+                        </div>
+                        <div className={`${styles.listview_col} ${styles.header} ${styles.centered}`}>
+                          {t('INIT. ABILITIES')}
+                        </div>
+                        <div className={`${styles.listview_col} ${styles.header}  ${styles.centered}`}>
+                          {t('LATEST SOLD')}
+                        </div>
+                      </div>
+                      {
+                        Object.keys(nftList[nftTab][item]).map(level => {
+                          return <div className={styles.listview_row} key={level}>
+                            <div className={`${styles.listview_col} ${styles.item_image}`}>
+                              {
+                                nftList[nftTab][item][level].image ? <img src={nftList[nftTab][item][level].image} /> : <img src="assets/locked.png" />
+                              }
+                            </div>
+                            <div className={`${styles.listview_col} ${styles.item_name}`}>
+                              {
+                                nftList[nftTab][item][level].name ? nftList[nftTab][item][level].name : t('None Unlocked (yet)')
+                              }
+                            </div>
+                            <div className={`${styles.listview_col} ${styles.item_stars}`}>
+                              {
+                                Number(level) < 4 ? Array.from({ length: level }).map((v, i) => {
+                                  return <img src="assets/star18x18.png" key={i} />
+                                }) : <img src="assets/max.png" />
+                              }
+                            </div>
+                            <div className={`${styles.listview_col} ${styles.item_supply}`}>
+                              {
+                                nftList[nftTab][item][level].itemSupply ? nftList[nftTab][item][level].itemSupply : '--'
+                              }
+                            </div>
+                            <div className={`${styles.listview_col} ${styles.item_abilities}`}>
+                              <div><img src="assets/rocket24x24.png" />
+                        +{
+                                  nftList[nftTab][item][level].boosting ? (nftList[nftTab][item][level].boosting / 1e10 - 100).toFixed(1) : '--'
+                                }%
+                        </div>
+                              <div><img src="assets/hourglass24x24.png" />
+                        -{
+                                  nftList[nftTab][item][level].reduce ? (100 - nftList[nftTab][item][level].reduce / 1e10).toFixed(1) : '--'
+                                }%
+                        </div>
+                            </div>
+                            <div className={`${styles.listview_col} ${styles.item_price}  ${styles.centered}`}>
+                              {
+                                nftList[nftTab][item][level].price ? (nftList[nftTab][item][level].price + ' ' + nftList[nftTab][item][level].symbol) : '--'
+                              }
+                            </div>
+                          </div>
+                        })
+                      }
                     </div>
                   </div>
-                  {
-                    Object.keys(nftList[nftTab][item]).map(level=>{
-                      return <div className={styles.listview_row} key={level}>
-                      <div className={`${styles.listview_col} ${styles.item_image}`}>
-                        {
-                          nftList[nftTab][item][level].image ? <img src={nftList[nftTab][item][level].image} /> : <img src="assets/locked.png" />
-                        }
-                      </div>
-                      <div className={`${styles.listview_col} ${styles.item_name}`}>
-                        {
-                          nftList[nftTab][item][level].name ? nftList[nftTab][item][level].name : t('None Unlocked (yet)')
-                        }
-                      </div>
-                      <div className={`${styles.listview_col} ${styles.item_stars}`}>
-                        {
-                          Number(level) < 4 ? Array.from({length: level}).map((v,i)=>{
-                            return <img src="assets/star18x18.png" key={i} />
-                          }) : <img src="assets/max.png" />
-                        }
-                      </div>
-                      <div className={`${styles.listview_col} ${styles.item_supply}`}>
-                        {
-                          nftList[nftTab][item][level].itemSupply ? nftList[nftTab][item][level].itemSupply : '--'
-                        }
-                      </div>
-                      <div className={`${styles.listview_col} ${styles.item_abilities}`}>
-                        <div><img src="assets/rocket24x24.png" /> 
-                        +{
-                          nftList[nftTab][item][level].boosting ? (nftList[nftTab][item][level].boosting / 1e10 - 100).toFixed(1) : '--'
-                        }%
-                        </div>
-                        <div><img src="assets/hourglass24x24.png" /> 
-                        -{
-                          nftList[nftTab][item][level].reduce ? (100 - nftList[nftTab][item][level].reduce/1e10 ).toFixed(1): '--'
-                        }%
-                        </div>
-                      </div>
-                      <div className={`${styles.listview_col} ${styles.item_price}  ${styles.centered}`}>
-                        {
-                          nftList[nftTab][item][level].price ? (nftList[nftTab][item][level].price + ' ' + nftList[nftTab][item][level].symbol) : '--'
-                        }
-                      </div>
-                    </div>
-                    })
-                  }
-                </div>
-              </div>
-              )
-            })
-          }
+                )
+              })
+            }
           </div>
         </div>
       </div>
+
+      {/*LOG*/}
+      <div className={styles.row} style={{ marginTop: -40 }}>
+        <div className={styles.panel_full}>
+          <div className={styles.log_title}>
+            <img src="assets/sidebar/insight.png" /> <span>LATEST 50 TRANSACTIONS</span>
+          </div>
+          <div className={styles.item_list_wrapper}>
+            <div className={styles.item_list}>
+              <div className={styles.listview_table}>
+                <div className={styles.listview_row}>
+                  <div className={`${styles.listview_col} ${styles.log_icon}`}>
+                    <img src="assets/goldenbox42x42.png" />
+                  </div>
+                  <div className={`${styles.listview_col} ${styles.log_message}`}>
+                    <div>24 minutes ago..</div>
+                    Golden Chest opened and received <span>Fragrant Fergana Peach</span>
+                  </div>
+                </div>
+
+                <div className={styles.listview_row}>
+                  <div className={`${styles.listview_col} ${styles.log_icon}`}>
+                    <img src="assets/silverbox42x42.png" />
+                  </div>
+                  <div className={`${styles.listview_col} ${styles.log_message}`}>
+                    <div>45 minutes ago..</div>
+                    Silver Chest opened and received <span>Nothing...</span>
+                  </div>
+                </div>
+
+                <div className={styles.listview_row}>
+                  <div className={`${styles.listview_col} ${styles.log_icon}`}>
+                    <img src="assets/silverbox42x42.png" />
+                  </div>
+                  <div className={`${styles.listview_col} ${styles.log_message}`}>
+                    <div>1 hour ago..</div>
+                    Silver Chest opened and received <span>Lemon of Bunburry</span>
+                  </div>
+                </div>
+
+                <div className={styles.listview_row}>
+                  <div className={`${styles.listview_col} ${styles.log_icon}`}>
+                    <img src="assets/sidebar/market.png" />
+                  </div>
+                  <div className={`${styles.listview_col} ${styles.log_message}`}>
+                    <div>2 hours ago..</div>
+                    Purchased <span>Lemon of Bunburry</span> for <span>10,000 ZOO</span>
+                  </div>
+                </div>
+                <div className={styles.listview_row}>
+                  <div className={`${styles.listview_col} ${styles.log_icon}`}>
+                    <img src="assets/sidebar/market.png" />
+                  </div>
+                  <div className={`${styles.listview_col} ${styles.log_message}`}>
+                    <div>1 day ago..</div>
+                    Purchased <span>Exotic Peach Juice</span> for <span>50,000 ZOO</span>
+                  </div>
+                </div>
+                <div className={styles.listview_row}>
+                  <div className={`${styles.listview_col} ${styles.log_icon}`}>
+                    <img src="assets/silverbox42x42.png" />
+                  </div>
+                  <div className={`${styles.listview_col} ${styles.log_message}`}>
+                    <div>2 days ago..</div>
+                    Silver Chest opened and received <span>Nothing...</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </React.Fragment>
   );
 }
