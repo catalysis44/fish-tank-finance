@@ -474,7 +474,7 @@ export default function (props) {
             </div>
 
             <div className={styles.estimated_supply}>
-              {commafy(storage.zooTotalSupply / startDays * 365 * 2).split('.')[0]} <span>~{commafy(storage.zooTotalSupply / startDays / 1000).split('.')[0]}K {t('per days')}</span>
+              {commafy(storage.zooTotalSupply / startDays * 365 * 2).split('.')[0]} <span>~{commafy(storage.zooTotalSupply / startDays / 1000).split('.')[0]}K {t('per day')}</span>
             </div>
           </div>
         </div>
@@ -485,14 +485,14 @@ export default function (props) {
             <img src="assets/goldenbox42x42.png" />
             <div className={styles.chest_opened_value}>
               {golden.length}
-              <div>{t('Gold Chest opened')}</div>
+              <div>{t('Gold Chests opened')}</div>
             </div>
           </div>
           <div className={styles.chest_opened}>
             <img src="assets/silverbox42x42.png" />
             <div className={styles.chest_opened_value}>
               {silver.length}
-              <div>{t('Silver Chest opened')}</div>
+              <div>{t('Silver Chests opened')}</div>
             </div>
             <div className={styles.silver_daily}>
               {commafy(silverRate).split('.')[0]}%
