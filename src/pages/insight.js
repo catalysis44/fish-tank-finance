@@ -337,6 +337,7 @@ export default function (props) {
   const [totalHolder, setTotalHolder] = useState();
   const [averageBoost, setAverageBoost] = useState();
   const [averageReduce, setAverageReduce] = useState();
+  const [lockedNftValue, setLockedNftValue] = useState();
   useEffect(() => {
     axios.get('https://rpc.zookeeper.finance/api/v1/nftInfo').then(ret => {
       let info = ret.data;
@@ -344,8 +345,13 @@ export default function (props) {
       setTotalHolder(info.totalHolder);
       setAverageBoost(info.averageBoosting);
       setAverageReduce(info.averageReduce);
+      let nftLocked = 0;
+      for (let i=0; i<info.lockedNft.length; i++) {
+        nftLocked += info.lockedNft[i].price * prices[info.lockedNft[i].symbol];
+      }
+      setLockedNftValue(nftLocked);
     }).catch(console.error);
-  }, []);
+  }, [prices]);
 
   const [nftList, setNftList] = useState(initNftList);
   const [nftTab, setNftTab] = useState(1);
@@ -354,7 +360,6 @@ export default function (props) {
     axios.get('https://rpc.zookeeper.finance/api/v1/nft').then(ret => {
       let list = ret.data;
       let newNftList = initNftList;
-      console.log('list 1', list.length);
       list = list.filter(v => {
         if (invalidNFT.includes(Number(v.tokenId))) {
           if (!newNftList[v.category][v.item][v.level].bannedSupply) {
@@ -367,10 +372,6 @@ export default function (props) {
         return true;
       });
 
-      console.log('list 2', list.length);
-
-      console.log('list 3', list);
-
       list.map(v => {
         let bannedSupply = newNftList[v.category][v.item][v.level].bannedSupply;
         newNftList[v.category][v.item][v.level] = v;
@@ -378,7 +379,6 @@ export default function (props) {
       })
 
       setNftList(newNftList);
-      console.log('newNftList', newNftList)
     }).catch(console.error);
   }, []);
 
@@ -424,7 +424,7 @@ export default function (props) {
           <div className={styles.tvl_header}>
             <img src="assets/tvl.png" />
             <div className={styles.tvl_value}>
-              ${commafy(Number(zooTvl) + Number(expTvl)).split('.')[0]}
+              ${commafy(Number(zooTvl) + Number(expTvl) + Number(lockedNftValue)).split('.')[0]}
               <div>{t('Total value locked')}</div>
             </div>
           </div>
@@ -447,7 +447,7 @@ export default function (props) {
             </tr> */}
             <tr>
               <td>{t('NFT Value')}</td>
-              <td>${commafy()}</td>
+              <td>${commafy(lockedNftValue).split('.')[0]}</td>
             </tr>
           </table>
         </div>
