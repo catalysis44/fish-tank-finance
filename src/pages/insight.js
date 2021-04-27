@@ -12,212 +12,18 @@ import { WalletContext } from '../wallet/Wallet';
 import { history } from 'umi';
 import { invalidNFT } from '../config';
 
-// category->item->level
-const initNftList = {
-  1: {
-    1: {
-      1: {},
-      2: {},
-      3: {},
-      4: {},
-    },
-    2: {
-      1: {},
-      2: {},
-      3: {},
-      4: {},
-    },
-    3: {
-      1: {},
-      2: {},
-      3: {},
-      4: {},
-    },
-    4: {
-      1: {},
-      2: {},
-      3: {},
-      4: {},
-    },
-    5: {
-      1: {},
-      2: {},
-      3: {},
-      4: {},
-    },
-  },
-  2: {
-    1: {
-      1: {},
-      2: {},
-      3: {},
-      4: {},
-    },
-    2: {
-      1: {},
-      2: {},
-      3: {},
-      4: {},
-    },
-    3: {
-      1: {},
-      2: {},
-      3: {},
-      4: {},
-    },
-    4: {
-      1: {},
-      2: {},
-      3: {},
-      4: {},
-    },
-    5: {
-      1: {},
-      2: {},
-      3: {},
-      4: {},
-    },
-  },
-  3: {
-    1: {
-      1: {},
-      2: {},
-      3: {},
-      4: {},
-    },
-    2: {
-      1: {},
-      2: {},
-      3: {},
-      4: {},
-    },
-    3: {
-      1: {},
-      2: {},
-      3: {},
-      4: {},
-    },
-    4: {
-      1: {},
-      2: {},
-      3: {},
-      4: {},
-    },
-    5: {
-      1: {},
-      2: {},
-      3: {},
-      4: {},
-    },
-  },
-  4: {
-    1: {
-      1: {},
-      2: {},
-      3: {},
-      4: {},
-    },
-    2: {
-      1: {},
-      2: {},
-      3: {},
-      4: {},
-    },
-    3: {
-      1: {},
-      2: {},
-      3: {},
-      4: {},
-    },
-    4: {
-      1: {},
-      2: {},
-      3: {},
-      4: {},
-    },
-    5: {
-      1: {},
-      2: {},
-      3: {},
-      4: {},
-    },
-  },
-  5: {
-    1: {
-      1: {},
-      2: {},
-      3: {},
-      4: {},
-    },
-    2: {
-      1: {},
-      2: {},
-      3: {},
-      4: {},
-    },
-    3: {
-      1: {},
-      2: {},
-      3: {},
-      4: {},
-    },
-    4: {
-      1: {},
-      2: {},
-      3: {},
-      4: {},
-    },
-    5: {
-      1: {},
-      2: {},
-      3: {},
-      4: {},
-    },
-  },
-  6: {
-    1: {
-      1: {},
-      2: {},
-      3: {},
-      4: {},
-    },
-    2: {
-      1: {},
-      2: {},
-      3: {},
-      4: {},
-    },
-    3: {
-      1: {},
-      2: {},
-      3: {},
-      4: {},
-    },
-    4: {
-      1: {},
-      2: {},
-      3: {},
-      4: {},
-    },
-    5: {
-      1: {},
-      2: {},
-      3: {},
-      4: {},
-    },
-  },
-}
+
 
 function getTimeStr(time) {
-  
-  if (parseInt(time / (3600*24)) === 1) {
-    return parseInt(time / (3600*24)) + ' day ago...';
-  } 
-  
-  if (parseInt(time / (3600*24)) >= 2) {
-    return parseInt(time / (3600*24)) + ' days ago...';
+
+  if (parseInt(time / (3600 * 24)) === 1) {
+    return parseInt(time / (3600 * 24)) + ' day ago...';
   }
-  
+
+  if (parseInt(time / (3600 * 24)) >= 2) {
+    return parseInt(time / (3600 * 24)) + ' days ago...';
+  }
+
   if (parseInt(time / (3600)) === 1) {
     return parseInt(time / (3600)) + ' hour ago...';
   }
@@ -248,6 +54,202 @@ export default function (props) {
   const startBlockNumber = 14174838;
   let leftDays = endBlockNumber > blockNumber ? (endBlockNumber - blockNumber) * 5 / 3600 / 24 : 0;
   let startDays = (blockNumber - startBlockNumber) * 5 / 3600 / 24;
+
+  // category->item->level
+  const initNftList = {
+    1: {
+      1: {
+        1: {},
+        2: {},
+        3: {},
+        4: {},
+      },
+      2: {
+        1: {},
+        2: {},
+        3: {},
+        4: {},
+      },
+      3: {
+        1: {},
+        2: {},
+        3: {},
+        4: {},
+      },
+      4: {
+        1: {},
+        2: {},
+        3: {},
+        4: {},
+      },
+      5: {
+        1: {},
+        2: {},
+        3: {},
+        4: {},
+      },
+    },
+    2: {
+      1: {
+        1: {},
+        2: {},
+        3: {},
+        4: {},
+      },
+      2: {
+        1: {},
+        2: {},
+        3: {},
+        4: {},
+      },
+      3: {
+        1: {},
+        2: {},
+        3: {},
+        4: {},
+      },
+      4: {
+        1: {},
+        2: {},
+        3: {},
+        4: {},
+      },
+      5: {
+        1: {},
+        2: {},
+        3: {},
+        4: {},
+      },
+    },
+    3: {
+      1: {
+        1: {},
+        2: {},
+        3: {},
+        4: {},
+      },
+      2: {
+        1: {},
+        2: {},
+        3: {},
+        4: {},
+      },
+      3: {
+        1: {},
+        2: {},
+        3: {},
+        4: {},
+      },
+      4: {
+        1: {},
+        2: {},
+        3: {},
+        4: {},
+      },
+      5: {
+        1: {},
+        2: {},
+        3: {},
+        4: {},
+      },
+    },
+    4: {
+      1: {
+        1: {},
+        2: {},
+        3: {},
+        4: {},
+      },
+      2: {
+        1: {},
+        2: {},
+        3: {},
+        4: {},
+      },
+      3: {
+        1: {},
+        2: {},
+        3: {},
+        4: {},
+      },
+      4: {
+        1: {},
+        2: {},
+        3: {},
+        4: {},
+      },
+      5: {
+        1: {},
+        2: {},
+        3: {},
+        4: {},
+      },
+    },
+    5: {
+      1: {
+        1: {},
+        2: {},
+        3: {},
+        4: {},
+      },
+      2: {
+        1: {},
+        2: {},
+        3: {},
+        4: {},
+      },
+      3: {
+        1: {},
+        2: {},
+        3: {},
+        4: {},
+      },
+      4: {
+        1: {},
+        2: {},
+        3: {},
+        4: {},
+      },
+      5: {
+        1: {},
+        2: {},
+        3: {},
+        4: {},
+      },
+    },
+    6: {
+      1: {
+        1: {},
+        2: {},
+        3: {},
+        4: {},
+      },
+      2: {
+        1: {},
+        2: {},
+        3: {},
+        4: {},
+      },
+      3: {
+        1: {},
+        2: {},
+        3: {},
+        4: {},
+      },
+      4: {
+        1: {},
+        2: {},
+        3: {},
+        4: {},
+      },
+      5: {
+        1: {},
+        2: {},
+        3: {},
+        4: {},
+      },
+    },
+  }
 
   const wallet = useContext(WalletContext);
   const chainId = wallet.networkId;
@@ -306,7 +308,7 @@ export default function (props) {
         let allMarket = ret.data;
         let allTx = allChest.concat(allMarket);
 
-        allTx.sort((a, b)=>{
+        allTx.sort((a, b) => {
           if ((new Date(a.time)) > (new Date(b.time))) {
             return 1;
           }
@@ -352,17 +354,22 @@ export default function (props) {
     axios.get('https://rpc.zookeeper.finance/api/v1/nft').then(ret => {
       let list = ret.data;
       let newNftList = initNftList;
-
+      console.log('list 1', list.length);
       list = list.filter(v => {
         if (invalidNFT.includes(Number(v.tokenId))) {
           if (!newNftList[v.category][v.item][v.level].bannedSupply) {
             newNftList[v.category][v.item][v.level].bannedSupply = 0;
           }
+
           newNftList[v.category][v.item][v.level].bannedSupply++;
           return false;
         }
         return true;
       });
+
+      console.log('list 2', list.length);
+
+      console.log('list 3', list);
 
       list.map(v => {
         let bannedSupply = newNftList[v.category][v.item][v.level].bannedSupply;
@@ -371,6 +378,7 @@ export default function (props) {
       })
 
       setNftList(newNftList);
+      console.log('newNftList', newNftList)
     }).catch(console.error);
   }, []);
 
@@ -630,7 +638,7 @@ export default function (props) {
                             </div>
                             <div className={`${styles.listview_col} ${styles.item_supply}`}>
                               {
-                                nftList[nftTab][item][level].itemSupply ? (nftList[nftTab][item][level].bannedSupply > 0 ? (nftList[nftTab][item][level].itemSupply - nftList[nftTab][item][level].bannedSupply) : nftList[nftTab][item][level].itemSupply) : '--'
+                                nftList[nftTab][item][level].itemSupply ? (nftList[nftTab][item][level].bannedSupply ? (nftList[nftTab][item][level].itemSupply - nftList[nftTab][item][level].bannedSupply) : nftList[nftTab][item][level].itemSupply) : '--'
                               }
                             </div>
                             <div className={`${styles.listview_col} ${styles.item_abilities}`}>
@@ -672,19 +680,19 @@ export default function (props) {
             <div className={styles.item_list}>
               <div className={styles.listview_table}>
                 {
-                  lastTx.map(v=>{
+                  lastTx.map(v => {
                     let time = (Date.now() - (new Date(v.time))) / 1000;
                     let timeStr = getTimeStr(time);
                     return <div className={styles.listview_row}>
                       <div className={`${styles.listview_col} ${styles.log_icon}`}>
                         {
-                          v.type==='GoldenBuy' && <img src="assets/goldenbox42x42.png" />
+                          v.type === 'GoldenBuy' && <img src="assets/goldenbox42x42.png" />
                         }
                         {
-                          v.type==='ZooClaim' && <img src="assets/goldenbox42x42.png" />
+                          v.type === 'ZooClaim' && <img src="assets/goldenbox42x42.png" />
                         }
                         {
-                          v.type==='SilverBuy' && <img src="assets/silverbox42x42.png" />
+                          v.type === 'SilverBuy' && <img src="assets/silverbox42x42.png" />
                         }
                         {
                           !v.type && <img src="assets/sidebar/market.png" />
@@ -693,17 +701,17 @@ export default function (props) {
                       <div className={`${styles.listview_col} ${styles.log_message}`}>
                         <div>{timeStr}</div>
                         {
-                          v.type==='SilverBuy' && 'Silver Chest opened and received '
+                          v.type === 'SilverBuy' && 'Silver Chest opened and received '
                         }
                         {
-                          v.type==='SilverBuy' && <span>{Number(v.level) === 0 ? 'Nothing...' : nftList[v.category][v.item][v.level].name}</span>
+                          v.type === 'SilverBuy' && <span>{Number(v.level) === 0 ? 'Nothing...' : nftList[v.category][v.item][v.level].name}</span>
                         }
 
                         {
-                          (v.type==='GoldenBuy' || v.type==='ZooClaim') && 'Golden Chest opened and received '
+                          (v.type === 'GoldenBuy' || v.type === 'ZooClaim') && 'Golden Chest opened and received '
                         }
                         {
-                          (v.type==='GoldenBuy' || v.type==='ZooClaim') && <span>{nftList[v.category][v.item][v.level].name}</span>
+                          (v.type === 'GoldenBuy' || v.type === 'ZooClaim') && <span>{nftList[v.category][v.item][v.level].name}</span>
                         }
 
                         {
@@ -716,7 +724,7 @@ export default function (props) {
                 {
                   lastTx.length === 0 && 'Loading...'
                 }
-                
+
               </div>
             </div>
           </div>
