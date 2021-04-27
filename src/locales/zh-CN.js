@@ -219,5 +219,17 @@ export default {
   "INIT. ABILITIES":"初始属性",
   "LATEST SOLD":"最近成交价格",
   "None Unlocked (yet)":"未解锁",
+
   "LATEST 50 NFT TRANSACTIONS":"最近50条NFT事件",
+  "Silver Chest opened and received ":"一个白银宝箱被打开，并得到了 ",
+  "Gold Chest opened and received ":"一个黄金宝箱被打开，并得到了 ",
+  "Purchased":"购买了",
+  "for":"花费",
+  " day ago...":" 天之前...",
+  " days ago...":" 天之前...",
+  " hour ago...":" 小时之前...",
+  " hours ago...":" 小时之前...",
+  " minute ago...":" 分钟之前...",
+  " minutes ago...":" 分钟之前...",
+  " long time ago...":" 很久以前..."
 };

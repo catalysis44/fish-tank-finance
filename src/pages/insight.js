@@ -14,33 +14,33 @@ import { invalidNFT } from '../config';
 
 
 
-function getTimeStr(time) {
-
+function getTimeStr(time,t) {
+  
   if (parseInt(time / (3600 * 24)) === 1) {
-    return parseInt(time / (3600 * 24)) + ' day ago...';
+    return parseInt(time / (3600 * 24)) + t(' day ago...');
   }
 
   if (parseInt(time / (3600 * 24)) >= 2) {
-    return parseInt(time / (3600 * 24)) + ' days ago...';
+    return parseInt(time / (3600 * 24)) + t(' days ago...');
   }
 
   if (parseInt(time / (3600)) === 1) {
-    return parseInt(time / (3600)) + ' hour ago...';
+    return parseInt(time / (3600)) + t(' hour ago...');
   }
 
   if (parseInt(time / (3600)) >= 2) {
-    return parseInt(time / (3600)) + ' hours ago...';
+    return parseInt(time / (3600)) + t(' hours ago...');
   }
 
   if (parseInt(time / (60)) === 1) {
-    return parseInt(time / (60)) + ' minute ago...';
+    return parseInt(time / (60)) + t(' minute ago...');
   }
 
   if (parseInt(time / (60)) >= 2) {
-    return parseInt(time / (60)) + ' minutes ago...';
+    return parseInt(time / (60)) + t(' minutes ago...');
   }
 
-  return 'long ago...';
+  return t('long time ago...');
 }
 
 export default function (props) {
@@ -682,7 +682,7 @@ export default function (props) {
                 {
                   lastTx.map(v => {
                     let time = (Date.now() - (new Date(v.time))) / 1000;
-                    let timeStr = getTimeStr(time);
+                    let timeStr = getTimeStr(time,t);
                     return <div className={styles.listview_row}>
                       <div className={`${styles.listview_col} ${styles.log_icon}`}>
                         {
@@ -701,21 +701,21 @@ export default function (props) {
                       <div className={`${styles.listview_col} ${styles.log_message}`}>
                         <div>{timeStr}</div>
                         {
-                          v.type === 'SilverBuy' && 'Silver Chest opened and received '
+                          v.type === 'SilverBuy' && t('Silver Chest opened and received ')
                         }
                         {
-                          v.type === 'SilverBuy' && <span>{Number(v.level) === 0 ? 'Nothing...' : nftList[v.category][v.item][v.level].name}</span>
+                          v.type === 'SilverBuy' && <span>{Number(v.level) === 0 ? t('Nothing...') : nftList[v.category][v.item][v.level].name}</span>
                         }
 
                         {
-                          (v.type === 'GoldenBuy' || v.type === 'ZooClaim') && 'Golden Chest opened and received '
+                          (v.type === 'GoldenBuy' || v.type === 'ZooClaim') && t('Gold Chest opened and received ')
                         }
                         {
                           (v.type === 'GoldenBuy' || v.type === 'ZooClaim') && <span>{nftList[v.category][v.item][v.level].name}</span>
                         }
 
                         {
-                          !v.type && <>Purchased <span>{nftList[v.category][v.item][v.level].name}</span> for <span>{Number(v.price.toFixed(8)) + ' ' + v.symbol}</span></>
+                          !v.type && <>{t('Purchased')} <span>{nftList[v.category][v.item][v.level].name}</span> {t('for')} <span>{Number(v.price.toFixed(8)) + ' ' + v.symbol}</span></>
                         }
                       </div>
                     </div>
