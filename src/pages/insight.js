@@ -378,14 +378,14 @@ export default function (props) {
               <td>The Expedition</td>
               <td>${commafy(expTvl).split('.')[0]}</td>
             </tr>
-            <tr>
+            {/* <tr>
               <td>The Safari</td>
               <td>${commafy()}</td>
             </tr>
             <tr>
               <td>The ZooRena</td>
               <td>${commafy()}</td>
-            </tr>
+            </tr> */}
             <tr>
               <td>NFT Value</td>
               <td>${commafy()}</td>
