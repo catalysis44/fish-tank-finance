@@ -314,7 +314,7 @@ export default function (props) {
           }
           return -1;
         });
-        setLastTx(allTx.slice(-50).reverse());
+        setLastTx(allTx.slice(-30).reverse());
       }).catch(console.error);
 
     }).catch(console.error);
@@ -674,7 +674,7 @@ export default function (props) {
       <div className={styles.row} style={{ marginTop: -40 }}>
         <div className={styles.panel_full}>
           <div className={styles.log_title}>
-            <img src="assets/sidebar/insight.png" /> <span>{t("LATEST 50 NFT TRANSACTIONS")}</span>
+            <img src="assets/sidebar/insight.png" /> <span>{t("LATEST 30 NFT TRANSACTIONS")}</span>
           </div>
           <div className={styles.item_list_wrapper}>
             <div className={styles.item_list}>
@@ -683,6 +683,13 @@ export default function (props) {
                   lastTx.map(v => {
                     let time = (Date.now() - (new Date(v.time))) / 1000;
                     let timeStr = getTimeStr(time,t);
+                    //temp remove it later//
+                    {
+                      if (v._id === '608751eca6ff39001f9ca3c8')
+                      {
+                        return;
+                      }
+                    }
                     return <div className={styles.listview_row}>
                       <div className={`${styles.listview_col} ${styles.log_icon}`}>
                         {
