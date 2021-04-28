@@ -231,5 +231,6 @@ export default {
   "{0} hours ago...":"{0} 小时之前...",
   "{0} minute ago...":"{0} 分钟之前...",
   "{0} minutes ago...":"{0} 分钟之前...",
-  "Just now...":"刚刚..."
+  "Just now...":"刚刚...",
+  "Waiting for insight page loading...":"汇总板页面信息加载中请稍候...",
 };

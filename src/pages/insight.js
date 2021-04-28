@@ -271,7 +271,9 @@ export default function (props) {
       axios.get('https://rpc.zookeeper.finance/api/v1/setTvl?tvl=' + (Number(expTvl) + Number(zooTvl))).then(ret => {
         // console.debug(ret);
       }).catch(console.error);
+      window.insightLoading = false;
     } else {
+      window.insightLoading = true;
       history.push('/');
     }
   }, [expTvl, zooTvl, zooPrice, chainId])
