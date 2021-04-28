@@ -175,21 +175,21 @@ export default {
     "will be added to the market with a tag price of":"se incorporará al mercado con un precio de etiqueta de",
 
     // Insight Page //
-    "Insight": "Insight",
+    "Insights": "Insights",
     "ZOO Price": "Precio ZOO",
     "Circulating supply": "Provisión actual",
     "Market Cap":"Market Cap",
     "Fully Diluted MC":"MC completamente diluido",
     "Total value locked":"Valor total cerada",
-    "NFT Value":"Valor NFT",
+    "Locked NFTs Value":"Valor NFTs cerrados",
     "Zoo Distribution Ends In":"Distribución de Zoo terminada en",
     "Zoo Burning Rate":"Tasa de Zoo quemados",
     "Estimated Zoo Supply":"Estimación de provisión de Zoo",
     "per day":"per día",
     "Gold Chests opened":"Cofres de oro abiertos",
     "Silver Chest opened":"Cofres de plata abiertos",
-    "24 hrs Rate":"Tasa desde 24 horas",
-    "Gold Chests Price":"Precio cofre de oro",
+    "24 hr Rate":"Tasa desde 24 horas",
+    "Gold Chest Price":"Precio cofre de oro",
     "24 hrs":"24 horas",
     "1 Week":"1 semana",
     "Average Boosting Attached":"Promedio de boost adjuntos",
@@ -200,7 +200,20 @@ export default {
     "LEVEL":"NIVEL",
     "SUPPLY":"PROVISIÓN",
     "INIT. ABILITIES":"CAPACIDADES INIC.",
-    "LATEST SOLD":"ÚLTIMO VENDIDO",
-    "None Unlocked (yet)":"Ninguno desbloqueado"
+    "LATEST SALE":"ÚLTIMO VENDIDO",
+    "None Unlocked (yet)":"Ninguno desbloqueado",
+
+    "LATEST 30 NFT TRANSACTIONS":"ÚLTIMAS 30 TRANSACCIÓNES",
+    "Silver Chest opened and received ": "Cofre de plata abierto y a recibido ",
+    "Gold Chest opened and received ":"Cofre de oro abierto y a recibido ",
+    "Purchased":"",
+    "for":"comprado para",
+    "{0} day ago...":"Hace {0} día...",
+    "{0} days ago...":"Hace {0} días...",
+    "{0} hour ago...":"Hace {0} hora...",
+    "{0} hours ago...":"Hace {0} horas...",
+    "{0} minute ago...":"Hace {0} minuto...",
+    "{0} minutes ago...":"Hace {0} minutos...",
+    "Just now...":"Ahora mismo..."
   };
   

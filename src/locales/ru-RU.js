@@ -179,5 +179,34 @@ export default {
     "BUSINESS IS GROWING":"БИЗНЕС РАСТЕТ",
     "will be added to the market with a tag price of":"будет добавлено на рынок по цене",
 
+
+    // Insight Page //
+    "Insight": "Данные",
+    "ZOO Price": "Цена ЗОО",
+    "Circulating supply": "Текущее предложение",
+    "Market Cap":"Рыночная капитализация",
+    "Fully Diluted MC":"Полностью разбавленная РК",
+    "Total value locked":"Общая стоимость заблокирована",
+    "Locked NFTs Value":"Значение NFT",
+    "Zoo Distribution Ends In":"Распределение ЗОО заканчивается через",
+    "Zoo Burning Rate":"Уровень сожжённых ЗОО",
+    "Estimated Zoo Supply":"Предполагаемое предложение ЗОО ",
+    "per day":"в день",
+    "Golden Chests opened":"Золотой Сундук открыт",
+    "Silver Chests opened":"Серебряный Сундук открыт",
+    "24 hr Rate":"24-часовой тариф",
+    "Golden Chest Price":"Цена Золотого Сундука",
+    "24 hrs":"24 часа",
+    "1 Week":"1 неделя",
+    "Average Boosting Attached":"Средний множитель прикреплён",
+    "Average Time Reducing Attached":"Средний обратный отсчёт времени прикреплён",
+    "Total Booster":"Общий ускоритель",
+    "Booster Holders":"Держатели ускорителя",
+    "BOOSTER NAME":"НАЗВАНИЕ УСКОРИТЕЛЯ",
+    "LEVEL":"УРОВЕНЬ",
+    "SUPPLY":"ПРЕДЛОЖЕНИЕ",
+    "INIT. ABILITIES":"ИЗНАЧ. ДАННЫЕ",
+    "LATEST SALE":"ПОСЛЕДНЕЕ ПРОДАНО",
+    "None Unlocked (yet)":"Ничего Не Заблокировано"
   };
   

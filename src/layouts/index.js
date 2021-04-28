@@ -250,7 +250,7 @@ function BasicLayout(props) {
 
               <NavLink onClick={toggleSidebar} to="/insight" activeClassName="is_active">
                 <img src="assets/sidebar/insight.png"/>
-                <span>{t("Insight")}</span>
+                <span>{t("Insights")}</span>
               </NavLink>
             </div>
 

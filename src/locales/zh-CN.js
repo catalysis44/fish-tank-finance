@@ -192,21 +192,21 @@ export default {
 
 
   // Insight Page //
-  "Insight": "汇总板",
+  "Insights": "汇总板",
   "ZOO Price": "ZOO价格",
   "Circulating supply": "流通量",
   "Market Cap":"当前市值",
   "Fully Diluted MC":"预估挖矿结束后的总市值",
   "Total value locked":"总锁定金额",
-  "NFT Value":"锁定NFT",
+  "Locked NFTs Value":"锁定NFT",
   "Zoo Distribution Ends In":"Zoo挖矿结束倒计时",
   "Zoo Burning Rate":"Zoo销毁率",
   "Estimated Zoo Supply":"预估Zoo总发行量",
   "per day":"每天",
   "Gold Chests opened":"黄金宝箱开启数量",
   "Silver Chest opened":"白银宝箱开启数量",
-  "24 hrs Rate":"24小时成功率",
-  "Gold Chests Price":"黄金宝箱价格",
+  "24 hr Rate":"24小时成功率",
+  "Gold Chest Price":"黄金宝箱价格",
   "24 hrs":"24小时",
   "1 Week":"1星期",
   "Average Boosting Attached":"平均NFT卡牌加速",
@@ -217,7 +217,7 @@ export default {
   "LEVEL":"等级",
   "SUPPLY":"供应量",
   "INIT. ABILITIES":"初始属性",
-  "LATEST SOLD":"最近成交价格",
+  "LATEST SALE":"最近成交价格",
   "None Unlocked (yet)":"未解锁",
 
   "LATEST 30 NFT TRANSACTIONS":"最近30条NFT事件",
@@ -225,11 +225,11 @@ export default {
   "Gold Chest opened and received ":"一个黄金宝箱被打开，并得到了 ",
   "Purchased":"购买了",
   "for":"花费",
-  " day ago...":" 天之前...",
-  " days ago...":" 天之前...",
-  " hour ago...":" 小时之前...",
-  " hours ago...":" 小时之前...",
-  " minute ago...":" 分钟之前...",
-  " minutes ago...":" 分钟之前...",
-  " Just now...":" 刚刚..."
+  "{0} day ago...":"{0} 天之前...",
+  "{0} days ago...":"{0} 天之前...",
+  "{0} hour ago...":"{0} 小时之前...",
+  "{0} hours ago...":"{0} 小时之前...",
+  "{0} minute ago...":"{0} 分钟之前...",
+  "{0} minutes ago...":"{0} 分钟之前...",
+  "Just now...":"刚刚..."
 };

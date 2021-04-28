@@ -17,30 +17,30 @@ import { invalidNFT } from '../config';
 function getTimeStr(time,t) {
   
   if (parseInt(time / (3600 * 24)) === 1) {
-    return parseInt(time / (3600 * 24)) + t(' day ago...');
+    return t('{0} day ago...',[parseInt(time / (3600 * 24))]);
   }
 
   if (parseInt(time / (3600 * 24)) >= 2) {
-    return parseInt(time / (3600 * 24)) + t(' days ago...');
+    return t('{0} days ago...',[parseInt(time / (3600 * 24))]);
   }
 
   if (parseInt(time / (3600)) === 1) {
-    return parseInt(time / (3600)) + t(' hour ago...');
+    return t('{0} hour ago...',[parseInt(time / (3600))]);
   }
 
   if (parseInt(time / (3600)) >= 2) {
-    return parseInt(time / (3600)) + t(' hours ago...');
+    return t('{0} hours ago...',[parseInt(time / (3600))]);
   }
 
   if (parseInt(time / (60)) === 1) {
-    return parseInt(time / (60)) + t(' minute ago...');
+    return t('{0} minute ago...',[parseInt(time / (60))]);
   }
 
   if (parseInt(time / (60)) >= 2) {
-    return parseInt(time / (60)) + t(' minutes ago...');
+    return t('{0} minutes ago...',[parseInt(time / (60))]);
   }
 
-  return t(' Just now...');
+  return t('Just now...');
 }
 
 export default function (props) {
@@ -446,7 +446,7 @@ export default function (props) {
               <td>${commafy()}</td>
             </tr> */}
             <tr>
-              <td>{t('NFT Value')}</td>
+              <td>{t('Locked NFTs Value')}</td>
               <td>${commafy(lockedNftValue).split('.')[0]}</td>
             </tr>
           </table>
@@ -496,7 +496,7 @@ export default function (props) {
             </div>
             <div className={styles.silver_daily}>
               {commafy(silverRate).split('.')[0]}%
-            <div>{t('24 hrs Rate')}</div>
+            <div>{t('24 hr Rate')}</div>
             </div>
           </div>
           <div className={styles.price_title}>
@@ -613,7 +613,7 @@ export default function (props) {
                           {t('INIT. ABILITIES')}
                         </div>
                         <div className={`${styles.listview_col} ${styles.header}  ${styles.centered}`}>
-                          {t('LATEST SOLD')}
+                          {t('LATEST SALE')}
                         </div>
                       </div>
                       {
@@ -683,13 +683,7 @@ export default function (props) {
                   lastTx.map(v => {
                     let time = (Date.now() - (new Date(v.time))) / 1000;
                     let timeStr = getTimeStr(time,t);
-                    //temp remove it later//
-                    {
-                      if (v._id === '608751eca6ff39001f9ca3c8')
-                      {
-                        return;
-                      }
-                    }
+                   
                     return <div className={styles.listview_row}>
                       <div className={`${styles.listview_col} ${styles.log_icon}`}>
                         {
