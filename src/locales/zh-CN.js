@@ -194,10 +194,10 @@ export default {
   // Insight Page //
   "Insights": "汇总板",
   "ZOO Price": "ZOO价格",
-  "Circulating supply": "流通量",
+  "Circulating Supply": "流通量",
   "Market Cap":"当前市值",
   "Fully Diluted MC":"预估挖矿结束后的总市值",
-  "Total value locked":"总锁定金额",
+  "Total Value Locked":"总锁定金额",
   "Locked NFTs Value":"锁定NFT",
   "Zoo Distribution Ends In":"Zoo挖矿结束倒计时",
   "Zoo Burning Rate":"Zoo销毁率",

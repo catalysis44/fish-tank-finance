@@ -180,10 +180,10 @@ export default {
     // Insight page //
     "Insight": "İçgörü",
     "ZOO Price": "ZOO Fiyatı",
-    "Circulating supply": "Tedavüldeki tedarik",
+    "Circulating Supply": "Tedavüldeki tedarik",
     "Market Cap":"Piyasa Değeri",
     "Fully Diluted MC":"Fully Diluted Piyasa Değeri",
-    "Total value locked":"Kilitli toplam değer",
+    "Total Value Locked":"Kilitli toplam değer",
     "Locked NFTs Value":"NFT Değeri",
     "Zoo Distribution Ends In":"Zoo Dağıtımı Sona Erecek:",
     "Zoo Burning Rate":"Zoo Yakma Oranı",
@@ -207,8 +207,8 @@ export default {
     "None Unlocked (yet)":"Hiçbiri Açılmadı (şimdiye kadar)",
 
     "LATEST 30 NFT TRANSACTIONS":"SON 30 NFT İŞLEMİ",
-    "Silver Chest opened and received ":"Gümüş Sandık açıldı ve alındı",
-    "Gold Chest opened and received ":"Alındı Sandık açıldı ve alındı",
+    "Silver Chest opened and received ":"Gümüş Sandık açıldı ve alındı ",
+    "Gold Chest opened and received ":"Alındı Sandık açıldı ve alındı ",
     "Purchased":"Satın Alındı",
     "for":"için",
     "{0} day ago...":"{0} gün önce...",

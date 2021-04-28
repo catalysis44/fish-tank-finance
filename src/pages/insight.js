@@ -398,7 +398,7 @@ export default function (props) {
                   ${commafy(zooPrice)}
                 </div>
                 <div className={styles.title}>
-                  {t("Circulating supply")}: <span>{commafy(storage.zooTotalSupply).split('.')[0]} ZOO</span>
+                  {t("Circulating Supply")}: <span>{commafy(storage.zooTotalSupply).split('.')[0]} ZOO</span>
                 </div>
               </div>
             </div>
@@ -425,7 +425,7 @@ export default function (props) {
             <img src="assets/tvl.png" />
             <div className={styles.tvl_value}>
               ${commafy(Number(zooTvl) + Number(expTvl) + Number(lockedNftValue)).split('.')[0]}
-              <div>{t('Total value locked')}</div>
+              <div>{t('Total Value Locked')}</div>
             </div>
           </div>
           <table className={styles.tvl_table}>

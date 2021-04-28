@@ -183,10 +183,10 @@ export default {
     // Insight Page //
     "Insight": "Данные",
     "ZOO Price": "Цена ЗОО",
-    "Circulating supply": "Текущее предложение",
+    "Circulating Supply": "Текущее предложение",
     "Market Cap":"Рыночная капитализация",
     "Fully Diluted MC":"Полностью разбавленная РК",
-    "Total value locked":"Общая стоимость заблокирована",
+    "Total Value Locked":"Общая стоимость заблокирована",
     "Locked NFTs Value":"Значение NFT",
     "Zoo Distribution Ends In":"Распределение ЗОО заканчивается через",
     "Zoo Burning Rate":"Уровень сожжённых ЗОО",

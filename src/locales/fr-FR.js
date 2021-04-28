@@ -177,10 +177,10 @@ export default {
   // Insight Page //
   "Insights": "Insights",
   "ZOO Price": "Prix ZOO",
-  "Circulating supply": "Fonds actuels",
+  "Circulating Supply": "Fonds actuels",
   "Market Cap":"Market Cap",
   "Fully Diluted MC":"MC totalement dilué",
-  "Total value locked":"Valeur totale verrouillée",
+  "Total Value Locked":"Valeur totale verrouillée",
   "Locked NFTs Value":"Valeur NFTs verrouillés",
   "Zoo Distribution Ends In":"Distribution de Zoo terminée dans",
   "Zoo Burning Rate":"Taux de Zoo brûlés",
@@ -203,8 +203,8 @@ export default {
   "LATEST SALE":"DERNIER VENDU",
   "None Unlocked (yet)":"Aucun déverrouillé",
 
-  "LATEST 30 NFT TRANSACTIONS":"DERNIERES 30 TRANSACTIONS",
-  "Silver Chest opened and received":"Coffre d’argent ouvert et a offert ",
+  "LATEST 30 NFT TRANSACTIONS":"30 DERNIERES TRANSACTIONS",
+  "Silver Chest opened and received ":"Coffre d’argent ouvert et a offert ",
   "Gold Chest opened and received ":"Coffre d’or ouvert et a offert ",
   "Purchased":"",
   "for":"a été acheté pour",
