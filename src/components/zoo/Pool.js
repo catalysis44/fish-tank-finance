@@ -16,6 +16,8 @@ import { getPrices } from '../../hooks/price';
 import { useLanguage } from '../../hooks/language';
 import { useLocalStorageState } from 'ahooks';
 import CountUp from 'react-countup';
+import { history } from 'umi';
+
 
 const poolAnimals = [
   '/zoo_keeper_pools/LION.png',
@@ -260,6 +262,12 @@ export default function Pool(props) {
 
   if (wslpPrice && totalDeposited && totalDeposited * wslpPrice) {
     window.tvl[poolInfo.pid] = totalDeposited * wslpPrice;
+    if (poolInfo.pid == props.poolLength - 1) {
+      if (window.insightLoading) {
+        window.insightLoading = false;
+        history.push('/insight');
+      }
+    }
   }
 
   // console.debug('pooInfo', pid, symbol0, symbol1, JSON.stringify(poolInfo, null, 2));

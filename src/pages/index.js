@@ -60,6 +60,9 @@ export default function () {
       {
         txWaiting && <Loader/>
       }
+      {
+        window.insightLoading && <Loader info={'Waiting for insight page loading...'}/>
+      }
       <div id="filterbar_backdrop" onClick={toggleFilter}></div>
       <a id="toggle_filter" className={styles.toggle_filter} onClick={toggleFilter}><span><img src="assets/magnify24x24.png" /> {t("FILTER")}</span></a>
       <div className={styles.filter_row}>
@@ -133,7 +136,7 @@ export default function () {
                 visible = false;
               }
             }
-            return <Pool poolInfo={v} pid={v.pid} key={v.pid} setTxWaiting={setTxWaiting} farmingInfo={storage.farmingInfo} visible={visible}/>
+            return <Pool poolInfo={v} pid={v.pid} key={v.pid} setTxWaiting={setTxWaiting} farmingInfo={storage.farmingInfo} visible={visible} poolLength={storage.poolInfo.length} />
           })
         }
         {
