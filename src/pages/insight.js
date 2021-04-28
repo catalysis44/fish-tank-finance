@@ -655,7 +655,7 @@ export default function (props) {
                             </div>
                             <div className={`${styles.listview_col} ${styles.item_price}  ${styles.centered}`}>
                               {
-                                nftList[nftTab][item][level].price ? (nftList[nftTab][item][level].price + ' ' + nftList[nftTab][item][level].symbol) : '--'
+                                nftList[nftTab][item][level].price ? (commafy(nftList[nftTab][item][level].price) + ' ' + nftList[nftTab][item][level].symbol) : '--'
                               }
                             </div>
                           </div>
