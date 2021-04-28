@@ -208,8 +208,19 @@ export default {
     "INIT. ABILITIES":"ИЗНАЧ. ДАННЫЕ",
     "LATEST SALE":"ПОСЛЕДНЕЕ ПРОДАНО",
     "None Unlocked (yet)":"Ничего Не Заблокировано",
+    "LATEST 30 NFT TRANSACTIONS":"ПОСЛЕДНИЕ 30 NFT транзакций",
+    "Silver Chest opened and received ":"Серебряный Сундук открыт и получен ",
+    "Gold Chest opened and received ":"Золотой Сундук открыт и получен ",
+    "Purchased":"Куплен",
+    "for":"для",
+    "{0} day ago...":"{0} день назад...",
+    "{0} days ago...":"{0} дней назад...",
+    "{0} hour ago...":"{0} час назад...",
+    "{0} hours ago...":"{0} часов назад...",
+    "{0} minute ago...":"{0} минуту назад...",
+    "{0} minutes ago...":"{0} минут назад...",
+    "Just now...":"Недавно...",
 
-
-    "Insights Loading...":"Insights Loading...",
+    "Insights Loading...":"Идёт Загрузка...",
   };
   
