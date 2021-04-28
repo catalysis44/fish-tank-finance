@@ -121,18 +121,19 @@ export default function () {
         }
         {
           storage.poolInfo.sort(sortFunc).map((v, i)=>{
+            let visible = true;
             if (onlyStaked) {
               if (!v.lpAmount || v.lpAmount.toString() === '0') {
-                return null;
+                visible = false;
               }
             }
 
             if (onlyActived) {
               if (!v.allocPoint || v.allocPoint === 0) {
-                return null;
+                visible = false;
               }
             }
-            return <Pool poolInfo={v} pid={v.pid} key={v.pid} setTxWaiting={setTxWaiting} farmingInfo={storage.farmingInfo}/>
+            return <Pool poolInfo={v} pid={v.pid} key={v.pid} setTxWaiting={setTxWaiting} farmingInfo={storage.farmingInfo} visible={visible}/>
           })
         }
         {

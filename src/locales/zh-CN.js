@@ -231,5 +231,5 @@ export default {
   " hours ago...":" 小时之前...",
   " minute ago...":" 分钟之前...",
   " minutes ago...":" 分钟之前...",
-  " long time ago...":" 很久以前..."
+  " Just now...":" 刚刚..."
 };

@@ -114,6 +114,8 @@ export default function Pool(props) {
   const multiplier = poolInfo.getMultiplier;
   // console.debug('multiplier', multiplier, symbol0, symbol1);
 
+  const visible = props.visible;
+
   const zooPerWeek = useMemo(() => {
     if (currentBlock <= startBlock) {
       return new BigNumber(0);
@@ -265,6 +267,10 @@ export default function Pool(props) {
   // console.debug('harvest', connected, deposited, poolInfo.pendingWasp, poolInfo.pendingZoo, (connected && deposited));
   // console.debug('total', totalDeposited * wslpPrice, totalDeposited.toString(), wslpPrice);
   // console.log('symbol', symbol0, symbol1);
+  if (!visible) {
+    return null;
+  }
+  
   return (
     <React.Fragment >
       <BoosterSelectionModal isActived={modal} setModal={setModal}
