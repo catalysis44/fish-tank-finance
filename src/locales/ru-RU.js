@@ -192,10 +192,10 @@ export default {
     "Zoo Burning Rate":"Уровень сожжённых ЗОО",
     "Estimated Zoo Supply":"Предполагаемое предложение ЗОО ",
     "per day":"в день",
-    "Golden Chests opened":"Золотой Сундук открыт",
-    "Silver Chests opened":"Серебряный Сундук открыт",
+    "Gold Chests Opened":"Золотой Сундук открыт",
+    "Silver Chests Opened":"Серебряный Сундук открыт",
     "24 hr Rate":"24-часовой тариф",
-    "Golden Chest Price":"Цена Золотого Сундука",
+    "Gold Chest Price":"Цена Золотого Сундука",
     "24 hrs":"24 часа",
     "1 Week":"1 неделя",
     "Average Boosting Attached":"Средний множитель прикреплён",
@@ -207,6 +207,9 @@ export default {
     "SUPPLY":"ПРЕДЛОЖЕНИЕ",
     "INIT. ABILITIES":"ИЗНАЧ. ДАННЫЕ",
     "LATEST SALE":"ПОСЛЕДНЕЕ ПРОДАНО",
-    "None Unlocked (yet)":"Ничего Не Заблокировано"
+    "None Unlocked (yet)":"Ничего Не Заблокировано",
+
+
+    "Insights Loading...":"Insights Loading...",
   };
   

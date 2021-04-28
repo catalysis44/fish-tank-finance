@@ -186,8 +186,8 @@ export default {
   "Zoo Burning Rate":"Taux de Zoo brûlés",
   "Estimated Zoo Supply":"Estimation des fonds de Zoo",
   "per day":"par jour",
-  "Gold Chests opened":"Coffres d’or ouverts",
-  "Silver Chests opened":"Coffres d’argent ouverts",
+  "Gold Chests Opened":"Coffres d’or ouverts",
+  "Silver Chests Opened":"Coffres d’argent ouverts",
   "24 hr Rate":"Taux sur 24 heures",
   "Gold Chest Price":"Prix coffre d’or",
   "24 hrs":"24 heures",
@@ -214,5 +214,6 @@ export default {
   "{0} hours ago...":"Il y a {0} heures",
   "{0} minute ago...":"Il y a {0} minute",
   "{0} minutes ago...":"Il y a {0} minutes",
-  "๋Just now...":"A l'instant..."
+  "๋Just now...":"A l'instant...",
+  "Insights Loading...":"Chargement Insights...",
 };

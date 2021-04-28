@@ -61,7 +61,7 @@ export default function () {
         txWaiting && <Loader/>
       }
       {
-        window.insightLoading && <Loader info={'Waiting for insight page loading...'}/>
+        window.insightLoading && <Loader info={'Insights Loading...'}/>
       }
       <div id="filterbar_backdrop" onClick={toggleFilter}></div>
       <a id="toggle_filter" className={styles.toggle_filter} onClick={toggleFilter}><span><img src="assets/magnify24x24.png" /> {t("FILTER")}</span></a>

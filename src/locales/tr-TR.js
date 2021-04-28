@@ -189,8 +189,8 @@ export default {
     "Zoo Burning Rate":"Zoo Yakma Oranı",
     "Estimated Zoo Supply":"Tahmini Zoo Tedariki",
     "per day":"günlük",
-    "Gold Chests opened":"Altın Sandık açıldı",
-    "Silver Chests opened":"Gümüş Sandık açıldı",
+    "Gold Chests Opened":"Altın Sandık açıldı",
+    "Silver Chests Opened":"Gümüş Sandık açıldı",
     "24 hr Rate":"24 saat Oranı",
     "Gold Chest Price":"Altın Sandık Fiyatı",
     "24 hrs":"24 saat",
@@ -217,5 +217,6 @@ export default {
     "{0} hours ago...":"{0} saat önce...",
     "{0} minute ago...":"{0} dakika önce...",
     "{0} minutes ago...":"{0} dakika önce...",
-    "Just now...":"Şu anda..."
+    "Just now...":"Şu anda...",
+    "Insights Loading...":"Insights Loading...",
 };

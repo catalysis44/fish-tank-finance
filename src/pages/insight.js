@@ -487,14 +487,14 @@ export default function (props) {
             <img src="assets/goldenbox42x42.png" />
             <div className={styles.chest_opened_value}>
               {golden.length}
-              <div>{t('Gold Chests opened')}</div>
+              <div>{t('Gold Chests Opened')}</div>
             </div>
           </div>
           <div className={styles.chest_opened}>
             <img src="assets/silverbox42x42.png" />
             <div className={styles.chest_opened_value}>
               {silver.length}
-              <div>{t('Silver Chests opened')}</div>
+              <div>{t('Silver Chests Opened')}</div>
             </div>
             <div className={styles.silver_daily}>
               {commafy(silverRate).split('.')[0]}%

@@ -203,8 +203,8 @@ export default {
   "Zoo Burning Rate":"Zoo销毁率",
   "Estimated Zoo Supply":"预估Zoo总发行量",
   "per day":"每天",
-  "Gold Chests opened":"黄金宝箱开启数量",
-  "Silver Chest opened":"白银宝箱开启数量",
+  "Gold Chests Opened":"黄金宝箱开启数量",
+  "Silver Chests Opened":"白银宝箱开启数量",
   "24 hr Rate":"24小时成功率",
   "Gold Chest Price":"黄金宝箱价格",
   "24 hrs":"24小时",
@@ -232,5 +232,5 @@ export default {
   "{0} minute ago...":"{0} 分钟之前...",
   "{0} minutes ago...":"{0} 分钟之前...",
   "Just now...":"刚刚...",
-  "Waiting for insight page loading...":"汇总板页面信息加载中请稍候...",
+  "Insights Loading...":"汇总板页面信息加载中请稍候...",
 };
