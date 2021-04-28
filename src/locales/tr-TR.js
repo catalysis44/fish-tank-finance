@@ -217,6 +217,6 @@ export default {
     "{0} hours ago...":"{0} saat önce...",
     "{0} minute ago...":"{0} dakika önce...",
     "{0} minutes ago...":"{0} dakika önce...",
-    "Just now...":"Şu anda...",
-    "Insights Loading...":"Insights Loading...",
+    "Just now...":"Az önce...",
+    "Insights Loading...":"İçgörüler Yükleniyor...",
 };
