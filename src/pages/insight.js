@@ -40,7 +40,7 @@ function getTimeStr(time,t) {
     return parseInt(time / (60)) + t(' minutes ago...');
   }
 
-  return t('Just now...');
+  return t(' Just now...');
 }
 
 export default function (props) {
