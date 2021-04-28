@@ -10,7 +10,7 @@ const marketAbi = require('../assets/abi/market.json');
 export const withdraw = async (pid, amount, chainId, web3, address) => {
   // console.debug('withdraw', pid, amount, chainId, web3, address);
   const sc = new web3.eth.Contract(farmingAbi, ZOO_FARMING_ADDRESS[chainId]);
-  let ret = await sc.methods.withdraw(pid, amount).send({ gasPrice: '0x3b9aca00', from: address, gas: 600000 });
+  let ret = await sc.methods.withdraw(pid, amount).send({ gasPrice: '0x3b9aca00', from: address, gas: 880000 });
   // console.debug('withdraw ret', ret);
   return ret.status;
 }
@@ -18,7 +18,7 @@ export const withdraw = async (pid, amount, chainId, web3, address) => {
 export const deposit = async (pid, amount, lockTime, nftId, chainId, web3, address) => {
   // console.debug('deposit', pid, amount, lockTime, nftId, chainId, web3, address);
   const sc = new web3.eth.Contract(farmingAbi, ZOO_FARMING_ADDRESS[chainId]);
-  let ret = await sc.methods.deposit(pid, amount, lockTime, nftId).send({ gasPrice: '0x3b9aca00', from: address, gas: 600000 });
+  let ret = await sc.methods.deposit(pid, amount, lockTime, nftId).send({ gasPrice: '0x3b9aca00', from: address, gas: 880000 });
   // console.debug('deposit ret', ret);
   return ret.status;
 }

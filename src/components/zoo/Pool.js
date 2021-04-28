@@ -454,7 +454,7 @@ export default function Pool(props) {
 
             <div className={styles.staked}>
               <div className={styles.title}>
-                WSLP {t("STAKED")}: {poolInfo.lpAmount * wslpPrice ? ('$' + commafy(poolInfo.lpAmount * wslpPrice).split('.')[0]) : (commafy(poolInfo.lpAmount) + ' WSLP')}
+                WSLP {t("STAKED")}: {poolInfo.lpAmount * wslpPrice ? ('$' + commafy(poolInfo.lpAmount * wslpPrice).split('.')[0]) : (commafy(poolInfo.lpAmount,10) + ' WSLP')}
               </div>
               <div className={styles.action_wrapper}>
                 {
@@ -593,12 +593,15 @@ export default function Pool(props) {
             <div className={styles.locking}>
               <div className={styles.title}>
                 <span>{t("LOCK PERIOD")}</span>
+               
                 <span className={styles.boost}>{t("ZOO BOOST")} +{commafy(calcLockTimeBoost(lockDays) * 100) + '%'}</span>
               </div>
               <div className={styles.lock_wrapper}>
 
                 <div className={styles.lock_period}>
-                  {lockDays} {t("days")}
+                  <input id="lock_period_amount" className={styles.lock_period_amount} value={lockDays} onChange={(e) => {
+                    setLockDays(e.target.value);
+                  }}></input> <label for="lock_period_amount">{t("days")}</label>
                 </div>
                 <div className={styles.lock_action}>
                   <Slider value={lockDays} min={parseInt(countdown / 1000 / 3600 / 24)} max={180} tooltipVisible={false} onChange={(e) => {
