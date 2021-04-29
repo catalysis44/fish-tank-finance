@@ -267,7 +267,12 @@ export default function (props) {
   }) : 0;
 
   useEffect(() => {
-    if (Number(expTvl) > 0 && Number(zooTvl) > 0 && Number(zooPrice) > 0 && Number(chainId) !== 999) {
+    if (Number(chainId) !== 999) {
+      history.push('/');
+      return;
+    }
+
+    if (Number(expTvl) > 0 && Number(zooTvl) > 0 && Number(zooPrice) > 0) {
       axios.get('https://rpc.zookeeper.finance/api/v1/setTvl?tvl=' + (Number(expTvl) + Number(zooTvl))).then(ret => {
         // console.debug(ret);
       }).catch(console.error);
