@@ -39,6 +39,9 @@ export default function CardView(props) {
   const [showConfirmActionModal, setShowConfirmActionModal] = useState(0);
 
   const setTxWaiting = props.setTxWaiting;
+  const item = rare;
+  const itemSupply = window.banCount && window.banCount[category] && window.banCount[category][item] && window.banCount[category][item][level] ? (props.itemSupply - window.banCount[category][item][level]) : props.itemSupply;
+
 
   return (
     <React.Fragment >
@@ -51,7 +54,7 @@ export default function CardView(props) {
         categoryName={categorys[category - 1]}
         categoryIcon={categoryIcons[category - 1]}
         tokenId={props.tokenId}
-        itemSupply={props.itemSupply}
+        itemSupply={itemSupply}
         boost={props.boost}
         reduce={props.reduce}
         currency={currency}
@@ -94,7 +97,7 @@ export default function CardView(props) {
                 <span><img src={categoryIcons[category - 1]} /> {t(categorys[category - 1])}</span>
               </div>
               <div className={styles.description_supply}>
-                <div className={styles.gauge} data-level={getSupplyLevel(props.itemSupply)}> {/*LV 1-5*/ }
+                <div className={styles.gauge} data-level={getSupplyLevel(itemSupply)}> {/*LV 1-5*/ }
                   <div></div>
                   <div></div>
                   <div></div>
@@ -102,7 +105,7 @@ export default function CardView(props) {
                   <div></div>
                 </div>
                 <span>{t('Total Supply')}</span>
-                {props.itemSupply}
+                {itemSupply}
               </div>
             </div>
             {/*On Sale : hide it if not on the market*/}
@@ -223,11 +226,6 @@ export default function CardView(props) {
           </div>
         </div>
       </div>
-
-
-
-
-
     </React.Fragment>
   )
 }

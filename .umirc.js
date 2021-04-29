@@ -10,5 +10,6 @@ export default {
     title: false,
     baseNavigator: true,
     baseSeparator: '-',
-  },
+  }
+  //history: { type: 'hash' },
 }

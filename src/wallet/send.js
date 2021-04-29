@@ -10,7 +10,7 @@ const marketAbi = require('../assets/abi/market.json');
 export const withdraw = async (pid, amount, chainId, web3, address) => {
   // console.debug('withdraw', pid, amount, chainId, web3, address);
   const sc = new web3.eth.Contract(farmingAbi, ZOO_FARMING_ADDRESS[chainId]);
-  let ret = await sc.methods.withdraw(pid, amount).send({ gasPrice: '0x3b9aca00', from: address });
+  let ret = await sc.methods.withdraw(pid, amount).send({ gasPrice: '0x3b9aca00', from: address, gas: 880000 });
   // console.debug('withdraw ret', ret);
   return ret.status;
 }
@@ -18,7 +18,7 @@ export const withdraw = async (pid, amount, chainId, web3, address) => {
 export const deposit = async (pid, amount, lockTime, nftId, chainId, web3, address) => {
   // console.debug('deposit', pid, amount, lockTime, nftId, chainId, web3, address);
   const sc = new web3.eth.Contract(farmingAbi, ZOO_FARMING_ADDRESS[chainId]);
-  let ret = await sc.methods.deposit(pid, amount, lockTime, nftId).send({ gasPrice: '0x3b9aca00', from: address });
+  let ret = await sc.methods.deposit(pid, amount, lockTime, nftId).send({ gasPrice: '0x3b9aca00', from: address, gas: 880000 });
   // console.debug('deposit ret', ret);
   return ret.status;
 }
@@ -200,3 +200,11 @@ export const approveForMarketBuy = async (token, chainId, web3, address) => {
   return ret.status;
 }
 
+export const sendNft = async (tokenId, chainId, web3, address, toAddress) => {
+  const erc721 = new web3.eth.Contract(erc721Abi, ZOO_NFT_ADDRESS[chainId]);
+  let ret = await erc721.methods.safeTransferFrom(address, toAddress, tokenId).send({ gasPrice: '0x3b9aca00', from: address });
+  if(!ret || !ret.status) {
+    throw new Error("send failed");
+  }
+  return ret.status;
+}

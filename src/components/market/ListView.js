@@ -29,6 +29,8 @@ function Row(props) {
   const decimals = ret.decimals;
   const currencyIcon = symbol && currencyList.find(v => v.symbol === symbol).icon;
 
+  const itemSupply = window.banCount && window.banCount[category] && window.banCount[category][item] && window.banCount[category][item][level] ? (props.itemSupply - window.banCount[category][item][level]) : props.itemSupply;
+
 
   return <div className={styles.listview_row}>
 
@@ -87,7 +89,7 @@ function Row(props) {
             {props.tokenId}
         </div>
           <div className={styles.description_supply}>
-            <div className={styles.gauge} data-level={getSupplyLevel(props.itemSupply)}> {/*LV 1-5*/}
+            <div className={styles.gauge} data-level={getSupplyLevel(itemSupply)}> {/*LV 1-5*/}
               <div></div>
               <div></div>
               <div></div>
@@ -95,7 +97,7 @@ function Row(props) {
               <div></div>
             </div>
             <span>{t('Total Supply')}</span>
-            {props.itemSupply}
+            {itemSupply}
           </div>
         </div>
       </div>
@@ -116,7 +118,7 @@ function Row(props) {
             categoryName: categorys[category - 1],
             categoryIcon: categoryIcons[category - 1],
             tokenId: props.tokenId,
-            itemSupply: props.itemSupply,
+            itemSupply,
             boost: props.boost,
             reduce: props.reduce,
             currency: symbol,

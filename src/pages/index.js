@@ -60,6 +60,9 @@ export default function () {
       {
         txWaiting && <Loader/>
       }
+      {
+        window.insightLoading && <Loader info={'Insights Loading...'}/>
+      }
       <div id="filterbar_backdrop" onClick={toggleFilter}></div>
       <a id="toggle_filter" className={styles.toggle_filter} onClick={toggleFilter}><span><img src="assets/magnify24x24.png" /> {t("FILTER")}</span></a>
       <div className={styles.filter_row}>
@@ -121,18 +124,19 @@ export default function () {
         }
         {
           storage.poolInfo.sort(sortFunc).map((v, i)=>{
+            let visible = true;
             if (onlyStaked) {
               if (!v.lpAmount || v.lpAmount.toString() === '0') {
-                return null;
+                visible = false;
               }
             }
 
             if (onlyActived) {
               if (!v.allocPoint || v.allocPoint === 0) {
-                return null;
+                visible = false;
               }
             }
-            return <Pool poolInfo={v} pid={v.pid} key={v.pid} setTxWaiting={setTxWaiting} farmingInfo={storage.farmingInfo}/>
+            return <Pool poolInfo={v} pid={v.pid} key={v.pid} setTxWaiting={setTxWaiting} farmingInfo={storage.farmingInfo} visible={visible} poolLength={storage.poolInfo.length} />
           })
         }
         {

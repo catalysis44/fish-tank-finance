@@ -101,7 +101,7 @@ export default function (props) {
 
           </div>
           <div className={styles.title}>
-            {t("THE GOLDEN CHEST")}
+            {t("THE GOLD CHEST")}
           </div>
           <div className={styles.condition}>
             <div className={styles.minimum}>
@@ -123,13 +123,13 @@ export default function (props) {
             </div>
             <div className={styles.description}>
               <div>{t("SPEND ZOO TO ACQUIRE")}</div>
-              <div>1 {t("GOLDEN CHEST")}</div>
+              <div>1 {t("GOLD CHEST")}</div>
             </div>
           </div>
 
           <div className={styles.action_wrapper}>
             <a className={styles.action_btn} onClick={() => { setShowGoldenModal(1) }}>
-              {t("BUY GOLDEN CHEST")}
+              {t("BUY GOLD CHEST")}
             </a>
           </div>
         </div>
@@ -220,7 +220,7 @@ export default function (props) {
             <div className={styles.description}>
               <div>{t("STAKE AND LOCK")}</div>
               <div>{t("ZOO TO RECEIVE")}</div>
-              <div>1 {t("GOLDEN CHEST")}</div>
+              <div>1 {t("GOLD CHEST")}</div>
             </div>
           </div>
           {
@@ -275,7 +275,7 @@ export default function (props) {
                   getNftInfo(ret.events.MintNFT.returnValues.tokenId, web3, chainId).then(obj => {
                     insertHistory('chest', Date.now(), ret.events.MintNFT.returnValues.tokenId, obj.name, obj.image, ret.events.MintNFT.returnValues.level, '0', 'ZOO', ret.transactionHash);
                     // console.debug('nftmeta111', obj);
-                    openNotificationOpenedBox(t('GOLDEN CHEST HAS BEEN OPENED'),t('You got'),t('Check your Safe'), obj.name, t('Your boost card has been transfered to your safe.'), obj.image, false, true);
+                    openNotificationOpenedBox(t('GOLD CHEST HAS BEEN OPENED'),t('You got'),t('Check your Safe'), obj.name, t('Your boost card has been transfered to your safe.'), obj.image, false, true);
                   }).catch(err => {
                     console.error('getNftInfo error', err);
                   });
@@ -284,7 +284,7 @@ export default function (props) {
                   setTxWaiting(false);
                 })
               }}>
-                {t("Claim 1 Golden Chest")}
+                {t("Claim 1 Gold Chest")}
               </a>
             }
             {
@@ -328,7 +328,7 @@ export default function (props) {
             <div className={styles.description}>
               <div>{t("STAKE AND LOCK")}</div>
               <div>{t("ZOO TO RECEIVE")}</div>
-              <div>1 {t("GOLDEN CHEST")}</div>
+              <div>1 {t("GOLD CHEST")}</div>
 
             </div>
           </div>
@@ -384,7 +384,7 @@ export default function (props) {
                     // console.debug('nftmeta111', obj);
                     insertHistory('chest', Date.now(), ret.events.MintNFT.returnValues.tokenId, obj.name, obj.image, ret.events.MintNFT.returnValues.level, commafy((new BigNumber(ret.events.GoldenBuy.returnValues.price)).div(1e18)), 'ZOO', ret.transactionHash);
 
-                    openNotificationOpenedBox(t('GOLDEN CHEST HAS BEEN OPENED'),t('You got'),t('Check your Safe'), obj.name, t('Your boost card has been transfered to your safe.'), obj.image, false, true);
+                    openNotificationOpenedBox(t('GOLD CHEST HAS BEEN OPENED'),t('You got'),t('Check your Safe'), obj.name, t('Your boost card has been transfered to your safe.'), obj.image, false, true);
                   }).catch(err => {
                     console.error('getNftInfo error', err);
                   });
@@ -393,7 +393,7 @@ export default function (props) {
                   setTxWaiting(false);
                 })
               }}>
-               {t("Claim 1 Golden Chest")}
+               {t("Claim 1 Gold Chest")}
               </a>
             }
             {
@@ -437,7 +437,7 @@ export default function (props) {
             <div className={styles.description}>
               <div>{t("STAKE AND LOCK")}</div>
               <div>{t("ZOO TO RECEIVE")}</div>
-              <div>1 {t("GOLDEN CHEST")}</div>
+              <div>1 {t("GOLD CHEST")}</div>
 
             </div>
           </div>
@@ -492,7 +492,7 @@ export default function (props) {
                   getNftInfo(ret.events.MintNFT.returnValues.tokenId, web3, chainId).then(obj => {
                     // console.debug('nftmeta111', obj);
                     insertHistory('chest', Date.now(), ret.events.MintNFT.returnValues.tokenId, obj.name, obj.image, ret.events.MintNFT.returnValues.level, commafy((new BigNumber(ret.events.GoldenBuy.returnValues.price)).div(1e18)), 'ZOO', ret.transactionHash);
-                    openNotificationOpenedBox(t('GOLDEN CHEST HAS BEEN OPENED'),t('You got'),t('Check your Safe'), obj.name, t('Your boost card has been transfered to your safe.'), obj.image, false, true);
+                    openNotificationOpenedBox(t('GOLD CHEST HAS BEEN OPENED'),t('You got'),t('Check your Safe'), obj.name, t('Your boost card has been transfered to your safe.'), obj.image, false, true);
                   }).catch(err => {
                     console.error('getNftInfo error', err);
                   });
@@ -501,7 +501,7 @@ export default function (props) {
                   setTxWaiting(false);
                 })
               }}>
-               {t("Claim 1 Golden Chest")}
+               {t("Claim 1 Gold Chest")}
             </a>
             }
             {

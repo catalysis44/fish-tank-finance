@@ -8,7 +8,7 @@ export default {
   "Spices":"Spices",
   "Foods":"Foods",
   "Potions":"Potions",
-  "Magic":"Magie",
+  "Magic":"Magic",
 
   //layout
   "DISCONNECT": "断开钱包",
@@ -27,7 +27,7 @@ export default {
   "Your sell order":"你的出售订单",
   "has been concluded":"已经成交",
   "info":"信息",
-  "Vote":"投票",
+  "Vote":"去投票",
 
   //Pool
   "REWARD": "收益",
@@ -88,11 +88,11 @@ export default {
   "Burn your Zoo and secure a 100% chance of acquiring a random NFT collectible.": "燃烧你的ZOO代币，可以100%概率得到一个随机NFT收藏卡牌.",
   "SILVER CHEST INSTANT BUY": "立即购买白银宝箱",
   "Burn your Zoo and have a 10% chance of getting a random NFT collectible. If you get \"nothing\" 9 times in a row, the next purchase will give you a 100% chance to acquire a random NFT collectible.": "燃烧你的NFT代币，有10%的概率得到一个低稀有度随机NFT收藏卡牌，如果连续9次不中，则第10次概率提升为100%.",
-  "THE GOLDEN CHEST": "黄金宝箱",
+  "THE GOLD CHEST": "黄金宝箱",
   "INSTANT": "立即购买",
   "SPEND ZOO TO ACQUIRE": "花费ZOO代币并得到",
-  "GOLDEN CHEST": "黄金宝箱",
-  "BUY GOLDEN CHEST": "购买黄金宝箱",
+  "GOLD CHEST": "黄金宝箱",
+  "BUY GOLD CHEST": "购买黄金宝箱",
   "THE SILVER CHEST": "白银宝箱",
   "SILVER CHEST": "白银宝箱",
   "BUY SILVER CHEST": "购买白银宝箱",
@@ -104,7 +104,7 @@ export default {
   "STAKE AND LOCK": "质押并锁定",
   "ZOO TO RECEIVE": "ZOO代币将得到",
   "Stake ZOO": "质押ZOO代币",
-  "Claim 1 Golden Chest": "领取1个黄金宝箱",
+  "Claim 1 Gold Chest": "领取1个黄金宝箱",
   "Obsidian Mines of Khralia":"赫拉利亚的黑曜石矿",
   "Drakorian Forests of Loot":"德拉科掠夺者森林",
   "Lost Island of Brambleson":"迷失的布兰布尔森岛",
@@ -115,7 +115,7 @@ export default {
   "You got":"你获得了",
   "your boost card has been transfered to you safe.":"你的加速卡牌已经放入保险箱中.",
   "SILVER CHEST HAS BEEN OPENED":"白银宝箱已经开启",
-  "GOLDEN CHEST HAS BEEN OPENED":"黄金宝箱已经开启",
+  "GOLD CHEST HAS BEEN OPENED":"黄金宝箱已经开启",
   "Nothing...":"什么也没有...",
   "Unfortunately you get nothing this time around; after 9 unsuccessful tries you are guaranteed a random NFT upon opening the 10th silver chest in a row.":"Unfortunately you get nothing this time around; after 9 unsuccessful tries you are guaranteed a random NFT upon opening the 10th silver chest in a row.",
 
@@ -172,4 +172,65 @@ export default {
 
   "NEW POOL": "新挖矿池",
   "TOMORROW": "明日上线",
+
+  
+  "Those items has been marked as FRAUDULENT and cannot be placed to the marketplace. To keep your Wallet clean, please burn those NFT with our Burn Machine, Thank you": "这些商品已被标记为欺诈物品，不可继续使用，也不能放在市场上交易。为了保持您的钱包干净，请用点击下方的销毁按钮来销毁它们，谢谢",
+  "ITEM NAME":"物品名称",
+  "ABILITIES":"属性",
+  "CATTEGORY":"物品名称",
+  "Burn":"销毁",
+  "After burned these items. Please contact us directly on Telegram":"在销毁完成后，请在telegram中联系下面的人来解除你的账户异常状态",
+  
+  
+  "RAGING MANE LEO": "狂怒 狮子王",
+  'BARCODE BRENDA': "扫我条形码 斑马",
+  'MEL GIBBON': "梅尔 吉布森猴", // MONKEY    
+  'CARL CROCS': "卡尔 马鳄斯", // CROCODILE  
+  'PAULIE BAMBOOZLE': "宝利 功夫熊猫", // PANDA   
+  'RAFFERTY G. MONAY': "混沌 莫奈鹿", // GIRAFFE   
+  'ELON TUSK': "翼龙 马斯克", // ELEPHANT   
+
+
+  // Insight Page //
+  "Insights": "汇总板",
+  "ZOO Price": "ZOO价格",
+  "Circulating Supply": "流通量",
+  "Market Cap":"当前市值",
+  "Fully Diluted MC":"预估挖矿结束后的总市值",
+  "Total Value Locked":"总锁定金额",
+  "Locked NFTs Value":"锁定NFT",
+  "Zoo Distribution Ends In":"Zoo挖矿结束倒计时",
+  "Zoo Burning Rate":"Zoo销毁率",
+  "Estimated Zoo Supply":"预估Zoo总发行量",
+  "per day":"每天",
+  "Gold Chests Opened":"黄金宝箱开启数量",
+  "Silver Chests Opened":"白银宝箱开启数量",
+  "24 hr Rate":"24小时成功率",
+  "Gold Chest Price":"黄金宝箱价格",
+  "24 hrs":"24小时",
+  "1 Week":"1星期",
+  "Average Boosting Attached":"平均NFT卡牌加速",
+  "Average Time Reducing Attached":"平均锁定时间减少",
+  "Total Booster":"总加速卡牌数量",
+  "Booster Holders":"NFT卡牌持有人",
+  "BOOSTER NAME":"加速卡牌名称",
+  "LEVEL":"等级",
+  "SUPPLY":"供应量",
+  "INIT. ABILITIES":"初始属性",
+  "LATEST SALE":"最近成交价格",
+  "None Unlocked (yet)":"未解锁",
+
+  "LATEST 30 NFT TRANSACTIONS":"最近30条NFT事件",
+  "Silver Chest opened and received ":"一个白银宝箱被打开，并得到了 ",
+  "Gold Chest opened and received ":"一个黄金宝箱被打开，并得到了 ",
+  "Purchased":"购买了",
+  "for":"花费",
+  "{0} day ago...":"{0} 天之前...",
+  "{0} days ago...":"{0} 天之前...",
+  "{0} hour ago...":"{0} 小时之前...",
+  "{0} hours ago...":"{0} 小时之前...",
+  "{0} minute ago...":"{0} 分钟之前...",
+  "{0} minutes ago...":"{0} 分钟之前...",
+  "Just now...":"刚刚...",
+  "Insights Loading...":"汇总板页面信息加载中请稍候...",
 };

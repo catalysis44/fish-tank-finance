@@ -16,6 +16,8 @@ import { getPrices } from '../../hooks/price';
 import { useLanguage } from '../../hooks/language';
 import { useLocalStorageState } from 'ahooks';
 import CountUp from 'react-countup';
+import { history } from 'umi';
+
 
 const poolAnimals = [
   '/zoo_keeper_pools/LION.png',
@@ -62,7 +64,6 @@ const poolTitles = [
   'HIP HIPPO RAY', // HIPPO
   'DAVID HASSELHOP', // KANGAROO
 ]
-
 
 export default function Pool(props) {
   const [modal, setModal] = useState(0);
@@ -114,6 +115,8 @@ export default function Pool(props) {
 
   const multiplier = poolInfo.getMultiplier;
   // console.debug('multiplier', multiplier, symbol0, symbol1);
+
+  const visible = props.visible;
 
   const zooPerWeek = useMemo(() => {
     if (currentBlock <= startBlock) {
@@ -253,11 +256,29 @@ export default function Pool(props) {
     symbol1 = 'WAN';
   }
 
+  if (!window.tvl) {
+    window.tvl = []
+  }
+
+  if (wslpPrice && totalDeposited && totalDeposited * wslpPrice) {
+    window.tvl[poolInfo.pid] = totalDeposited * wslpPrice;
+    if (poolInfo.pid == props.poolLength - 1) {
+      if (window.insightLoading) {
+        window.insightLoading = false;
+        history.push('/insight');
+      }
+    }
+  }
+
   // console.debug('pooInfo', pid, symbol0, symbol1, JSON.stringify(poolInfo, null, 2));
   // console.debug('currentInfo', icon, nftId, boost, reduce);
   // console.debug('harvest', connected, deposited, poolInfo.pendingWasp, poolInfo.pendingZoo, (connected && deposited));
   // console.debug('total', totalDeposited * wslpPrice, totalDeposited.toString(), wslpPrice);
   // console.log('symbol', symbol0, symbol1);
+  if (!visible) {
+    return null;
+  }
+  
   return (
     <React.Fragment >
       <BoosterSelectionModal isActived={modal} setModal={setModal}
@@ -308,7 +329,7 @@ export default function Pool(props) {
         </div>
         <div className={styles.header}>
           <div className={styles.title}>
-            {poolTitles[pid]}
+            {t(poolTitles[pid])}
           </div>
           {/*is-success for KEEPER CHOICE and is-dark for COMMUNITY CHOICE*/}
           <div className="choice button is-success is-outlined">
@@ -441,7 +462,7 @@ export default function Pool(props) {
 
             <div className={styles.staked}>
               <div className={styles.title}>
-                WSLP {t("STAKED")}: {poolInfo.lpAmount * wslpPrice ? ('$' + commafy(poolInfo.lpAmount * wslpPrice).split('.')[0]) : (commafy(poolInfo.lpAmount) + ' WSLP')}
+                WSLP {t("STAKED")}: {poolInfo.lpAmount * wslpPrice ? ('$' + commafy(poolInfo.lpAmount * wslpPrice).split('.')[0]) : (commafy(poolInfo.lpAmount,10) + ' WSLP')}
               </div>
               <div className={styles.action_wrapper}>
                 {
@@ -580,12 +601,18 @@ export default function Pool(props) {
             <div className={styles.locking}>
               <div className={styles.title}>
                 <span>{t("LOCK PERIOD")}</span>
+               
                 <span className={styles.boost}>{t("ZOO BOOST")} +{commafy(calcLockTimeBoost(lockDays) * 100) + '%'}</span>
               </div>
               <div className={styles.lock_wrapper}>
 
                 <div className={styles.lock_period}>
-                  {lockDays} {t("days")}
+                  <input id="lock_period_amount" className={styles.lock_period_amount} value={lockDays} onChange={(e) => {
+                    e.target.value = Math.floor(e.target.value);
+                    if (e.target.value>180) e.target.value = 180;
+                    if (e.target.value<0 || isNaN(e.target.value)) e.target.value = 0;
+                    setLockDays(e.target.value);
+                  }}></input> <label for="lock_period_amount">{t("days")}</label>
                 </div>
                 <div className={styles.lock_action}>
                   <Slider value={lockDays} min={parseInt(countdown / 1000 / 3600 / 24)} max={180} tooltipVisible={false} onChange={(e) => {

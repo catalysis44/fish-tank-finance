@@ -1,0 +1,649 @@
+.row
+{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin:0 auto;
+    padding: 0px 10px;
+    max-width:880px;
+}
+.row:first-child
+{
+    margin-top:60px;
+}
+
+.price_mc_wrapper
+{
+    display:flex;
+    .price_wrapper
+    {
+        flex:1;
+        display:flex;
+        align-items: center;
+        img
+        {
+            width:32px;
+            height:32px;
+            margin-right:20px;
+        }
+        .amount
+        {
+            font-size: 30px;
+            color: #00a99d;
+            line-height: 25px;
+            padding-top: 6px;
+        }
+        .title
+        {
+            color:black;
+            span
+            {
+                color:#00a99d;
+            }
+        }
+    }
+    .mc_wrapper
+    {
+        flex:1;
+        display:flex;
+        align-items: center;
+       
+        img
+        {
+            width:32px;
+            height:32px;
+            margin-right:20px;
+            margin-left:30px;
+        }
+        .amount
+        {
+            font-size: 30px;
+            color: #00a99d;
+            line-height: 25px;
+            padding-top: 6px;
+        }
+        .title
+        {
+            color:black;
+            span
+            {
+                color:#00a99d;
+            }
+        }
+    }
+}
+
+.panel
+{
+  width:400px;
+  height:180px;
+  background:white;
+  border-radius: 4px;
+  box-shadow:4px 4px 0 rgba(0,0,0,0.04);
+  margin:20px 10px;
+  margin-top:0;
+  padding:20px;
+  position:relative;
+
+    // TVL BOX //
+    .tvl_header
+    {
+        img
+        {
+            max-height:34px;
+            margin-right:10px;
+        }
+        display:flex;
+        .tvl_value
+        {
+            color:#00a99d;
+            display:flex;
+            flex-direction: column;
+            justify-content: center;
+            font-size:22px;
+            line-height:18px;
+            padding-top:3px;
+            div
+            {
+                font-size:14px;
+                color:black;
+            }
+        }
+    }
+    .tvl_table
+    {
+        margin-top:8px;
+        color:black;
+        width:100%;
+        font-size:14px;
+        td:last-child
+        {
+            text-align: right;
+            color:#00a99d;
+        }
+    }
+
+    // Chest //
+    .chest_opened
+    {
+        img
+        {
+            max-height:34px;
+            margin-right:10px;
+        }
+        display:flex;
+        margin-bottom:5px;
+        .chest_opened_value
+        {
+            flex:1;
+            color:#00a99d;
+            display:flex;
+            flex-direction: column;
+            justify-content: center;
+            font-size:22px;
+            line-height:18px;
+            padding-top:3px;
+            div
+            {
+                font-size:14px;
+                color:black;
+                white-space: nowrap;
+            }
+        }
+        .silver_daily
+        {
+            flex:1;
+            font-size:22px;
+            
+            text-align: center;
+            line-height:18px;
+            color:#00a99d;
+            padding-top:3px;
+           
+            margin-left:20px;
+            padding-left:20px;
+            border-left:1px solid #eee;
+            div
+            {
+                color:black;
+                font-size:13px;
+            }
+        }
+        
+    }
+    .price_title
+    {
+
+        text-align: center;
+        color:black;
+    }
+    .chest_price_wrapper
+    {
+        display:flex;
+        margin-top:0px;
+    }
+   
+    .chest_price
+    {
+        flex:1;
+        font-size:16px;
+        margin:0 5px;
+        text-align: center;
+        line-height:14px;
+        color:#00a99d;
+        padding-top:5px;
+        background:#eee;
+        border-radius: 4px;
+        div
+        {
+            color:black;
+            font-size:13px;
+        }
+    }
+
+    // ZOO //
+    &.zoo_stat
+    {
+        display:flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    .title
+    {
+        line-height: 20px;
+        color:black;
+        margin-top:3px;
+    }
+    .estimated_supply
+    {
+        font-size:22px;
+        color:#00a99d;
+        span
+        {
+            font-size:11px;
+            color:black;
+        }
+    }
+
+
+    // Booster //
+    .booster
+    {
+        img
+        {
+            max-height:34px;
+            margin-right:10px;
+        }
+        display:flex;
+        margin-bottom:5px;
+        .booster_value
+        {
+            color:#00a99d;
+            display:flex;
+            flex-direction: column;
+            justify-content: center;
+            font-size:22px;
+            line-height:18px;
+            padding-top:3px;
+            div
+            {
+                font-size:14px;
+                color:black;
+            }
+        }
+    }
+    .booster_sub_wrapper
+    {
+        display:flex;
+        justify-content: space-around;
+        margin-top:10px;
+        .booster_sub
+        {
+            color:black;
+            text-align: center;
+            div
+            {
+                color:#00a99d;
+            }
+        }
+    }
+}
+.panel_full
+{
+  .log_title
+  {
+      color:black;
+      font-size:20px;
+      margin-bottom:10px;
+      img
+      {
+          width:28px;
+          margin-right:5px;
+      }
+  }
+  width:100%;
+
+  background:white;
+  border-radius: 4px;
+  box-shadow:4px 4px 0 rgba(0,0,0,0.04);
+  margin:60px 20px;
+
+  padding:20px;
+  position:relative;
+  margin-top:40px;
+  .item_category_tab
+  {
+      display:flex;
+      position:absolute;
+      top:-25px;
+      left:0px;
+      .category
+      {
+          &.is_active
+          {
+              opacity:1;
+          }
+          &:hover
+          {
+            opacity:1;
+          }
+          color:black;
+          display:block;
+          padding:2px 8px;
+          margin-right:3px;
+          background:white;
+          border-top-right-radius: 4px;
+          border-top-left-radius: 4px;
+          opacity:0.5;
+          img
+          {
+              margin-right:3px;
+          }
+      }
+  }
+  .item_list_wrapper
+  {
+    // Removed Scroll bar (I hate you Maro!)
+    //height:400px;
+    //max-height:400px;
+    //overflow-y: auto;
+    margin-right:-20px;
+    margin-left:-20px;
+    
+  }
+  .item_list:last-child
+  {
+    margin-bottom:-40px;
+  }
+  .item_list
+  {
+    margin-left:20px;
+    margin-right:20px;
+      .grade
+      {
+          img
+          {
+              margin-right:5px;
+              height:28px;
+          }
+          color:black;
+          font-size:22px;
+      }
+
+      .listview_table
+      {
+        display:table;
+        width:100%;
+        border-collapse: collapse;
+        margin-top:10px;
+        margin-bottom:40px;
+      }
+      
+
+        .listview_row
+        {
+        display:table-row;
+        width:100%;
+        border-bottom:1px solid #eee;
+
+            .listview_col
+            {
+                &.header
+                {
+                    font-size:16px;
+                    color:black;
+                }
+                &.centered
+                {
+                    text-align: center;
+                }
+                display:table-cell;
+                padding:5px 3px;
+                vertical-align: middle;
+                
+                color:black;
+                &.item_image
+                {
+                    color:black;
+                    text-align: center;
+                    font-size:22px;
+                    img
+                    {
+                        min-width:24px;
+                        width:32px;
+                    }
+                }
+                &.item_name
+                {
+                    color:black;
+                    max-width:100px;
+                }
+
+                &.item_stars 
+                {
+                    text-align: center;
+                    img
+                    {
+                         height:16px;
+                    }
+                   
+                }
+                &.item_supply
+                {
+                    color:#00a99d;
+                    text-align: center;
+                }
+                &.item_abilities
+                {
+                    text-align: center;
+                    img
+                    {
+                        width:15px;
+                    }
+                    font-size:13px;
+                }
+                &.item_price
+                {
+                    color:#00a99d;
+                }
+
+                /// For LOG ///
+                &.log_icon
+                {
+                    
+                    max-width: 40px;
+                    padding-top:10px;
+                    padding-bottom:10px;
+                    text-align: center;
+                    vertical-align: top;
+                    img
+                    {
+                        width:40px;
+                      
+                    }
+                }
+                &.log_message
+                {
+                    line-height:20px;
+                    padding-top:10px;
+                    padding-bottom:10px;
+                    padding-left:10px;
+                    div
+                    {
+                        font-size:1em;
+                    }
+                    font-size:1em;
+                    span
+                    {
+                        color:#00a99d;
+                    }
+                }
+            }
+        }
+  }
+}
+
+/*Responsive*/
+@media screen and (max-width: 1159px)
+{
+    .row
+    {
+        max-width:680px !important;
+    }
+    .panel
+    {
+        width:300px !important;
+    }
+}
+@media screen and (max-width: 940px)
+{
+    .panel,.panel_full
+    {
+        width:100% !important;
+        margin-left:20px !important;
+        margin-right:20px !important;
+    }
+}
+@media screen and (max-width: 870px)
+{
+    .item_category_tab
+    {
+        top:-45px !important;
+    }
+    .panel_full
+    {
+        margin-top:60px;
+    }
+    .item_category_tab .category
+    {
+        display:flex !important;
+        flex-direction: column !important;
+        align-items: center;
+        margin-right: 3px !important;
+        padding: 2px 10px !important;
+        font-size:12px;
+        img
+        {
+            width:24px !important;
+            text-align: center;
+            margin-right:0 !important;
+        }
+    }
+    .header:nth-child(5)
+    {
+        display:none !important;
+    }
+    .item_abilities
+    {
+        display:none !important;
+    }
+}
+@media screen and (max-width: 650px)
+{
+    .listview_col,.header
+    {
+        font-size:13px !important;
+    }
+}
+@media screen and (max-width: 425px)
+{
+    .panel_full
+    {
+        margin-top:40px;
+    }
+    .item_category_tab
+    {
+        top:-32px !important;
+    }
+    .item_category_tab .category
+    {
+        padding-top:5px !important;
+        padding-bottom:5px !important;
+        
+    }
+    .item_category_tab .category span
+    {
+        display:none !important;
+    }
+    .price_mc_wrapper
+    {
+        flex-direction: column;
+    }
+    .price_mc_wrapper .mc_wrapper
+    {
+        margin-top:20px;
+    }
+    .price_mc_wrapper .mc_wrapper img
+    {
+        margin-left:0;
+    }
+    .panel,.panel_full
+    {
+        width:100% !important;
+        margin-left: 0px !important;
+        margin-right: 0px !important;
+    }
+}
+
+
+:global
+{
+    #burning_bar .ant-progress-bg
+    {
+        background:#c1272d !important;
+    }
+    .ant-progress-show-info .ant-progress-outer {
+        margin-right: calc(-2em - 25px);
+        padding-right: calc(2em + 25px);
+    }
+    .ant-progress
+    {
+        top:-3px;
+    }
+
+}
+
+
+// Darkmode //
+:global
+{
+    html[data-scheme="dark"]
+    {
+        .ant-progress-text
+        {
+            color:white !important;
+        }
+        .ant-progress-inner
+        {
+            background-color: #555 !important;
+        }
+        :local
+        {
+            .panel_full, .panel
+            {
+                background:#101010;
+            }
+            
+            .item_category_tab .category
+            {
+                background:#101010 !important;
+                color:white !important;
+            }
+            .item_list .grade,.listview_col.header
+            {
+                color:white !important;
+            }
+            .listview_col.item_name, .listview_col.item_abilities
+            {
+                color:white !important;
+            }
+            .silver_daily
+            {
+                border-left:1px solid #555 !important;
+            }
+            .listview_row
+            {
+                border-bottom: 1px solid #555 !important;
+            }
+            .title, td, .tvl_value div, .chest_opened_value div,.silver_daily div,.price_title,.estimated_supply span,.booster_value div,.booster_sub
+            {
+                color:white !important;
+            }
+            .log_message,.log_title
+            {
+                color:white !important;
+            }
+            .chest_price
+            {
+                background:#000 !important;
+                color:#00a99d !important;
+                div
+                {
+                    color:white !important;
+                }
+            }
+        }
+        
+    }
+    
+}
