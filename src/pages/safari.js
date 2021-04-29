@@ -64,6 +64,10 @@ export default function (props) {
                   <div>{t("STAKE ZOO AND")}</div>
                   <div>{t("GET")} wanSUSHI</div>
                 </div>
+                <div className={styles.caption} style={{paddingRight:16,display:'none'}}>
+                  <div>{t("This pool already expired.")}</div>
+                  <div>{t("Please withdraw your ZOO and claim remaining reward below.")}</div>
+                </div>
                 <a className={styles.topup_btn}  style={{display:'none'}}>{t('Top-up')}</a>
               </div>
             </div>
@@ -171,6 +175,10 @@ export default function (props) {
                 <div className={styles.caption}>
                   <div>{t("STAKE ZOO AND")}</div>
                   <div>{t("GET")} wanSUSHI</div>
+                </div>
+                <div className={styles.caption} style={{paddingRight:16,display:'none'}}>
+                  <div>{t("This pool already expired.")}</div>
+                  <div>{t("Please withdraw your ZOO and claim remaining reward below.")}</div>
                 </div>
                 <a className={styles.topup_btn}  style={{display:'none'}}>{t('Top-up')}</a>
               </div>
@@ -280,6 +288,10 @@ export default function (props) {
                   <div>{t("STAKE ZOO AND")}</div>
                   <div>{t("GET")} wanSUSHI</div>
                 </div>
+                <div className={styles.caption} style={{paddingRight:16,display:'none'}}>
+                  <div>{t("This pool already expired.")}</div>
+                  <div>{t("Please withdraw your ZOO and claim remaining reward below.")}</div>
+                </div>
                 <a className={styles.topup_btn}>{t('Top-up')}</a>
               </div>
             </div>
@@ -385,7 +397,11 @@ export default function (props) {
 
               </div>
               <div className={styles.description}>
-                <div className={styles.caption}>
+                <div className={styles.caption} style={{display:'none'}}>
+                  <div>{t("STAKE ZOO AND")}</div>
+                  <div>{t("GET")} wanSUSHI</div>
+                </div>
+                <div className={styles.caption} style={{paddingRight:16}}>
                   <div>{t("This pool already expired.")}</div>
                   <div>{t("Please withdraw your ZOO and claim remaining reward below.")}</div>
                 </div>
@@ -497,6 +513,10 @@ export default function (props) {
                 <div className={styles.caption}>
                   <div>{t("STAKE ZOO AND")}</div>
                   <div>{t("GET")} wanSUSHI</div>
+                </div>
+                <div className={styles.caption} style={{paddingRight:16,display:'none'}}>
+                  <div>{t("This pool already expired.")}</div>
+                  <div>{t("Please withdraw your ZOO and claim remaining reward below.")}</div>
                 </div>
                 <a className={styles.topup_btn}  style={{display:'none'}}>{t('Top-up')}</a>
               </div>
