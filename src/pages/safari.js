@@ -115,6 +115,7 @@ export default function (props) {
            
             <a className={styles.action_btn}>
                 {t("Claim")}
+                <div>{'~'}0.00001 wanBTC</div>
               </a>
             
           </div>
@@ -122,6 +123,7 @@ export default function (props) {
           <div className={styles.action_wrapper} style={{display:'none'}}>
             <a className={styles.action_btn}>
                 {t("Withdraw & Claim")}
+                <div>{'~'}0.00001 wanBTC</div>
             </a>
           </div>
         </div>
@@ -227,6 +229,7 @@ export default function (props) {
            
             <a className={styles.action_btn}>
                 {t("Claim")}
+                <div>{'~'}0.00001 wanBTC</div>
               </a>
             
           </div>
@@ -234,6 +237,7 @@ export default function (props) {
           <div className={styles.action_wrapper} style={{display:'none'}}>
             <a className={styles.action_btn}>
                 {t("Withdraw & Claim")}
+                <div>{'~'}0.00001 wanBTC</div>
             </a>
           </div>
         </div>
@@ -339,6 +343,7 @@ export default function (props) {
            
             <a className={styles.action_btn}>
                 {t("Claim")}
+                <div>{'~'}0.00001 wanBTC</div>
               </a>
             
           </div>
@@ -346,6 +351,7 @@ export default function (props) {
           <div className={styles.action_wrapper} style={{display:'none'}}>
             <a className={styles.action_btn}>
                 {t("Withdraw & Claim")}
+                <div>{'~'}0.00001 wanBTC</div>
             </a>
           </div>
         </div>
@@ -452,6 +458,7 @@ export default function (props) {
            
             <a className={styles.action_btn}>
                 {t("Claim")}
+                <div>{'~'}0.00001 wanBTC</div>
               </a>
             
           </div>
@@ -459,6 +466,7 @@ export default function (props) {
           <div className={styles.action_wrapper}>
             <a className={styles.action_btn}>
                 {t("Withdraw & Claim")}
+                <div>{'~'}0.00001 wanBTC</div>
             </a>
           </div>
         </div>
@@ -565,6 +573,7 @@ export default function (props) {
            
             <a className={styles.action_btn}>
                 {t("Claim")}
+                <div>{'~'}0.00001 wanBTC</div>
               </a>
             
           </div>
@@ -572,6 +581,7 @@ export default function (props) {
           <div className={styles.action_wrapper} style={{display:'none'}}>
             <a className={styles.action_btn}>
                 {t("Withdraw & Claim")}
+                <div>{'~'}0.00001 wanBTC</div>
             </a>
           </div>
         </div>
