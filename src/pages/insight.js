@@ -267,7 +267,7 @@ export default function (props) {
   }) : 0;
 
   useEffect(() => {
-    if (Number(chainId) !== 999) {
+    if (Number(chainId) === 999) {
       history.push('/');
       return;
     }
