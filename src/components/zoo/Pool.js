@@ -608,6 +608,9 @@ export default function Pool(props) {
 
                 <div className={styles.lock_period}>
                   <input id="lock_period_amount" className={styles.lock_period_amount} value={lockDays} onChange={(e) => {
+                    e.target.value = Math.floor(e.target.value);
+                    if (e.target.value>180) e.target.value = 180;
+                    if (e.target.value<0 || isNaN(e.target.value)) e.target.value = 0;
                     setLockDays(e.target.value);
                   }}></input> <label for="lock_period_amount">{t("days")}</label>
                 </div>
