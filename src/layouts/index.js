@@ -210,8 +210,12 @@ function BasicLayout(props) {
           }}>{connected ? t("DISCONNECT") : t("CONNECT WALLET")}</a>
           <div class="address"><img src="assets/wallet32x32.png" /><span>{address ? address.slice(0, 6) + '...' + address.slice(-6) : t('NO WALLET')}</span> <a onClick={() => copyAddress(address)} className="has-tooltip-top  has-tooltip-active"><FontAwesomeIcon icon={faCopy} /></a></div>
           {chainId && chainId.toString() !== '1' && chainId.toString() !== '888' && chainId !== "" && <div class="testnet"><span>!! {t('TESTNET')} !!</span></div>}
-          <div class="balance"><img src="assets/zoo32x32.png" /><span>{commafy(storage.zooBalance)}</span></div>
-          <div class="balance" style={{ marginTop: 5 }}><img src="assets/wasp32x32.png" /><span>{commafy(storage.waspBalance)}</span></div>
+          <div class="balance">
+            <img src="assets/zoo32x32.png" /><span>{commafy(storage.zooBalance)}</span>
+            <hr/>
+            <img src="assets/wasp32x32.png" /><span>{commafy(storage.waspBalance)}</span>
+          </div>
+        
         </div>
 
 
