@@ -233,6 +233,4 @@ export default {
   "{0} minutes ago...":"{0} 分钟之前...",
   "Just now...":"刚刚...",
   "Insights Loading...":"汇总板页面信息加载中请稍候...",
-
-  "The Safari": "去旅行",
 };

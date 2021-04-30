@@ -190,10 +190,8 @@ export default function CardView(props) {
         return;
       }
 
+      // console.log('markets', markets);
       const arr = markets.map(v => {
-        if (!v.uri) {
-          console.error('uri is undefined', v);
-        }
         return axioGet(v.uri);
       });
 

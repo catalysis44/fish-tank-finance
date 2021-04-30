@@ -59,12 +59,6 @@ export const WWAN_ADDRESS = {
   '999': "0x916283cc60fdaf05069796466af164876e35d21f",
 }
 
-export const SAFARI_ADDRESS = {
-  '1': "0x4092eB95190516751f141274a15c508014bD1854",
-  '888': "0x4092eB95190516751f141274a15c508014bD1854",
-  '999': "0x4092eB95190516751f141274a15c508014bD1854",
-}
-
 export const RPC_URL = {
   '1': "https://rpc.zookeeper.finance",
   '888': "https://rpc.zookeeper.finance",
