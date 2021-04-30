@@ -2,10 +2,19 @@ import styles from './safari.less';
 import React, { useContext, useEffect } from 'react';
 import { useState } from 'react';
 import { useLanguage } from '../hooks/language';
+import { StorageContext } from '../hooks';
+import { getPrices } from '../hooks/price';
+import { commafy } from '../utils';
 
 export default function (props) {
   const t = useLanguage();
   const [topup, setTopup] = useState(0);
+
+  const storage = useContext(StorageContext);
+  const prices = getPrices();
+  const safariInfo = storage.safariInfo;
+  const weekBlock = 3600*24*7/5;
+
   return (
     <React.Fragment>
       {
@@ -13,7 +22,123 @@ export default function (props) {
       }
 
       <div className={styles.row}>
+      {
+        safariInfo && safariInfo.map((v,i)=>{
+          return <div className={styles.pool} data-active={false}> {/*active true for on staking pool */}
+          <div className={styles.cover_wrapper} >
+            <img src="dummy/desertxbtc.png" className={styles.cover} />
+            <div className={styles.tvl}>
+              <div className={styles.amount}>
+                {commafy(v.currentSupply)}
+              </div>
+              <span>{t("ZOO LOCKED")}</span>
+            </div>
+          </div>
+          <div className={styles.title}>
+            HUNTING THE {v.rewardTokenSymbol} (Season{parseInt(i / 2 + 1).toString().padStart(2, '0')})
+          </div>
 
+          <div className={styles.inactive_wrapper} style={{display:'none'}}>
+           <img src={v.rewardTokenIcon}/>
+           <div className={styles.amount}></div>
+           <div className={styles.distributed}>{t('Distributed')}</div>
+          </div>
+
+          <div className={styles.condition}>
+            <div className={styles.minimum}>
+              <img src="assets/zoo32x32.png" />
+              <div className={styles.deposited}>
+                {t("unlimited")}
+                <span style={{display:'none'}}>Deposited</span>
+              </div>
+            </div>
+            <div className={styles.hour}>
+              <img src="assets/hourglass24x24.png" />
+              <div>
+                {t("End in")}
+                <span>18:54:12</span>
+              </div>
+
+            </div>
+          </div>
+
+          <div className={styles.topup_wrapper} data-show-topup={false}> {/* Show topup panel when Stake Zoo or Topup */}
+            <div className={styles.reward}>
+              <div className={styles.type}>
+                <img src={v.rewardTokenIcon} />
+                <div className={styles.amount}>{commafy(weekBlock * v.rewardPerBlock / (10**v.rewardTokenDecimals) )} {v.rewardTokenSymbol}<div className={styles.per_week}>{t('per week')}</div></div>
+
+              </div>
+              <div className={styles.description}>
+                <div className={styles.caption}>
+                  <div>{t("STAKE ZOO AND")}</div>
+                  <div>{t("GET")} wanSUSHI</div>
+                </div>
+                <div className={styles.caption} style={{paddingRight:16,display:'none'}}>
+                  <div>{t("This pool already expired.")}</div>
+                  <div>{t("Please withdraw your ZOO and claim remaining reward below.")}</div>
+                </div>
+                <a className={styles.topup_btn}  style={{display:'none'}}>{t('Top-up')}</a>
+              </div>
+            </div>
+
+            <div className={styles.topup}>
+              <div className={styles.deposit_wrapper}>
+                <div className={styles.title}>
+                  {t('DEPOSIT ZOO')}
+                </div>
+                <input className={styles.deposit_amount} value="0" />
+              </div>
+              <div className={styles.avaliable_wrapper}>
+                <div className={styles.title}>
+                  154,540.55 {t('AVAILABLE')}
+                </div>
+                <a className={styles.max}>
+                  MAX
+              </a>
+              </div>
+            </div>
+          </div>
+
+
+          <div className={styles.action_wrapper} style={{ display: 'none' }}>
+            <a className={styles.action_btn} disabled={false} >
+              {t("Approve")}
+            </a>
+            <a className={styles.action_btn} disabled={false}>
+              {t("Validate")}
+            </a>
+          </div>
+
+
+          <div className={styles.action_wrapper}>
+            <a className={styles.action_btn}>
+              {t("Stake ZOO")}
+            </a>
+          </div>
+
+          <div className={styles.action_wrapper} style={{display:'none'}}>
+          
+            <a className={styles.action_btn}>
+                {t("Withdraw")}
+              </a>
+           
+            <a className={styles.action_btn}>
+                {t("Claim")}
+                <div>{'~'}0.00001 wanBTC</div>
+              </a>
+            
+          </div>
+
+          <div className={styles.action_wrapper} style={{display:'none'}}>
+            <a className={styles.action_btn}>
+                {t("Withdraw & Claim")}
+                <div>{'~'}0.00001 wanBTC</div>
+            </a>
+          </div>
+        </div>
+        })
+      }
         <div className={styles.pool} data-active={false}> {/*active true for on staking pool */}
           <div className={styles.cover_wrapper} >
             <img src="dummy/desertxbtc.png" className={styles.cover} />

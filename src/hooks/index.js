@@ -1,8 +1,9 @@
 import BigNumber from 'bignumber.js';
 import { useInterval, useLockFn, useReactive } from 'ahooks';
-import { MULTICALL_ADDRESS, RPC_URL, ZOO_TOKEN_ADDRESS, ZOO_FARMING_ADDRESS, ZOO_BOOSTING_ADDRESS, NFT_FACTORY_ADDRESS, ZOO_NFT_ADDRESS, WASP_FARMING_ADDRESS, NFT_MARKETPLACE_ADDRESS, currencyList, WASP_TOKEN_ADDRESS, invalidNFT } from '../config';
+import { MULTICALL_ADDRESS, RPC_URL, ZOO_TOKEN_ADDRESS, ZOO_FARMING_ADDRESS, ZOO_BOOSTING_ADDRESS, NFT_FACTORY_ADDRESS, ZOO_NFT_ADDRESS, WASP_FARMING_ADDRESS, NFT_MARKETPLACE_ADDRESS, currencyList, WASP_TOKEN_ADDRESS, invalidNFT, SAFARI_ADDRESS } from '../config';
 import React, { useCallback, useMemo } from 'react';
 import { getPrices, setPrice, toByte32, updatePrice } from './price';
+const token_list = require('../assets/wanswap.tokenlist.json');
 const { aggregate } = require('@makerdao/multicall');
 const DataLoader = require('dataloader');
 
@@ -390,6 +391,50 @@ const getFarmingInfo = (loader, chainId) => {
   ]);
 }
 
+const getSafariLength = (loader, chainId) => {
+  return loader.load({
+    target: SAFARI_ADDRESS[chainId],
+    call: ['poolLength()(uint256)'],
+    returns: [['poolLength', val => Number(val.toString())]]
+  });
+}
+
+const getSafariInfo = (loader, chainId, address, poolLength) => {
+  let poolIndexs = Array.from({ length: poolLength }, (v, i) => i);
+
+  //PoolInfo
+  let calls = poolIndexs.map(v => {
+    return {
+      target: SAFARI_ADDRESS[chainId],
+      call: ['poolInfo(uint256)(address,uint256,uint256,uint256,uint256,uint256,uint256,address)', v],
+      returns: [
+        ['lpToken', val => val],
+        ['currentSupply', val => (new BigNumber(val)).div(1e18)],
+        ['bonusStartBlock', val => Number(val)],
+        ['bonusEndBlock', val => Number(val)],
+        ['lastRewardBlock', val => Number(val)],
+        ['accRewardPerShare', val => new BigNumber(val)],
+        ['rewardPerBlock', val => new BigNumber(val)],
+        ['rewardToken', val => val],
+      ]
+    }
+  });
+
+  //PendingZoo
+  calls = calls.concat(poolIndexs.map(v => {
+    return {
+      target: SAFARI_ADDRESS[chainId],
+      call: ['pendingReward(uint256,address)(uint256,uint256)', v, address],
+      returns: [
+        ['amount', val => (new BigNumber(val)).div(1e18)],
+        ['pendingReward', val => new BigNumber(val)],
+      ]
+    }
+  }));
+
+  return loader.loadMany(calls);
+}
+
 const getNFTFactoryInfo = (loader, chainId, address) => {
   return loader.loadMany([
     {
@@ -735,6 +780,44 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
       console.error('err 2', err);
     });
 
+    getSafariLength(loader, chainId).then(ret => {
+      console.debug('getSafariLength', ret);
+      let poolLength = ret.returnValue.poolLength;
+      getSafariInfo(loader, chainId, address, poolLength).then(ret => {
+        console.log('getSafariInfo', ret);
+        let safariInfo = tmpStorage.safariInfo;
+        if (!safariInfo) {
+          safariInfo = [];
+        }
+
+        for (let i = 0; i < poolLength; i++) {
+          safariInfo[i] = { ...safariInfo[i], ...ret[i].returnValue };
+          safariInfo[i] = { ...safariInfo[i], ...ret[i + poolLength].returnValue };
+        }
+
+        safariInfo = safariInfo.map(v=>{
+          console.log('v.rewardToken', v.rewardToken);
+          let token = token_list.tokens.filter(t=>(t.address.toLowerCase() === v.rewardToken.toLowerCase()));
+          console.log('token', token);
+          v.rewardTokenSymbol = token[0].symbol;
+          v.rewardTokenDecimals = token[0].decimals;
+          if (v.rewardTokenSymbol === 'WWAN') {
+            v.rewardTokenSymbol = 'WAN';
+          }
+          v.rewardTokenIcon = token[0].logoURI;
+          return v;
+        })
+
+        console.log('safariInfo', safariInfo);
+        tmpStorage.safariInfo = safariInfo;
+        updateStorage(tmpStorage);
+      }).catch(err => {
+        console.error('err 333', err);
+      });
+    }).catch(err => {
+      console.error('err 222', err);
+    });
+
     getNFTFactoryInfo(loader, chainId, address).then(ret => {
       // console.debug('getNFTFactoryInfo ret', ret, tmpStorage);
       tmpStorage.goldenPrice = ret[0].returnValue.goldenPrice;
@@ -820,17 +903,6 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
     });
 
     if (Number(chainId) === 1 || Number(chainId) === 888) {
-      // const prices = {'WAN':2.32};
-      // console.log('prices', prices);
-      // getPriceFromOracle(loader, prices).then(ret => {
-      //   console.log('getPriceFromOracle', ret);
-      //   Object.keys(prices).map((v, i) => {
-      //     if (ret[i] && ret[i].returnValue && ret[i].returnValue.price > 0) {
-      //       setPrice(v, ret[i].returnValue.price);
-      //     }
-      //   });
-      // })
-
       getWanReserve(loader).then(ret => {
         // console.log('getWanReserve', ret, ret.returnValue.wan_reserve0 / ret.returnValue.wan_reserve1);
         let wanPrice = ret.returnValue.wan_reserve0 / ret.returnValue.wan_reserve1;
