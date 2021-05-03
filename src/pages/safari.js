@@ -2,15 +2,23 @@ import styles from './safari.less';
 import React, { useContext, useEffect } from 'react';
 import { useState } from 'react';
 import { useLanguage } from '../hooks/language';
+import { Switch } from 'antd';
 
 export default function (props) {
   const t = useLanguage();
   const [topup, setTopup] = useState(0);
+  function toggleActivePool(checked) {
+    console.log(`switch to ${checked}`);
+  }
   return (
     <React.Fragment>
       {
         //txWaiting && <Loader />
       }
+      <div className={styles.togglePool}>
+        <Switch onChange={toggleActivePool}/>
+        <div className={styles.title}>{t('Show only Active')}</div>
+      </div>
 
       <div className={styles.row}>
 
