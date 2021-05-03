@@ -556,6 +556,7 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
 
     let tmpStorage = Object.assign({ ...storage });
 
+    if(Math.floor((Math.random() * 2) + 1)===1) //Try to stupid optimization
     getZooBalance(loader, chainId, address).then(ret => {
       // console.debug('getZooBalance ret', ret, ret.returnValue.zooBalance);
       tmpStorage.zooBalance = ret.returnValue.zooBalance;
@@ -565,6 +566,7 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
       console.error('err 1', err);
     });
 
+    if(Math.floor((Math.random() * 2) + 1)===1) //Try to stupid optimization
     getWaspBalance(loader, chainId, address).then(ret => {
       // console.debug('getZooBalance ret', ret, ret.returnValue.zooBalance);
       tmpStorage.waspBalance = ret.returnValue.waspBalance;
@@ -574,6 +576,7 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
       console.error('err 1', err);
     });
 
+    if(Math.floor((Math.random() * 4) + 1)===1) //Try to stupid optimization
     getZooTotalSupply(loader, chainId).then(ret => {
       // console.debug('getZooTotalSupply ret', ret, ret.returnValue.totalSupply);
       tmpStorage.zooTotalSupply = ret.returnValue.totalSupply;
@@ -583,6 +586,7 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
       console.error('err 1.1', err);
     });
 
+    if(Math.floor((Math.random() * 4) + 1)===1) //Try to stupid optimization
     getZooBurned(loader, chainId).then(ret => {
       // console.debug('getZooBurned ret', ret, ret.returnValue.totalSupply);
       tmpStorage.zooBurned = ret.returnValue.zooBurned;
@@ -592,6 +596,7 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
       console.error('err 1.2', err);
     });
 
+    if(Math.floor((Math.random() * 2) + 1)===1) //Try to stupid optimization
     getUserNftBalance(loader, chainId, address).then(ret => {
       // console.debug('getUserNftBalance ret', ret);
 
@@ -658,6 +663,7 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
       console.error('err 1.2', err);
     });
 
+    if(Math.floor((Math.random() * 2) + 1)===1) //Try to stupid optimization
     getFarmingInfo(loader, chainId).then(ret => {
       // console.debug('getFarmingInfo ret', ret);
       let farmingInfo = tmpStorage.farmingInfo;
@@ -735,6 +741,7 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
       console.error('err 2', err);
     });
 
+    if(Math.floor((Math.random() * 3) + 1)===1) //Try to stupid optimization
     getNFTFactoryInfo(loader, chainId, address).then(ret => {
       // console.debug('getNFTFactoryInfo ret', ret, tmpStorage);
       tmpStorage.goldenPrice = ret[0].returnValue.goldenPrice;
@@ -750,6 +757,7 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
       console.error('err 30', err);
     });
 
+    if(Math.floor((Math.random() * 2) + 1)===1) //Try to stupid optimization
     getMarketCount(loader, chainId).then(ret => {
       // console.debug('getMarketCount', ret);
       tmpStorage.marketOrderCount = ret.returnValue.orderCount;
@@ -831,6 +839,7 @@ export const useDataPump = (storage, setStorage, chainId, address, connected) =>
       //   });
       // })
 
+      if(Math.floor((Math.random() * 3) + 1)===1) //Try to stupid optimization
       getWanReserve(loader).then(ret => {
         // console.log('getWanReserve', ret, ret.returnValue.wan_reserve0 / ret.returnValue.wan_reserve1);
         let wanPrice = ret.returnValue.wan_reserve0 / ret.returnValue.wan_reserve1;
