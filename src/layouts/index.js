@@ -2,7 +2,7 @@ import styles from './index.less';
 import "../styles/bulma.scss"
 import '../../node_modules/animate.css/animate.min.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCircle, faCopy, faCaretUp, faExternalLinkSquareAlt, faMoon, faSun } from '@fortawesome/free-solid-svg-icons'
+import { faCircle, faCopy, faCaretUp, faExternalLinkSquareAlt, faMoon, faSun, faCaretRight } from '@fortawesome/free-solid-svg-icons'
 import { invalidNFT, ZOO_TOKEN_ADDRESS } from '../config';
 import { NavLink, setLocale, getLocale } from 'umi';
 import Wallet, { WalletContext } from '../wallet/Wallet';
@@ -50,7 +50,7 @@ function BasicLayout(props) {
   const connected = wallet.connected;
   const provider = wallet.provider;
   const [loading, setLoading] = useState(false);
-
+  const [balanceDetail, setBalanceDetail] = useState(false);
   const t = useLanguage();
 
   const [storage, setStorage] = useLocalStorageState('zoo-keeper-' + address + '-' + chainId, initialState);
@@ -161,15 +161,15 @@ function BasicLayout(props) {
   useEffect(() => {
     axios.get('https://rpc.zookeeper.finance/api/v1/nft').then(ret => {
       let list = ret.data;
-      
+
       let banCount = {};
 
       list.map(v => {
         if (invalidNFT.includes(Number(v.tokenId))) {
-          if (!banCount[v.category]){
+          if (!banCount[v.category]) {
             banCount[v.category] = {};
           }
-          if (!banCount[v.category][v.item]){
+          if (!banCount[v.category][v.item]) {
             banCount[v.category][v.item] = {};
           }
           if (!banCount[v.category][v.item][v.level]) {
@@ -210,12 +210,36 @@ function BasicLayout(props) {
           }}>{connected ? t("DISCONNECT") : t("CONNECT WALLET")}</a>
           <div class="address"><img src="assets/wallet32x32.png" /><span>{address ? address.slice(0, 6) + '...' + address.slice(-6) : t('NO WALLET')}</span> <a onClick={() => copyAddress(address)} className="has-tooltip-top  has-tooltip-active"><FontAwesomeIcon icon={faCopy} /></a></div>
           {chainId && chainId.toString() !== '1' && chainId.toString() !== '888' && chainId !== "" && <div class="testnet"><span>!! {t('TESTNET')} !!</span></div>}
-          <div class="balance">
-            <img src="assets/zoo32x32.png" /><span>{commafy(storage.zooBalance)}</span>
-            <hr/>
+          <div class={`balance ${balanceDetail?'clicked':''}`}>
+
+            <a onClick={() => { setBalanceDetail(!balanceDetail) }} >
+              <img src="assets/zoo32x32.png" />
+              <div class="balance_title">
+                <div>{commafy(storage.zooBalance)}</div>
+                <div>{t('In Wallet')}</div>
+              </div> <FontAwesomeIcon icon={faCaretRight} />
+            </a>
+            {
+              balanceDetail && <div class="balance_detail_panel animate__animated animate__pulse animate__faster">
+                <div class="balance_title">
+                  <div>555,5555.5</div>
+                  <div>{t('In Zoo Pool')}</div>
+                </div>
+                <div class="balance_title">
+                  <div>555,5555.5</div>
+                  <div>{t('In Expedition Pool')}</div>
+                </div>
+                <div class="balance_title">
+                  <div>555,5555.5</div>
+                  <div>{t('In Safari Pool')}</div>
+                </div>
+              </div>
+            }
+
+            <hr />
             <img src="assets/wasp32x32.png" /><span>{commafy(storage.waspBalance)}</span>
           </div>
-        
+
         </div>
 
 
@@ -229,8 +253,8 @@ function BasicLayout(props) {
             <ul class="menu-list">
               <li><NavLink onClick={toggleSidebar} to="/" activeClassName="is_active" exact={true}><img src="assets/sidebar/zoo.png" /> <div>{t("The Zoo")}</div></NavLink></li>
               <li><NavLink onClick={toggleSidebar} to="/expedition" activeClassName="is_active"><img src="assets/sidebar/expedition.png" /> <div>{t("The Expedition")}</div></NavLink></li>
-              <li><NavLink onClick={toggleSidebar}  to="/safari" activeClassName="is_active"><img src="assets/sidebar/safari.png"/> <div>{t("The Safari")}</div></NavLink></li>
-              <li  style={{ display: 'none' }}><a><img src="assets/sidebar/market.png"/> <div  style={{flexDirection:'column',alignItems:'flex-start'}}><div style={{alignItems:'flex-start',lineHeight:'10px'}}>{t("The Market")}</div><div style={{alignItems:'flex-start',fontSize:11}}>(Maintenance)</div></div></a></li>
+              <li><NavLink onClick={toggleSidebar} to="/safari" activeClassName="is_active"><img src="assets/sidebar/safari.png" /> <div>{t("The Safari")}</div></NavLink></li>
+              <li style={{ display: 'none' }}><a><img src="assets/sidebar/market.png" /> <div style={{ flexDirection: 'column', alignItems: 'flex-start' }}><div style={{ alignItems: 'flex-start', lineHeight: '10px' }}>{t("The Market")}</div><div style={{ alignItems: 'flex-start', fontSize: 11 }}>(Maintenance)</div></div></a></li>
               <li><NavLink onClick={toggleSidebar} to="/market" activeClassName="is_active"><img src="assets/sidebar/market.png" /> <div>{t("The Market")}</div></NavLink></li>
               <li><NavLink onClick={toggleSidebar} to="/safe" activeClassName="is_active"><img src="assets/sidebar/safe.png" /> <div>{t("My Safe")}</div></NavLink></li>
               <li style={{ display: 'none' }}><a><img src="assets/sidebar/stake.png" /> <div>{t("Stake Zoo")}</div></a></li>
@@ -242,30 +266,30 @@ function BasicLayout(props) {
 
         <div className={styles.footer}>
 
-            <div className={styles.ext_link}>
-              
-              <a href="https://docs.zookeeper.finance/" target="_blank">
-                <img src="assets/docs.png"/>
-                <span>{t("Documentation")}</span>
-              </a>
-              <a href="https://vote.wandevs.org/#/zookeeper" target="_blank">
-                <img src="assets/vote.png"/>
-                <span>{t("Vote")}</span>
-              </a>
+          <div className={styles.ext_link}>
 
-              <NavLink onClick={toggleSidebar} to="/insight" activeClassName="is_active">
-                <img src="assets/sidebar/insight.png"/>
-                <span>{t("Insights")}</span>
-              </NavLink>
-            </div>
+            <a href="https://docs.zookeeper.finance/" target="_blank">
+              <img src="assets/docs.png" />
+              <span>{t("Documentation")}</span>
+            </a>
+            <a href="https://vote.wandevs.org/#/zookeeper" target="_blank">
+              <img src="assets/vote.png" />
+              <span>{t("Vote")}</span>
+            </a>
+
+            <NavLink onClick={toggleSidebar} to="/insight" activeClassName="is_active">
+              <img src="assets/sidebar/insight.png" />
+              <span>{t("Insights")}</span>
+            </NavLink>
+          </div>
 
           <div id="zoo_info_burned">
             <div className={styles.box}>
-              <img src="assets/zoo_panel.png" class={styles.zoo_icon}/>
+              <img src="assets/zoo_panel.png" class={styles.zoo_icon} />
               <div class={styles.detail}>
                 <div>1 ZOO = <a target="_blank" href="https://info.wanswap.finance/token/0x6e11655d6ab3781c6613db8cb1bc3dee9a7e111f" >${commafy(zooPrice)}</a></div>
                 <div>{t("MC")} <span>${commafy((new BigNumber(storage.zooTotalSupply)).multipliedBy(zooPrice)).split('.')[0]}</span></div>
-                <div>{t("Current supply")} <a target="_blank" href={"https://www.wanscan.org/token/"+ZOO_TOKEN_ADDRESS[chainId]}><FontAwesomeIcon icon={faExternalLinkSquareAlt}/></a></div>
+                <div>{t("Current supply")} <a target="_blank" href={"https://www.wanscan.org/token/" + ZOO_TOKEN_ADDRESS[chainId]}><FontAwesomeIcon icon={faExternalLinkSquareAlt} /></a></div>
                 <div><span>{commafy(new BigNumber(storage.zooTotalSupply)).split('.')[0]} ZOO</span></div>
               </div>
             </div>

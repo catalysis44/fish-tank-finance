@@ -1,4 +1,4 @@
-@media (min-height: 950px) { // Edit here for expanding menu
+@media (min-height: 1000px) { // Edit here for expanding menu
     .footer
     {
         width:100%;
@@ -48,7 +48,7 @@
     }
     .ext_link
     {
-        padding: 10px 30px;
+        padding: 20px 30px 10px;
         padding-bottom:15px;
         border-bottom: 1px solid #f5f5f5;
         a:last-child
@@ -369,6 +369,7 @@
     , #fdad48 25%, #e67056 25%, #e67056 50%, #fdad48 50%, #fdad48 75%, #e67056 75%, #e67056 100%);
         background-size: 56.57px 56.57px;
     }
+    
     #sidebar_wrapper .address svg
     {
         margin-right:8px;
@@ -376,6 +377,54 @@
         padding-top:2px;
         width:19px;
         height:19px;
+    }
+    #sidebar_wrapper .balance .balance_title
+    {
+        display:flex;
+        flex-direction: column;
+        line-height:14px;
+        padding-top:5px;
+        div:last-child
+        {
+            font-size:12px;
+        }
+    }
+    #sidebar_wrapper .balance .balance_detail_panel
+    {
+        transition: all .5s ease-in-out;
+        padding-top:5px;
+        padding-bottom:5px;
+        .balance_title
+        {
+            padding-left:42px;
+        }
+    }
+
+  
+    #sidebar_wrapper .balance  a
+    {
+        color:black !important;
+        display:flex;
+    }
+    #sidebar_wrapper .balance a img
+    {
+        width:32px;
+        height:32px;
+    }
+    #sidebar_wrapper .balance.clicked svg
+    {
+        transform: rotate(90deg);
+    }
+    #sidebar_wrapper .balance svg
+    {
+        transition: 0.1s ease-in-out;
+        position:absolute;
+        right:8px;
+        top:12px;
+        color: black;
+       
+        width: 19px;
+        height: 19px;
     }
     #sidebar_wrapper .balance
     {
@@ -402,6 +451,7 @@
             display:inline-block;
             position:relative;
             top:2px;
+            width: 130px;
         }
     }
     #sidebar_wrapper .balance img,#sidebar_wrapper .address img
