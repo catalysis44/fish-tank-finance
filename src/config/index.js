@@ -60,8 +60,8 @@ export const WWAN_ADDRESS = {
 }
 
 export const RPC_URL = {
-  '1': "https://rpc.zookeeper.finance",
-  '888': "https://rpc.zookeeper.finance",
+  '1': Math.floor((Math.random() * 2) + 1)==1?"https://gwan-ssl.wandevs.org:56891":"https://rpc.zookeeper.finance",
+  '888': Math.floor((Math.random() * 4) + 1)==1?"https://gwan-ssl.wandevs.org:56891":"https://rpc.zookeeper.finance",
   '999': "https://rpc.zookeeper.finance/testnet"
 }
 
