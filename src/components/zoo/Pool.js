@@ -27,8 +27,8 @@ const poolAnimals = [
   '/zoo_keeper_pools/PANDA.png',
   '/zoo_keeper_pools/GIRAFE.png',
   '/zoo_keeper_pools/ELEPHANT.png',
-  '/zoo_keeper_pools/WOLF.png',
   '/zoo_keeper_pools/TIGER.png',
+  '/zoo_keeper_pools/WOLF.png',
   '/zoo_keeper_pools/BEAR.png',
   '/zoo_keeper_pools/WHALE.png',
   '/zoo_keeper_pools/PENGUIN.png',
@@ -50,8 +50,8 @@ const poolTitles = [
   'PAULIE BAMBOOZLE', // PANDA
   'RAFFERTY G. MONAY', // GIRAFFE
   'ELON TUSK', // ELEPHANT
+  'TONY STRIPES', // TIGER
   'THE BIG BAG WOLF', // WOLF 
-  'STRIPEY TONAY', // TIGER
   'EVANDER HONEYFIELD', // BEAR
   'BLUBBER BOB', // WHALE 
   'EMPEROR SLICKFEET', // PENGUIN

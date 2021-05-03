@@ -188,7 +188,9 @@ export default {
   'CARL CROCS': "卡尔 马鳄斯", // CROCODILE  
   'PAULIE BAMBOOZLE': "宝利 功夫熊猫", // PANDA   
   'RAFFERTY G. MONAY': "混沌 莫奈鹿", // GIRAFFE   
-  'ELON TUSK': "翼龙 马斯克", // ELEPHANT   
+  'ELON TUSK': "翼龙 马斯克", // ELEPHANT  
+  "TONY STRIPES": "托尼 条纹虎",
+
 
 
   // Insight Page //
@@ -233,4 +235,5 @@ export default {
   "{0} minutes ago...":"{0} 分钟之前...",
   "Just now...":"刚刚...",
   "Insights Loading...":"汇总板页面信息加载中请稍候...",
+
 };

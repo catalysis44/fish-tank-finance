@@ -356,6 +356,7 @@ export default function (props) {
       for (let i=0; i<info.lockedNft.length; i++) {
         nftLocked += info.lockedNft[i].price * prices[info.lockedNft[i].symbol];
       }
+      console.debug('nftLocked', nftLocked);
       setLockedNftValue(nftLocked);
     }).catch(console.error);
   }, [prices]);
@@ -687,11 +688,11 @@ export default function (props) {
             <div className={styles.item_list}>
               <div className={styles.listview_table}>
                 {
-                  lastTx.map(v => {
+                  lastTx.map((v,i) => {
                     let time = (Date.now() - (new Date(v.time))) / 1000;
                     let timeStr = getTimeStr(time,t);
                    
-                    return <div className={styles.listview_row}>
+                    return <div className={styles.listview_row} key={i}>
                       <div className={`${styles.listview_col} ${styles.log_icon}`}>
                         {
                           v.type === 'GoldenBuy' && <img src="assets/goldenbox42x42.png" />
